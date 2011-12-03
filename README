@@ -1,0 +1,56 @@
+>> NOTES <<
+Run on a freshly installed server under root!
+No warranty. For help come on #frantech on irc.dairc.net and look for maxexcloo!
+
+>> FEATURES <<
+Will be outlined.
+
+>> DOWNLOAD <<
+Will be outlined.
+
+>> INSTRUCTIONS <<
+This script contains serveral modules designed to help you set up your server how you want it. The included modules are outlined below:
+
+TODO: Maintenance: Clean Packages
+TODO: Maintenance: Update/Upgrade Packages
+TODO: Maintenance: Install Extra Packages
+TODO: Maintenance: Install Repositories
+
+TODO: Manage: Users
+TODO: Manage: User Permissions
+TODO: Manage: vHosts
+TODO: Manage: vHost Permissions
+
+TODO Configure: Skel
+TODO Configure: Getty
+TODO Configure: Bash History
+TODO Configure: Simplified Logging
+TODO Configure: SSH Ports
+TODO Configure: Root SSH Access
+TODO Configure: Timezone Settings
+TODO Configure: Shell Defaults
+
+TODO: Install: OpenSSH
+TODO: Install: Dropbear
+TODO: Install: Basic PPTP
+TODO: Install: Basic OpenVPN
+TODO: Install: NGINX
+TODO: Install: PHP-FPM
+TODO: Install: MySQL
+TODO: Install: Exim
+
+>> COMPATIBILITY <<
+Operating Systems:
+ + Debian 6 (Squeeze) i686
+ + Debian 6 (Squeeze) x86_64
+
+Platforms:
+ + Physical Hardware
+ + KVM
+ + OpenVZ
+ + VirtualBox
+ + VMWare
+ + Xen
+
+>> CREDITS <<
+Will be outlined.
