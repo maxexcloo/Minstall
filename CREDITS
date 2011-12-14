@@ -1,0 +1,9 @@
+# General
+minstall.sh:
+ + Argument function from Subsonic startup script (subsonic.sh), found here: http://subsonic.svn.sourceforge.net/viewvc/subsonic/
+
+# Functions
+libraries/general.sh:
+ + http://www.linuxjournal.com/content/asking-yesno-question-bash-script
+libraries/question.sh:
+ + http://www.linuxjournal.com/content/asking-yesno-question-bash-script

@@ -3,14 +3,6 @@ Run on a freshly installed server under root!
 No warranty. For help come on #frantech on irc.dairc.net and look for maxexcloo!
 
 >> FEATURES <<
-Will be outlined.
-
->> DOWNLOAD <<
-Will be outlined.
-
->> INSTRUCTIONS <<
-This script contains serveral modules designed to help you set up your server how you want it. The included modules are outlined below:
-
 TODO: Maintenance: Clean Packages
 TODO: Maintenance: Update/Upgrade Packages
 TODO: Maintenance: Install Extra Packages
@@ -39,6 +31,12 @@ TODO: Install: PHP-FPM
 TODO: Install: MySQL
 TODO: Install: Exim
 
+>> DOWNLOAD <<
+Will be outlined.
+
+>> INSTRUCTIONS <<
+This script contains serveral modules designed to help you set up your server how you want it. The included modules are outlined below:
+
 >> COMPATIBILITY <<
 Operating Systems:
  + Debian 6 (Squeeze) i686
@@ -51,6 +49,3 @@ Platforms:
  + VirtualBox
  + VMWare
  + Xen
-
->> CREDITS <<
-Will be outlined.
