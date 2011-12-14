@@ -13,6 +13,12 @@ if [ $DISTRIBUTION = 'none' ]; then
 	error "Your distribution is unsupported."
 fi
 
+# Load Distribution Specific Libraries
+for file in libraries/platforms/*.$DISTRIBUTION.sh; do
+	# Source Scripts
+	source $file
+done
+
 # Loop Through Parameters
 while [ $# -ge 1 ]; do
 	# Check Parameters Against Known Scripts
@@ -33,12 +39,20 @@ while [ $# -ge 1 ]; do
 		;;
 		# Load Scripts
 		*)
+			# Check If Module Exists
 			if [ -f modules/$1.sh ]; then
+				# Load Module
 				source modules/$1.sh
+			# Module Doesn't Exist
 			else
-				error "Module $1 not found."
+				# Ask If User Wants To Abort
+				if question --default yes "Module $1 not found. Do you want to abort? (Y/n)"; then
+					# Print Message & Exit
+					error "Aborted."
+				fi
 			fi
 		;;
 	esac
+	# Continue
 	shift
 done
