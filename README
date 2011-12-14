@@ -35,12 +35,15 @@ TODO: Install: Exim
 Will be outlined.
 
 >> INSTRUCTIONS <<
-This script contains serveral modules designed to help you set up your server how you want it. The included modules are outlined below:
+This script contains serveral modules designed to help you set up your server how you want it.
+The included modules will be outlined below as they are worked on.
 
 >> COMPATIBILITY <<
 Operating Systems:
  + Debian 6 (Squeeze) i686
  + Debian 6 (Squeeze) x86_64
+ + Scientific Linux (6.x) i686
+ + Scientific Linux (6.x) x86_64
 
 Platforms:
  + Physical Hardware
