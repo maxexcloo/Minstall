@@ -2,48 +2,42 @@
 # Loads libraries and runs specified modules.
 
 # Loop Through Libraries
+for file in libraries/*.sh; do
+	# Source Scripts
+	source $file
+done
 
+# Check Distribution
+if [ $DISTRIBUTION = 'none' ]; then
+	# Print Distribution Not Supported Message
+	error "Your distribution is unsupported."
+fi
 
+# Loop Through Parameters
 while [ $# -ge 1 ]; do
+	# Check Parameters Against Known Scripts
 	case $1 in
-		--help)
-			usage
+		# Help Function
+		help)
+			# Load Help Script
+			source modules/script-help.sh
+			# Exit
+			exit
 		;;
-		--home=?*)
-			SUBSONIC_HOME=${1#--home=}
+		# Module Listing Function
+		modules)
+			# Load Module Listing Script
+			source modules/script-modules.sh
+			# Exit
+			exit
 		;;
-		--host=?*)
-			SUBSONIC_HOST=${1#--host=}
-		;;
-		--port=?*)
-			SUBSONIC_PORT=${1#--port=}
-		;;
-		--https-port=?*)
-			SUBSONIC_HTTPS_PORT=${1#--https-port=}
-		;;
-		--context-path=?*)
-			SUBSONIC_CONTEXT_PATH=${1#--context-path=}
-		;;
-		--max-memory=?*)
-			SUBSONIC_MAX_MEMORY=${1#--max-memory=}
-		;;
-		--pidfile=?*)
-			SUBSONIC_PIDFILE=${1#--pidfile=}
-		;;
-		--quiet)
-			quiet=1
-		;;
-		--default-music-folder=?*)
-			SUBSONIC_DEFAULT_MUSIC_FOLDER=${1#--default-music-folder=}
-		;;
-		--default-podcast-folder=?*)
-			SUBSONIC_DEFAULT_PODCAST_FOLDER=${1#--default-podcast-folder=}
-		;;
-		--default-playlist-folder=?*)
-			SUBSONIC_DEFAULT_PLAYLIST_FOLDER=${1#--default-playlist-folder=}
-		;;
+		# Load Scripts
 		*)
-			usage
+			if [ -f modules/$1.sh ]; then
+				source modules/$1.sh
+			else
+				error "Module $1 not found."
+			fi
 		;;
 	esac
 	shift
