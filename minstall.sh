@@ -59,3 +59,4 @@ while [ $# -ge 1 ]; do
 	# Continue
 	shift
 done
+final_function
