@@ -10,13 +10,16 @@ done
 # Check Distribution
 if [ $DISTRIBUTION = 'none' ]; then
 	# Print Distribution Not Supported Message
-	error "Your distribution is unsupported."
+	warning "Your distribution is unsupported!"
 fi
 
 # Load Distribution Specific Libraries
 for file in libraries/platforms/*.$DISTRIBUTION.sh; do
-	# Source Scripts
-	source $file
+	# Check Distribution
+	if [ $DISTRIBUTION != 'none' ]; then
+		# Source Scripts
+		source $file
+	fi
 done
 
 # Loop Through Parameters
@@ -48,7 +51,7 @@ while [ $# -ge 1 ]; do
 				# Ask If User Wants To Abort
 				if question --default yes "Module $1 not found. Do you want to abort? (Y/n)"; then
 					# Print Message & Exit
-					error "Aborted."
+					error "Aborted!"
 				fi
 			fi
 		;;

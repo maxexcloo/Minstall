@@ -14,8 +14,10 @@ function question() {
 			--default)
 				shift
 				default=$1
-				if [[ ! "$default" ]]; then error "Missing default value"; fi
-				t=$(tr '[:upper:]' '[:lower:]' <<<$default)
+				if [[ ! "$default" ]]; then
+					error "Missing default value"
+				fi
+				t=$(tr '[:upper:]' '[:lower:]' <<< $default)
 				if [[ "$t" != 'y' && "$t" != 'yes' && "$t" != 'n' && "$t" != 'no' ]]; then
 					error "Illegal default answer: $default"
 				fi
@@ -25,8 +27,12 @@ function question() {
 			--timeout)
 				shift
 				timeout=$1
-				if [[ ! "$timeout" ]]; then error "Missing timeout value"; fi
-				if [[ ! "$timeout" =~ ^[0-9][0-9]*$ ]]; then error "Illegal timeout value: $timeout"; fi
+				if [[ ! "$timeout" ]]; then
+					error "Missing timeout value"
+				fi
+				if [[ ! "$timeout" =~ ^[0-9][0-9]*$ ]]; then
+					error "Illegal timeout value: $timeout"
+				fi
 				shift
 			;;
 			-*)
@@ -46,14 +52,16 @@ function question() {
 
 	while [[ $ok -eq 0 ]]; do
 		if [[ $timeout -ne 0 ]]; then
-			if ! read -t $timeout -p "$*" ans; then
+			if ! read -t $timeout -p "$* " ans; then
 				ans=$default
 			else
 				timeout=0
-				if [[ ! "$ans" ]]; then ans=$default; fi
+				if [[ ! "$ans" ]]; then
+					ans=$default;
+				fi
 			fi
 		else
-			read -p "$*" ans
+			read -p "$* " ans
 			if [[ ! "$ans" ]]; then
 				ans=$default
 			else
@@ -65,7 +73,9 @@ function question() {
 			ok=1
 		fi
 
-		if [[ $ok -eq 0 ]]; then warning "Valid answers are: yes/no or y/n"; fi
+		if [[ $ok -eq 0 ]]; then
+			warning "Valid answers are yes/no or y/n."
+		fi
 	done
 	[[ "$ans" = "y" || "$ans" == "yes" ]]
 }

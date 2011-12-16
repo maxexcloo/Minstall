@@ -1,16 +1,22 @@
 #!/bin/bash
 # General script functions.
 
-# Print Warning Message
-function warning() {
+# Print Header
+function header() {
 	# Print Message
-	echo "$*" >&2
+	echo -e "\e[1;34m>> \e[1;37m$* \e[1;34m<<\e[0m" >&2
 }
 
 # Print Error Message & Exit
 function error() {
 	# Print Message
-	echo "$*" >&2
+	echo -e "\e[1;31m$*\e[0m" >&2
 	# Exit
 	exit 1
+}
+
+# Print Warning Message
+function warning() {
+	# Print Message
+	echo -e "\e[1;33m$*\e[0m" >&2
 }
