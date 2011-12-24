@@ -1,5 +1,5 @@
 #!/bin/bash
-# Asks Common Package Management Questions
+# Common Package Management Question Functions
 
 # Set Package List Clean Variable
 PACKAGE_LIST_CLEAN=0

@@ -1,5 +1,5 @@
 #!/bin/bash
-# Loads libraries and runs specified modules.
+# Script Initialisation Functions
 
 # Loop Through Libraries
 for file in libraries/*.sh; do
@@ -44,6 +44,8 @@ while [ $# -ge 1 ]; do
 		*)
 			# Check If Module Exists
 			if [ -f modules/$1.sh ]; then
+				# Print Module Description
+				header $(description $1)
 				# Load Module
 				source modules/$1.sh
 			# Module Doesn't Exist

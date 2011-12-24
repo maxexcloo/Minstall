@@ -1,5 +1,5 @@
 #!/bin/bash
-# General script functions.
+# Functions For Displaying Messages & Headers
 
 # Print Header
 function header() {

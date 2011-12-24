@@ -1,8 +1,5 @@
 #!/bin/bash
-# Installs Dropbear SSH Server/Client
-
-# Print Header
-header "Installing Dropbear Server/Client"
+# Install: Dropbear SSH Server
 
 # Package List Update Question
 package_update_question

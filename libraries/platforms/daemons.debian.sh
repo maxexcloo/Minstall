@@ -1,5 +1,5 @@
 #!/bin/bash
-# Handles daemon management in Debian Linux.
+# Functions For Handling Daemon Management In Debian Linux.
 
 # Add Daemon
 function daemon_add() {

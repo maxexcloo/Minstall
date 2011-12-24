@@ -1,5 +1,5 @@
 #!/bin/bash
-# Detects Distrubution
+# Function To Detect Current Distrubution
 
 # Set Distrubution Variable
 DISTRIBUTION=none

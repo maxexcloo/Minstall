@@ -1,22 +1,14 @@
 #!/bin/bash
-# Handles daemon management.
+# Functions For Handling Daemon Management.
 
 # Add Daemon
-function daemon_add() {
-
-}
+function daemon_add() {}
 
 # Remove Daemon
-function daemon_remove() {
-
-}
+function daemon_remove() {}
 
 # Enable Daemon
-function daemon_enable() {
-
-}
+function daemon_enable() {}
 
 # Disable Daemon
-function daemon_disable() {
-
-}
+function daemon_disable() {}

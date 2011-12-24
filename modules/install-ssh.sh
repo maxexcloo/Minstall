@@ -1,8 +1,5 @@
 #!/bin/bash
-# Installs OpenSSH Server/Client
-
-# Print Header
-header "Installing OpenSSH Server/Client"
+# Install: OpenSSH Server/Client
 
 # Package List Update Question
 package_update_question

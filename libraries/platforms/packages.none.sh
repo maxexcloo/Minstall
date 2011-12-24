@@ -1,42 +1,26 @@
 #!/bin/bash
-# Handles package management.
+# Functions For Handling Package Management.
 
 # Clean Package Cache
-function package_clean() {
-
-}
+function package_clean() {}
 
 # Clean Package List
-function package_clean_list() {
-
-}
+function package_clean_list() {}
 
 # Install Package(s)
-function package_install() {
-
-}
+function package_install() {}
 
 # Uninstall Package(s)
-function package_uninstall() {
-
-}
+function package_uninstall() {}
 
 # Update Package List
-function package_update() {
-
-}
+function package_update() {}
 
 # Upgrade Packages
-function package_upgrade() {
-
-}
+function package_upgrade() {}
 
 # Add Repository
-function repo_add() {
-
-}
+function repo_add() {}
 
 # Add Repository Key
-function repo_key() {
-
-}
+function repo_key() {}

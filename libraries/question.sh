@@ -1,5 +1,5 @@
 #!/bin/bash
-# Takes user input and uses to help answer questions.
+# Functions Related To Questioning User
 
 # Ask Question
 function question() {

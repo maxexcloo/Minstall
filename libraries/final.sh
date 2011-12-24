@@ -1,5 +1,5 @@
 #!/bin/bash
-# Finalisation Function
+# Finalisation Functions
 
 # Final Function
 function final_function() {
