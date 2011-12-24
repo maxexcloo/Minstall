@@ -3,6 +3,11 @@ Run on a freshly installed server under root!
 No warranty. For help come on #frantech on irc.dairc.net and look for maxexcloo!
 
 >> FEATURES <<
+Configure: Getty
+
+Install: Dropbear
+Install: OpenSSH
+
 TODO: Maintenance: Clean Packages
 TODO: Maintenance: Update/Upgrade Packages
 TODO: Maintenance: Install Extra Packages
@@ -14,16 +19,13 @@ TODO: Manage: vHosts
 TODO: Manage: vHost Permissions
 
 TODO Configure: Skel
-TODO Configure: Getty
 TODO Configure: Bash History
 TODO Configure: Simplified Logging
-TODO Configure: SSH Ports
+TODO Configure: SSH
 TODO Configure: Root SSH Access
 TODO Configure: Timezone Settings
 TODO Configure: Shell Defaults
 
-TODO: Install: OpenSSH
-TODO: Install: Dropbear
 TODO: Install: Basic PPTP
 TODO: Install: Basic OpenVPN
 TODO: Install: NGINX

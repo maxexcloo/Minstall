@@ -16,10 +16,7 @@ function listing() {
 	filename=${base%.*}
 
 	# Print Module Name
-	echo -n $filename
-
-	# Print Separator
-	echo -n " - "
+	echo -e -n "\e[1;32m$filename:\e[0m "
 
 	# Print Description
 	echo $(description $1)

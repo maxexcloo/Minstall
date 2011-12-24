@@ -1,5 +1,5 @@
 #!/bin/bash
-# Help: Module Names & Descriptions
+# Help: Module Help & Descriptions
 
 # Print Header
 header "Module Name - Description"

@@ -29,14 +29,14 @@ while [ $# -ge 1 ]; do
 		# Help Function
 		help)
 			# Load Help Script
-			source modules/script-help.sh
+			source modules/help.sh
 			# Exit
 			exit
 		;;
 		# Module Listing Function
 		modules)
 			# Load Module Listing Script
-			source modules/script-modules.sh
+			source modules/help-modules.sh
 			# Exit
 			exit
 		;;
@@ -45,7 +45,7 @@ while [ $# -ge 1 ]; do
 			# Check If Module Exists
 			if [ -f modules/$1.sh ]; then
 				# Print Module Description
-				header $(description $1)
+				header $(description modules/$1.sh)
 				# Load Module
 				source modules/$1.sh
 			# Module Doesn't Exist
@@ -56,6 +56,7 @@ while [ $# -ge 1 ]; do
 					error "Aborted!"
 				fi
 			fi
+			echo ""
 		;;
 	esac
 	# Continue
