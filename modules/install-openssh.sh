@@ -10,7 +10,7 @@ package_install openssh-server
 
 # Copy Configuration
 subheader "Copying Configuration..."
-cp -r modules/install-ssh/* /etc/
+cp -r modules/install-openssh/* /etc/
 
 # Restart Daemon
 subheader "Restarting Daemon..."

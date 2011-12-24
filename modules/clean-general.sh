@@ -4,7 +4,10 @@
 # Change Default System Shell
 if question --default yes "Do you want to change the default system shell? (Y/n)"; then
 	subheader "Changing Default System Shell..."
-	dpkg-reconfigure dash
+	# Check Distribution
+	if [ $DISTRIBUTION = 'debian' ]; then
+		dpkg-reconfigure dash
+	fi
 fi
 
 # Remove Unneeded Getty Instances

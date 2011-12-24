@@ -1,5 +1,5 @@
 #!/bin/bash
-# Install: Extra Packages
+# Maintain: Extra Packages
 
 # Package List Update Question
 package_update_question
@@ -10,7 +10,7 @@ subheader "Installing Extra Packages..."
 while read package; do
 	# Install Currently Selected Package
 	package_install $package
-done < modules/install-extra/packages
+done < modules/maintain-extra/$DISTRIBUTION
 
 # Package List Clean Question
 package_clean_question
