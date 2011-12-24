@@ -1,14 +1,14 @@
 #!/bin/bash
 # Functions For Displaying Information About Modules
 
-# Describe Modules From Comment Information
-function description() {
+# Print Module Description
+function describe() {
 	# Print Description
 	echo $(sed -n '2p' $1 | cut -c3-)
 }
 
-# List All Modules
-function listing() {
+# Print All Module Information
+function list() {
 	# Find Base Name
 	base=$(basename $1)
 
@@ -19,5 +19,5 @@ function listing() {
 	echo -e -n "\e[1;32m$filename:\e[0m "
 
 	# Print Description
-	echo $(description $1)
+	echo $(describe $1)
 }

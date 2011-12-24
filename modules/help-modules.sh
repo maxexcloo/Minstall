@@ -6,5 +6,5 @@ header "Module Name - Description"
 
 # Loop Through Modules
 for file in modules/*.sh; do
-	listing $file
+	list $file
 done

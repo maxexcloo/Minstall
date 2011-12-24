@@ -3,29 +3,22 @@ Run on a freshly installed server under root!
 No warranty. For help come on #frantech on irc.dairc.net and look for maxexcloo!
 
 >> FEATURES <<
-Clean General: Getty
-Clean General: Shell Defaults
-Clean User: Bash History
-Clean User: Skeleton
+Clean: General
+Clean: Logging
+Clean: Packages
+Clean: User
 
-Configure General: Timezone Settings
+Configure: General
+Configure: SSH
 
-Install Dropbear
-Install OpenSSH
+Install: Dropbear
+Install: Extra Packages
+Install: Extra Repositories
+Install: OpenSSH
 
-Maintenance: Extra Packages
-
-TODO: Maintenance: Clean Packages
-TODO: Maintenance: Update/Upgrade Packages
-TODO: Maintenance: Install Repositories
-
-TODO: Manage: Users
-TODO: Manage: User Permissions
-TODO: Manage: vHosts
-TODO: Manage: vHost Permissions
-
-TODO Configure: Simplified Logging
-TODO Configure: SSH
+TODO: Maintain: Hosts
+TODO: Maintain: Update/Upgrade Packages
+TODO: Maintain: Users
 
 TODO: Install: Basic PPTP
 TODO: Install: Basic OpenVPN

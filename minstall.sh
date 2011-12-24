@@ -45,7 +45,7 @@ while [ $# -ge 1 ]; do
 			# Check If Module Exists
 			if [ -f modules/$1.sh ]; then
 				# Print Module Description
-				header $(description modules/$1.sh)
+				header $(describe modules/$1.sh)
 				# Load Module
 				source modules/$1.sh
 			# Module Doesn't Exist
@@ -62,4 +62,4 @@ while [ $# -ge 1 ]; do
 	# Continue
 	shift
 done
-final_function
+final
