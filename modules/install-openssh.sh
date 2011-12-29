@@ -4,6 +4,9 @@
 # Package List Update Question
 package_update_question
 
+# Set Module
+MODULE=install-openssh
+
 # Install Package
 subheader "Installing Package..."
 package_install openssh-server

@@ -3,9 +3,12 @@
 
 # Module Warning
 warning "This module will remove all non-essential packages on this system, you have been warned!"
-if question --default no "Do you still want to run this module? (y/N)"; then
+if question --default yes "Do you still want to run this module? (Y/n)"; then
+	# Running Message
+	subheader "Running Module..."
+else
 	# Skipped Message
-	subheader "This module has been skipped!"
+	subheader "Skipping Module..."
 	# Skip Module
 	continue
 fi

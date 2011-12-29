@@ -11,7 +11,7 @@ if question --default yes "Do you want to install the Debian Multimedia reposito
 	# Remove Temporary Package File
 	rm $MODULEPATH/$MODULE/temp.deb
 	# Add Package To Package List
-	echo "debian-multimedia-keyring                       install" > $MODULEPATH/clean-packages/$DISTRIBUTION/base
+	echo "debian-multimedia-keyring                       install" >> $MODULEPATH/clean-packages/$DISTRIBUTION/base
 	# Add Repository
 	repo_add "debian-multimedia" "deb http://www.debian-multimedia.org squeeze main non-free"
 fi

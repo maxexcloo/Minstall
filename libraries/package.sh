@@ -7,7 +7,7 @@ PACKAGE_LIST_CLEAN=0
 # Package List Clean Question
 function package_clean_question() {
 	# Check If Package List Clean Needs To Be Run
-	if [ $PACKAGE_LIST_CLEAN = 1 ] && [ $1 = 1 ]; then
+	if [[ $PACKAGE_LIST_CLEAN = 1 ]] && [[ $1 = 1 ]]; then
 		# Ask Question
 		if question --default yes "Do you want to clean the package cache? (Y/n)"; then
 			# Clean Package Cache
@@ -24,7 +24,7 @@ PACKAGE_LIST_UPDATE=0
 # Package List Update Question
 function package_update_question() {
 	# Check If Package List Update Has Been Run Previously
-	if [ $PACKAGE_LIST_UPDATE = 0 ]; then
+	if [[ $PACKAGE_LIST_UPDATE = 0 ]]; then
 		# Ask Question
 		if question --default yes "Do you want to update the package list? (Y/n)"; then
 			# Update Package Lists

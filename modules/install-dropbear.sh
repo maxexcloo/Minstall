@@ -4,16 +4,19 @@
 # Package List Update Question
 package_update_question
 
+# Set Module
+MODULE=install-dropbear
+
 # Install Package
 subheader "Installing Package..."
 package_install dropbear
 
-# Update Configuratio
-cp -r install-dropbear/* /etc/
+# Update Configuration
+cp -r $MODULEPATH/$MODULE/* /etc/
 
 # Install OpenSSH SFTP Support
 subheader "Installing OpenSSH SFTP Support..."
-source $MODULEPATH/install-ssh.sh
+source $MODULEPATH/install-openssh.sh
 
 # Remove OpenSSH Daemon
 subheader "Removing OpenSSH Daemon..."
