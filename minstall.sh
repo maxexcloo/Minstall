@@ -35,11 +35,11 @@ for file in $LIBRARYPATH/platforms/*.$DISTRIBUTION.sh; do
 done
 
 # Loop Through Parameters
-for i in "$@"; do
+while [ $# -ne 0 ]; do
 	# Set Current Module Variable
-	MODULE=$i
+	MODULE=$1
 	# Check Parameters Against Known Scripts
-	case $i in
+	case $1 in
 		# Help Function
 		help)
 			# Load Help Script
@@ -57,15 +57,15 @@ for i in "$@"; do
 		# Load Scripts
 		*)
 			# Check If Module Exists
-			if [ -f $MODULEPATH/$i.sh ]; then
+			if [ -f $MODULEPATH/$1.sh ]; then
 				# Print Module Description
-				header $(describe $MODULEPATH/$i.sh)
+				header $(describe $MODULEPATH/$1.sh)
 				# Load Module
-				source $MODULEPATH/$i.sh
+				source $MODULEPATH/$1.sh
 			# Module Doesn't Exist
 			else
 				# Ask If User Wants To Abort
-				if question --default yes "Module $i not found. Do you want to abort? (Y/n)"; then
+				if question --default yes "Module $1 not found. Do you want to abort? (Y/n)"; then
 					# Print Message
 					error "Aborted!"
 					# Exit Script
@@ -75,5 +75,6 @@ for i in "$@"; do
 			echo ""
 		;;
 	esac
+	shift
 done
 final
