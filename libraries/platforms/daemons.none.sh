@@ -1,5 +1,5 @@
 #!/bin/bash
-# Functions For Handling Daemon Management.
+# Functions For Handling Daemon Management
 
 # Add Daemon
 function daemon_add() {}

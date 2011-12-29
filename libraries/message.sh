@@ -17,8 +17,6 @@ function subheader() {
 function error() {
 	# Print Message
 	echo -e "\e[1;31m$*\e[0m" >&2
-	# Exit
-	exit 1
 }
 
 # Print Warning Message

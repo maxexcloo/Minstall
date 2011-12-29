@@ -1,6 +1,9 @@
 #!/bin/bash
 # Clean: Logging
 
+# Check For inetutils-syslogd Package
+check "inetutils-syslogd" "/etc/init.d/inetutils-syslogd"
+
 # Clean Logs
 subheader "Cleaning Logs..."
 
@@ -18,7 +21,7 @@ touch /var/log/{auth,daemon,kernel,mail,messages}
 subheader "Configuring Logging..."
 
 # Copy Configuration
-cp -r modules/clean-logging/* /etc/
+cp -r $MODULEPATH/$MODULE/* /etc/
 
 # Start Logging Daemon
 /etc/init.d/inetutils-syslogd start

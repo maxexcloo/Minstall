@@ -13,7 +13,7 @@ cp -r install-dropbear/* /etc/
 
 # Install OpenSSH SFTP Support
 subheader "Installing OpenSSH SFTP Support..."
-source modules/install-ssh.sh
+source $MODULEPATH/install-ssh.sh
 
 # Remove OpenSSH Daemon
 subheader "Removing OpenSSH Daemon..."

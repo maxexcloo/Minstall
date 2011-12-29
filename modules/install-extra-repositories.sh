@@ -4,8 +4,11 @@
 # Package List Update Question
 package_update_question
 
+# Install Repositories
+subheader "Installing Extra Repositories..."
+
 # Loop Through Avalible Repositories
-for file in modules/install-extra-repositories/$DISTRIBUTION/*.sh; do
+for file in $MODULEPATH/$MODULE/$DISTRIBUTION/*.sh; do
 	# Source Scripts
 	source $file
 done

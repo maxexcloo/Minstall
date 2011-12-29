@@ -5,6 +5,6 @@
 header "Module Name - Description"
 
 # Loop Through Modules
-for file in modules/*.sh; do
+for file in $MODULEPATH/*.sh; do
 	list $file
 done

@@ -1,5 +1,5 @@
 #!/bin/bash
-# Functions For Handling Package Management In Scientific Linux.
+# Functions For Handling Package Management In Scientific Linux
 
 # Clean Package Cache
 function package_clean() {

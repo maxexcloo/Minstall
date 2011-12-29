@@ -11,7 +11,7 @@ subheader "Installing Extra Packages..."
 while read package; do
 	# Install Currently Selected Package
 	package_install $package
-done < modules/install-extra-packages/$DISTRIBUTION
+done < $MODULEPATH/$MODULE/$DISTRIBUTION
 
 # Package List Clean Question
 package_clean_question

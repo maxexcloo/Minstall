@@ -1,5 +1,5 @@
 #!/bin/bash
-# Functions For Handling Daemon Management In Scientific Linux.
+# Functions For Handling Daemon Management In Scientific Linux
 
 # Add Daemon
 function daemon_add() {

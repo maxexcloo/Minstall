@@ -1,5 +1,5 @@
 #!/bin/bash
-# Functions For Handling Package Management.
+# Functions For Handling Package Management
 
 # Clean Package Cache
 function package_clean() {}

@@ -8,7 +8,6 @@ function question() {
 	local timeout=0
 	local default
 	local t
-
 	while [[ "$1" ]]; do
 		case "$1" in
 			--default)
@@ -43,13 +42,10 @@ function question() {
 			;;
 		esac
 	done
-
 	if [[ $timeout -ne 0 && ! "$default" ]]; then
 		error "Non-Zero Timeout Requires A Default Answer"
 	fi
-
 	if [[ ! "$*" ]]; then error "Missing Question"; fi
-
 	while [[ $ok -eq 0 ]]; do
 		if [[ $timeout -ne 0 ]]; then
 			if ! read -t $timeout -p "$* " ans; then
@@ -68,11 +64,9 @@ function question() {
 				ans=$(tr '[:upper:]' '[:lower:]' <<<$ans)
 			fi
 		fi
-
 		if [[ "$ans" == 'y' || "$ans" == 'yes' || "$ans" == 'n' || "$ans" == 'no' ]]; then
 			ok=1
 		fi
-
 		if [[ $ok -eq 0 ]]; then
 			warning "Valid answers are yes/no or y/n."
 		fi
