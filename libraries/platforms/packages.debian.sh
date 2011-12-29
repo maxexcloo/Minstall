@@ -36,7 +36,7 @@ function repo_add() {
 	if grep -Fxq "$1" /etc/apt/sources.list; then
 		warning "Repository exists, skipping add."
 	else
-		echo -e "$2" >> /etc/apt/sources.list.d/$1
+		echo -e "$2" >> /etc/apt/sources.list.d/$1.list
 	fi
 }
 

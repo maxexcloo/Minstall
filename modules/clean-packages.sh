@@ -76,7 +76,7 @@ if [ $DISTRIBUTION = 'debian' ]; then
 	apt-get dselect-upgrade
 fi
 
-# Remove Remporary Package List
+# Remove Temporary Package List
 rm $MODULEPATH/$MODULE/temp
 
 # Upgrade Any Outdated Packages
