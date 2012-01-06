@@ -1,8 +1,8 @@
 #!/bin/bash
-# Clean: User Files/Settings
+# Configure: User Files/Settings
 
 # Clean Default User Files/Directories
-if question --default yes "Do you want to update default user files (/etc/skel)? (Y/n)"; then
+if question --default yes "Do you want to clean default user files (/etc/skel)? (Y/n)"; then
 	subheader "Cleaning Default User Files..."
 	# Remove Home Dotfiles
 	rm -rf ~/.??*

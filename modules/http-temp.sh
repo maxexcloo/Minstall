@@ -1,15 +1,12 @@
 #!/bin/bash
-# Install: OpenSSH Server/Client
+# HTTP: Temp
 
 # Package List Update Question
 package_update_question
 
-# Set Module
-MODULE=install-openssh
-
 # Install Package
 subheader "Installing Package..."
-package_install openssh-server
+package_install temp
 
 # Copy Configuration
 subheader "Copying Configuration..."
@@ -17,7 +14,7 @@ cp -r $MODULEPATH/$MODULE/* /etc/
 
 # Restart Daemon
 subheader "Restarting Daemon..."
-/etc/init.d/ssh restart
+invoke-rc.d temp restart
 
 # Package List Clean Question
 package_clean_question
