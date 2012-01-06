@@ -14,7 +14,7 @@ cp -r $MODULEPATH/$MODULE/* /etc/
 
 # Restart Daemon
 subheader "Restarting Daemon..."
-invoke-rc.d temp restart
+daemon_manage temp restart
 
 # Package List Clean Question
 package_clean_question

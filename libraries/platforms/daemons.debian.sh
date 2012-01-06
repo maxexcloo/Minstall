@@ -20,3 +20,12 @@ function daemon_enable() {
 function daemon_disable() {
 	update-rc.d $1 disable
 }
+
+# Manage Daemon
+function daemon_manage() {
+	if [ -e /etc/init.d/$1 ]; then
+		invoke-rc.d $1 $2
+	else
+		warning "Daemon Not Found, Skipping..."
+	fi
+}

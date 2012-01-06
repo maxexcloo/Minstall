@@ -33,7 +33,7 @@ function package_upgrade() {
 
 # Add Repository
 function repo_add() {
-	if [ -f /etc/apt/sources.list.d/$1.list ]; then
+	if check_repository $1; then
 		warning "Repository exists, skipping add."
 	else
 		echo -e "$2" > /etc/apt/sources.list.d/$1.list

@@ -2,7 +2,7 @@
 # Clean: Logging
 
 # Check System Logging Package
-if [ ! -e /etc/init.d/inetutils-syslogd ]; then
+if check_package "inetutils-syslogd"; then
 	# Print Warning
 	warning "This module requires the inetutils-syslogd package to be installed, please install it and run this module again!"
 	# Continue Loop
@@ -13,7 +13,7 @@ fi
 subheader "Cleaning Logs..."
 
 # Stop Logging Daemon
-invoke-rc.d inetutils-syslogd stop
+daemon_manage inetutils-syslogd stop
 
 # Remove Log Files
 rm /var/log/* /var/log/*/*
@@ -29,4 +29,4 @@ subheader "Configuring Logging..."
 cp -r $MODULEPATH/$MODULE/* /etc/
 
 # Start Logging Daemon
-invoke-rc.d inetutils-syslogd start
+daemon_manage inetutils-syslogd start

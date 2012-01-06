@@ -4,6 +4,9 @@
 # Package List Update Question
 package_update_question
 
+# Common Functions
+source $MODULEPATH/http-install-common.sh
+
 # Install Packages
 subheader "Installing Extra Packages..."
 
@@ -15,11 +18,11 @@ done < $MODULEPATH/$MODULE/$DISTRIBUTION
 
 # Restart PHP-FPM
 subheader "Restarting Daemon (PHP-FPM)..."
-invoke-rc.d php5-fpm restart
+daemon_manage php5-fpm restart
 
 # Restart nginx
 subheader "Restarting Daemon (nginx)..."
-invoke-rc.d nginx restart
+daemon_manage nginx restart
 
 # Package List Clean Question
 package_clean_question

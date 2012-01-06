@@ -25,7 +25,7 @@ daemon_remove ssh
 
 # Restart Daemon
 subheader "Restarting Daemon..."
-invoke-rc.d dropbear restart
+daemon_manage dropbear restart
 
 # Package List Clean Question
 package_clean_question

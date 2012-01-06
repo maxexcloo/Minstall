@@ -12,3 +12,6 @@ function daemon_enable() {}
 
 # Disable Daemon
 function daemon_disable() {}
+
+# Manage Daemon
+function daemon_manage() {}

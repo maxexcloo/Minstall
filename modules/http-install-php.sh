@@ -1,5 +1,5 @@
 #!/bin/bash
-# HTTP Install: MySQL Database Server
+# HTTP Install: PHP
 
 # Package List Update Question
 package_update_question
@@ -9,25 +9,21 @@ source $MODULEPATH/http-install-common.sh
 
 # Install Package
 subheader "Installing Package..."
-package_install mysql-server
+package_install php5-fpm
 
-# Check PHP
-if check_package "php-fpm"; then
+# Check MySQL
+if check_package "mysql_server"; then
 	subheader "Installing PHP MySQL Package..."
 	package_install php5-mysql
 fi
-
-# Stop Daemon
-subheader "Stopping Daemon..."
-daemon_manage mysql stop
 
 # Copy Configuration
 subheader "Copying Configuration..."
 cp -r $MODULEPATH/$MODULE/* /etc/
 
-# Start Daemon
-subheader "Starting Daemon..."
-daemon_manage mysql start
+# Restart Daemon
+subheader "Restarting Daemon..."
+daemon_manage php-fpm start
 
 # Package List Clean Question
 package_clean_question

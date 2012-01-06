@@ -4,6 +4,9 @@
 # Package List Update Question
 package_update_question
 
+# Common Functions
+source $MODULEPATH/http-install-common.sh
+
 # Install Package
 subheader "Installing Package..."
 package_install exim4
@@ -14,7 +17,7 @@ sed -i "s/dc_eximconfig_configtype='local'/dc_eximconfig_configtype='internet'/"
 
 # Restart Daemon
 subheader "Restarting Daemon..."
-invoke-rc.d exim4 restart
+daemon_manage exim4 restart
 
 # Package List Clean Question
 package_clean_question

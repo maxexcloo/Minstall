@@ -7,12 +7,12 @@ if question --default yes "Do you want to disable root SSH logins? (Y/n)"; then
 	# Disable Root SSH Login For Dropbear
 	if [[ -f /etc/default/dropbear ]]; then
 		sed -i 's/DROPBEAR_EXTRA_ARGS="/DROPBEAR_EXTRA_ARGS="-w/g' /etc/default/dropbear
-		invoke-rc.d dropbear restart
+		daemon_manage dropbear restart
 	fi
 	# Disable Root SSH Login For OpenSSH
 	if [[ -f /etc/ssh/sshd_config ]]; then
 		sed -i 's/PermitRootLogin yes/PermitRootLogin no/g' /etc/ssh/sshd_config
-		invoke-rc.d ssh restart
+		daemon_manage ssh restart
 	fi
 # Enable Root SSH Login
 else
@@ -20,12 +20,12 @@ else
 	# Enable Root SSH Login For Dropbear
 	if [[ -f /etc/default/dropbear ]]; then
 		sed -i 's/-w//g' /etc/default/dropbear
-		invoke-rc.d dropbear restart
+		daemon_manage dropbear restart
 	fi
 	# Enable Root SSH Login For OpenSSH
 	if [[ -f /etc/ssh/sshd_config ]]; then
 		sed -i 's/PermitRootLogin no/PermitRootLogin yes/g' /etc/ssh/sshd_config
-		invoke-rc.d ssh restart
+		daemon_manage ssh restart
 	fi
 fi
 
@@ -38,12 +38,12 @@ if question --default no "Do you want to enable additional SSH ports? (y/N)"; th
 	if [[ -f /etc/default/dropbear ]]; then
 		echo "Incomplete Function."
 		#sed -i 's/DROPBEAR_EXTRA_ARGS="-w/DROPBEAR_EXTRA_ARGS="-w -p '$SSHPORT'/g' /etc/default/dropbear
-		#invoke-rc.d dropbear restart
+		#daemon_manage dropbear restart
 	fi
 	# Add Additional SSH Port To OpenSSH
 	if [[ -f /etc/ssh/sshd_config ]]; then
 		echo "Incomplete Function."
 		#sed -i 's/#Port/Port '$SSHPORT'/g' /etc/ssh/sshd_config
-		#invoke-rc.d ssh restart
+		#daemon_manage ssh restart
 	fi
 fi

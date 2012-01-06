@@ -17,7 +17,7 @@ cp -r $MODULEPATH/$MODULE/* /etc/
 
 # Restart Daemon
 subheader "Restarting Daemon..."
-invoke-rc.d ssh restart
+daemon_manage ssh restart
 
 # Package List Clean Question
 package_clean_question
