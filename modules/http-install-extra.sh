@@ -1,11 +1,11 @@
 #!/bin/bash
 # HTTP Install: Extra Packages
 
-# Package List Update Question
-package_update_question
-
 # Common Functions
 source $MODULEPATH/http-install-common.sh
+
+# Package List Update Question
+package_update_question
 
 # Module Warning
 warning "Many of these packages require PHP, installing them may break your install if you plan on installing PHP later with the modules provided, please only proceed if PHP is already installed!"
@@ -37,7 +37,7 @@ fi
 
 # Restart nginx
 if check_package "nginx"; then
-	subheader "Restarting Daemon (nginx)..."
+	subheader "Restarting Daemon (Nginx)..."
 	daemon_manage nginx restart
 fi
 

@@ -1,0 +1,21 @@
+server {
+	server_name example.com;
+	rewrite ^/(.*) http://www.example.com/$1 permanent;
+}
+
+server {
+	server_name www.example.com;
+	root /home/example/http/hosts/example.com;
+	error_log /home/example/http/logs/example.com.log;
+	index index.html index.php;
+
+	include /etc/nginx/conf.d/cache.conf;
+	include /etc/nginx/conf.d/deny.conf;
+
+	location ~ \.php$ {
+		fastcgi_pass unix:/home/example/http/private/php.socket;
+		fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+		include fastcgi_params;
+		try_files $uri =404;
+	}
+}

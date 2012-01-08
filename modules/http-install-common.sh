@@ -4,7 +4,11 @@
 # Check DotDeb
 if check_repository_ni "dotdeb"; then
 	# Print Warning
-	warning "This module requires the dotdeb repository to be installed, please install it and run this module again!"
+	warning "This module requires the DotDeb repository to be installed, please install it and run this module again!"
 	# Continue Loop
 	continue
 fi
+
+# Clean HTTP Config
+mv /etc/nginx/mime.types /etc/nginx/nginx.d/mime.conf
+rm -rf /etc/nginx/conf.d/* /etc/nginx/sites-*

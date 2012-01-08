@@ -8,12 +8,15 @@ Clean: Packages
 
 Configure: General
 Configure: SSH
+Configure: Upgrade
 Configure: User
 
+HTTP Install: Common Functions
 HTTP Install: Exim Mailserver
 HTTP Install: Extra Packages
 HTTP Install: MySQL Database Server
-HTTP Install: PHP
+HTTP Install: Nginx Web Server
+HTTP Install: PHP Application Server
 
 Install: Dropbear SSH Server
 Install: Extra Packages
@@ -21,15 +24,10 @@ Install: Extra Repositories
 Install: OpenSSH Server
 
 TODO: Maintain: Hosts
-TODO: Maintain: Update/Upgrade Packages
 TODO: Maintain: Users
 
 TODO: Install: Basic PPTP
 TODO: Install: Basic OpenVPN
-TODO: Install: NGINX
-TODO: Install: PHP-FPM
-TODO: Install: MySQL
-TODO: Install: Exim
 
 >> DOWNLOAD <<
 Will be outlined.

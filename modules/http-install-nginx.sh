@@ -1,5 +1,5 @@
 #!/bin/bash
-# HTTP Install: PHP Application Server
+# HTTP Install: Nginx Web Server
 
 # Common Functions
 source $MODULEPATH/http-install-common.sh
@@ -9,22 +9,23 @@ package_update_question
 
 # Install Package
 subheader "Installing Package..."
-package_install php5-fpm
+package_install nginx
 
-# Check MySQL
-if check_package "mysql_server"; then
-	subheader "Installing PHP MySQL Package..."
-	package_install php5-mysql
-fi
+# Remove System Sites
+subheader "Removing System Sites..."
+rm -rf /etc/nginx/conf.d/* /etc/nginx/sites-*
+
+# Move System Configuration
+subheader "Moving System Configuration..."
+mv /etc/nginx/mime.types /etc/nginx/nginx.d/mime.conf
 
 # Copy Configuration
 subheader "Copying Configuration..."
-rm -rf /etc/php5/fpm/pool.d/*
 cp -r $MODULEPATH/$MODULE/* /etc/
 
 # Restart Daemon
 subheader "Restarting Daemon..."
-daemon_manage php-fpm start
+daemon_manage nginx restart
 
 # Package List Clean Question
 package_clean_question
