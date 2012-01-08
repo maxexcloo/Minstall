@@ -32,11 +32,11 @@ TODO: Install: Basic PPTP
 TODO: Install: Basic OpenVPN
 
 >> DOWNLOAD <<
-Will be outlined.
+cd ~; wget --no-check-certificate -O mini.tgz http://www.github.com/maxexcloo/Minstall/tarball/master; tar zxvf mini.tgz; cd *Minstall*
 
 >> INSTRUCTIONS <<
 This script contains serveral modules designed to help you set up your server how you want it.
-The included modules will be outlined below as they are worked on.
+Instructions to be written.
 
 >> COMPATIBILITY <<
 Operating Systems:
