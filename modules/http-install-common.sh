@@ -10,5 +10,6 @@ if check_repository_ni "dotdeb"; then
 fi
 
 # Clean HTTP Config
+echo -n "" > /usr/share/nginx/www/index.html
 mv /etc/nginx/mime.types /etc/nginx/nginx.d/mime.conf
 rm -rf /etc/nginx/conf.d/* /etc/nginx/sites-*

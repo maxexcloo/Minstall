@@ -11,6 +11,8 @@ Configure: SSH
 Configure: Upgrade
 Configure: User
 
+HTTP Configure: MySQL Database Server
+HTTP Configure: Nginx Web Server
 HTTP Install: Common Functions
 HTTP Install: Exim Mailserver
 HTTP Install: Extra Packages
