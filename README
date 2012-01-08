@@ -3,18 +3,22 @@ Run on a freshly installed server under root!
 No warranty. For help come on #frantech on irc.dairc.net and look for maxexcloo!
 
 >> FEATURES <<
-Clean: General
 Clean: Logging
 Clean: Packages
-Clean: User
 
 Configure: General
 Configure: SSH
+Configure: User
 
-Install: Dropbear
+HTTP Install: Exim Mailserver
+HTTP Install: Extra Packages
+HTTP Install: MySQL Database Server
+HTTP Install: PHP
+
+Install: Dropbear SSH Server
 Install: Extra Packages
 Install: Extra Repositories
-Install: OpenSSH
+Install: OpenSSH Server
 
 TODO: Maintain: Hosts
 TODO: Maintain: Update/Upgrade Packages

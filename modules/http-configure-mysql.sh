@@ -1,6 +1,14 @@
 #!/bin/bash
 # HTTP Configure: MySQL Database Server
 
+# Check MySQL Package
+if check_package_ni "mysql-server"; then
+	# Print Warning
+	warning "This module requires the mysql-server package to be installed, please install it and run this module again!"
+	# Continue Loop
+	continue
+fi
+
 # Configure MySQL For Minimal Memory Usage
 if question --default yes "Do you want to configure MySQL for minimal memory usage? (Y/n)"; then
 	subheader "Adding Configuration..."

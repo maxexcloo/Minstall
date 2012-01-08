@@ -2,7 +2,7 @@
 # Clean: Logging
 
 # Check System Logging Package
-if check_package "inetutils-syslogd"; then
+if check_package_ni "inetutils-syslogd"; then
 	# Print Warning
 	warning "This module requires the inetutils-syslogd package to be installed, please install it and run this module again!"
 	# Continue Loop

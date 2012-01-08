@@ -6,7 +6,6 @@ if question --default yes "Do you want to change the default system shell? (Y/n)
 	subheader "Changing Default System Shell..."
 	# Check Distribution
 	if [ $DISTRIBUTION = 'debian' ]; then
-		# Reconfigure Default System Shell
 		dpkg-reconfigure dash
 	fi
 fi
@@ -16,7 +15,6 @@ if question --default yes "Do you want to change the system timezone? (Y/n)"; th
 	subheader "Changing System Timezone..."
 	# Check Distribution
 	if [ $DISTRIBUTION = 'debian' ]; then
-		# Reconfigure System Timezone
 		dpkg-reconfigure tzdata
 	fi
 fi
@@ -24,11 +22,17 @@ fi
 # Disable BASH History
 if question --default yes "Do you want to disable BASH history? (Y/n)"; then
 	subheader "Disabling BASH History..."
-	echo -e "\nunset HISTFILE" >> /etc/profile
+	# Check Distribution
+	if [ $DISTRIBUTION = 'debian' ]; then
+		echo -e "\nunset HISTFILE" >> /etc/profile
+	fi
 fi
 
 # Disable Additional Getty Instances
 if question --default yes "Do you want to disable extra getty instances? (Y/n)"; then
 	subheader "Disabling Additional Getty Instances..."
-	sed -e 's/\(^[2-6].*getty.*\)/#\1/' -i /etc/inittab
+	# Check Distribution
+	if [ $DISTRIBUTION = 'debian' ]; then
+		sed -e 's/\(^[2-6].*getty.*\)/#\1/' -i /etc/inittab
+	fi
 fi
