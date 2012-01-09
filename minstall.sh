@@ -35,7 +35,7 @@ for file in $LIBRARYPATH/platforms/*.$DISTRIBUTION.sh; do
 done
 
 # Print Help If No Parameters Are Specified
-if [ $# -e 0 ]; then
+if [ $# != 0 ]; then
 	# Load Module Listing Script
 	source $MODULEPATH/help-modules.sh
 	# Exit
