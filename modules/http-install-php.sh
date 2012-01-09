@@ -22,7 +22,7 @@ subheader "Copying Configuration..."
 rm -rf /etc/php5/fpm/pool.d/* > /dev/null 2>&1
 cp -r $MODULEPATH/$MODULE/* /etc/
 
-# Check Nginx
+# Check Package
 if check_package "nginx"; then
 	subheader "Enabling nginx PHP Configuration..."
 	sed -i 's/#include \/etc\/nginx\/php.d/include \/etc\/nginx\/php.d/g' /etc/nginx/hosts.d/www-data.conf

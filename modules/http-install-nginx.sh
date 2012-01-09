@@ -24,7 +24,7 @@ subheader "Moving System Configuration..."
 mv /etc/nginx/mime.types /etc/nginx/nginx.d/mime.conf > /dev/null 2>&1
 
 # Check PHP
-if check_package "php-fpm"; then
+if check_package "php5-fpm"; then
 	subheader "Enabling PHP Configuration..."
 	sed -i 's/#include \/etc\/nginx\/php.d/include \/etc\/nginx\/php.d/g' /etc/nginx/hosts.d/www-data.conf
 	subheader "Restarting Daemon (PHP-FPM)..."

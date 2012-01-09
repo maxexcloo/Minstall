@@ -30,14 +30,17 @@ while read package; do
 	package_install $package
 done < $MODULEPATH/$MODULE/$DISTRIBUTION
 
-
-# Restart PHP-FPM
+# Check Package
+if check_package "php5-fpm"; then
 subheader "Restarting Daemon (PHP-FPM)..."
 daemon_manage php5-fpm restart
+fi
 
-# Restart Nginx
-subheader "Restarting Daemon (nginx)..."
-daemon_manage nginx restart
+# Check Package
+if check_package "nginx"; then
+	subheader "Restarting Daemon (nginx)..."
+	daemon_manage nginx restart
+fi
 
 # Package List Clean Question
 package_clean_question
