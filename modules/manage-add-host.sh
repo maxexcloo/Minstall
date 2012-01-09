@@ -23,6 +23,19 @@ while true; do
 	fi
 done
 
+# Check Folders
+if [ ! -d ~$USERNAME/http ]; then
+	# User HTTP Folder Question
+	if question --default yes "Do you want to add a HTTP folder for this user (if you have already done this you don't need to do it again)? (Y/n)"; then
+		subheader "Adding HTTP Folder..."
+		mkdir -p ~$USERNAME/http/{common,hosts,logs,private}
+		subheader "Changing HTTP Permissions..."
+		chown -R $USERNAME:$USERNAME ~$USERNAME/http
+		subheader "Adding User To HTTP Group..."
+		useradd -G www-data $USERNAME
+	fi
+fi
+
 # Host Check Loop
 while true; do
 	# Take Host Input
@@ -38,24 +51,19 @@ done
 # Create Host File
 subheader "Creating Host File..."
 if [[ $HOST = www.*.* ]]; then
-	cp $MODULEPATH/$MODULE/nginx-www.conf $MODULEPATH/$MODULE/temp
-	cat $MODULEPATH/$MODULE/nginx.conf >> $MODULEPATH/$MODULE/temp
+	cp $MODULEPATH/$MODULE/nginx-www.conf /etc/nginx/hosts.d/$USERNAME.conf
+	cat $MODULEPATH/$MODULE/nginx.conf >> /etc/nginx/hosts.d/$USERNAME.conf
+	HOST_DIR=$(echo $HOST | sed 's/...\(.*\)/\1/')
+	HOST_WWW=1
 else
-	cp $MODULEPATH/$MODULE/nginx.conf $MODULEPATH/$MODULE/temp
+	HOST_DIR=$HOST
+	cp $MODULEPATH/$MODULE/nginx.conf /etc/nginx/hosts.d/$USERNAME.conf
 fi
 
-# Check Folders
-if [ ! -d ~$USERNAME/http ]; then
-	# User HTTP Folder Question
-	if question --default yes "Do you want to add a HTTP folder for this user (if you have already done this you don't need to do it again)? (Y/n)"; then
-		subheader "Adding HTTP Folder..."
-		mkdir -p ~$USERNAME/http/{common,hosts,logs,private}
-		subheader "Changing HTTP Permissions..."
-		chown -R $USERNAME:$USERNAME ~$USERNAME/http
-		subheader "Adding User To HTTP Group..."
-		useradd -G www-data $USERNAME
-	fi
-fi
+# Create Host Directory
+subheader "Creating Host Directory"
+mkdir ~$USERNAME/http/hosts/$HOST_DIR
+chown -R $USERNAME:$USERNAME ~$USERNAME/http/hosts/$HOST_DIR
 
 # Check Package
 if check_package "php-fpm"; then
@@ -73,6 +81,9 @@ fi
 
 # Remove Temporary Host File
 rm $MODULEPATH/$MODULE/temp
+
+# Reset Host WWW Variable
+HOST_WWW=0
 
 # Check Package
 if check_package "php5-fpm"; then
