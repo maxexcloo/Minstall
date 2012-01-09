@@ -3,7 +3,7 @@ Run on a freshly installed server under root!
 No warranty. For help come on #frantech on irc.dairc.net and look for maxexcloo!
 
 >> FEATURES <<
-Clean: Logging
+Clean: Logging (QC Pass)
 Clean: Packages (QC Pass)
 
 Configure: General
@@ -23,7 +23,7 @@ HTTP Install: PHP Application Server
 Install: Dropbear SSH Server
 Install: Extra Packages (QC Pass)
 Install: Extra Repositories (QC Pass)
-Install: OpenSSH Server
+Install: OpenSSH Server (QC Pass)
 
 TODO: Maintain: Hosts
 TODO: Maintain: Users

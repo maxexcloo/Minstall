@@ -83,6 +83,7 @@ while [ $# -ne 0 ]; do
 			echo ""
 		;;
 	esac
+	# Shift Variables
 	shift
 done
 final

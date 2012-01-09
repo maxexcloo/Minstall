@@ -9,6 +9,8 @@ if question --default yes "Do you still want to run this module? (Y/n)"; then
 else
 	# Skipped Message
 	subheader "Skipping Module..."
+	# Shift Variables
+	shift
 	# Skip Module
 	continue
 fi
