@@ -1,5 +1,5 @@
 #!/bin/bash
-# HTTP Install: Nginx Web Server
+# HTTP Install: nginx Web Server
 
 # Common Functions
 source $MODULEPATH/http-install-common.sh
@@ -13,7 +13,7 @@ package_install nginx
 
 # Remove System Sites
 subheader "Removing System Sites..."
-rm -rf /etc/nginx/conf.d/* /etc/nginx/sites-* > /dev/null 2>&1
+rm -rf /etc/nginx/sites-* > /dev/null 2>&1
 
 # Copy Configuration
 subheader "Copying Configuration..."
@@ -21,12 +21,14 @@ cp -r $MODULEPATH/$MODULE/* /etc/
 
 # Move System Configuration
 subheader "Moving System Configuration..."
-mv /etc/nginx/mime.types /etc/nginx/nginx.d/mime.conf
+mv /etc/nginx/mime.types /etc/nginx/nginx.d/mime.conf > /dev/null 2>&1
 
 # Check PHP
 if check_package "php-fpm"; then
 	subheader "Enabling PHP Configuration..."
 	sed -i 's/#include \/etc\/nginx\/php.d/include \/etc\/nginx\/php.d/g' /etc/nginx/hosts.d/www-data.conf
+	subheader "Restarting Daemon (PHP-FPM)..."
+	daemon_manage php5-fpm restart
 fi
 
 # Restart Daemon

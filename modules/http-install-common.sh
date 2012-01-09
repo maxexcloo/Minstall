@@ -13,4 +13,4 @@ fi
 
 # Clean HTTP Config
 mv /etc/nginx/mime.types /etc/nginx/nginx.d/mime.conf > /dev/null 2>&1
-rm -rf /etc/nginx/conf.d/* /etc/nginx/sites-* > /dev/null 2>&1
+rm -rf /etc/nginx/sites-* > /dev/null 2>&1

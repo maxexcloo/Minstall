@@ -15,7 +15,9 @@ if question --default yes "Do you still want to run this module? (Y/n)"; then
 else
 	# Skipped Message
 	subheader "Skipping Module..."
-	# Skip Module
+	# Shift Variables
+	shift
+	# Continue Loop
 	continue
 fi
 
@@ -34,7 +36,7 @@ subheader "Restarting Daemon (PHP-FPM)..."
 daemon_manage php5-fpm restart
 
 # Restart Nginx
-subheader "Restarting Daemon (Nginx)..."
+subheader "Restarting Daemon (nginx)..."
 daemon_manage nginx restart
 
 # Package List Clean Question

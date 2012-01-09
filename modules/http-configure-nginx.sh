@@ -1,5 +1,5 @@
 #!/bin/bash
-# HTTP Configure: Nginx Web Server
+# HTTP Configure: nginx Web Server
 
 # Check Package
 if check_package_ni "nginx"; then
