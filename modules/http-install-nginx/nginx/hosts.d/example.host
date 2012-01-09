@@ -11,11 +11,4 @@ server {
 
 	include /etc/nginx/conf.d/cache.conf;
 	include /etc/nginx/conf.d/deny.conf;
-
-	location ~ \.php$ {
-		fastcgi_pass unix:/home/example/http/private/php.socket;
-		fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-		include fastcgi_params;
-		try_files $uri =404;
-	}
 }

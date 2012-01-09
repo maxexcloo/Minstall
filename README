@@ -6,15 +6,15 @@ No warranty. For help come on #frantech on irc.dairc.net and look for maxexcloo!
 Clean: Logging (QC Pass)
 Clean: Packages (QC Pass)
 
-Configure: General
-Configure: SSH
-Configure: Upgrade
-Configure: User
+Configure: General (QC Pass)
+Configure: SSH (QC Pass)
+Configure: Upgrade (QC Pass)
+Configure: User (QC Pass)
 
-HTTP Configure: MySQL Database Server
+HTTP Configure: MySQL Database Server (QC Pass)
 HTTP Configure: Nginx Web Server
-HTTP Install: Common Functions
-HTTP Install: Exim Mailserver
+HTTP Install: Common Functions (QC Pass)
+HTTP Install: Exim Mailserver (QC Pass)
 HTTP Install: Extra Packages
 HTTP Install: MySQL Database Server
 HTTP Install: Nginx Web Server
