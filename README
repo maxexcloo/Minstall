@@ -12,7 +12,7 @@ Configure: Upgrade (QC Pass)
 Configure: User (QC Pass)
 
 HTTP Configure: MySQL Database Server (QC Pass)
-HTTP Configure: nginx Web Server
+HTTP Configure: nginx Web Server (QC Pass)
 HTTP Install: Common Functions (QC Pass)
 HTTP Install: Exim Mailserver (QC Pass)
 HTTP Install: Extra Packages (QC Pass)
@@ -20,7 +20,7 @@ HTTP Install: MySQL Database Server (QC Pass)
 HTTP Install: nginx Web Server (QC Pass)
 HTTP Install: PHP Application Server (QC Pass)
 
-Install: Dropbear SSH Server
+Install: Dropbear SSH Server (QC Pass)
 Install: Extra Packages (QC Pass)
 Install: Extra Repositories (QC Pass)
 Install: OpenSSH Server (QC Pass)
