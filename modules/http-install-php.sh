@@ -22,6 +22,12 @@ subheader "Copying Configuration..."
 rm -rf /etc/php5/fpm/pool.d/* > /dev/null 2>&1
 cp -r $MODULEPATH/$MODULE/* /etc/
 
+# Check Nginx
+if check_package "nginx"; then
+	subheader "Enabling Nginx PHP Configuration..."
+	sed -i 's/#include \/etc\/nginx\/php.d/include \/etc\/nginx\/php.d/g' /etc/nginx/hosts.d/www-data.conf
+fi
+
 # Restart Daemon
 subheader "Restarting Daemon..."
 daemon_manage php-fpm start
