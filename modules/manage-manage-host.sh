@@ -36,18 +36,40 @@ if [ ! -d ~$USERNAME/http ]; then
 	fi
 fi
 
+# Host Check Loop
+while true; do
+	# Take Host Input
+	read -p "Please enter the virtual host (e.g. www.example.com): " HOST
+	# Check If User Directory Exists
+	if [[ $HOST = *.*.* ]]; then
+		break
+	else
+		echo "Please enter a valid virtual host."
+	fi
+done
+
+# Check Host
+subheader "Checking Host..."
+if [[ $HOST = www.*.* ]]; then
+	HOST_DIR=$(echo $HOST | sed 's/...\(.*\)/\1/')
+	HOST_WWW=1
+else
+	HOST_DIR=$HOST
+	HOST_WWW=0
+fi
+
 # Check Package
 if check_package "php-fpm"; then
 	# PHP Question
 	if question --default yes "Do you want to enable PHP for this virtual host? (Y/n)"; then
 		subheader "Enabling PHP..."
-		sed -i 's/#include \/etc\/nginx\/php.d/include \/etc\/nginx\/php.d/g' /etc/nginx/hosts.d/$USERNAME.conf
+		sed -i 's/#include \/etc\/nginx\/php.d/include \/etc\/nginx\/php.d/g' /etc/nginx/hosts.d/$USERNAME-$HOST_DIR.conf
 	else
 		subheader "Disabling PHP..."
-		sed -i 's/include \/etc\/nginx\/php.d/#include \/etc\/nginx\/php.d/g' /etc/nginx/hosts.d/$USERNAME.conf
+		sed -i 's/include \/etc\/nginx\/php.d/#include \/etc\/nginx\/php.d/g' /etc/nginx/hosts.d/$USERNAME-$HOST_DIR.conf
 	fi
 else
-	sed -i 's/include \/etc\/nginx\/php.d/#include \/etc\/nginx\/php.d/g' /etc/nginx/hosts.d/$USERNAME.conf
+	sed -i 's/include \/etc\/nginx\/php.d/#include \/etc\/nginx\/php.d/g' /etc/nginx/hosts.d/$USERNAME-$HOST_DIR.conf
 fi
 
 # Check Package

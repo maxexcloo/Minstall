@@ -19,7 +19,6 @@ fi
 
 # Copy Configuration
 subheader "Copying Configuration..."
-rm -rf /etc/php5/fpm/pool.d/* > /dev/null 2>&1
 cp -r $MODULEPATH/$MODULE/* /etc/
 
 # Check Package
