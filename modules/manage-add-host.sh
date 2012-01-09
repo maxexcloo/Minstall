@@ -16,7 +16,7 @@ while true; do
 	# Take User Input
 	read -p "Please enter a user name: " USERNAME
 	# Check If User Directory Exists
-	if [ -d ~$USERNAME ]; then
+	if [ -d /home/$USERNAME ]; then
 		break
 	else
 		echo "Please enter a valid username."
@@ -24,13 +24,13 @@ while true; do
 done
 
 # Check Folders
-if [ ! -d ~$USERNAME/http ]; then
+if [ ! -d /home/$USERNAME/http ]; then
 	# User HTTP Folder Question
 	if question --default yes "Do you want to add a HTTP folder for this user (if you have already done this you don't need to do it again)? (Y/n)"; then
 		subheader "Adding HTTP Folder..."
-		mkdir -p ~$USERNAME/http/{common,hosts,logs,private}
+		mkdir -p /home/$USERNAME/http/{common,hosts,logs,private}
 		subheader "Changing HTTP Permissions..."
-		chown -R $USERNAME:$USERNAME ~$USERNAME/http
+		chown -R $USERNAME:$USERNAME /home/$USERNAME/http
 		subheader "Adding User To HTTP Group..."
 		useradd -G www-data $USERNAME
 	fi
@@ -60,8 +60,8 @@ fi
 
 # Create Host Directory
 subheader "Creating Host Directory"
-mkdir ~$USERNAME/http/hosts/$HOST_DIR
-chown -R $USERNAME:$USERNAME ~$USERNAME/http/hosts/$HOST_DIR
+mkdir /home/$USERNAME/http/hosts/$HOST_DIR
+chown -R $USERNAME:$USERNAME /home/$USERNAME/http/hosts/$HOST_DIR
 
 # Create Host Configuration
 subheader "Creating Host Configuration..."
