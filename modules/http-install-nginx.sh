@@ -13,8 +13,8 @@ package_install nginx
 
 # Remove System Sites
 subheader "Removing System Sites..."
-echo -n "" > /usr/share/nginx/www/index.html
-rm -rf /etc/nginx/conf.d/* /etc/nginx/sites-*
+echo -n "" > /usr/share/nginx/www/index.html > /dev/null 2>&1
+rm -rf /etc/nginx/conf.d/* /etc/nginx/sites-* > /dev/null 2>&1
 
 # Move System Configuration
 subheader "Moving System Configuration..."

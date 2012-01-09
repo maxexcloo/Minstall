@@ -1,18 +1,20 @@
 #!/bin/bash
-# Function To Check Stuff
+# Function To Check Package/Repository Installation Status
 
 # Check If Package Installed
 function check_package() {
 	# Check Distribution
 	if [ $DISTRIBUTION = 'debian' ]; then
-		dpkg -l $1 >/dev/null 2>&1 && [ true ]
+		dpkg -l $1 > /dev/null 2>&1
+		[ $? == '0' ]
 	fi
 }
 # Check If Package Not Installed
 function check_package_ni() {
 	# Check Distribution
 	if [ $DISTRIBUTION = 'debian' ]; then
-		dpkg -l $1 >/dev/null 2>&1 && [ false ]
+		dpkg -l $1 > /dev/null 2>&1
+		[ $? != '0' ]
 	fi
 }
 

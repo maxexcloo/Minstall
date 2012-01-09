@@ -30,16 +30,12 @@ done < $MODULEPATH/$MODULE/$DISTRIBUTION
 
 
 # Restart PHP-FPM
-if check_package "php-fpm"; then
-	subheader "Restarting Daemon (PHP-FPM)..."
-	daemon_manage php5-fpm restart
-fi
+subheader "Restarting Daemon (PHP-FPM)..."
+daemon_manage php5-fpm restart
 
-# Restart nginx
-if check_package "nginx"; then
-	subheader "Restarting Daemon (Nginx)..."
-	daemon_manage nginx restart
-fi
+# Restart Nginx
+subheader "Restarting Daemon (Nginx)..."
+daemon_manage nginx restart
 
 # Package List Clean Question
 package_clean_question

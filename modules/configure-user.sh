@@ -5,10 +5,10 @@
 if question --default yes "Do you want to clean default user files (/etc/skel)? (Y/n)"; then
 	subheader "Cleaning Default User Files..."
 	# Remove Home Dotfiles
-	rm -rf ~/.??*
+	rm -rf ~/.??* > /dev/null 2>&1
 	# Remove Skel Dotfiles
-	rm -rf /etc/skel/*
-	rm -rf /etc/skel/.??*
+	rm -rf /etc/skel/* > /dev/null 2>&1
+	rm -rf /etc/skel/.??* > /dev/null 2>&1
 	# Update Home Dotfiles
 	cp -a -R $MODULEPATH/$MODULE/skel/.??* ~
 	# Update Skel Dotfiles

@@ -34,6 +34,14 @@ for file in $LIBRARYPATH/platforms/*.$DISTRIBUTION.sh; do
 	fi
 done
 
+# Print Help If No Parameters Are Specified
+if [ $# -e 0 ]; then
+	# Load Module Listing Script
+	source $MODULEPATH/help-modules.sh
+	# Exit
+	exit
+fi
+
 # Loop Through Parameters
 while [ $# -ne 0 ]; do
 	# Set Current Module Variable

@@ -90,3 +90,6 @@ package_clean
 
 # Clean Package List
 package_clean_list
+
+# SSH Warning
+warning "All SSH Servers have been uninstalled! Be sure to install an SSH server again using the modules provided!"

@@ -16,7 +16,7 @@ if question --default yes "Do you want to enable gzip compression? (Y/n)"; then
 # Configure MySQL For Normal Memory Usage
 else
 	subheader "Removing Configuration..."
-	rm /etc/nginx/nginx.d/gzip.conf
+	rm /etc/nginx/nginx.d/gzip.conf > /dev/null 2>&1
 fi
 
 # Enable Optimised Configuration
@@ -26,7 +26,7 @@ if question --default yes "Do you want to enable optimised configurations? (Y/n)
 # Disable Optimised Configuration
 else
 	subheader "Removing Configuration..."
-	rm /etc/nginx/nginx.d/speed.conf
+	rm /etc/nginx/nginx.d/speed.conf > /dev/null 2>&1
 fi
 
 # Restart Daemon

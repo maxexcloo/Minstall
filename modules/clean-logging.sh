@@ -16,11 +16,11 @@ subheader "Cleaning Logs..."
 daemon_manage inetutils-syslogd stop
 
 # Remove Log Files
-rm /var/log/* /var/log/*/*
-rm -rf /var/log/news
+rm /var/log/* /var/log/*/* > /dev/null 2>&1
+rm -rf /var/log/news > /dev/null 2>&1
 
 # Create New Log Files
-touch /var/log/{auth,daemon,kernel,mail,messages}
+touch /var/log/{auth,daemon,kernel,mail,messages} > /dev/null 2>&1
 
 # Configure Logging
 subheader "Configuring Logging..."
