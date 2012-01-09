@@ -77,19 +77,12 @@ function question() {
 # Ask Numerical Question (WIP)
 function question_number() {
 	while true; do
-		read -p "Do you wish to install this program?" yn
-		case $yn in
-			[Yy]* )
-				make install
-				break
-			;;
-			[Nn]* )
-				exit
-			;;
-			* )
-				echo "Please answer yes or no."
-			;;
-		esac
+		read -p "$1 " nm
+		if [[ "$nm" =~ ^[0-9]+$ ]]; then
+			break
+		else
+			echo "Please enter a number."
+		fi
 	done
-
+	echo $nm
 }

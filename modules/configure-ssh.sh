@@ -33,7 +33,7 @@ fi
 if question --default no "Do you want to enable additional SSH ports? (y/N)"; then
 	subheader "Enabling Additional SSH Ports..."
 	# Take User Input
-	read -p "Please enter an additional SSH Port: " -e SSHPORT
+	SSHPORT=$(question_number)
 	# Add Additional SSH Port To Dropbear
 	if check_package "dropbear"; then
 		echo "Incomplete Function."
