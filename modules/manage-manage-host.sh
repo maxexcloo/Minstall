@@ -58,6 +58,16 @@ else
 	HOST_WWW=0
 fi
 
+# Check Directory
+if [ ! -f /etc/nginx/hosts.d/$USERNAME-$HOST_DIR.conf ]; then
+	# Print Warning
+	warning "The virtual host configuration file does not exist (/etc/nginx/hosts.d/$USERNAME-$HOST_DIR.conf), run this module again and re-enter the information!"
+	# Shift Variables
+	shift
+	# Continue Loop
+	continue
+fi
+
 # Check Package
 if check_package "php-fpm"; then
 	# PHP Question
