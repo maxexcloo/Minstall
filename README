@@ -4,7 +4,7 @@ No warranty. For help come on #frantech on irc.dairc.net and look for maxexcloo!
 
 >> FEATURES <<
 Clean: Logging
-Clean: Packages
+Clean: Packages (QC Pass)
 
 Configure: General
 Configure: SSH
@@ -21,8 +21,8 @@ HTTP Install: Nginx Web Server
 HTTP Install: PHP Application Server
 
 Install: Dropbear SSH Server
-Install: Extra Packages
-Install: Extra Repositories
+Install: Extra Packages (QC Pass)
+Install: Extra Repositories (QC Pass)
 Install: OpenSSH Server
 
 TODO: Maintain: Hosts
@@ -32,7 +32,7 @@ TODO: Install: Basic PPTP
 TODO: Install: Basic OpenVPN
 
 >> DOWNLOAD <<
-cd ~; wget --no-check-certificate -O mini.tgz http://www.github.com/maxexcloo/Minstall/tarball/master; tar zxvf mini.tgz; cd *Minstall*
+cd ~; rm -rf *Minstall* mini.tgz; wget --no-check-certificate -O mini.tgz http://www.github.com/maxexcloo/Minstall/tarball/master; tar zxvf mini.tgz; cd *Minstall*
 
 >> INSTRUCTIONS <<
 This script contains serveral modules designed to help you set up your server how you want it.

@@ -5,7 +5,7 @@
 package_update_question
 
 # Set Module
-MODULE=install-openssh
+MODULE=install-ssh
 
 # Install Package
 subheader "Installing Package..."
