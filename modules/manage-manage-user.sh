@@ -22,7 +22,7 @@ if check_package "nginx"; then
 		subheader "Changing HTTP Permissions..."
 		chown -R $USERNAME:$USERNAME /home/$USERNAME/http
 		subheader "Adding User To HTTP Group..."
-		useradd -G www-data $USERNAME
+		gpasswd -a $USERNAME www-data
 	fi
 fi
 
