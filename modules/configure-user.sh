@@ -14,5 +14,5 @@ if question --default yes "Do you want to clean default user files (/etc/skel)? 
 	# Update Skel Dotfiles
 	cp -a -R $MODULEPATH/$MODULE/skel/.??* /etc/skel
 	# Append Umask
-	echo -e "\numask 027" >> /etc/skel/.bashrc
+	echo -e "\numask o=" >> /etc/skel/.bashrc
 fi
