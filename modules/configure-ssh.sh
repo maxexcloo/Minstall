@@ -47,3 +47,19 @@ if question --default no "Do you want to enable additional SSH ports? (y/N)"; th
 		#daemon_manage ssh restart
 	fi
 fi
+
+# Enable SFTP Umask Privacy
+if question --default no "Do you want to enable more private SFTP Umask Settings? (y/N)"; then
+	subheader "Enabling SFTP Umask Privacy..."
+	if check_package "openssh-server"; then
+		sed -i 's/sftp-server/sftp-server -u o=/g' /etc/ssh/sshd_config
+		daemon_manage ssh restart
+	fi
+# Disable SFTP Umask Privacy
+else
+	subheader "Disabling SFTP Umask Privacy..."
+	if check_package "openssh-server"; then
+		sed -i 's/sftp-server -u o=/sftp-server/g' /etc/ssh/sshd_config
+		daemon_manage ssh restart
+	fi
+fi
