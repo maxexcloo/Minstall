@@ -76,21 +76,21 @@ fi
 if [[ $HOST_WWW = 1 ]]; then
 	subheader "Updating Host Configuration (WWW)..."
 	# Update WWW Host
-	sed -i 's/server_name example.com/server_name $HOST_DIR/g' /etc/nginx/hosts.d/$USERNAME-$HOST_DIR.conf
+	sed -i 's/server_name example.com/server_name '$HOST_DIR'/g' /etc/nginx/hosts.d/$USERNAME-$HOST_DIR.conf
 	# Update WWW Host Redirect
-	sed -i 's/www.example.com\/$1/$HOST\/$1/g' /etc/nginx/hosts.d/$USERNAME-$HOST_DIR.conf
+	sed -i 's/www.example.com\/$1/'$HOST'\/$1/g' /etc/nginx/hosts.d/$USERNAME-$HOST_DIR.conf
 fi
 
 # Update Host Configuration
 subheader "Updating Host Configuration..."
 # Update Host
-sed -i 's/server_name www.example.com/server_name $HOST/g' /etc/nginx/hosts.d/$USERNAME-$HOST_DIR.conf
+sed -i 's/server_name www.example.com/server_name '$HOST'/g' /etc/nginx/hosts.d/$USERNAME-$HOST_DIR.conf
 # Update Root
-sed -i 's/root example/root \/home\/$USERNAME\/http\/hosts\/$HOST_DIR/g' /etc/nginx/hosts.d/$USERNAME-$HOST_DIR.conf
+sed -i 's/root example/root \/home\/'$USERNAME'\/http\/hosts\/'$HOST_DIR'/g' /etc/nginx/hosts.d/$USERNAME-$HOST_DIR.conf
 # Update Log File Path
-sed -i 's/error_log example/error_log \/home\/$USERNAME\/http\/logs\/$USERNAME-$HOST_DIR.log/g' /etc/nginx/hosts.d/$USERNAME-$HOST_DIR.conf
+sed -i 's/error_log example/error_log \/home\/'$USERNAME'\/http\/logs\/'$USERNAME'-'$HOST_DIR'.log/g' /etc/nginx/hosts.d/$USERNAME-$HOST_DIR.conf
 # Update PHP
-sed -i 's/php.d\/example/php.d\/$USERNAME/g' /etc/nginx/hosts.d/$USERNAME-$HOST_DIR.conf
+sed -i 's/php.d\/example/php.d\/'$USERNAME'/g' /etc/nginx/hosts.d/$USERNAME-$HOST_DIR.conf
 
 # Create Host PHP Configuration
 subheader "Creating Host PHP Configuration..."
@@ -98,7 +98,7 @@ cp $MODULEPATH/$MODULE/nginx/example-php.conf /etc/nginx/php.d/$USERNAME.conf
 
 # Update Host PHP Configuration
 subheader "Updating Host PHP Configuration..."
-sed -i 's/example/$USERNAME/g' /etc/nginx/php.d/$USERNAME.conf
+sed -i 's/example/'$USERNAME'/g' /etc/nginx/php.d/$USERNAME.conf
 
 # Create PHP Directories
 subheader "Creating PHP Directories..."
@@ -111,13 +111,13 @@ cp $MODULEPATH/$MODULE/php-fpm/example.conf /etc/php5/fpm/pool.d/$USERNAME.conf
 # Update PHP Configuration
 subheader "Updating PHP Configuration..."
 # Update PHP Configuration Header
-sed -i 's/[example]/[$USERNAME]/g' /etc/php5/fpm/pool.d/$USERNAME.conf
+sed -i 's/[example]/['$USERNAME']/g' /etc/php5/fpm/pool.d/$USERNAME.conf
 # Update PHP Configuration Listen
-sed -i 's/listen = example/listen = \/home\/$USERNAME\/http\/private\/php.socket/g' /etc/php5/fpm/pool.d/$USERNAME.conf
+sed -i 's/listen = example/listen = \/home\/'$USERNAME'\/http\/private\/php.socket/g' /etc/php5/fpm/pool.d/$USERNAME.conf
 # Update PHP Configuration User
-sed -i 's/group = example/group = $USERNAME/g' /etc/php5/fpm/pool.d/$USERNAME.conf
+sed -i 's/group = example/group = '$USERNAME'/g' /etc/php5/fpm/pool.d/$USERNAME.conf
 # Update PHP Configuration Group
-sed -i 's/group = example/group = $USERNAME/g' /etc/php5/fpm/pool.d/$USERNAME.conf
+sed -i 's/group = example/group = '$USERNAME'/g' /etc/php5/fpm/pool.d/$USERNAME.conf
 
 # Check Package
 if check_package "php-fpm"; then
