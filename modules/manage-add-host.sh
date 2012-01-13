@@ -115,7 +115,7 @@ sed -i 's/HEADER/\['$USERNAME'\]/g' /etc/php5/fpm/pool.d/$USERNAME.conf
 # Update PHP Configuration Listen
 sed -i 's/listen = example/listen = \/home\/'$USERNAME'\/http\/private\/php.socket/g' /etc/php5/fpm/pool.d/$USERNAME.conf
 # Update PHP Configuration User
-sed -i 's/group = example/group = '$USERNAME'/g' /etc/php5/fpm/pool.d/$USERNAME.conf
+sed -i 's/user = example/user = '$USERNAME'/g' /etc/php5/fpm/pool.d/$USERNAME.conf
 # Update PHP Configuration Group
 sed -i 's/group = example/group = '$USERNAME'/g' /etc/php5/fpm/pool.d/$USERNAME.conf
 # Update PHP Configuration Chroot
