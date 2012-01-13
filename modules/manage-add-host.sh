@@ -88,7 +88,7 @@ sed -i 's/server_name www.example.com/server_name '$HOST'/g' /etc/nginx/hosts.d/
 # Update Root
 sed -i 's/root example/root \/home\/'$USERNAME'\/http\/hosts\/'$HOST_DIR'/g' /etc/nginx/hosts.d/$USERNAME-$HOST_DIR.conf
 # Update Log File Path
-sed -i 's/error_log example/error_log \/home\/'$USERNAME'\/http\/logs\/'$USERNAME'-'$HOST_DIR'.log/g' /etc/nginx/hosts.d/$USERNAME-$HOST_DIR.conf
+sed -i 's/error_log example/error_log \/home\/'$USERNAME'\/http\/logs\/'$HOST_DIR'.log/g' /etc/nginx/hosts.d/$USERNAME-$HOST_DIR.conf
 # Update PHP
 sed -i 's/php.d\/example/php.d\/'$USERNAME'/g' /etc/nginx/hosts.d/$USERNAME-$HOST_DIR.conf
 
@@ -111,23 +111,25 @@ cp $MODULEPATH/$MODULE/php-fpm/example.conf /etc/php5/fpm/pool.d/$USERNAME.conf
 # Update PHP Configuration
 subheader "Updating PHP Configuration..."
 # Update PHP Configuration Header
-sed -i 's/[example]/['$USERNAME']/g' /etc/php5/fpm/pool.d/$USERNAME.conf
+sed -i 's/HEADER/\['$USERNAME'\]/g' /etc/php5/fpm/pool.d/$USERNAME.conf
 # Update PHP Configuration Listen
 sed -i 's/listen = example/listen = \/home\/'$USERNAME'\/http\/private\/php.socket/g' /etc/php5/fpm/pool.d/$USERNAME.conf
 # Update PHP Configuration User
 sed -i 's/group = example/group = '$USERNAME'/g' /etc/php5/fpm/pool.d/$USERNAME.conf
 # Update PHP Configuration Group
 sed -i 's/group = example/group = '$USERNAME'/g' /etc/php5/fpm/pool.d/$USERNAME.conf
+# Update PHP Configuration Chroot
+sed -i 's/\/home\/example\//\/home\/'$USERNAME'\//g' /etc/php5/fpm/pool.d/$USERNAME.conf
 
 # Check Package
-if check_package "php-fpm"; then
+if check_package "php5-fpm"; then
 	# PHP Question
 	if question --default yes "Do you want to enable PHP for this virtual host? (Y/n)"; then
 		subheader "Enabling PHP..."
-		sed -i 's/#include \/etc\/nginx\/php.d/include \/etc\/nginx\/php.d/g' /etc/nginx/hosts.d/$USERNAME-$HOST_DIR.conf
+		sed -i 's/\o011#include \/etc\/nginx\/php.d/\o011include \/etc\/nginx\/php.d/g' /etc/nginx/hosts.d/$USERNAME-$HOST_DIR.conf
 	else
 		subheader "Disabling PHP..."
-		sed -i 's/include \/etc\/nginx\/php.d/#include \/etc\/nginx\/php.d/g' /etc/nginx/hosts.d/$USERNAME-$HOST_DIR.conf
+		sed -i 's/\o011include \/etc\/nginx\/php.d/\o011#include \/etc\/nginx\/php.d/g' /etc/nginx/hosts.d/$USERNAME-$HOST_DIR.conf
 	fi
 else
 	sed -i 's/include \/etc\/nginx\/php.d/#include \/etc\/nginx\/php.d/g' /etc/nginx/hosts.d/$USERNAME-$HOST_DIR.conf
