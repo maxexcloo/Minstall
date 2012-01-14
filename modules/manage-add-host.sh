@@ -32,7 +32,7 @@ if [ ! -d /home/$USERNAME/http ]; then
 		subheader "Changing HTTP Permissions..."
 		chown -R $USERNAME:$USERNAME /home/$USERNAME/http
 		subheader "Adding User To HTTP Group..."
-		useradd -G www-data $USERNAME
+		gpasswd -a www-data $USERNAME
 	fi
 fi
 
@@ -118,8 +118,6 @@ sed -i 's/listen = example/listen = \/home\/'$USERNAME'\/http\/private\/php.sock
 sed -i 's/user = example/user = '$USERNAME'/g' /etc/php5/fpm/pool.d/$USERNAME.conf
 # Update PHP Configuration Group
 sed -i 's/group = example/group = '$USERNAME'/g' /etc/php5/fpm/pool.d/$USERNAME.conf
-# Update PHP Configuration Chroot
-sed -i 's/\/home\/example\//\/home\/'$USERNAME'\//g' /etc/php5/fpm/pool.d/$USERNAME.conf
 
 # Check Package
 if check_package "php5-fpm"; then

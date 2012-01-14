@@ -32,7 +32,7 @@ if [ ! -d /home/$USERNAME/http ]; then
 		subheader "Changing HTTP Permissions..."
 		chown -R $USERNAME:$USERNAME /home/$USERNAME/http
 		subheader "Adding User To HTTP Group..."
-		useradd -G www-data $USERNAME
+		gpasswd -a www-data $USERNAME
 	fi
 fi
 
