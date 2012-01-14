@@ -7,6 +7,11 @@ source $MODULEPATH/http-install-common.sh
 # Package List Update Question
 package_update_question
 
+# Copying Configuration
+subheader "Copying Configuration..."
+mkdir -p /etc/mysql/conf.d/
+cp -r $MODULEPATH/$MODULE/mysql/conf.d/* /etc/mysql/conf.d/
+
 # Install Package
 subheader "Installing Package..."
 package_install mysql-server
