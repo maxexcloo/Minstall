@@ -1,5 +1,5 @@
 #!/bin/bash
-# Manage: Manage Virtual Host
+# Manage: Remove Virtual Host
 
 # Check Package
 if check_package_ni "nginx"; then
@@ -55,18 +55,19 @@ if [ ! -f /etc/nginx/hosts.d/$USERNAME-$HOST_DIR.conf ]; then
 	continue
 fi
 
-# Check Package
-if check_package "php5-fpm"; then
-	# PHP Question
-	if question --default yes "Do you want to enable PHP for this virtual host? (Y/n)"; then
-		subheader "Enabling PHP..."
-		sed -i 's/\o011#include \/etc\/nginx\/php.d/\o011include \/etc\/nginx\/php.d/g' /etc/nginx/hosts.d/$USERNAME-$HOST_DIR.conf
-	else
-		subheader "Disabling PHP..."
-		sed -i 's/\o011include \/etc\/nginx\/php.d/\o011#include \/etc\/nginx\/php.d/g' /etc/nginx/hosts.d/$USERNAME-$HOST_DIR.conf
+# Confirmation Question
+if question --default yes "Are you sure you want to remove this virtual host? (Y/n)"; then
+	subheader "Removing Files..."
+	rm /etc/nginx/hosts.d/$USERNAME-$HOST_DIR.conf
+	if [ ! -f /etc/nginx/hosts.d/$USERNAME-*.conf ]; then
+		rm /etc/nginx/php.d/$USERNAME.conf
+		rm /etc/php5/fpm/pool.d/$USERNAME.conf
 	fi
 else
-	sed -i 's/include \/etc\/nginx\/php.d/#include \/etc\/nginx\/php.d/g' /etc/nginx/hosts.d/$USERNAME-$HOST_DIR.conf
+	# Shift Variables
+	shift
+	# Continue Loop
+	continue
 fi
 
 # Check Package

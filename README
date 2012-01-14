@@ -25,8 +25,12 @@ Install: Extra Packages (QC Pass)
 Install: Extra Repositories (QC Pass)
 Install: OpenSSH Server (QC Pass)
 
-Maintain: Users
-TODO: Maintain: Hosts
+Manage: Add Host (QC Pass)
+Manage: Add User (QC Pass)
+Manage: Manage Host (QC Pass)
+Manage: Manage User (QC Pass)
+Manage: Remove Host
+Manage: Remove Host (System)
 
 TODO: Install: Basic PPTP
 TODO: Install: Basic OpenVPN
