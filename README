@@ -29,8 +29,8 @@ Manage: Add Host (QC Pass)
 Manage: Add User (QC Pass)
 Manage: Manage Host (QC Pass)
 Manage: Manage User (QC Pass)
-Manage: Remove Host
-Manage: Remove Host (System)
+Manage: Remove Host (QC Pass)
+Manage: Remove Host (System) (QC Pass)
 
 TODO: Install: Basic PPTP
 TODO: Install: Basic OpenVPN

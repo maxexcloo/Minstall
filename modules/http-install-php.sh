@@ -32,7 +32,7 @@ fi
 
 # Restart Daemon
 subheader "Restarting Daemon..."
-daemon_manage php-fpm5 start
+daemon_manage php5-fpm restart
 
 # Package List Clean Question
 package_clean_question
