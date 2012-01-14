@@ -38,7 +38,7 @@ done
 # Check Host
 subheader "Checking Host..."
 if [[ $HOST = www.*.* ]]; then
-	HOST_DIR=$(echo $HOST | sed 's/...\(.*\)/\1/')
+	HOST_DIR=$(echo $HOST | sed 's/....\(.*\)/\1/')
 	HOST_WWW=1
 else
 	HOST_DIR=$HOST
@@ -58,6 +58,7 @@ fi
 # Confirmation Question
 if question --default yes "Are you sure you want to remove this virtual host? (Y/n)"; then
 	subheader "Removing Files..."
+	rm /home/$USERNAME/http/logs/$HOST_DIR.log
 	rm /etc/nginx/hosts.d/$USERNAME-$HOST_DIR.conf
 	if [ ! -f /etc/nginx/hosts.d/$USERNAME-*.conf ]; then
 		rm /etc/nginx/php.d/$USERNAME.conf
@@ -68,6 +69,12 @@ else
 	shift
 	# Continue Loop
 	continue
+fi
+
+# Confirmation Question
+if question --default yes "Do you want to delete the virtual host directory? (Y/n)"; then
+	subheader "Removing Files..."
+	rm -rf /home/$USERNAME/http/hosts/$HOST_DIR/
 fi
 
 # Check Package
