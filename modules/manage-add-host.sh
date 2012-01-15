@@ -31,6 +31,7 @@ if [ ! -d /home/$USERNAME/http ]; then
 		mkdir -p /home/$USERNAME/http/{common,hosts,logs,private}
 		subheader "Changing HTTP Permissions..."
 		chown -R $USERNAME:$USERNAME /home/$USERNAME/http
+		find /home/$USERNAME/http -exec chmod o= {} \;
 		subheader "Adding User To HTTP Group..."
 		gpasswd -a www-data $USERNAME
 	fi
