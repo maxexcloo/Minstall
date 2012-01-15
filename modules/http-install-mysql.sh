@@ -17,7 +17,7 @@ subheader "Installing Package..."
 package_install mysql-server
 
 # Check PHP
-if check_package "php-fpm"; then
+if check_package "php5-fpm"; then
 	subheader "Installing PHP MySQL Package..."
 	package_install php5-mysql
 fi
