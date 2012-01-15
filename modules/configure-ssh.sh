@@ -52,14 +52,14 @@ fi
 if question --default yes "Do you want to enable more private SFTP Umask Settings? (Y/n)"; then
 	subheader "Enabling SFTP Umask Privacy..."
 	if check_package "openssh-server"; then
-		sed -i 's/sftp-server/sftp-server -u 027/g' /etc/ssh/sshd_config
+		sed -i 's/sftp-serve.*/sftp-server -u 007/g' /etc/ssh/sshd_config
 		daemon_manage ssh restart
 	fi
 # Disable SFTP Umask Privacy
 else
 	subheader "Disabling SFTP Umask Privacy..."
 	if check_package "openssh-server"; then
-		sed -i 's/sftp-server -u 027/sftp-server/g' /etc/ssh/sshd_config
+		sed -i 's/sftp-serve.*/sftp-server/g' /etc/ssh/sshd_config
 		daemon_manage ssh restart
 	fi
 fi
