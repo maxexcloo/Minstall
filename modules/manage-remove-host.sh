@@ -60,7 +60,7 @@ if question --default yes "Are you sure you want to remove this virtual host? (Y
 	subheader "Removing Files..."
 	rm /home/$USERNAME/http/logs/$HOST_DIR.log
 	rm /etc/nginx/hosts.d/$USERNAME-$HOST_DIR.conf
-	if [ ! -f /etc/nginx/hosts.d/$USERNAME-*.conf ]; then
+	if [[ ! -f /etc/nginx/hosts.d/$USERNAME-*.conf ]]; then
 		rm /etc/nginx/php.d/$USERNAME.conf
 		rm /etc/php5/fpm/pool.d/$USERNAME.conf
 	fi

@@ -63,6 +63,7 @@ fi
 subheader "Creating Host Directory"
 mkdir /home/$USERNAME/http/hosts/$HOST_DIR
 chown -R $USERNAME:$USERNAME /home/$USERNAME/http/hosts/$HOST_DIR
+find /home/$USERNAME/http/hosts/$HOST_DIR -type d -exec chmod 770 {} \;
 
 # Create Host Configuration
 subheader "Creating Host Configuration..."
