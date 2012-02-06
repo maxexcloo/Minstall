@@ -17,7 +17,7 @@ cp -r $MODULEPATH/$MODULE/* /etc/
 
 # Install OpenSSH SFTP Support
 subheader "Installing OpenSSH SFTP Support..."
-source $MODULEPATH/install-openssh.sh
+source $MODULEPATH/install-ssh.sh
 
 # Remove OpenSSH Daemon
 subheader "Removing OpenSSH Daemon..."

@@ -22,7 +22,7 @@ function check_package_ni() {
 function check_repository() {
 	# Check Distribution
 	if [ $DISTRIBUTION = 'debian' ]; then
-		[ -f /etc/apt/sources.list.d/$1.list ] || [ grep -n $1 /etc/apt/sources.list ]
+		[ -f /etc/apt/sources.list.d/$1.list ] || grep -q "$1" /etc/apt/sources.list
 	fi
 }
 
