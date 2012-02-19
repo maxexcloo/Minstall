@@ -3,7 +3,7 @@ Run on a freshly installed server under root!
 No warranty. For help come on #frantech on irc.dairc.net and look for maxexcloo!
 
 >> INSTRUCTIONS <<
-This script contains serveral modules designed to help you set up your server how you want it.
+This script contains several modules designed to help you set up your server how you want it.
 Simply run the below download command then run "bash minstall.sh help" or "bash minstall.sh modules" to see help or modules respectively.
 
 >> COMPATIBILITY <<
