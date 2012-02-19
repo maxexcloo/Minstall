@@ -13,7 +13,7 @@ function package_clean_list() {
 
 # Install Package(s)
 function package_install() {
-	yum install -q -y
+	yum -q -y install "$*"
 }
 
 # Uninstall Package(s)

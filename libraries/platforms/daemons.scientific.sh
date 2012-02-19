@@ -29,4 +29,3 @@ function daemon_manage() {
 		warning "Daemon Not Found, Skipping..."
 	fi
 }
-
