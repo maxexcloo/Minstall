@@ -1,7 +1,11 @@
 axel
 bwm-ng
 curl
+ethtool
 htop
+iotop
+iperf
+lftp
 ntp
 psmisc
 python

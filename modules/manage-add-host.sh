@@ -69,6 +69,7 @@ find /home/$USERNAME/http/hosts/$HOST_DIR -type d -exec chmod 770 {} \;
 subheader "Creating Host Configuration..."
 if [[ $HOST_WWW = 1 ]]; then
 	cp $MODULEPATH/$MODULE/nginx/example-www.conf /etc/nginx/hosts.d/$USERNAME-$HOST_DIR.conf
+	echo "" >> /etc/nginx/hosts.d/$USERNAME-$HOST_DIR.conf
 	cat $MODULEPATH/$MODULE/nginx/example.conf >> /etc/nginx/hosts.d/$USERNAME-$HOST_DIR.conf
 else
 	cp $MODULEPATH/$MODULE/nginx/example.conf /etc/nginx/hosts.d/$USERNAME-$HOST_DIR.conf
