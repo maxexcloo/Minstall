@@ -6,6 +6,8 @@ htop
 iotop
 iperf
 lftp
+lshw
+mtr-tiny
 ntp
 psmisc
 python
