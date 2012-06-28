@@ -9,7 +9,7 @@ package_update_question
 
 # Module Warning
 warning "Many of these packages require PHP, installing them may break your install if you plan on installing PHP later with the modules provided, please only proceed if PHP is already installed!"
-if question --default yes "Do you still want to run this module? (Y/n)"; then
+if question --default yes "Do you still want to run this module? (Y/n)" || [[ $(read_var_module enable) = 1]]; then
 	# Running Message
 	subheader "Running Module..."
 else
@@ -32,8 +32,8 @@ done < $MODULEPATH/$MODULE/$DISTRIBUTION
 
 # Check Package
 if check_package "php5-fpm"; then
-subheader "Restarting Daemon (PHP-FPM)..."
-daemon_manage php5-fpm restart
+	subheader "Restarting Daemon (PHP-FPM)..."
+	daemon_manage php5-fpm restart
 fi
 
 # Check Package

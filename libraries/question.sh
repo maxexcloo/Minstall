@@ -1,8 +1,12 @@
 #!/bin/bash
-# Functions Related To Questioning User
+# Functions For User Questions
 
 # Ask Question
 function question() {
+	if [[ $UNATTENDED == 1 ]]; then
+		false
+	fi
+
 	local ans
 	local ok=0
 	local timeout=0
@@ -74,8 +78,12 @@ function question() {
 	[[ "$ans" = "y" || "$ans" == "yes" ]]
 }
 
-# Ask Numerical Question (WIP)
+# Ask Numerical Question
 function question_number() {
+	if [[ $UNATTENDED == 1 ]]; then
+		false
+	fi
+
 	while true; do
 		read -p "$1 " nm
 		if [[ "$nm" =~ ^[0-9]+$ ]]; then

@@ -1,10 +1,9 @@
 #!/bin/bash
-# Function To Detect Current Distrubution
+# Functions For Detecting Current Distribution
 
-# Search For Debian In Issue File
+# Debian Detection
 grep "debian" /etc/issue -i -q
-# Check Outcome Of Search
 if [ $? = '0' ]; then
-	# Set Distrubution To Debian
+	# Set Distribution To Debian
 	DISTRIBUTION=debian
 fi

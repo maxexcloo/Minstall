@@ -2,7 +2,7 @@
 # Configure: SSH Configuration
 
 # Disable Root SSH Login
-if question --default yes "Do you want to disable root SSH logins? (Y/n)"; then
+if question --default yes "Do you want to disable root SSH logins? (Y/n)" || [[ $(read_var_module root_login) = 1]]; then
 	subheader "Disabling Root SSH Login..."
 	# Disable Root SSH Login For Dropbear
 	if check_package "dropbear"; then
@@ -29,27 +29,8 @@ else
 	fi
 fi
 
-# Enable Additional SSH Ports
-if question --default no "Do you want to enable additional SSH ports? (y/N)"; then
-	subheader "Enabling Additional SSH Ports..."
-	# Take User Input
-	SSHPORT=$(question_number)
-	# Add Additional SSH Port To Dropbear
-	if check_package "dropbear"; then
-		echo "Incomplete Function."
-		#sed -i 's/DROPBEAR_EXTRA_ARGS="-w/DROPBEAR_EXTRA_ARGS="-w -p '$SSHPORT'/g' /etc/default/dropbear
-		#daemon_manage dropbear restart
-	fi
-	# Add Additional SSH Port To OpenSSH
-	if check_package "openssh-server"; then
-		echo "Incomplete Function."
-		#sed -i 's/#Port/Port '$SSHPORT'/g' /etc/ssh/sshd_config
-		#daemon_manage ssh restart
-	fi
-fi
-
 # Enable SFTP Umask Privacy
-if question --default yes "Do you want to enable more private SFTP Umask Settings? (Y/n)"; then
+if question --default yes "Do you want to enable more private SFTP Umask Settings? (Y/n)" || [[ $(read_var_module private_umask) = 1]]; then
 	subheader "Enabling SFTP Umask Privacy..."
 	if check_package "openssh-server"; then
 		sed -i 's/sftp-serve.*/sftp-server -u 0007/g' /etc/ssh/sshd_config

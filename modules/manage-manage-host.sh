@@ -28,7 +28,7 @@ while true; do
 	# Take Host Input
 	read -p "Please enter the virtual host (e.g. www.example.com): " HOST
 	# Check If User Directory Exists
-	if [[ $HOST = *.*.* ]]; then
+	if [[ $HOST = *.* ]]; then
 		break
 	else
 		echo "Please enter a valid virtual host."
@@ -53,6 +53,15 @@ if [ ! -f /etc/nginx/hosts.d/$USERNAME-$HOST_DIR.conf ]; then
 	shift
 	# Continue Loop
 	continue
+fi
+
+# Default Question
+if question --default yes "Do you want to set this virtual host as the default host? (Y/n)"; then
+	subheader "Setting As Default..."
+	echo "server {" > /etc/nginx/hosts.d/default.conf
+	echo -e "\tlisten 80 default_server;" >> /etc/nginx/hosts.d/default.conf
+	echo -e "\trewrite ^/(.*) http://$HOST/\$1 permanent;" >> /etc/nginx/hosts.d/default.conf
+	echo "}" >> /etc/nginx/hosts.d/default.conf
 fi
 
 # Check Package

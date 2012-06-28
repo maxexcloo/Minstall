@@ -23,6 +23,11 @@ cp -r $MODULEPATH/$MODULE/* /etc/
 subheader "Moving System Configuration..."
 mv /etc/nginx/mime.types /etc/nginx/nginx.d/mime.conf > /dev/null 2>&1
 
+# Update Permissions
+subheader "Updating Permissions..."
+mkdir -p /var/lib/nginx/cache
+chown -r www-data:www-data /var/lib/nginx/cache
+
 # Check PHP
 if check_package "php5-fpm"; then
 	subheader "Enabling PHP Configuration..."

@@ -3,7 +3,7 @@
 
 # Module Warning
 warning "This module will remove all non-essential packages on this system, you have been warned!"
-if question --default yes "Do you still want to run this module? (Y/n)"; then
+if question --default yes "Do you still want to run this module? (Y/n) || [[ $(read_var_module enable) = 1]]"; then
 	# Running Message
 	subheader "Running Module..."
 else
@@ -28,8 +28,11 @@ cp $MODULEPATH/$MODULE/$DISTRIBUTION/base $MODULEPATH/$MODULE/temp
 # Detect OpenVZ
 if [ -f /proc/user_beancounters ] || [ -d /proc/bc ]; then
 	warning "Detected OpenVZ!"
+# Detect vServer
+elif [[ $(uname -a | grep "vserver") ]]; then
+	warning "Detected vServer!"
 else
-	# Copy Base Package List
+	# Copy Hardware Package List
 	cat $MODULEPATH/$MODULE/$DISTRIBUTION/base-hw >> $MODULEPATH/$MODULE/temp
 
 	# Detect i686

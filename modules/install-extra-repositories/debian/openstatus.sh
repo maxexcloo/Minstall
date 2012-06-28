@@ -2,7 +2,7 @@
 # Install OpenStatus Repository
 
 # Ask If Repository Should Be Installed
-if question --default yes "Do you want to install the OpenStatus repository? (Y/n)"; then
+if question --default yes "Do you want to install the OpenStatus repository? (Y/n)" || [[ $(read_var_module repo_openstatus) = 1]]; then
 	subheader "Installing The OpenStatus Repository..."
 	# Add Repository Key
 	repo_key "http://deb.nickmoeck.com/debian/packages.gpg.key"

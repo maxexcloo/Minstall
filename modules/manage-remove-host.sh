@@ -28,7 +28,7 @@ while true; do
 	# Take Host Input
 	read -p "Please enter the virtual host (e.g. www.example.com): " HOST
 	# Check If User Directory Exists
-	if [[ $HOST = *.*.* ]]; then
+	if [[ $HOST = *.* ]]; then
 		break
 	else
 		echo "Please enter a valid virtual host."

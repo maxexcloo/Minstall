@@ -3,7 +3,9 @@ minstall.sh:
  + Argument function from Subsonic startup script (subsonic.sh), found here: http://subsonic.svn.sourceforge.net/viewvc/subsonic/
 
 # Functions
-libraries/check.sh:
+libraries/external/read_ini.sh:
+ + http://www.github.com/rudimeier/bash_ini_parser/
+libraries/platform/check.debian.sh:
  + http://www.servercobra.com/bash-check-if-package-is-installed/
 libraries/detect.sh:
  + http://www.doxer.org/learn-linux/linux-shell-centos-debian-ostype/
