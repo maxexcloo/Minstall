@@ -6,7 +6,7 @@ package_update_question
 
 # Module Warning
 warning "This package will install the Dropbear SSH Server. If you want the OpenSSH server (they are functionally identical) cancel and run its module instead."
-if question --default yes "Do you still want to run this module? (Y/n)" || [[ $(read_var_module enable) = 1]]; then
+if question --default yes "Do you still want to run this module? (Y/n)" || [[ $(read_var_module enable) = 1 ]]; then
 	# Running Message
 	subheader "Running Module..."
 else

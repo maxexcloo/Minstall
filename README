@@ -21,7 +21,6 @@ Platforms:
  + Xen
 
 >> FEATURES <<
-Clean: Logging
 Clean: Packages
 Configure: General
 Configure: SSH

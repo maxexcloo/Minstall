@@ -12,7 +12,7 @@ if check_package_ni "nginx"; then
 fi
 
 # Enable Caching
-if question --default yes "Do you want to enable a caching directory? (Y/n)" || [[ $(read_var_module cache) = 1]]; then
+if question --default yes "Do you want to enable a caching directory? (Y/n)" || [[ $(read_var_module cache) = 1 ]]; then
 	subheader "Adding Configuration..."
 	cp -r $MODULEPATH/$MODULE/nginx/nginx.d/cache.conf /etc/nginx/nginx.d/
 	mkdir -p /var/lib/nginx/cache
@@ -25,7 +25,7 @@ else
 fi
 
 # Enable Compression
-if question --default yes "Do you want to enable gzip compression? (Y/n)" || [[ $(read_var_module gzip) = 1]]; then
+if question --default yes "Do you want to enable gzip compression? (Y/n)" || [[ $(read_var_module gzip) = 1 ]]; then
 	subheader "Adding Configuration..."
 	cp -r $MODULEPATH/$MODULE/nginx/nginx.d/gzip.conf /etc/nginx/nginx.d/
 # Disable Compression
@@ -35,7 +35,7 @@ else
 fi
 
 # Enable Optimised Configuration
-if question --default yes "Do you want to enable optimised configurations? (Y/n)" || [[ $(read_var_module optimise) = 1]]; then
+if question --default yes "Do you want to enable optimised configurations? (Y/n)" || [[ $(read_var_module optimise ) = 1]]; then
 	subheader "Adding Configuration..."
 	cp -r $MODULEPATH/$MODULE/nginx/nginx.d/speed.conf /etc/nginx/nginx.d/
 # Disable Optimised Configuration

@@ -77,6 +77,9 @@ fi
 
 # Attended Mode
 if [ $UNATTENDED == 0 ]; then
+	# Read Config
+	read_ini $CONFIGFILE
+
 	# Loop Through Parameters
 	while [ $# -gt 0 ]; do
 		# Set Current Module Variable

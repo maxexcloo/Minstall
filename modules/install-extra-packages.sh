@@ -7,11 +7,21 @@ package_update_question
 # Install Packages
 subheader "Installing Extra Packages..."
 
-# Loop Through Package List
-while read package; do
+# Define Packages
+LIST=$(read_var_module packages)
+LOOPVAR=${LIST},
+
+# Loop Through Packages
+while echo $LOOPVAR | grep \, &amp;> /dev/null; do
+	# Define Current Package
+	FILE=${LOOPVAR%%\,*}
+
+	# Remove Current Package From List
+	LOOPVAR=${LOOPVAR#*\,}
+
 	# Install Currently Selected Package
-	package_install $package
-done < $MODULEPATH/$MODULE/$DISTRIBUTION
+	package_install $FILE
+done
 
 # Package List Clean Question
 package_clean_question
