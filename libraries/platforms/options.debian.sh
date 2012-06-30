@@ -3,6 +3,9 @@
 
 # Unattended Options
 function distro_unattended() {
-	# Set Frontend Unattended Mode
+	# Set Debian Frontend To Non Interactive Mode
 	DEBIAN_FRONTEND=noninteractive
+
+	# Set Debian Priority To Critical
+	DEBIAN_PRIORITY=critical
 }

@@ -25,7 +25,7 @@ read_var_module() {
 	fi
 }
 
-# Remove Invalid Characters From Module Name
+# Remove Invalid Characters From Section Names
 safe_string() {
 	# Replace Dash With Underscore
 	echo "$1" | tr - _
