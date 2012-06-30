@@ -17,16 +17,16 @@ if [ $UNATTENDED = 0 ]; then
 # Unattended Mode
 else
 	# Define Repositories
-	LIST=$(read_var_module repositories)
-	LOOPVAR=${LIST},
+	REPOLIST=$(read_var_module repositories)
+	REPOLISTLOOP=${REPOLIST},
 
 	# Loop Through Repositories
-	while echo $LOOPVAR | grep \, &> /dev/null; do
+	while echo $REPOLISTLOOP | grep \, &> /dev/null; do
 		# Define Current Package
-		FILE=${LOOPVAR%%\,*}
+		FILE=${REPOLISTLOOP%%\,*}
 
 		# Remove Current Package From List
-		LOOPVAR=${LOOPVAR#*\,}
+		REPOLISTLOOP=${REPOLISTLOOP#*\,}
 
 		# Source Scripts
 		source $MODULEPATH/$MODULE/$DISTRIBUTION/$FILE.sh

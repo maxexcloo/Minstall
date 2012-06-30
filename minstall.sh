@@ -135,30 +135,27 @@ if [ $UNATTENDED = 1 ]; then
 	read_ini $CONFIGFILE
 
 	# Define Modules
-	LIST=$(read_var minstall__modules)
-	LOOPVAR=${LIST},
+	MODULELIST=$(read_var minstall__modules)
+	MODULELISTLOOP=${MODULELIST},
 
 	# Loop Through Modules
-	while echo $LOOPVAR | grep \, &> /dev/null; do
+	while echo $MODULELISTLOOP | grep \, &> /dev/null; do
 		# Define Current Module
-		FILE=${LOOPVAR%%\,*}
+		MODULE=${MODULELISTLOOP%%\,*}
 
 		# Remove Current Module From List
-		LOOPVAR=${LOOPVAR#*\,}
-
-		# Set Current Module Variable
-		MODULE=$FILE
+		MODULELISTLOOP=${MODULELISTLOOP#*\,}
 
 		# Check If Module Exists
-		if [ -f $MODULEPATH/$FILE.sh ]; then
+		if [ -f $MODULEPATH/$MODULE.sh ]; then
 			# Print Module Description
-			header $(describe $MODULEPATH/$FILE.sh)
+			header $(describe $MODULEPATH/$MODULE.sh)
 			# Load Module
-			source $MODULEPATH/$FILE.sh
+			source $MODULEPATH/$MODULE.sh
 		# Module Doesn't Exist
 		else
 			# Print Message
-			error "Module $FILE not found. Aborting."
+			error "Module $MODULE not found. Aborting."
 			# Exit Script
 			exit
 		fi

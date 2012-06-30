@@ -81,7 +81,7 @@ if [ $DISTRIBUTION = "debian" ]; then
 	# Set Package Selections
 	dpkg --set-selections < $MODULEPATH/$MODULE/temp
 	# Update DPKG
-	apt-get dselect-upgrade
+	apt-get -q -y dselect-upgrade
 fi
 
 # Remove Temporary Package List

@@ -6,7 +6,25 @@ if question --default yes "Do you want to change the default system shell? (Y/n)
 	subheader "Changing Default System Shell..."
 	# Check Distribution
 	if [ $DISTRIBUTION = "debian" ]; then
-		dpkg-reconfigure dash
+		# Attended Mode
+		if [ $UNATTENDED = 0 ]; then
+			dpkg-reconfigure dash
+		# Unattended Mode
+		else
+			# DASH Enabled
+			if [ $(read_var_module shell_option_dash) = 1 ]; then
+				ln -f -s dash /bin/sh
+				ln -f -s bash /bin/sh.distrib
+				ln -f -s dash.1.gz /usr/share/man/man1/sh.1.gz
+				ln -f -s bash.1.gz /usr/share/man/man1/sh.distrib.1.gz
+			# BASH Enabled
+			else
+				ln -f -s bash /bin/sh
+				ln -f -s dash /bin/sh.distrib
+				ln -f -s bash.1.gz /usr/share/man/man1/sh.1.gz
+				ln -f -s dash.1.gz /usr/share/man/man1/sh.distrib.1.gz
+			fi
+		fi
 	fi
 fi
 
@@ -15,7 +33,16 @@ if question --default yes "Do you want to change the system timezone? (Y/n)" || 
 	subheader "Changing System Timezone..."
 	# Check Distribution
 	if [ $DISTRIBUTION = "debian" ]; then
-		dpkg-reconfigure tzdata
+		# Attended Mode
+		if [ $UNATTENDED = 0 ]; then
+			# Set Timezone Manually
+			dpkg-reconfigure tzdata
+		# Unattended Mode
+		else
+			# Set Timezone From File
+			echo $(read_var_module timezone_option) > /etc/timezone
+			dpkg-reconfigure -f noninteractive tzdata
+		fi
 	fi
 fi
 

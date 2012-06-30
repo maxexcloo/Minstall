@@ -8,16 +8,16 @@ package_update_question
 subheader "Installing Extra Packages..."
 
 # Define Packages
-LIST=$(read_var_module packages)
-LOOPVAR=${LIST},
+PACKAGELIST=$(read_var_module packages)
+PACKAGELISTLOOP=${PACKAGELIST},
 
 # Loop Through Packages
-while echo $LOOPVAR | grep \, &> /dev/null; do
+while echo $PACKAGELISTLOOP | grep \, &> /dev/null; do
 	# Define Current Package
-	FILE=${LOOPVAR%%\,*}
+	FILE=${PACKAGELISTLOOP%%\,*}
 
 	# Remove Current Package From List
-	LOOPVAR=${LOOPVAR#*\,}
+	PACKAGELISTLOOP=${PACKAGELISTLOOP#*\,}
 
 	# Install Currently Selected Package
 	package_install $FILE
