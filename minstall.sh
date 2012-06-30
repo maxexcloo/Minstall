@@ -138,6 +138,9 @@ if [ $UNATTENDED = 1 ]; then
 	MODULELIST=$(read_var minstall__modules)
 	MODULELISTLOOP=${MODULELIST},
 
+	# Load Unattended Distribution Settings
+	distro_unattended
+
 	# Loop Through Modules
 	while echo $MODULELISTLOOP | grep \, &> /dev/null; do
 		# Define Current Module
