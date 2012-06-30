@@ -4,7 +4,7 @@
 # INI Variable Tester
 read_var() {
 	# Check If Variable Exists
-	if [ $(eval "echo \${INI__$(safe_string $1)}") = "" ]; then
+	if [[ $(eval "echo \${INI__$(safe_string $1)}") = "" ]]; then
 		# Echo False
 		echo 0
 	else
@@ -16,7 +16,7 @@ read_var() {
 # INI Variable Tester
 read_var_module() {
 	# Check If Variable Exists
-	if [ $(eval "echo \${INI__$(safe_string $MODULE)__$(safe_string $1)}") = "" ]; then
+	if [[ $(eval "echo \${INI__$(safe_string $MODULE)__$(safe_string $1)}") = "" ]]; then
 		# Echo False
 		echo 0
 	else

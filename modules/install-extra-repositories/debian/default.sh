@@ -2,10 +2,10 @@
 # Optimise Default Repositories
 
 # Ask If Repositories Should Be Optimised
-if question --default yes "Do you want to optimise the default repositories? Warning, this replaces the default repository list! (Y/n)" || [[ $UNATTENDED == 1 ]]; then
+if question --default yes "Do you want to optimise the default repositories? Warning, this replaces the default repository list! (Y/n)" || [ $UNATTENDED = 1 ]; then
 	subheader "Optimising Default Repositories..."
 	# Check Country
-	if [ $(read_var_module shell) == 0 ]; then
+	if [ $(read_var_module shell) = 0 ]; then
 		# Set Country
 		COUNTRY="http://ftp.us.debian.org/debian/"
 	else

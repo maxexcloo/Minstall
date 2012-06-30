@@ -39,7 +39,7 @@ done
 #####################
 
 # Print Help If No Parameters Are Specified
-if [ $# == 0 ]; then
+if [ $# = 0 ]; then
 	# Load Module Listing Script
 	source $MODULEPATH/help-modules.sh
 	# Exit
@@ -47,7 +47,7 @@ if [ $# == 0 ]; then
 fi
 
 # Check For Unattended Mode
-if [ $1 == "-u" ]; then
+if [ $1 = "-u" ]; then
 	# Enable Unattended Mode
 	UNATTENDED=1
 	# Check For Unattended Config
@@ -76,7 +76,7 @@ fi
 ###########
 
 # Attended Mode
-if [ $UNATTENDED == 0 ]; then
+if [ $UNATTENDED = 0 ]; then
 	# Read Config
 	read_ini $CONFIGFILE
 
@@ -130,7 +130,7 @@ if [ $UNATTENDED == 0 ]; then
 fi
 
 # Unattended Mode
-if [ $UNATTENDED == 1 ]; then
+if [ $UNATTENDED = 1 ]; then
 	# Read Config
 	read_ini $CONFIGFILE
 
