@@ -146,6 +146,9 @@ if [ $UNATTENDED = 1 ]; then
 		# Remove Current Module From List
 		LOOPVAR=${LOOPVAR#*\,}
 
+		# Set Current Module Variable
+		MODULE=$FILE
+
 		# Check If Module Exists
 		if [ -f $MODULEPATH/$FILE.sh ]; then
 			# Print Module Description
