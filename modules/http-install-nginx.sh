@@ -31,7 +31,7 @@ chown -r www-data:www-data /var/lib/nginx/cache
 # Check PHP
 if check_package "php5-fpm"; then
 	subheader "Enabling PHP Configuration..."
-	sed -i 's/#include \/etc\/nginx\/php.d/include \/etc\/nginx\/php.d/g' /etc/nginx/hosts.d/www-data.conf
+	sed -i "s/#include \/etc\/nginx\/php.d/include \/etc\/nginx\/php.d/g" /etc/nginx/hosts.d/www-data.conf
 	subheader "Restarting Daemon (PHP-FPM)..."
 	daemon_manage php5-fpm restart
 fi

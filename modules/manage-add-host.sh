@@ -25,7 +25,7 @@ done
 
 # Check Folders
 if [ ! -d /home/$USERNAME/http ]; then
-	# User HTTP Folder Question
+# 	# User HTTP Folder Question
 	if question --default yes "Do you want to add a HTTP folder for this user (if you have already done this you don't need to do it again)? (Y/n)"; then
 		subheader "Adding HTTP Folder..."
 		mkdir -p /home/$USERNAME/http/{common,hosts,logs,private}
@@ -52,7 +52,7 @@ done
 # Check Host
 subheader "Checking Host..."
 if [[ $HOST = www.*.* ]]; then
-	HOST_DIR=$(echo $HOST | sed 's/....\(.*\)/\1/')
+	HOST_DIR=$(echo $HOST | sed "s/....\(.*\)/\1/")
 	HOST_WWW=1
 else
 	HOST_DIR=$HOST
@@ -67,7 +67,7 @@ find /home/$USERNAME/http/hosts/$HOST_DIR -type d -exec chmod 770 {} \;
 
 # Create Host Configuration
 subheader "Creating Host Configuration..."
-if [[ $HOST_WWW = 1 ]]; then
+if [ $HOST_WWW = 1 ]; then
 	cp $MODULEPATH/$MODULE/nginx/example-www.conf /etc/nginx/hosts.d/$USERNAME-$HOST_DIR.conf
 	echo "" >> /etc/nginx/hosts.d/$USERNAME-$HOST_DIR.conf
 	cat $MODULEPATH/$MODULE/nginx/example.conf >> /etc/nginx/hosts.d/$USERNAME-$HOST_DIR.conf
@@ -79,21 +79,21 @@ fi
 if [[ $HOST_WWW = 1 ]]; then
 	subheader "Updating Host Configuration (WWW)..."
 	# Update WWW Host
-	sed -i 's/server_name example.com/server_name '$HOST_DIR'/g' /etc/nginx/hosts.d/$USERNAME-$HOST_DIR.conf
+	sed -i "s/server_name example.com/server_name "$HOST_DIR"/g" /etc/nginx/hosts.d/$USERNAME-$HOST_DIR.conf
 	# Update WWW Host Redirect
-	sed -i 's/www.example.com\/$1/'$HOST'\/$1/g' /etc/nginx/hosts.d/$USERNAME-$HOST_DIR.conf
+	sed -i "s/www.example.com\/$1/"$HOST"\/$1/g" /etc/nginx/hosts.d/$USERNAME-$HOST_DIR.conf
 fi
 
 # Update Host Configuration
 subheader "Updating Host Configuration..."
 # Update Host
-sed -i 's/server_name www.example.com/server_name '$HOST'/g' /etc/nginx/hosts.d/$USERNAME-$HOST_DIR.conf
+sed -i "s/server_name www.example.com/server_name "$HOST"/g" /etc/nginx/hosts.d/$USERNAME-$HOST_DIR.conf
 # Update Root
-sed -i 's/root example/root \/home\/'$USERNAME'\/http\/hosts\/'$HOST_DIR'/g' /etc/nginx/hosts.d/$USERNAME-$HOST_DIR.conf
+sed -i "s/root example/root \/home\/"$USERNAME"\/http\/hosts\/"$HOST_DIR"/g" /etc/nginx/hosts.d/$USERNAME-$HOST_DIR.conf
 # Update Log File Path
-sed -i 's/error_log example/error_log \/home\/'$USERNAME'\/http\/logs\/'$HOST_DIR'.log/g' /etc/nginx/hosts.d/$USERNAME-$HOST_DIR.conf
+sed -i "s/error_log example/error_log \/home\/"$USERNAME"\/http\/logs\/"$HOST_DIR".log/g" /etc/nginx/hosts.d/$USERNAME-$HOST_DIR.conf
 # Update PHP
-sed -i 's/php.d\/example/php.d\/'$USERNAME'/g' /etc/nginx/hosts.d/$USERNAME-$HOST_DIR.conf
+sed -i "s/php.d\/example/php.d\/"$USERNAME"/g" /etc/nginx/hosts.d/$USERNAME-$HOST_DIR.conf
 
 # Create Host PHP Configuration
 subheader "Creating Host PHP Configuration..."
@@ -101,7 +101,7 @@ cp $MODULEPATH/$MODULE/nginx/example-php.conf /etc/nginx/php.d/$USERNAME.conf
 
 # Update Host PHP Configuration
 subheader "Updating Host PHP Configuration..."
-sed -i 's/example/'$USERNAME'/g' /etc/nginx/php.d/$USERNAME.conf
+sed -i "s/example/"$USERNAME"/g" /etc/nginx/php.d/$USERNAME.conf
 
 # Create PHP Directories
 subheader "Creating PHP Directories..."
@@ -114,13 +114,13 @@ cp $MODULEPATH/$MODULE/php-fpm/example.conf /etc/php5/fpm/pool.d/$USERNAME.conf
 # Update PHP Configuration
 subheader "Updating PHP Configuration..."
 # Update PHP Configuration Header
-sed -i 's/HEADER/\['$USERNAME'\]/g' /etc/php5/fpm/pool.d/$USERNAME.conf
+sed -i "s/HEADER/\["$USERNAME"\]/g" /etc/php5/fpm/pool.d/$USERNAME.conf
 # Update PHP Configuration Listen
-sed -i 's/listen = example/listen = \/home\/'$USERNAME'\/http\/private\/php.socket/g' /etc/php5/fpm/pool.d/$USERNAME.conf
+sed -i "s/listen = example/listen = \/home\/"$USERNAME"\/http\/private\/php.socket/g" /etc/php5/fpm/pool.d/$USERNAME.conf
 # Update PHP Configuration User
-sed -i 's/user = example/user = '$USERNAME'/g' /etc/php5/fpm/pool.d/$USERNAME.conf
+sed -i "s/user = example/user = "$USERNAME"/g" /etc/php5/fpm/pool.d/$USERNAME.conf
 # Update PHP Configuration Group
-sed -i 's/group = example/group = '$USERNAME'/g' /etc/php5/fpm/pool.d/$USERNAME.conf
+sed -i "s/group = example/group = "$USERNAME"/g" /etc/php5/fpm/pool.d/$USERNAME.conf
 
 # Default Question
 if question --default yes "Do you want to set this virtual host as the default host? (Y/n)"; then
@@ -136,13 +136,13 @@ if check_package "php5-fpm"; then
 	# PHP Question
 	if question --default yes "Do you want to enable PHP for this virtual host? (Y/n)"; then
 		subheader "Enabling PHP..."
-		sed -i 's/\o011#include \/etc\/nginx\/php.d/\o011include \/etc\/nginx\/php.d/g' /etc/nginx/hosts.d/$USERNAME-$HOST_DIR.conf
+		sed -i "s/\o011#include \/etc\/nginx\/php.d/\o011include \/etc\/nginx\/php.d/g" /etc/nginx/hosts.d/$USERNAME-$HOST_DIR.conf
 	else
 		subheader "Disabling PHP..."
-		sed -i 's/\o011include \/etc\/nginx\/php.d/\o011#include \/etc\/nginx\/php.d/g' /etc/nginx/hosts.d/$USERNAME-$HOST_DIR.conf
+		sed -i "s/\o011include \/etc\/nginx\/php.d/\o011#include \/etc\/nginx\/php.d/g" /etc/nginx/hosts.d/$USERNAME-$HOST_DIR.conf
 	fi
 else
-	sed -i 's/include \/etc\/nginx\/php.d/#include \/etc\/nginx\/php.d/g' /etc/nginx/hosts.d/$USERNAME-$HOST_DIR.conf
+	sed -i "s/include \/etc\/nginx\/php.d/#include \/etc\/nginx\/php.d/g" /etc/nginx/hosts.d/$USERNAME-$HOST_DIR.conf
 fi
 
 # Reset Host WWW Variable

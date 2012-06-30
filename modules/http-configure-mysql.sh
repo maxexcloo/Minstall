@@ -12,7 +12,7 @@ if check_package_ni "mysql-server"; then
 fi
 
 # Configure MySQL For Minimal Memory Usage
-if question --default yes "Do you want to configure MySQL for minimal memory usage? (Y/n)" || [[ $(read_var_module minimal_memory) = 1 ]]; then
+if question --default yes "Do you want to configure MySQL for minimal memory usage? (Y/n)" || [ $(read_var_module minimal_memory) = 1 ]; then
 	subheader "Adding Configuration..."
 	cp -r $MODULEPATH/$MODULE/mysql/conf.d/lowmem.cnf /etc/mysql/conf.d/
 # Configure MySQL For Normal Memory Usage
@@ -22,7 +22,7 @@ else
 fi
 
 # Disable InnoDB Database Engine
-if question --default yes "Do you want to disable InnoDB? (Y/n)" || [[ $(read_var_module disable_innodb) = 1 ]]; then
+if question --default yes "Do you want to disable InnoDB? (Y/n)" || [ $(read_var_module disable_innodb) = 1 ]; then
 	subheader "Disabling InnoDB..."
 	cp -r $MODULEPATH/$MODULE/mysql/conf.d/innodb.cnf /etc/mysql/conf.d/
 	subheader "Removing InnoDB Files..."

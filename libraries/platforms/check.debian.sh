@@ -4,12 +4,12 @@
 # Check If Package Installed
 function check_package() {
 	dpkg -l $1 > /dev/null 2>&1
-	[ $? == '0' ]
+	[ $? = "0" ]
 }
 # Check If Package Not Installed
 function check_package_ni() {
 	dpkg -l $1 > /dev/null 2>&1
-	[ $? != '0' ]
+	[ $? != "0" ]
 }
 
 # Check If Repository Installed

@@ -38,7 +38,7 @@ done
 # Check Host
 subheader "Checking Host..."
 if [[ $HOST = www.*.* ]]; then
-	HOST_DIR=$(echo $HOST | sed 's/....\(.*\)/\1/')
+	HOST_DIR=$(echo $HOST | sed "s/....\(.*\)/\1/")
 	HOST_WWW=1
 else
 	HOST_DIR=$HOST
@@ -69,13 +69,13 @@ if check_package "php5-fpm"; then
 	# PHP Question
 	if question --default yes "Do you want to enable PHP for this virtual host? (Y/n)"; then
 		subheader "Enabling PHP..."
-		sed -i 's/\o011#include \/etc\/nginx\/php.d/\o011include \/etc\/nginx\/php.d/g' /etc/nginx/hosts.d/$USERNAME-$HOST_DIR.conf
+		sed -i "s/\o011#include \/etc\/nginx\/php.d/\o011include \/etc\/nginx\/php.d/g" /etc/nginx/hosts.d/$USERNAME-$HOST_DIR.conf
 	else
 		subheader "Disabling PHP..."
-		sed -i 's/\o011include \/etc\/nginx\/php.d/\o011#include \/etc\/nginx\/php.d/g' /etc/nginx/hosts.d/$USERNAME-$HOST_DIR.conf
+		sed -i "s/\o011include \/etc\/nginx\/php.d/\o011#include \/etc\/nginx\/php.d/g" /etc/nginx/hosts.d/$USERNAME-$HOST_DIR.conf
 	fi
 else
-	sed -i 's/include \/etc\/nginx\/php.d/#include \/etc\/nginx\/php.d/g' /etc/nginx/hosts.d/$USERNAME-$HOST_DIR.conf
+	sed -i "s/include \/etc\/nginx\/php.d/#include \/etc\/nginx\/php.d/g" /etc/nginx/hosts.d/$USERNAME-$HOST_DIR.conf
 fi
 
 # Check Package

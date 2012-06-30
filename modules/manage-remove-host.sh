@@ -38,7 +38,7 @@ done
 # Check Host
 subheader "Checking Host..."
 if [[ $HOST = www.*.* ]]; then
-	HOST_DIR=$(echo $HOST | sed 's/....\(.*\)/\1/')
+	HOST_DIR=$(echo $HOST | "sed s/....\(.*\)/\1/")
 	HOST_WWW=1
 else
 	HOST_DIR=$HOST

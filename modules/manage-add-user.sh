@@ -36,7 +36,7 @@ if [ $UNATTENDED == 1 ]; then
 		echo -e "$CURPASS\n$CURPASS" | (passwd --stdin $CURUSER)
 
 		# User HTTP Folder
-		if [[ $CURHTTP == 1 ]]; then
+		if [ $CURHTTP == 1 ]; then
 			subheader "Adding HTTP Folder..."
 			mkdir -p /home/$CURUSER/http/{common,hosts,logs,private}
 			subheader "Changing HTTP Permissions..."
@@ -47,7 +47,7 @@ if [ $UNATTENDED == 1 ]; then
 		fi
 
 		# Reset User Permissions
-		if [[ $CURPERM == 1 ]]; then
+		if [ $CURPERM == 1 ]; then
 			subheader "Changing User File Permissions..."
 			chmod -R o= /home/$CURUSER
 			chown -R $CURUSER:$CURUSER /home/$CURUSER

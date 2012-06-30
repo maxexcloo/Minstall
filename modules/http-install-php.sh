@@ -25,7 +25,7 @@ cp -r $MODULEPATH/$MODULE/* /etc/
 # Check Package
 if check_package "nginx"; then
 	subheader "Enabling nginx PHP Configuration..."
-	sed -i 's/#include \/etc\/nginx\/php.d/include \/etc\/nginx\/php.d/g' /etc/nginx/hosts.d/www-data.conf
+	sed -i "s/#include \/etc\/nginx\/php.d/include \/etc\/nginx\/php.d/g" /etc/nginx/hosts.d/www-data.conf
 	subheader "Restarting Daemon (nginx)..."
 	daemon_manage nginx restart
 fi
