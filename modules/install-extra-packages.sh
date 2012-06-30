@@ -12,7 +12,7 @@ LIST=$(read_var_module packages)
 LOOPVAR=${LIST},
 
 # Loop Through Packages
-while echo $LOOPVAR | grep \, &amp;> /dev/null; do
+while echo $LOOPVAR | grep \, &> /dev/null; do
 	# Define Current Package
 	FILE=${LOOPVAR%%\,*}
 

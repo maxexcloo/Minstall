@@ -14,7 +14,7 @@ if [ $UNATTENDED == 1 ]; then
 	LOOPPERM=${PERM},
 
 	# Loop Through Users
-	while echo $LOOPVAR | grep \, &amp;> /dev/null; do
+	while echo $LOOPVAR | grep \, &> /dev/null; do
 		# Define Current Variable
 		CURUSER=${LOOPUSER%%\,*}
 		CURPASS=${LOOPPASS%%\,*}

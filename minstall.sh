@@ -51,7 +51,7 @@ if [ $1 == "-u" ]; then
 	# Enable Unattended Mode
 	UNATTENDED=1
 	# Check For Unattended Config
-	if [ $2 != "" ]; then
+	if [[ $2 != "" ]]; then
 		# Check If File Exists
 		if [ -f $2 ]; then
 			# Set Config File
@@ -139,7 +139,7 @@ if [ $UNATTENDED == 1 ]; then
 	LOOPVAR=${LIST},
 
 	# Loop Through Modules
-	while echo $LOOPVAR | grep \, &amp;> /dev/null; do
+	while echo $LOOPVAR | grep \, &> /dev/null; do
 		# Define Current Module
 		FILE=${LOOPVAR%%\,*}
 
