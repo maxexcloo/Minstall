@@ -134,20 +134,19 @@ if [ $UNATTENDED = 1 ]; then
 	# Read Config
 	read_ini $CONFIGFILE
 
-	# Define Modules
-	MODULELIST=$(read_var minstall__modules)
-	MODULELISTLOOP=${MODULELIST},
-
 	# Load Unattended Distribution Settings
 	distro_unattended
 
+	# Define Modules
+	MODULELIST=$(read_var minstall__modules),
+
 	# Loop Through Modules
-	while echo $MODULELISTLOOP | grep \, &> /dev/null; do
+	while echo $MODULELIST | grep \, &> /dev/null; do
 		# Define Current Module
-		MODULE=${MODULELISTLOOP%%\,*}
+		MODULE=${MODULELIST%%\,*}
 
 		# Remove Current Module From List
-		MODULELISTLOOP=${MODULELISTLOOP#*\,}
+		MODULELIST=${MODULELIST#*\,}
 
 		# Check If Module Exists
 		if [ -f $MODULEPATH/$MODULE.sh ]; then
@@ -163,6 +162,9 @@ if [ $UNATTENDED = 1 ]; then
 			exit
 		fi
 	done
+
+	# Unset Array
+	unset MODULELIST
 
 	# Check Package Clean Requirement
 	package_clean_question 1

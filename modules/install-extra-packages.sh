@@ -8,20 +8,22 @@ package_update_question
 subheader "Installing Extra Packages..."
 
 # Define Packages
-PACKAGELIST=$(read_var_module packages)
-PACKAGELISTLOOP=${PACKAGELIST},
+PACKAGELIST=$(read_var_module packages),
 
 # Loop Through Packages
-while echo $PACKAGELISTLOOP | grep \, &> /dev/null; do
+while echo $PACKAGELIST | grep \, &> /dev/null; do
 	# Define Current Package
-	FILE=${PACKAGELISTLOOP%%\,*}
+	FILE=${PACKAGELIST%%\,*}
 
 	# Remove Current Package From List
-	PACKAGELISTLOOP=${PACKAGELISTLOOP#*\,}
+	PACKAGELIST=${PACKAGELIST#*\,}
 
 	# Install Currently Selected Package
 	package_install $FILE
 done
+
+# Unset Array
+unset PACKAGELIST
 
 # Package List Clean Question
 package_clean_question
