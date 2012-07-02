@@ -3,7 +3,7 @@
 
 # Module Warning
 warning "This module will remove all non-essential packages on this system, you have been warned!"
-if question --default yes "Do you still want to run this module? (Y/n)" || [ $(read_var_module enable) = 1 ]; then
+if question --default yes "Do you still want to run this module? (Y/n)" || [ $UNATTENDED = 1 ]; then
 	# Running Message
 	subheader "Running Module..."
 else

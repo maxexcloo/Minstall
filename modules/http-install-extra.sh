@@ -9,7 +9,7 @@ package_update_question
 
 # Module Warning
 warning "Many of these packages require PHP, installing them may break your install if you plan on installing PHP later with the modules provided, please only proceed if PHP is already installed!"
-if question --default yes "Do you still want to run this module? (Y/n)" || [ $(read_var_module enable) = 1 ]; then
+if question --default yes "Do you still want to run this module? (Y/n)" || [ $UNATTENDED = 1 ]; then
 	# Running Message
 	subheader "Running Module..."
 else

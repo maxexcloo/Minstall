@@ -12,7 +12,7 @@ if check_package_ni "nginx"; then
 fi
 
 # Confirmation Question
-if question --default yes "Are you sure you want to remove the system virtual host? (Y/n)" || [ $(read_var_module enable) = 1 ]; then
+if question --default yes "Are you sure you want to remove the system virtual host? (Y/n)" || [ $UNATTENDED = 1 ]; then
 	subheader "Removing Files..."
 	rm /etc/nginx/hosts.d/www-data.conf
 	rm /etc/nginx/php.d/www-data.conf
