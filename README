@@ -10,8 +10,6 @@ Simply run the below download command then run "bash minstall.sh help" or "bash 
 Operating Systems:
  + Debian 6 (Squeeze) i686
  + Debian 6 (Squeeze) x86_64
- + Scientific Linux (6.x) i686 (WIP)
- + Scientific Linux (6.x) x86_64 (WIP)
 Platforms:
  + Physical Hardware
  + KVM
@@ -19,31 +17,6 @@ Platforms:
  + VirtualBox
  + VMWare
  + Xen
-
->> FEATURES <<
-Clean: Packages
-Configure: General
-Configure: SSH
-Configure: Upgrade
-Configure: User
-HTTP Configure: MySQL Database Server
-HTTP Configure: nginx Web Server
-HTTP Install: Common Functions
-HTTP Install: Exim Mailserver
-HTTP Install: Extra Packages
-HTTP Install: MySQL Database Server
-HTTP Install: nginx Web Server
-HTTP Install: PHP Application Server
-Install: Dropbear SSH Server
-Install: Extra Packages
-Install: Extra Repositories
-Install: OpenSSH Server
-Manage: Add Host
-Manage: Add User
-Manage: Manage Host
-Manage: Manage User
-Manage: Remove Host
-Manage: Remove Host (System)
 
 >> SAMPLE COMMANDS <<
 > Download <
