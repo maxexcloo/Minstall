@@ -14,7 +14,17 @@ cp -r $MODULEPATH/$MODULE/mysql/conf.d/* /etc/mysql/conf.d/
 
 # Install Package
 subheader "Installing Package..."
-package_install mysql-server
+# Attended Mode
+if [ $UNATTENDED = 0 ]; then
+	# Install Package
+	package_install mysql-server
+# Unattended Mode
+else
+	# Install Package
+	DEBIAN_FRONTEND=noninteractive package_install mysql-server
+	# Set Password
+	mysqladmin -u root password $(read_var_module root_password)
+fi
 
 # Check PHP
 if check_package "php5-fpm"; then
