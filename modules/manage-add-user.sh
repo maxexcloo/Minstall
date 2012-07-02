@@ -76,7 +76,7 @@ else
 
 		# Set Password
 		subheader "Setting Password..."
-		echo $PASS | passwd $USER --stdin
+		echo "$USER:$PASS" | chpasswd
 
 		# User HTTP Folder
 		if [ $HTTP = 1 ]; then
