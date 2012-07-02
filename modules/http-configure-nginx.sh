@@ -16,7 +16,7 @@ if question --default yes "Do you want to enable a caching directory? (Y/n)" || 
 	subheader "Adding Configuration..."
 	cp -r $MODULEPATH/$MODULE/nginx/nginx.d/cache.conf /etc/nginx/nginx.d/
 	mkdir -p /var/lib/nginx/cache
-	chown -r www-data:www-data /var/lib/nginx/cache
+	chown -R www-data:www-data /var/lib/nginx/cache
 # Disable Caching
 else
 	subheader "Removing Configuration..."
@@ -35,7 +35,7 @@ else
 fi
 
 # Enable Optimised Configuration
-if question --default yes "Do you want to enable optimised configurations? (Y/n)" || [ $(read_var_module optimise ) = 1]; then
+if question --default yes "Do you want to enable optimised configurations? (Y/n)" || [ $(read_var_module optimise ) = 1 ]; then
 	subheader "Adding Configuration..."
 	cp -r $MODULEPATH/$MODULE/nginx/nginx.d/speed.conf /etc/nginx/nginx.d/
 # Disable Optimised Configuration
