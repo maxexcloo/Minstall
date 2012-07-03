@@ -80,50 +80,46 @@ if [ $UNATTENDED = 0 ]; then
 	# Read Config
 	read_ini $CONFIGFILE
 
-	# Loop Through Parameters
-	while [ $# -gt 0 ]; do
-		# Set Current Module Variable
-		MODULE=$1
-		# Check Parameters Against Options
-		case $1 in
-			# Help Function
-			help)
-				# Load Help Script
-				source $MODULEPATH/help.sh
-				# Exit
-				exit
-			;;
-			# Module List Function
-			modules)
-				# Load Module Listing Script
-				source $MODULEPATH/help-modules.sh
-				# Exit
-				exit
-			;;
-			# Load Scripts
-			*)
-				# Check If Module Exists
-				if [ -f $MODULEPATH/$1.sh ]; then
-					# Print Module Description
-					header $(describe $MODULEPATH/$1.sh)
-					# Load Module
-					source $MODULEPATH/$1.sh
-				# Module Doesn't Exist
-				else
-					# Ask If User Wants To Abort
-					if question --default yes "Module $1 not found. Do you want to abort? (Y/n)"; then
-						# Print Message
-						error "Aborted!"
-						# Exit Script
-						exit
-					fi
+	# Set Current Module Variable
+	MODULE=$1
+
+	# Check Parameters Against Options
+	case $1 in
+		# Help Function
+		help)
+			# Load Help Script
+			source $MODULEPATH/help.sh
+			# Exit
+			exit
+		;;
+		# Module List Function
+		modules)
+			# Load Module Listing Script
+			source $MODULEPATH/help-modules.sh
+			# Exit
+			exit
+		;;
+		# Load Scripts
+		*)
+			# Check If Module Exists
+			if [ -f $MODULEPATH/$1.sh ]; then
+				# Print Module Description
+				header $(describe $MODULEPATH/$1.sh)
+				# Load Module
+				source $MODULEPATH/$1.sh
+			# Module Doesn't Exist
+			else
+				# Ask If User Wants To Abort
+				if question --default yes "Module $1 not found. Do you want to abort? (Y/n)"; then
+					# Print Message
+					error "Aborted!"
+					# Exit Script
+					exit
 				fi
-				echo ""
-			;;
-		esac
-		# Shift Variables
-		shift
-	done
+			fi
+			echo ""
+		;;
+	esac
 
 	# Check Package Clean Requirement
 	package_clean_question 1
