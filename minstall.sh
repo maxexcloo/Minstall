@@ -57,7 +57,7 @@ if [ $1 = "-u" ]; then
 			# Set Config File
 			CONFIGFILE=$2
 			# Print Notification
-			warning "Loaded unattended config file at \"$2\"!"
+			warning "Loaded unattended config file \"$2\"!"
 		else
 			error "Unattended config file not found!"
 			exit
