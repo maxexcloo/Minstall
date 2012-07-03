@@ -1,15 +1,11 @@
 #!/bin/bash
 # Manage: Remove System Virtual Host
 
-# Check Package
-if check_package_ni "nginx"; then
-	# Print Warning
-	warning "This module requires the nginx package to be installed, please install it and run this module again!"
-	# Shift Variables
-	shift
-	# Continue Loop
-	continue
-fi
+# Common Functions
+source $MODULEPATH/manage-common.sh
+
+# Common HTTP Functions
+source $MODULEPATH/manage-common-http.sh
 
 # Confirmation Question
 if question --default yes "Are you sure you want to remove the system virtual host? (Y/n)" || [ $UNATTENDED = 1 ]; then
@@ -24,14 +20,5 @@ else
 	continue
 fi
 
-# Check Package
-if check_package "php5-fpm"; then
-	subheader "Restarting Daemon (PHP-FPM)..."
-	daemon_manage php5-fpm restart
-fi
-
-# Check Package
-if check_package "nginx"; then
-	subheader "Restarting Daemon (nginx)..."
-	daemon_manage nginx restart
-fi
+# Reload Daemons
+manage-http-reload-daemons

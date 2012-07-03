@@ -1,17 +1,20 @@
 #!/bin/bash
 # Manage: Add User
 
+# Common Functions
+source $MODULEPATH/manage-common.sh
+
 # Attended Mode
 if [ $UNATTENDED = 0 ]; then
 	# User Check Loop
 	while true; do
 		# Take User Input
-		read -p "Please enter a user name: " USERNAME
+		read -p "Please enter a user name: " USER
 		# Add User
 		subheader "Adding User..."
-		useradd -m -s /bin/bash $USERNAME
+		useradd -m -s /bin/bash $USER
 		# Check If Addition Successful
-		if [ -d /home/$USERNAME ]; then
+		if [ -d /home/$USER ]; then
 			break
 		else
 			echo "User addition failed, please try again."
@@ -20,27 +23,19 @@ if [ $UNATTENDED = 0 ]; then
 
 	# Set Password
 	subheader "Setting Password..."
-	passwd $USERNAME
+	passwd $USER
 
 	# Check Package
 	if check_package "nginx"; then
 		# User HTTP Folder Question
 		if question --default yes "Do you want to add a HTTP folder for this user? (Y/n)"; then
-			subheader "Adding HTTP Folder..."
-			mkdir -p /home/$USERNAME/http/{common,hosts,logs,private}
-			subheader "Changing HTTP Permissions..."
-			chown -R $USERNAME:$USERNAME /home/$USERNAME/http
-			find /home/$USERNAME/http -type d -exec chmod 770 {} \;
-			subheader "Adding User To HTTP Group..."
-			gpasswd -a www-data $USERNAME
+			manage-folder
 		fi
 	fi
 
 	# Reset User Permissions Question
 	if question --default yes "Do you want to change file permissions for this user to enable privacy? (Y/n)"; then
-		subheader "Changing User File Permissions..."
-		chmod -R o= /home/$USERNAME
-		chown -R $USERNAME:$USERNAME /home/$USERNAME
+		manage-reset-permissions
 	fi
 # Unattended Mode
 else
@@ -64,15 +59,15 @@ else
 		HTTPLIST=${HTTPLIST#*\,}
 		PERMLIST=${PERMLIST#*\,}
 
+		# Check If Array Empty
+		manage-check-array
+
 		# Add User
 		subheader "Adding User ($USER)..."
 		useradd -m -s /bin/bash $USER
 
 		# Check User
-		if [ ! -d /home/$USER ]; then
-			echo "Invalid user ($USER)."
-			break
-		fi
+		manage-check-user
 
 		# Set Password
 		subheader "Setting Password..."
@@ -80,23 +75,18 @@ else
 
 		# User HTTP Folder
 		if [ $HTTP = 1 ]; then
-			subheader "Adding HTTP Folder..."
-			mkdir -p /home/$USER/http/{common,hosts,logs,private}
-			subheader "Changing HTTP Permissions..."
-			chown -R $USER:$USER /home/$USER/http
-			find /home/$USER/http -type d -exec chmod 770 {} \;
-			subheader "Adding User To HTTP Group..."
-			gpasswd -a www-data $USER
+			manage-folder
 		fi
 
 		# Reset User Permissions
 		if [ $PERM = 1 ]; then
-			subheader "Changing User File Permissions..."
-			chmod -R o= /home/$USER
-			chown -R $USER:$USER /home/$USER
+			manage-reset-permissions
 		fi
 	done
 
-	# Unset Array
+	# Unset Arrays
 	unset USERLIST
+	unset PASSLIST
+	unset HTTPLIST
+	unset PERMLIST
 fi

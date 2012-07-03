@@ -148,6 +148,14 @@ if [ $UNATTENDED = 1 ]; then
 		# Remove Current Module From List
 		MODULELIST=${MODULELIST#*\,}
 
+		# Check If Array Empty
+		if [ $MODULE = 0 ]; then
+			# Print Message
+			error "No modules in modules array. Aborting."
+			# Exit Script
+			exit
+		fi
+
 		# Check If Module Exists
 		if [ -f $MODULEPATH/$MODULE.sh ]; then
 			# Print Module Description
