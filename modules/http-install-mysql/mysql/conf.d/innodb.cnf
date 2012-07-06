@@ -1,3 +1,0 @@
-[mysqld]
-default-storage-engine = myisam
-innodb = off
