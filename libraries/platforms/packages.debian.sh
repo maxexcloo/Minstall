@@ -28,7 +28,7 @@ function package_update() {
 
 # Upgrade Packages
 function package_upgrade() {
-	apt-get -q -y update
+	apt-get -q -y upgrade
 }
 
 # Add Repository
