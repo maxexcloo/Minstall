@@ -35,13 +35,19 @@ else
 fi
 
 # Enable Optimised Configuration
-if question --default yes "Do you want to enable optimised configurations? (Y/n)" || [ $(read_var_module optimise ) = 1 ]; then
+if question --default yes "Do you want to enable optimised configurations? (Y/n)" || [ $(read_var_module optimise) = 1 ]; then
 	subheader "Adding Configuration..."
 	cp -r $MODULEPATH/$MODULE/nginx/nginx.d/speed.conf /etc/nginx/nginx.d/
 # Disable Optimised Configuration
 else
 	subheader "Removing Configuration..."
 	rm /etc/nginx/nginx.d/speed.conf > /dev/null 2>&1
+fi
+
+# Protect Default Host
+if question --default no "Do you want to protect the default host (this will override your default virtual host if you have assigned one)? (y/N)" || [ $(read_var_module protect) = 1 ]; then
+	subheader "Adding Configuration..."
+	cp -r $MODULEPATH/$MODULE/nginx/hosts.d/default.conf /etc/nginx/hosts.d/
 fi
 
 # Restart Daemon
