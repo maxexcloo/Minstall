@@ -1,0 +1,4 @@
+Minstall includes some extra scripts, two examples being the benchmark enviroment setup script and the phpmyadmin script.
+These scripts may be used independantly to Minstall as they aren't dependant on it but some may require the changing of parameters in the scripts themselves.
+Please be sure to understand what each script does and update the variables in the variable section of each script before using.
+Hopefully you'll find the scripts useful!
