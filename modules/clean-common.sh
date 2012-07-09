@@ -4,6 +4,9 @@
 # Clean HTTP Config
 rm -rf /etc/nginx/sites-* /etc/php5/fpm/pool.d/www.* > /dev/null 2>&1
 
+# Create PHP Directories
+mkdir -p /etc/php5/fpm/pool.d
+
 # Update HTTP Config
 cp $MODULEPATH/http-install-nginx/nginx/* /etc/nginx/ > /dev/null 2>&1
 cp $MODULEPATH/http-install-nginx/nginx/conf.d/* /etc/nginx/conf.d/ > /dev/null 2>&1

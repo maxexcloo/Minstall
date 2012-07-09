@@ -40,7 +40,7 @@ manage-http-check-user-loop() {
 		# Check If User Directory Exists
 		if [ -d /home/$USER ]; then
 			if [ ! -d /home/$USER/http ]; then
-				warning "User valid but no HTTP directory was found, run the manage user module to fix then retry."
+				warning "User valid but no HTTP directory was found, run the manage user module to fix and then retry."
 				# Shift Variables
 				shift
 				# Continue Loop
@@ -97,60 +97,117 @@ manage-http-create-directories() {
 manage-http-generate-configuration() {
 	# Create Host Configuration
 	subheader "Creating Host Configuration..."
-	if [ $HOST_WWW = 1 ]; then
-		cp $MODULEPATH/$MODULE/nginx/example-www.conf /etc/nginx/hosts.d/$USER-$HOST_DIR.conf
-		echo "" >> /etc/nginx/hosts.d/$USER-$HOST_DIR.conf
-		cat $MODULEPATH/$MODULE/nginx/example.conf >> /etc/nginx/hosts.d/$USER-$HOST_DIR.conf
-	else
-		cp $MODULEPATH/$MODULE/nginx/example.conf /etc/nginx/hosts.d/$USER-$HOST_DIR.conf
-	fi
+	touch /etc/nginx/hosts.d/$USER-$HOST_DIR.conf
 
 	# Update Host Configuration (WWW)
-	if [[ $HOST_WWW = 1 ]]; then
+	if [ $HOST_WWW = 1 ]; then
 		subheader "Updating Host Configuration (WWW)..."
-		# Update WWW Host
-		sed -i "s/server_name example.com/server_name "$HOST_DIR"/g" /etc/nginx/hosts.d/$USER-$HOST_DIR.conf
-		# Update WWW Host Redirect
-		sed -i "s/www.example.com\/$1/"$HOST"\/$1/g" /etc/nginx/hosts.d/$USER-$HOST_DIR.conf
+		cat >> /etc/nginx/hosts.d/$USER-$HOST_DIR.conf <<END
+server {
+	listen 80;
+	server_name $HOST_DIR;
+
+	rewrite ^/(.*) http://$HOST/\$1 permanent;
+}
+END
+		echo "" >> /etc/nginx/hosts.d/$USER-$HOST_DIR.conf
 	fi
 
 	# Update Host Configuration
 	subheader "Updating Host Configuration..."
-	# Update Host
-	sed -i "s/server_name www.example.com/server_name "$HOST"/g" /etc/nginx/hosts.d/$USER-$HOST_DIR.conf
-	# Update Root
-	sed -i "s/root example/root \/home\/"$USER"\/http\/hosts\/"$HOST_DIR"/g" /etc/nginx/hosts.d/$USER-$HOST_DIR.conf
-	# Update Log File Path
-	sed -i "s/error_log example/error_log \/home\/"$USER"\/http\/logs\/"$HOST_DIR".log/g" /etc/nginx/hosts.d/$USER-$HOST_DIR.conf
-	# Update PHP
-	sed -i "s/php.d\/example/php.d\/"$USER"/g" /etc/nginx/hosts.d/$USER-$HOST_DIR.conf
+	cat >> /etc/nginx/hosts.d/$USER-$HOST_DIR.conf <<END
+server {
+	listen 80;
+	server_name $HOST;
 
-	# Create Host PHP Configuration
-	subheader "Creating Host PHP Configuration..."
-	cp $MODULEPATH/$MODULE/nginx/example-php.conf /etc/nginx/php.d/$USER.conf
+	access_log off;
+	error_log /home/$USER/http/logs/$HOST_DIR.log;
+	index index.html index.php;
+	root /home/$USER/http/hosts/$HOST_DIR;
 
-	# Update Host PHP Configuration
-	subheader "Updating Host PHP Configuration..."
-	sed -i "s/example/"$USER"/g" /etc/nginx/php.d/$USER.conf
+	include /etc/nginx/conf.d/cache.conf;
+	include /etc/nginx/conf.d/deny.conf;
+	#include /etc/nginx/php.d/$USER.conf;
+}
+END
 
-	# Create PHP Directories
-	subheader "Creating PHP Directories..."
-	mkdir -p /etc/php5/fpm/pool.d
+	# Create Host Configuration (SSL)
+	subheader "Creating Host Configuration (SSL)..."
+	touch /etc/nginx/hosts.d/$USER-$HOST_DIR-ssl.conf
+
+	# Update Host Configuration (SSL WWW)
+	if [ $HOST_WWW = 1 ]; then
+		subheader "Updating Host Configuration (SSL WWW)..."
+		cat >> /etc/nginx/hosts.d/$USER-$HOST_DIR-ssl.conf <<END
+server {
+	listen 443 ssl;
+	server_name $HOST_DIR;
+	ssl_certificate /etc/ssl/http/self.pem;
+	ssl_certificate_key /etc/ssl/http/self.key;
+
+	rewrite ^/(.*) http://$HOST/\$1 permanent;
+}
+END
+		echo "" >> /etc/nginx/hosts.d/$USER-$HOST_DIR-ssl.conf
+	fi
+
+	# Update Host Configuration (SSL)
+	subheader "Updating Host Configuration (SSL)..."
+	cat >> /etc/nginx/hosts.d/$USER-$HOST_DIR-ssl.conf <<END
+server {
+	listen 443 ssl;
+	server_name $HOST;
+	ssl_certificate /etc/ssl/http/self.pem;
+	ssl_certificate_key /etc/ssl/http/self.key;
+
+	access_log off;
+	error_log /home/$USER/http/logs/$HOST_DIR.log;
+	index index.html index.php;
+	root /home/$USER/http/hosts/$HOST_DIR;
+
+	include /etc/nginx/conf.d/cache.conf;
+	include /etc/nginx/conf.d/deny.conf;
+	#include /etc/nginx/php.d/$USER.conf;
+}
+END
 
 	# Create PHP Configuration
 	subheader "Creating PHP Configuration..."
-	cp $MODULEPATH/$MODULE/php-fpm/example.conf /etc/php5/fpm/pool.d/$USER.conf
+	touch /etc/nginx/php.d/$USER.conf
 
 	# Update PHP Configuration
 	subheader "Updating PHP Configuration..."
-	# Update PHP Configuration Header
-	sed -i "s/HEADER/\["$USER"\]/g" /etc/php5/fpm/pool.d/$USER.conf
-	# Update PHP Configuration Listen
-	sed -i "s/listen = example/listen = \/home\/"$USER"\/http\/private\/php.socket/g" /etc/php5/fpm/pool.d/$USER.conf
-	# Update PHP Configuration User
-	sed -i "s/user = example/user = "$USER"/g" /etc/php5/fpm/pool.d/$USER.conf
-	# Update PHP Configuration Group
-	sed -i "s/group = example/group = "$USER"/g" /etc/php5/fpm/pool.d/$USER.conf
+	cat >> /etc/nginx/php.d/$USER.conf <<END
+location ~ \.php\$ {
+	fastcgi_param SCRIPT_FILENAME \$document_root\$fastcgi_script_name;
+	fastcgi_pass unix:/home/$USER/http/private/php.socket;
+	include fastcgi_params;
+	try_files \$uri =404;
+}
+END
+
+	# Create PHP Configuration (Pool)
+	subheader "Creating PHP Configuration (Pool)..."
+	touch /etc/php5/fpm/pool.d/$USER.conf
+
+	# Update PHP Configuration (Pool)
+	subheader "Updating PHP Configuration (Pool)..."
+	cat >> /etc/php5/fpm/pool.d/$USER.conf <<END
+[$USER]
+listen = /home/$USER/http/private/php.socket
+user = $USER
+group = $USER
+pm = dynamic
+pm.start_servers = 1
+pm.max_children = 4
+pm.min_spare_servers = 1
+pm.max_spare_servers = 2
+pm.max_requests = 500
+php_flag[expose_php] = off
+php_flag[short_open_tag] = on
+php_value[max_execution_time] = 120
+php_value[memory_limit] = 64M
+END
 }
 
 ######################
@@ -160,20 +217,33 @@ manage-http-generate-configuration() {
 # Enable Host As Default Host
 manage-http-default-host() {
 	subheader "Setting As Default..."
-	echo "server {" > /etc/nginx/hosts.d/default.conf
-	echo -e "\tlisten 80 default_server;" >> /etc/nginx/hosts.d/default.conf
-	echo -e "\trewrite ^/(.*) http://$HOST/\$1 permanent;" >> /etc/nginx/hosts.d/default.conf
-	echo "}" >> /etc/nginx/hosts.d/default.conf
+	cat > /etc/nginx/hosts.d/default.conf <<END
+server {
+	listen 80 default_server;
+	rewrite ^/(.*) http://$HOST/\$1 permanent;
+}
+END
 }
 
 # Enable PHP For Host
 manage-http-enable-php() {
 	if [ $1 = 1 ]; then
 		subheader "Enabling PHP..."
-		sed -i "s/\o011#include \/etc\/nginx\/php.d/\o011include \/etc\/nginx\/php.d/g" /etc/nginx/hosts.d/$USER-$HOST_DIR.conf
+		sed -i "s/\o011#include \/etc\/nginx\/php.d/\o011include \/etc\/nginx\/php.d/g" /etc/nginx/hosts.d/$USER-$HOST_DIR{.conf,-ssl*}
 	else
 		subheader "Disabling PHP..."
-		sed -i "s/\o011include \/etc\/nginx\/php.d/\o011#include \/etc\/nginx\/php.d/g" /etc/nginx/hosts.d/$USER-$HOST_DIR.conf
+		sed -i "s/\o011include \/etc\/nginx\/php.d/\o011#include \/etc\/nginx\/php.d/g" /etc/nginx/hosts.d/$USER-$HOST_DIR{.conf,-ssl*}
+	fi
+}
+
+# Enable SSL For Host
+manage-http-enable-ssl() {
+	if [ $1 = 1 ]; then
+		subheader "Enabling SSL..."
+		mv /etc/nginx/hosts.d/$USER-$HOST_DIR-ssl.disabled /etc/nginx/hosts.d/$USER-$HOST_DIR-ssl.conf
+	else
+		subheader "Disabling SSL..."
+		mv /etc/nginx/hosts.d/$USER-$HOST_DIR-ssl.conf /etc/nginx/hosts.d/$USER-$HOST_DIR-ssl.disabled
 	fi
 }
 
@@ -183,7 +253,7 @@ manage-http-enable-php() {
 
 # Remove Host
 manage-http-remove-host() {
-	subheader "Removing Files..."
+	subheader "Removing Host..."
 	rm /home/$USER/http/logs/$HOST_DIR.log
 	rm /etc/nginx/hosts.d/$USER-$HOST_DIR.conf
 	if ! ls /etc/nginx/hosts.d/$USER-*.conf > /dev/null 2>&1; then
@@ -194,7 +264,7 @@ manage-http-remove-host() {
 
 # Remove Host Files
 manage-http-remove-host-files() {
-	subheader "Removing Files..."
+	subheader "Removing Host Files..."
 	rm -rf /home/$USER/http/hosts/$HOST_DIR/
 }
 

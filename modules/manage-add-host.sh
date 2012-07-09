@@ -40,14 +40,21 @@ if [ $UNATTENDED = 0 ]; then
 	else
 		manage-http-enable-php 0
 	fi
+
+	# SSL Question
+	if question --default yes "Do you want to enable SSL for this virtual host? (Y/n)"; then
+		manage-http-enable-ssl 1
+	else
+		manage-http-enable-ssl 0
+	fi
 # Unattended Mode
 else
 	# Define Arrays
 	USERLIST=$(read_var_module user),
 	HOSTLIST=$(read_var_module host),
 	DEFAULTLIST=$(read_var_module default),
-	HTTPLIST=$(read_var_module http),
 	PHPLIST=$(read_var_module php),
+	SSLLIST=$(read_var_module ssl),
 
 	# Loop Through Users
 	while echo $USERLIST | grep \, &> /dev/null; do
@@ -55,26 +62,21 @@ else
 		USER=${USERLIST%%\,*}
 		HOST=${HOSTLIST%%\,*}
 		DEFAULT=${DEFAULTLIST%%\,*}
-		HTTP=${HTTPLIST%%\,*}
 		PHP=${PHPLIST%%\,*}
+		SSL=${SSLLIST%%\,*}
 
 		# Remove Current User From List
 		USERLIST=${USERLIST#*\,}
 		HOSTLIST=${HOSTLIST#*\,}
 		DEFAULTLIST=${DEFAULTLIST#*\,}
-		HTTPLIST=${HTTPLIST#*\,}
 		PHPLIST=${PHPLIST#*\,}
+		SSLLIST=${SSLLIST#*\,}
 
 		# Check If Array Empty
 		manage-check-array
 
 		# Check User
 		manage-check-user
-
-		# User HTTP Folder
-		if [ $HTTP = 1 ]; then
-			manage-folder
-		fi
 
 		# Check Host
 		manage-http-check-host
@@ -100,6 +102,13 @@ else
 			fi
 		else
 			manage-http-enable-php 0
+		fi
+
+		# SSL Check
+		if [ $SSL = 1 ]; then
+			manage-http-enable-ssl 1
+		else
+			manage-http-enable-ssl 0
 		fi
 	done
 fi
