@@ -82,6 +82,22 @@ echo -e '#!/bin/bash\ncd $(dirname $0)/ioping\n./ioping -c 10 .' > ../ioping.sh
 # Exit Directory
 cd ..
 
+##############
+## Packages ##
+##############
+
+# lshw Hardware Info
+apt-get -q -y install lshw
+
+# lshw Hardware Info Script
+echo -e '#!/bin/bash\nlshw' > lshw.sh
+
+# sysbench Benchmark
+apt-get -q -y install sysbench
+
+# sysstat Performance Monitoring
+apt-get -q -y install sysstat
+
 ####################
 ## Scripts (Info) ##
 ####################
@@ -148,6 +164,3 @@ cd ..
 
 # Change Permissions
 chmod +x *.sh
-
-# Make Notes Directory
-mkdir notes
