@@ -39,6 +39,13 @@ manage-http-check-user-loop() {
 		read -p "Please enter a user name: " USER
 		# Check If User Directory Exists
 		if [ -d /home/$USER ]; then
+			if [ ! -d /home/$USER/http ]; then
+				warning "User valid but no HTTP directory was found, run the manage user module to fix then retry."
+				# Shift Variables
+				shift
+				# Continue Loop
+				continue
+			fi
 			break
 		else
 			echo "Please enter a valid username."

@@ -12,14 +12,6 @@ if [ $UNATTENDED = 0 ]; then
 	# User Check Loop
 	manage-http-check-user-loop
 
-	# Check Folders
-	if [ ! -d /home/$USER/http ]; then
-		# User HTTP Folder Question
-		if question --default yes "Do you want to add a HTTP folder for this user (if you have already done this you don't need to do it again)? (Y/n)"; then
-			manage-folder
-		fi
-	fi
-
 	# Host Check Loop
 	manage-http-check-host-loop
 
