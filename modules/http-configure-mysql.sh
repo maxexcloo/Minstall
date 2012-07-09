@@ -2,7 +2,7 @@
 # HTTP Configure: MySQL Database Server
 
 # Check Package
-if check_package_ni "mysql-server"; then
+if ! check_package "mysql-server"; then
 	# Print Warning
 	warning "This module requires the mysql-server package to be installed, please install it and run this module again!"
 	# Shift Variables

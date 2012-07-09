@@ -1,6 +1,6 @@
 # General
-minstall.sh:
- + Argument function from Subsonic startup script (subsonic.sh), found here: http://subsonic.svn.sourceforge.net/viewvc/subsonic/
+Zsolt Ero:
+ + Helped fix countless bugs, wrote a host manager and provided many good suggestions.
 
 # Functions
 libraries/external/read_ini.sh:
@@ -13,3 +13,5 @@ libraries/message.sh:
  + http://www.linuxjournal.com/content/asking-yesno-question-bash-script/
 libraries/question.sh:
  + http://www.linuxjournal.com/content/asking-yesno-question-bash-script/
+minstall.sh:
+ + Argument function from Subsonic startup script (subsonic.sh), found here: http://subsonic.svn.sourceforge.net/viewvc/subsonic/

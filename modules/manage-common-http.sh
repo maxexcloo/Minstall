@@ -2,7 +2,7 @@
 # Manage: Common HTTP Functions
 
 # Check Package
-if check_package_ni "nginx"; then
+if ! check_package "nginx"; then
 	# Print Warning
 	warning "This module requires the nginx package to be installed, please install it and run this module again!"
 	# Shift Variables
