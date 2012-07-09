@@ -11,9 +11,8 @@ if ! check_package "nginx"; then
 	continue
 fi
 
-# Clean HTTP Config
-mv /etc/nginx/mime.types /etc/nginx/nginx.d/mime.conf > /dev/null 2>&1
-rm -rf /etc/nginx/sites-* /etc/php5/fpm/pool.d/www.* > /dev/null 2>&1
+# Run Clean Common Module
+source $MODULEPATH/clean-common.sh
 
 #################
 ## Check Loops ##

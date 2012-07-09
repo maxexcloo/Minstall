@@ -16,3 +16,10 @@ if question --default yes "Do you want to clean default user files (/etc/skel)? 
 	# Append Umask
 	echo -e "\numask o=" >> /etc/skel/.bashrc
 fi
+
+# Clean Root Cron Entry
+if question --default yes "Do you want to clean the root cron entry? (Y/n)" || [ $(read_var_module clean_root_cron) = 1 ]; then
+	subheader "Cleaning Root Cron Entry..."
+	echo "" > /tmp/cron
+	crontab -u root /tmp/cron
+fi

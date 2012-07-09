@@ -25,6 +25,9 @@ if [ $UNATTENDED = 0 ]; then
 	subheader "Setting Password..."
 	passwd $USER
 
+	# Clean Cron Entry
+	clean-cron
+
 	# Check Package
 	if check_package "nginx"; then
 		# User HTTP Folder Question
@@ -72,6 +75,9 @@ else
 		# Set Password
 		subheader "Setting Password..."
 		echo "$USER:$PASS" | chpasswd
+
+		# Clean Cron Entry
+		clean-cron
 
 		# User HTTP Folder
 		if [ $HTTP = 1 ]; then

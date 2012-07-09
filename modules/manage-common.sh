@@ -29,6 +29,13 @@ manage-check-user() {
 ## Setup Functions ##
 #####################
 
+# Clean Cron Entry
+clean-cron() {
+	subheader "Cleaning User Cron Entry..."
+	echo "" > /tmp/cron
+	crontab -u $USER /tmp/cron
+}
+
 # HTTP Folder Setup
 manage-folder() {
 	subheader "Adding HTTP Folder..."
