@@ -1,11 +1,11 @@
 #!/bin/bash
 # HTTP Install: PHP Application Server
 
-# Common Functions
-source $MODULEPATH/http-install-common.sh
-
 # Package List Update Question
 package_update_question
+
+# Common Functions
+source $MODULEPATH/http-install-common.sh
 
 # Install Package
 subheader "Installing Package..."
@@ -24,10 +24,11 @@ cp -r $MODULEPATH/$MODULE/* /etc/
 
 # Check Package
 if check_package "nginx"; then
-	subheader "Enabling nginx PHP Configuration..."
-	sed -i "s/#include \/etc\/nginx\/php.d/include \/etc\/nginx\/php.d/g" /etc/nginx/hosts.d/www-data.conf
-	subheader "Restarting Daemon (nginx)..."
+	subheader "Enabling PHP Configuration..."
+	sed -i "s/\o011#include \/etc\/nginx\/php.d/\o011include \/etc\/nginx\/php.d/g" /etc/nginx/hosts.d/www-data{.conf,-ssl*}
+	subheader "Restarting Daemons..."
 	daemon_manage nginx restart
+	daemon_manage php5-fpm restart
 fi
 
 # Restart Daemon

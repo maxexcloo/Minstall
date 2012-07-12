@@ -1,11 +1,11 @@
 #!/bin/bash
 # HTTP Install: Extra Packages
 
-# Common Functions
-source $MODULEPATH/http-install-common.sh
-
 # Package List Update Question
 package_update_question
+
+# Common Functions
+source $MODULEPATH/http-install-common.sh
 
 # Module Warning
 warning "Many of these packages require PHP, installing them may break your install if you plan on installing PHP later with the modules provided, please only proceed if PHP is already installed!"

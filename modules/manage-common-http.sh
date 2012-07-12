@@ -88,7 +88,7 @@ manage-http-check-host() {
 # Create Directories
 manage-http-create-directories() {
 	subheader "Creating Host Directory"
-	mkdir /home/$USER/http/hosts/$HOST_DIR
+	mkdir /home/$USER/http/hosts/$HOST_DIR > /dev/null 2>&1; then
 	chown -R $USER:$USER /home/$USER/http/hosts/$HOST_DIR
 	find /home/$USER/http/hosts/$HOST_DIR -type d -exec chmod 770 {} \;
 }
@@ -223,6 +223,22 @@ server {
 	rewrite ^/(.*) http://$HOST/\$1 permanent;
 }
 END
+
+	subheader "Setting As Default (SSL)..."
+	cat > /etc/nginx/hosts.d/default-ssl.conf <<END
+server {
+	listen 443 default_server ssl;
+	ssl_certificate /etc/ssl/http/self.pem;
+	ssl_certificate_key /etc/ssl/http/self.key;
+	rewrite ^/(.*) https://$HOST/\$1 permanent;
+}
+END
+
+	# Disable If Default & SSL
+	if [ $SSL = 0 ]; then
+		# Redirect To HTTP
+		sed -i "s/https/http/g" /etc/nginx/hosts.d/default-ssl.conf
+	fi
 }
 
 # Enable PHP For Host
@@ -240,10 +256,10 @@ manage-http-enable-php() {
 manage-http-enable-ssl() {
 	if [ $1 = 1 ]; then
 		subheader "Enabling SSL..."
-		mv /etc/nginx/hosts.d/$USER-$HOST_DIR-ssl.disabled /etc/nginx/hosts.d/$USER-$HOST_DIR-ssl.conf
+		mv /etc/nginx/hosts.d/$USER-$HOST_DIR-ssl.disabled /etc/nginx/hosts.d/$USER-$HOST_DIR-ssl.conf > /dev/null 2>&1; then
 	else
 		subheader "Disabling SSL..."
-		mv /etc/nginx/hosts.d/$USER-$HOST_DIR-ssl.conf /etc/nginx/hosts.d/$USER-$HOST_DIR-ssl.disabled
+		mv /etc/nginx/hosts.d/$USER-$HOST_DIR-ssl.conf /etc/nginx/hosts.d/$USER-$HOST_DIR-ssl.disabled > /dev/null 2>&1; then
 	fi
 }
 
@@ -255,7 +271,7 @@ manage-http-enable-ssl() {
 manage-http-remove-host() {
 	subheader "Removing Host..."
 	rm /home/$USER/http/logs/$HOST_DIR.log
-	rm /etc/nginx/hosts.d/$USER-$HOST_DIR.conf
+	rm /etc/nginx/hosts.d/$USER-$HOST_DIR{.conf,-ssl*}
 	if ! ls /etc/nginx/hosts.d/$USER-*.conf > /dev/null 2>&1; then
 		rm /etc/nginx/php.d/$USER.conf
 		rm /etc/php5/fpm/pool.d/$USER.conf

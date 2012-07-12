@@ -1,11 +1,11 @@
 #!/bin/bash
 # HTTP Install: nginx Web Server
 
-# Common Functions
-source $MODULEPATH/http-install-common.sh
-
 # Package List Update Question
 package_update_question
+
+# Common Functions
+source $MODULEPATH/http-install-common.sh
 
 # Install Package
 subheader "Installing Package..."
@@ -36,11 +36,12 @@ openssl req -new -days 3650 -newkey rsa:2048 -nodes -x509 -subj "/C=/ST=/L=/O=/C
 chown -R www-data:www-data /etc/ssl/http
 chmod -R o= /etc/ssl/http
 
-# Check PHP
+# Check Package
 if check_package "php5-fpm"; then
 	subheader "Enabling PHP Configuration..."
-	sed -i "s/#include \/etc\/nginx\/php.d/include \/etc\/nginx\/php.d/g" /etc/nginx/hosts.d/www-data.conf
-	subheader "Restarting Daemon (PHP-FPM)..."
+	sed -i "s/\o011#include \/etc\/nginx\/php.d/\o011include \/etc\/nginx\/php.d/g" /etc/nginx/hosts.d/www-data{.conf,-ssl*}
+	subheader "Restarting Daemons..."
+	daemon_manage nginx restart
 	daemon_manage php5-fpm restart
 fi
 

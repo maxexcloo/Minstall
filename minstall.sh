@@ -162,6 +162,12 @@ if [ $UNATTENDED = 1 ]; then
 			# Exit Script
 			exit
 		fi
+
+		# Debug Pause
+		if [ $(read_var minstall__debug) = 1 ]; then
+			# Wait For User Input
+			read -p "Press any key to continue..."
+		fi
 	done
 
 	# Unset Array

@@ -1,11 +1,11 @@
 #!/bin/bash
 # HTTP Install: MySQL Database Server
 
-# Common Functions
-source $MODULEPATH/http-install-common.sh
-
 # Package List Update Question
 package_update_question
+
+# Common Functions
+source $MODULEPATH/http-install-common.sh
 
 # Copying Configuration
 subheader "Copying Configuration..."
