@@ -5,14 +5,9 @@
 if ! check_package "nginx"; then
 	# Print Warning
 	warning "This module requires the nginx package to be installed, please install it and run this module again!"
-	# Shift Variables
-	shift
 	# Continue Loop
 	continue
 fi
-
-# Run Clean Common Module
-source $MODULEPATH/clean-common.sh
 
 #################
 ## Check Loops ##
@@ -41,8 +36,6 @@ manage-http-check-user-loop() {
 		if [ -d /home/$USER ]; then
 			if [ ! -d /home/$USER/http ]; then
 				warning "User valid but no HTTP directory was found, run the manage user module to fix and then retry."
-				# Shift Variables
-				shift
 				# Continue Loop
 				continue
 			fi
@@ -62,8 +55,6 @@ manage-http-check-directory() {
 	if [ ! -f /etc/nginx/hosts.d/$USER-$HOST_DIR.conf ]; then
 		# Print Warning
 		warning "The virtual host configuration file does not exist (/etc/nginx/hosts.d/$USER-$HOST_DIR.conf), run this module again and re-enter the information!"
-		# Shift Variables
-		shift
 		# Continue Loop
 		continue
 	fi
@@ -81,6 +72,16 @@ manage-http-check-host() {
 	fi
 }
 
+# Check Host Existence
+manage-http-check-host-existence() {
+	if [ -f /etc/nginx/hosts.d/$USER-$HOST_DIR.conf ]; then
+		# Print Warning
+		warning "This virtual host already exists, please use the manage-manage-host module to edit it!"
+		# Continue Loop
+		continue
+	fi
+}
+
 #####################
 ## Setup Functions ##
 #####################
@@ -88,7 +89,7 @@ manage-http-check-host() {
 # Create Directories
 manage-http-create-directories() {
 	subheader "Creating Host Directory"
-	mkdir /home/$USER/http/hosts/$HOST_DIR > /dev/null 2>&1; then
+	mkdir /home/$USER/http/hosts/$HOST_DIR > /dev/null 2>&1
 	chown -R $USER:$USER /home/$USER/http/hosts/$HOST_DIR
 	find /home/$USER/http/hosts/$HOST_DIR -type d -exec chmod 770 {} \;
 }
@@ -177,7 +178,7 @@ END
 
 	# Update PHP Configuration
 	subheader "Updating PHP Configuration..."
-	cat >> /etc/nginx/php.d/$USER.conf <<END
+	cat > /etc/nginx/php.d/$USER.conf <<END
 location ~ \.php\$ {
 	fastcgi_param SCRIPT_FILENAME \$document_root\$fastcgi_script_name;
 	fastcgi_pass unix:/home/$USER/http/private/php.socket;
@@ -192,7 +193,7 @@ END
 
 	# Update PHP Configuration (Pool)
 	subheader "Updating PHP Configuration (Pool)..."
-	cat >> /etc/php5/fpm/pool.d/$USER.conf <<END
+	cat > /etc/php5/fpm/pool.d/$USER.conf <<END
 [$USER]
 listen = /home/$USER/http/private/php.socket
 user = $USER
@@ -256,10 +257,14 @@ manage-http-enable-php() {
 manage-http-enable-ssl() {
 	if [ $1 = 1 ]; then
 		subheader "Enabling SSL..."
-		mv /etc/nginx/hosts.d/$USER-$HOST_DIR-ssl.disabled /etc/nginx/hosts.d/$USER-$HOST_DIR-ssl.conf > /dev/null 2>&1; then
+		mv /etc/nginx/hosts.d/$USER-$HOST_DIR-ssl.disabled /etc/nginx/hosts.d/$USER-$HOST_DIR-ssl.conf > /dev/null 2>&1
+		# Enable SSH Variable
+		SSL=1
 	else
 		subheader "Disabling SSL..."
-		mv /etc/nginx/hosts.d/$USER-$HOST_DIR-ssl.conf /etc/nginx/hosts.d/$USER-$HOST_DIR-ssl.disabled > /dev/null 2>&1; then
+		mv /etc/nginx/hosts.d/$USER-$HOST_DIR-ssl.conf /etc/nginx/hosts.d/$USER-$HOST_DIR-ssl.disabled > /dev/null 2>&1
+		# Disable SSH Variable
+		SSL=0
 	fi
 }
 

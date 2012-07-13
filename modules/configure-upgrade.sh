@@ -1,6 +1,9 @@
 #!/bin/bash
 # Configure: Upgrade System
 
+# Run Clean Common Module
+source $MODULEPATH/clean-common.sh
+
 # Update Package Lists
 subheader "Updating Package Lists..."
 package_update

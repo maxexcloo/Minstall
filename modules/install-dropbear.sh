@@ -12,8 +12,6 @@ if question --default yes "Do you still want to run this module? (Y/n)" || [ $UN
 else
 	# Skipped Message
 	subheader "Skipping Module..."
-	# Shift Variables
-	shift
 	# Continue Loop
 	continue
 fi

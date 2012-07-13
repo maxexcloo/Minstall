@@ -14,8 +14,6 @@ if question --default yes "Are you sure you want to remove the system virtual ho
 	rm /etc/nginx/php.d/www-data.conf
 	rm /etc/php5/fpm/pool.d/www-data.conf
 else
-	# Shift Variables
-	shift
 	# Continue Loop
 	continue
 fi

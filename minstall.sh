@@ -71,18 +71,15 @@ else
 	UNATTENDED=0
 fi
 
+# Read Config
+read_ini $CONFIGFILE
+
 ###########
 ## Modes ##
 ###########
 
 # Attended Mode
 if [ $UNATTENDED = 0 ]; then
-	# Read Config
-	read_ini $CONFIGFILE
-
-	# Set Current Module Variable
-	MODULE=$1
-
 	# Check Parameters Against Options
 	case $1 in
 		# Help Function
@@ -99,37 +96,51 @@ if [ $UNATTENDED = 0 ]; then
 			# Exit
 			exit
 		;;
-		# Load Scripts
+		# Load Modules
 		*)
-			# Check If Module Exists
-			if [ -f $MODULEPATH/$1.sh ]; then
-				# Print Module Description
-				header $(describe $MODULEPATH/$1.sh)
-				# Load Module
-				source $MODULEPATH/$1.sh
-			# Module Doesn't Exist
-			else
-				# Ask If User Wants To Abort
-				if question --default yes "Module $1 not found. Do you want to abort? (Y/n)"; then
-					# Print Message
-					error "Aborted!"
-					# Exit Script
-					exit
+			# Define Modules
+			MODULELIST=$1,
+
+			# Loop Through Modules
+			while echo $MODULELIST | grep \, &> /dev/null; do
+				# Define Current Module
+				MODULE=${MODULELIST%%\,*}
+
+				# Remove Current Module From List
+				MODULELIST=${MODULELIST#*\,}
+
+				# Check If Module Exists
+				if [ -f $MODULEPATH/$MODULE.sh ]; then
+					# Print Module Description
+					header $(describe $MODULEPATH/$MODULE.sh)
+					# Load Module
+					source $MODULEPATH/$MODULE.sh
+				# Module Doesn't Exist
+				else
+					# Ask If User Wants To Abort
+					if question --default no "Module $MODULE not found. Do you want to abort? (y/N)"; then
+						# Print Message
+						error "Aborted!"
+						# Exit Script
+						exit
+					fi
 				fi
-			fi
-			echo ""
+
+				# Debug Pause
+				if [ $(read_var minstall__debug) = 1 ]; then
+					# Wait For User Input
+					read -p "Press any key to continue..."
+				fi
+			done
+
+			# Check Package Clean Requirement
+			package_clean_question 1
 		;;
 	esac
-
-	# Check Package Clean Requirement
-	package_clean_question 1
 fi
 
 # Unattended Mode
 if [ $UNATTENDED = 1 ]; then
-	# Read Config
-	read_ini $CONFIGFILE
-
 	# Define Modules
 	MODULELIST=$(read_var minstall__modules),
 

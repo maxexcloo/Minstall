@@ -26,8 +26,6 @@ if [ $UNATTENDED = 0 ]; then
 		# Remove Host
 		manage-http-remove-host
 	else
-		# Shift Variables
-		shift
 		# Continue Loop
 		continue
 	fi

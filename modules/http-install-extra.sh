@@ -1,11 +1,11 @@
 #!/bin/bash
 # HTTP Install: Extra Packages
 
-# Package List Update Question
-package_update_question
-
 # Common Functions
 source $MODULEPATH/http-install-common.sh
+
+# Package List Update Question
+package_update_question
 
 # Module Warning
 warning "Many of these packages require PHP, installing them may break your install if you plan on installing PHP later with the modules provided, please only proceed if PHP is already installed!"
@@ -15,8 +15,6 @@ if question --default yes "Do you still want to run this module? (Y/n)" || [ $UN
 else
 	# Skipped Message
 	subheader "Skipping Module..."
-	# Shift Variables
-	shift
 	# Continue Loop
 	continue
 fi
@@ -25,7 +23,7 @@ fi
 subheader "Installing Extra Packages..."
 
 # Define Packages
-PACKAGELIST=$(read_var_module packages),
+PACKAGELIST=$(read_var_module_var packages),
 
 # Loop Through Packages
 while echo $PACKAGELIST | grep \, &> /dev/null; do

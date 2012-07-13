@@ -5,17 +5,17 @@
 package_update_question
 
 # Module Warning
-warning "This package will install the OpenSSH Server. If you want the Dropbear SSH server (they are functionally identical) cancel and run its module instead."
-if question --default yes "Do you still want to run this module? (Y/n)" || [ $UNATTENDED = 1 ]; then
-	# Running Message
-	subheader "Running Module..."
-else
-	# Skipped Message
-	subheader "Skipping Module..."
-	# Shift Variables
-	shift
-	# Continue Loop
-	continue
+if [ $MODULE != "install-dropbear" ]; then
+	warning "This package will install the OpenSSH Server. If you want the Dropbear SSH server (they are functionally identical) cancel and run its module instead."
+	if question --default yes "Do you still want to run this module? (Y/n)" || [ $UNATTENDED = 1 ]; then
+		# Running Message
+		subheader "Running Module..."
+	else
+		# Skipped Message
+		subheader "Skipping Module..."
+		# Continue Loop
+		continue
+	fi
 fi
 
 # Set Module

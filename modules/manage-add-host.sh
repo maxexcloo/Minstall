@@ -18,16 +18,14 @@ if [ $UNATTENDED = 0 ]; then
 	# Check Host
 	manage-http-check-host
 
+	# Check Host Existence
+	manage-http-check-host-existence
+
 	# Create Directories
 	manage-http-create-directories
 
 	# Generate Configuration
 	manage-http-generate-configuration
-
-	# Default Question
-	if question --default yes "Do you want to set this virtual host as the default host? (Y/n)"; then
-		manage-http-default-host
-	fi
 
 	# Check Package
 	if check_package "php5-fpm"; then
@@ -46,6 +44,11 @@ if [ $UNATTENDED = 0 ]; then
 		manage-http-enable-ssl 1
 	else
 		manage-http-enable-ssl 0
+	fi
+
+	# Default Question
+	if question --default yes "Do you want to set this virtual host as the default host? (Y/n)"; then
+		manage-http-default-host
 	fi
 # Unattended Mode
 else

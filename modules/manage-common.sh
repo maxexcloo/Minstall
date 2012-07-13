@@ -1,6 +1,9 @@
 #!/bin/bash
 # Manage: Common Functions
 
+# Run Clean Common Module
+source $MODULEPATH/clean-common.sh
+
 #####################
 ## Check Functions ##
 #####################

@@ -5,8 +5,6 @@
 if ! check_package "nginx"; then
 	# Print Warning
 	warning "This module requires the nginx package to be installed, please install it and run this module again!"
-	# Shift Variables
-	shift
 	# Continue Loop
 	continue
 fi
@@ -51,7 +49,7 @@ if question --default no "Do you want to protect the default host (this will ove
 fi
 
 # Enable SSL Session Tweaks
-if question --default yes "Do you want to enable SSl session tweaks? (Y/n)" || [ $(read_var_module ssl) = 1 ]; then
+if question --default yes "Do you want to enable SSL session tweaks? (Y/n)" || [ $(read_var_module ssl) = 1 ]; then
 	subheader "Enabling SSL Session Tweaks..."
 	cp -r $MODULEPATH/$MODULE/nginx/nginx.d/ssl.conf /etc/nginx/nginx.d/
 # Disable SSL Session Tweaks

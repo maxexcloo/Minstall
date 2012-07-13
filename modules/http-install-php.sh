@@ -1,11 +1,11 @@
 #!/bin/bash
 # HTTP Install: PHP Application Server
 
-# Package List Update Question
-package_update_question
-
 # Common Functions
 source $MODULEPATH/http-install-common.sh
+
+# Package List Update Question
+package_update_question
 
 # Install Package
 subheader "Installing Package..."

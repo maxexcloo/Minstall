@@ -5,8 +5,6 @@
 if ! check_repository "dotdeb"; then
 	# Print Warning
 	warning "This module requires the DotDeb repository to be installed, please install it and run this module again!"
-	# Shift Variables
-	shift
 	# Continue Loop
 	continue
 fi

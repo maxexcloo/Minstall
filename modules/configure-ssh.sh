@@ -2,29 +2,32 @@
 # Configure: SSH Configuration
 
 # Disable Root SSH Login
-if question --default yes "Do you want to disable root SSH logins? (Y/n)" || [ $(read_var_module root_login) = 0 ]; then
-	subheader "Disabling Root SSH Login..."
-	# Disable Root SSH Login For Dropbear
-	if check_package "dropbear"; then
-		sed -i "s/DROPBEAR_EXTRA_ARGS="/DROPBEAR_EXTRA_ARGS="-w/g" /etc/default/dropbear
-		daemon_manage dropbear restart
-	fi
-	# Disable Root SSH Login For OpenSSH
-	if check_package "openssh-server"; then
-		sed -i "s/PermitRootLogin yes/PermitRootLogin no/g" /etc/ssh/sshd_config
-		daemon_manage ssh restart
-	fi
-# Enable Root SSH Login
-else
+if question --default no "Do you want to enable root SSH logins? (y/N)" || [ $(read_var_module root_login) = 1 ]; then
 	subheader "Enabling Root SSH Login..."
 	# Enable Root SSH Login For Dropbear
 	if check_package "dropbear"; then
-		sed -i "s/-w//g" /etc/default/dropbear
+		sed -i 's/-w //g' /etc/default/dropbear
+		sed -i 's/-w//g' /etc/default/dropbear
 		daemon_manage dropbear restart
 	fi
 	# Enable Root SSH Login For OpenSSH
 	if check_package "openssh-server"; then
 		sed -i "s/PermitRootLogin no/PermitRootLogin yes/g" /etc/ssh/sshd_config
+		daemon_manage ssh restart
+	fi
+# Enable Root SSH Login
+else
+	subheader "Disabling Root SSH Login..."
+	# Disable Root SSH Login For Dropbear
+	if check_package "dropbear"; then
+		sed -i 's/DROPBEAR_EXTRA_ARGS="-/DROPBEAR_EXTRA_ARGS="-w -/g' /etc/default/dropbear
+		sed -i 's/DROPBEAR_EXTRA_ARGS=""/DROPBEAR_EXTRA_ARGS="-w"/g' /etc/default/dropbear
+		sed -i 's/-w -w/-w/g' /etc/default/dropbear
+		daemon_manage dropbear restart
+	fi
+	# Disable Root SSH Login For OpenSSH
+	if check_package "openssh-server"; then
+		sed -i "s/PermitRootLogin yes/PermitRootLogin no/g" /etc/ssh/sshd_config
 		daemon_manage ssh restart
 	fi
 fi

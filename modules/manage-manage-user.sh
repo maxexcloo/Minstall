@@ -19,7 +19,7 @@ if [ $UNATTENDED = 0 ]; then
 	done
 
 	# Reset User Permissions Question
-	if question --default yes "Do you want to change the password for this user? (Y/n)"; then
+	if question --default no "Do you want to change the password for this user? (y/N)"; then
 		subheader "Setting Password..."
 		passwd $USER
 	fi
