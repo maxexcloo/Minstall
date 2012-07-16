@@ -36,15 +36,6 @@ openssl req -new -days 3650 -newkey rsa:2048 -nodes -x509 -subj "/C=/ST=/L=/O=/C
 chown -R www-data:www-data /etc/ssl/http
 chmod -R o= /etc/ssl/http
 
-# Check Package
-if check_package "php5-fpm"; then
-	subheader "Enabling PHP Configuration..."
-	sed -i "s/\o011#include \/etc\/nginx\/php.d/\o011include \/etc\/nginx\/php.d/g" /etc/nginx/hosts.d/www-data{.conf,-ssl*}
-	subheader "Restarting Daemons..."
-	daemon_manage nginx restart
-	daemon_manage php5-fpm restart
-fi
-
 # Restart Daemon
 subheader "Restarting Daemon..."
 daemon_manage nginx restart
