@@ -11,7 +11,7 @@ USER="main"
 # Virtual Host
 HOST="main.example.com"
 
-# Directory Under Virtual Host (Where phpMyAdmin Will Be Installed)
+# Directory Under Virtual Host Where Script Will Be Installed, Leave Empty For Installation Into Virtual Host Root
 DIRECTORY="phpmyadmin"
 
 # Download Link
@@ -38,11 +38,14 @@ shopt -s dotglob
 # Change Directory
 cd /home/$USER/http/hosts/$HOST
 
-# Make Script Directory
-mkdir $DIRECTORY
+# Check If Directory Variable Empty
+if [[ $DIRECTORY != "" ]]; then
+	# Make Script Directory
+	mkdir $DIRECTORY
 
-# Change Directory
-cd $DIRECTORY
+	# Change Directory
+	cd $DIRECTORY
+fi
 
 # Download Script
 wget -O script.tar.gz $LINK

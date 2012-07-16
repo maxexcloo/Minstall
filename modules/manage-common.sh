@@ -37,6 +37,7 @@ clean-cron() {
 	subheader "Cleaning User Cron Entry..."
 	echo "" > /tmp/cron
 	crontab -u $USER /tmp/cron
+	rm /tmp/cron
 }
 
 # HTTP Folder Setup

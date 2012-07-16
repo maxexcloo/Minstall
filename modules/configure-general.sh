@@ -40,6 +40,7 @@ if question --default yes "Do you want to change the system timezone? (Y/n)" || 
 		# Unattended Mode
 		else
 			# Set Timezone From File
+			cp /usr/share/zoneinfo/$(read_var_module timezone_option) /etc/localtime
 			echo $(read_var_module timezone_option) > /etc/timezone
 			dpkg-reconfigure -f noninteractive tzdata
 		fi

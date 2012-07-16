@@ -22,4 +22,5 @@ if question --default yes "Do you want to clean the root cron entry? (Y/n)" || [
 	subheader "Cleaning Root Cron Entry..."
 	echo "" > /tmp/cron
 	crontab -u root /tmp/cron
+	rm /tmp/cron
 fi

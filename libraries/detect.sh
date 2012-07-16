@@ -2,7 +2,7 @@
 # Functions For Detecting Current Distribution
 
 # Debian Detection
-grep "debian" /etc/issue -i -q
+grep -iq "debian" /etc/issue
 if [ $? = 0 ]; then
 	# Set Distribution To Debian
 	DISTRIBUTION=debian
