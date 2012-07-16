@@ -178,6 +178,7 @@ END
 
 	# Update PHP Configuration
 	subheader "Updating PHP Configuration..."
+	rm /etc/nginx/php.d/www-data.conf > /dev/null 2>&1
 	cat > /etc/nginx/php.d/$USER.conf <<END
 location ~ \.php\$ {
 	fastcgi_param SCRIPT_FILENAME \$document_root\$fastcgi_script_name;
@@ -193,6 +194,7 @@ END
 
 	# Update PHP Configuration (Pool)
 	subheader "Updating PHP Configuration (Pool)..."
+	rm /etc/php5/fpm/pool.d/www-data.conf > /dev/null 2>&1
 	cat > /etc/php5/fpm/pool.d/$USER.conf <<END
 [$USER]
 listen = /home/$USER/http/private/php.socket
