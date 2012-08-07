@@ -13,14 +13,14 @@ if question --default yes "Do you want to clean default user files (/etc/skel)? 
 	cp -a -R $MODULEPATH/$MODULE/skel/.??* ~
 	# Update Skel Dotfiles
 	cp -a -R $MODULEPATH/$MODULE/skel/.??* /etc/skel
-	# Append Umask
-	echo -e "\numask o=" >> /etc/skel/.bashrc
+	# Clearing Root Mask
+	sed -i "s/^umask o=/#umask o=/g" ~/.bashrc
 fi
 
 # Clean Root Cron Entry
 if question --default yes "Do you want to clean the root cron entry? (Y/n)" || [ $(read_var_module clean_root_cron) = 1 ]; then
 	subheader "Cleaning Root Cron Entry..."
-	echo "" > /tmp/cron
+	echo -n "" > /tmp/cron
 	crontab -u root /tmp/cron
 	rm /tmp/cron
 fi

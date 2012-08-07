@@ -9,13 +9,13 @@
 USER="main"
 
 # Virtual Host
-HOST="main.example.com"
+HOST="host.example.com"
 
 # Directory Under Virtual Host Where Script Will Be Installed, Leave Empty For Installation Into Virtual Host Root
-DIRECTORY="phpmyadmin"
+DIRECTORY="mysql"
 
 # Download Link
-LINK="http://sourceforge.net/projects/phpmyadmin/files/phpMyAdmin/3.5.2/phpMyAdmin-3.5.2-english.tar.gz/download"
+LINK="http://www.sourceforge.net/projects/phpmyadmin/files/phpMyAdmin/3.5.2.1/phpMyAdmin-3.5.2.1-english.tar.gz/download"
 
 ###############
 ## Functions ##
@@ -24,7 +24,7 @@ LINK="http://sourceforge.net/projects/phpmyadmin/files/phpMyAdmin/3.5.2/phpMyAdm
 # Random String Generator
 function rand() {
 	[ "$2" == "0" ] && CHAR="[:alnum:]" || CHAR="[:graph:]"
-	cat /dev/urandom | tr -cd "$CHAR" | head -c ${1:-32}
+	cat /dev/urandom | tr -cd "$CHAR" | head -c ${1:-48}
 	echo
 }
 
@@ -62,7 +62,7 @@ rm -rf phpMyAdmin-* script.tar.gz
 # Update Config
 cat > config.inc.php <<END
 <?php
-\$cfg['blowfish_secret'] = '$(rand)';
+\$cfg['blowfish_secret'] = '$(rand 40 0)';
 
 \$i = 0;
 \$i++;
@@ -81,7 +81,7 @@ cat > config.inc.php <<END
 END
 
 # Clean Useless Files
-rm -rf examples setup ChangeLog config.sample.inc.php LICENSE README README.VENDOR RELEASE-DATE-3.5.2
+rm -rf examples setup ChangeLog config.sample.inc.php LICENSE README README.VENDOR RELEASE-DATE-*
 
 # Update Permissions
 chmod -R o= /home/$USER/http/hosts/$HOST/$DIRECTORY

@@ -35,7 +35,7 @@ manage-check-user() {
 # Clean Cron Entry
 clean-cron() {
 	subheader "Cleaning User Cron Entry..."
-	echo "" > /tmp/cron
+	echo -n "" > /tmp/cron
 	crontab -u $USER /tmp/cron
 	rm /tmp/cron
 }

@@ -146,7 +146,7 @@ server {
 	ssl_certificate /etc/ssl/http/self.pem;
 	ssl_certificate_key /etc/ssl/http/self.key;
 
-	rewrite ^/(.*) http://$HOST/\$1 permanent;
+	rewrite ^/(.*) https://$HOST/\$1 permanent;
 }
 END
 		echo "" >> /etc/nginx/hosts.d/$USER-$HOST_DIR-ssl.conf
