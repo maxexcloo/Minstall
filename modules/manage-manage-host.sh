@@ -41,7 +41,7 @@ if [ $UNATTENDED = 0 ]; then
 	fi
 
 	# Default Question
-	if question --default yes "Do you want to set this virtual host as the default host? (Y/n)"; then
+	if question --default no "Do you want to set this virtual host as the default host? (y/N)"; then
 		manage-http-default-host
 	fi
 # Unattended Mode
