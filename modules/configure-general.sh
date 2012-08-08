@@ -53,8 +53,7 @@ if question --default yes "Do you want to disable BASH history? (Y/n)" || [ $(re
 	# Check Distribution
 	if [ $DISTRIBUTION = "debian" ]; then
 		# Check If Unset Exists
-		grep -qs "unset HISTFILE" /etc/profile
-		if [ $? = 0 ]; then
+		if grep -q "unset HISTFILE" /etc/profile; then
 			# Disable History
 			sed -i 's/#unset HISTFILE/unset HISTFILE/g' /etc/profile
 		else
@@ -68,8 +67,7 @@ else
 	# Check Distribution
 	if [ $DISTRIBUTION = "debian" ]; then
 		# Check If Comment Exists
-		grep -qs "#unset HISTFILE" /etc/profile
-		if [ $? = 1 ]; then
+		if grep -q "#unset HISTFILE" /etc/profile; then
 			# Enable History
 			sed -i 's/unset HISTFILE/#unset HISTFILE/g' /etc/profile
 		fi
