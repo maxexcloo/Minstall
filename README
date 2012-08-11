@@ -23,7 +23,7 @@ Platforms:
 
 >> SAMPLE COMMANDS <<
 > Download <
-cd ~; rm -rf *Minstall* mini.tgz; wget --no-check-certificate -O mini.tgz http://www.github.com/downloads/maxexcloo/Minstall/Latest.zip; tar zxvf mini.tgz; cd *Minstall*
+cd ~; rm -rf *Minstall* mini.tgz; wget --no-check-certificate -O mini.tgz http://www.github.com/downloads/maxexcloo/Minstall/Latest.tar.gz; tar zxvf mini.tgz; cd *Minstall*
 cd ~; rm -rf *Minstall* mini.tgz
 
 > Install <
