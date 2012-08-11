@@ -7,8 +7,9 @@ if question --default yes "Do you want to clean default user files (/etc/skel)? 
 	# Remove Home Dotfiles
 	rm -rf ~/.??* > /dev/null 2>&1
 	# Remove Skel Dotfiles
-	rm -rf /etc/skel/* > /dev/null 2>&1
 	rm -rf /etc/skel/.??* > /dev/null 2>&1
+	# Remove Skel Files
+	rm -rf /etc/skel/* > /dev/null 2>&1
 	# Update Home Dotfiles
 	cp -a -R $MODULEPATH/$MODULE/skel/.??* ~
 	# Update Skel Dotfiles

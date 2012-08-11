@@ -21,9 +21,9 @@ for file in $LIBRARYPATH/*.sh; do
 done
 
 # Check Distribution
-if [ $DISTRIBUTION = 'none' ]; then
+if [ $DISTRIBUTION = "none" ]; then
 	# Error Message
-	error "Your distribution is unsupported! If you are sure that your distribution is supported be sure to install lsb_release as it will improve detection."
+	error "Your distribution is unsupported! If you are sure that your distribution is supported install the lsb_release package as it will improve detection."
 	# Exit If Not Supported
 	exit
 fi
@@ -132,9 +132,6 @@ if [ $UNATTENDED = 0 ]; then
 					read -p "Press any key to continue..."
 				fi
 			done
-
-			# Check Package Clean Requirement
-			package_clean_question 1
 		;;
 	esac
 fi
@@ -180,10 +177,4 @@ if [ $UNATTENDED = 1 ]; then
 			read -p "Press any key to continue..."
 		fi
 	done
-
-	# Unset Array
-	unset MODULELIST
-
-	# Check Package Clean Requirement
-	package_clean_question 1
 fi

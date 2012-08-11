@@ -1,5 +1,5 @@
 #!/bin/bash
-# Functions For Handling Daemon Management In Debian Linux
+# Functions For Handling Daemon Management In Ubuntu Linux
 
 # Add Daemon
 function daemon_add() {
@@ -24,7 +24,7 @@ function daemon_disable() {
 # Manage Daemon
 function daemon_manage() {
 	if [ -e /etc/init.d/$1 ]; then
-		invoke-rc.d $1 $2
+		service $1 $2
 	else
 		warning "Daemon Not Found, Skipping..."
 	fi

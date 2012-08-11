@@ -17,7 +17,7 @@ rm -rf /etc/nginx/sites-* > /dev/null 2>&1
 
 # Copy Configuration
 subheader "Copying Configuration..."
-cp -r $MODULEPATH/$MODULE/* /etc/
+cp -r $MODULEPATH/$MODULE/nginx/* /etc/nginx/
 
 # Move System Configuration
 subheader "Moving System Configuration..."

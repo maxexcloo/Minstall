@@ -38,7 +38,7 @@ daemon_manage mysql stop
 
 # Copy Configuration
 subheader "Copying Configuration..."
-cp -r $MODULEPATH/$MODULE/* /etc/
+cp -r $MODULEPATH/$MODULE/mysql/* /etc/mysql/
 
 # Start Daemon
 subheader "Starting Daemon..."

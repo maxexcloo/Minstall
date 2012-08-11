@@ -25,7 +25,7 @@ package_install dropbear
 
 # Copy Configuration
 subheader "Copying Configuration..."
-cp -r $MODULEPATH/$MODULE/* /etc/
+cp -r $MODULEPATH/$MODULE/default/* /etc/default/
 
 # Install OpenSSH SFTP Support
 subheader "Installing OpenSSH SFTP Support..."

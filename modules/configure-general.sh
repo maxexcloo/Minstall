@@ -5,7 +5,7 @@
 if question --default yes "Do you want to change the default system shell? (Y/n)" || [ $(read_var_module shell) = 1 ]; then
 	subheader "Changing Default System Shell..."
 	# Check Distribution
-	if [ $DISTRIBUTION = "debian" ]; then
+	if [ $DISTRIBUTION = "debian" ] || [ $DISTRIBUTION = "ubuntu" ]; then
 		# Attended Mode
 		if [ $UNATTENDED = 0 ]; then
 			dpkg-reconfigure dash
@@ -32,7 +32,7 @@ fi
 if question --default yes "Do you want to change the system timezone? (Y/n)" || [ $(read_var_module timezone) = 1 ]; then
 	subheader "Changing System Timezone..."
 	# Check Distribution
-	if [ $DISTRIBUTION = "debian" ]; then
+	if [ $DISTRIBUTION = "debian" ] || [ $DISTRIBUTION = "ubuntu" ]; then
 		# Attended Mode
 		if [ $UNATTENDED = 0 ]; then
 			# Set Timezone Manually
@@ -50,28 +50,11 @@ fi
 # Disable BASH History
 if question --default yes "Do you want to disable BASH history? (Y/n)" || [ $(read_var_module bash_history) = 1 ]; then
 	subheader "Disabling BASH History..."
-	# Check Distribution
-	if [ $DISTRIBUTION = "debian" ]; then
-		# Check If Unset Exists
-		if grep -q "unset HISTFILE" /etc/profile; then
-			# Disable History
-			sed -i 's/#unset HISTFILE/unset HISTFILE/g' /etc/profile
-		else
-			# Unset History
-			echo -e "\nunset HISTFILE" >> /etc/profile
-		fi
-	fi
+	echo "unset HISTFILE" > /etc/profile.d/disable_history.sh
 # Enable BASH History
 else
 	subheader "Enabling BASH History..."
-	# Check Distribution
-	if [ $DISTRIBUTION = "debian" ]; then
-		# Check If Comment Exists
-		if grep -q "#unset HISTFILE" /etc/profile; then
-			# Enable History
-			sed -i 's/unset HISTFILE/#unset HISTFILE/g' /etc/profile
-		fi
-	fi
+	rm /etc/profile.d/disable_history.sh
 fi
 
 # Disable Additional Getty Instances
@@ -80,5 +63,14 @@ if question --default yes "Do you want to disable extra getty instances? (Y/n)" 
 	# Check Distribution
 	if [ $DISTRIBUTION = "debian" ]; then
 		sed -e "s/\(^[2-6].*getty.*\)/#\1/" -i /etc/inittab
+	elif [ $DISTRIBUTION = "ubuntu" ]; then
+		rename "s/\.conf$/\.disabled/" /etc/init/tty{3..6}.*
+	fi
+# Enable Additional Getty Instances
+else
+	subheader "Enabling Additional Getty Instances..."
+	# Check Distribution
+	if [ $DISTRIBUTION = "ubuntu" ]; then
+		rename "s/\.disabled$/\.conf/" /etc/init/tty{3..6}.*
 	fi
 fi
