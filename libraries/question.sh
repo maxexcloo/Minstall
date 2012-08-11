@@ -46,7 +46,9 @@ function question() {
 		if [[ $timeout -ne 0 && ! "$default" ]]; then
 			error "Non-Zero Timeout Requires A Default Answer"
 		fi
-		if [[ ! "$*" ]]; then error "Missing Question"; fi
+		if [[ ! "$*" ]]; then
+			error "Missing Question"
+		fi
 		while [[ $ok -eq 0 ]]; do
 			if [[ $timeout -ne 0 ]]; then
 				if ! read -t $timeout -p "$* " ans; then

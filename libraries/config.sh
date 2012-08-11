@@ -13,7 +13,7 @@ read_var() {
 	fi
 }
 
-# INI Variable Tester
+# INI Variable Tester (Module)
 read_var_module() {
 	# If Unattended Mode, Check Variables
 	if [ $UNATTENDED = 1 ]; then
