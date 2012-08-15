@@ -11,9 +11,9 @@ if question --default yes "Do you want to clean default user files (/etc/skel)? 
 	# Remove Skel Files
 	rm -rf /etc/skel/* > /dev/null 2>&1
 	# Update Home Dotfiles
-	cp -a -R $MODULEPATH/$MODULE/skel/.??* ~
+	cp -a -R $MODULEPATH/$MODULE/$DISTRIBUTION/.??* ~
 	# Update Skel Dotfiles
-	cp -a -R $MODULEPATH/$MODULE/skel/.??* /etc/skel
+	cp -a -R $MODULEPATH/$MODULE/$DISTRIBUTION/.??* /etc/skel
 	# Clearing Root Mask
 	sed -i "s/^umask o=/#umask o=/g" ~/.bashrc
 fi
