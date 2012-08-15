@@ -3,10 +3,7 @@
 
 # Module Warning
 warning "This module will remove all non-essential packages on this system, you have been warned!"
-if question --default yes "Do you still want to run this module? (Y/n)" || [ $UNATTENDED = 1 ]; then
-	# Running Message
-	subheader "Running Module..."
-else
+if ! question --default yes "Do you still want to run this module? (Y/n)" || [ $UNATTENDED = 1 ]; then
 	# Skipped Message
 	subheader "Skipping Module..."
 	# Skip Module
@@ -62,14 +59,17 @@ else
 	fi
 fi
 
+# Copy Custom Package List
+cat $MODULEPATH/$MODULE/$DISTRIBUTION/custom >> $MODULEPATH/$MODULE/temp
+
 # Sort Package List
 sort -o $MODULEPATH/$MODULE/temp $MODULEPATH/$MODULE/temp
 
 # Clean Packages
 subheader "Cleaning Packages..."
 
-# Clean Packages (Debian)
-if [ $DISTRIBUTION = "debian" ]; then
+# Clean Packages (Debian/Ubuntu)
+if [ $DISTRIBUTION = "debian" ] || [ $DISTRIBUTION = "ubuntu" ]; then
 	# Clear DPKG Package Selections
 	dpkg --clear-selections
 	# Set Package Selections
@@ -95,4 +95,4 @@ package_clean
 package_clean_list
 
 # SSH Warning
-warning "All SSH Servers have been uninstalled! Be sure to install an SSH server again using the modules provided!"
+warning "All SSH Servers have been uninstalled! Be sure to install an SSH server again using the modules provided (install-dropbear or install-ssh)!"

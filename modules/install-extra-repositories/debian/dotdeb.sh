@@ -7,5 +7,5 @@ if question --default yes "Do you want to install the DotDeb repository? (Y/n)" 
 	# Add Repository Key
 	repo_key "http://www.dotdeb.org/dotdeb.gpg"
 	# Add Repository
-	repo_add "dotdeb" "deb http://packages.dotdeb.org squeeze all"
+	repo_add "dotdeb" "deb http://packages.dotdeb.org/ squeeze all"
 fi
