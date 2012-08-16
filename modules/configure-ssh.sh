@@ -1,8 +1,8 @@
 #!/bin/bash
 # Configure: SSH Configuration
 
-# Disable Root SSH Login
-if question --default no "Do you want to enable root SSH logins? (y/N)" || [ $(read_var_module root_login) = 1 ]; then
+# Enable Root SSH Login
+if question --default yes "Do you want to enable root SSH logins? (Y/n)" || [ $(read_var_module root_login) = 1 ]; then
 	subheader "Enabling Root SSH Login..."
 	# Enable Root SSH Login For Dropbear
 	if check_package "dropbear"; then
@@ -15,7 +15,7 @@ if question --default no "Do you want to enable root SSH logins? (y/N)" || [ $(r
 		sed -i "s/PermitRootLogin no/PermitRootLogin yes/g" /etc/ssh/sshd_config
 		daemon_manage ssh restart
 	fi
-# Enable Root SSH Login
+# Disable Root SSH Login
 else
 	subheader "Disabling Root SSH Login..."
 	# Disable Root SSH Login For Dropbear
@@ -33,7 +33,7 @@ else
 fi
 
 # Enable SFTP Umask Privacy
-if question --default yes "Do you want to enable more private SFTP Umask Settings? (Y/n)" || [ $(read_var_module private_umask) = 1 ]; then
+if question --default yes "Do you want to enable private SFTP Umask settings (umask 0007)? (Y/n)" || [ $(read_var_module sftp_umask) = 1 ]; then
 	subheader "Enabling SFTP Umask Privacy..."
 	if check_package "openssh-server"; then
 		sed -i "s/sftp-serve.*/sftp-server -u 0007/g" /etc/ssh/sshd_config

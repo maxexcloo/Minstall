@@ -1,5 +1,5 @@
 #!/bin/bash
-# Manage: Common Functions
+# Manage: Common Functions (Called Automatically, Do Not Run Normally!)
 
 # Run Clean Common Module
 source $MODULEPATH/clean-common.sh

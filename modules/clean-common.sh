@@ -1,5 +1,5 @@
 #!/bin/bash
-# Clean: Common
+# Clean: Common (Called Automatically, Do Not Run Normally!)
 
 # Check Package
 if check_package "nginx"; then

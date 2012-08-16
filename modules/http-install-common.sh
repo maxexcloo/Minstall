@@ -1,5 +1,5 @@
 #!/bin/bash
-# HTTP Install: Common Functions
+# HTTP Install: Common Functions (Called Automatically, Do Not Run Normally!)
 
 # Debian Specific Tests
 if [ $DISTRIBUTION = "debian" ]; then

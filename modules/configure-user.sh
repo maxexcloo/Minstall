@@ -1,8 +1,8 @@
 #!/bin/bash
 # Configure: User Files/Settings
 
-# Clean Default User Files/Directories
-if question --default yes "Do you want to clean default user files (/etc/skel)? (Y/n)" || [ $(read_var_module clean_skel) = 1 ]; then
+# Clean & Update Default User Files
+if question --default yes "Do you want to clean and update default user files (/etc/skel)? (Y/n)" || [ $(read_var_module clean_default_user) = 1 ]; then
 	subheader "Cleaning Default User Files..."
 	# Remove Home Dotfiles
 	rm -rf ~/.??* > /dev/null 2>&1
@@ -18,9 +18,9 @@ if question --default yes "Do you want to clean default user files (/etc/skel)? 
 	sed -i "s/^umask o=/#umask o=/g" ~/.bashrc
 fi
 
-# Clean Root Cron Entry
-if question --default yes "Do you want to clean the root cron entry? (Y/n)" || [ $(read_var_module clean_root_cron) = 1 ]; then
-	subheader "Cleaning Root Cron Entry..."
+# Clean & Wipe Root Crontab
+if question --default yes "Do you want to clean and wipe the root crontab? (Y/n)" || [ $(read_var_module clean_root_cron) = 1 ]; then
+	subheader "Cleaning Root Crontab..."
 	echo -n "" > /tmp/cron
 	crontab -u root /tmp/cron
 	rm /tmp/cron
