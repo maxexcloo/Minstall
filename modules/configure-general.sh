@@ -12,7 +12,7 @@ else
 fi
 
 # Enable Additional Getty Instances
-if question --default no "Do you want to enable extra getty instances? (y/N)" || [ $(read_var_module getty_extra) = 1 ]; then
+if question --default no "Do you want to enable extra getty instances (uneeded on virtual machines, can save memory if disabled)? (y/N)" || [ $(read_var_module getty_extra) = 1 ]; then
 	subheader "Enabling Additional Getty Instances..."
 	# Check Distribution
 	if [ $DISTRIBUTION = "debian" ]; then

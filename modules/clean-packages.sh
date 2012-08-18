@@ -3,7 +3,7 @@
 
 # Module Warning
 warning "This module will remove all non-essential packages on this system, you have been warned!"
-if ! question --default yes "Do you still want to run this module? (Y/n)" || [ $UNATTENDED = 1 ]; then
+if ! question --default yes "Do you still want to run this module and purge all non-essential packages? (Y/n)" || [ $UNATTENDED = 1 ]; then
 	# Skipped Message
 	subheader "Skipping Module..."
 	# Skip Module
@@ -70,17 +70,23 @@ subheader "Cleaning Packages..."
 
 # Clean Packages (Debian/Ubuntu)
 if [ $DISTRIBUTION = "debian" ] || [ $DISTRIBUTION = "ubuntu" ]; then
-	# Clear DPKG Package Selections
-	dpkg --clear-selections
-	# Set Package Selections
-	dpkg --set-selections < $MODULEPATH/$MODULE/temp
-	# Get Selections & Set To Purge
-	dpkg --get-selections | sed -e "s/deinstall/purge/" > $MODULEPATH/$MODULE/temp
-	# Set Package Selections
-	dpkg --set-selections < $MODULEPATH/$MODULE/temp
-	# Update DPKG
-	DEBIAN_FRONTEND=noninteractive apt-get -q -y dselect-upgrade
+	# Execute Twice To Ensure Packages Are Fully Cleaned
+	for (( i = 1; i <= 2; i++ )); do
+		# Clear DPKG Package Selections
+		dpkg --clear-selections
+		# Set Package Selections
+		dpkg --set-selections < $MODULEPATH/$MODULE/temp
+		# Get Selections & Set To Purge
+		dpkg --get-selections | sed -e "s/deinstall/purge/" > $MODULEPATH/$MODULE/temp
+		# Set Package Selections
+		dpkg --set-selections < $MODULEPATH/$MODULE/temp
+		# Update DPKG
+		DEBIAN_FRONTEND=noninteractive apt-get -q -y dselect-upgrade
+	done
 fi
+
+# Run Post Install Commands
+source $MODULEPATH/$MODULE/$DISTRIBUTION/post.sh
 
 # Remove Temporary Package List
 rm $MODULEPATH/$MODULE/temp

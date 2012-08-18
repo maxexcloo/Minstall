@@ -2,7 +2,7 @@
 # Configure: User Files/Settings
 
 # Clean & Update Default User Files
-if question --default yes "Do you want to clean and update default user files (/etc/skel)? (Y/n)" || [ $(read_var_module clean_default_user) = 1 ]; then
+if question --default yes "Do you want to clean and update default user files (in /etc/skel)? (Y/n)" || [ $(read_var_module clean_default_user) = 1 ]; then
 	subheader "Cleaning Default User Files..."
 	# Remove Home Dotfiles
 	rm -rf ~/.??* > /dev/null 2>&1

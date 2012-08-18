@@ -57,7 +57,6 @@ libslang2 install
 libss2 install
 libssl0.9.8 install
 libstdc++6 install
-libudev0 install
 libusb-0.1-4 install
 libuuid1 install
 login install
@@ -82,7 +81,6 @@ sysvinit-utils install
 tar install
 traceroute install
 tzdata install
-udev install
 util-linux install
 wget install
 whiptail install

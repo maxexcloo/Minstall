@@ -1,5 +1,5 @@
 #!/bin/bash
-# Manage: Common HTTP Functions (Called Automatically, Do Not Run Normally!)
+# Manage: Common HTTP Functions (Called Automatically, Do Not Run Manually!)
 
 # Check Package
 if ! check_package "nginx"; then

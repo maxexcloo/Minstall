@@ -4,20 +4,16 @@
 # Common Functions
 source $MODULEPATH/http-install-common.sh
 
-# Package List Update Question
-package_update_question
-
 # Check Package
 if ! check_package "php5-fpm"; then
-	# Module Warning
-	warning "Many of these packages require PHP, installing them may break your install if you plan on installing PHP later with the modules provided, please only proceed if PHP is already installed!"
-	if ! question --default yes "Do you still want to run this module? (Y/n)" || [ $UNATTENDED = 1 ]; then
-		# Skipped Message
-		subheader "Skipping Module..."
-		# Continue Loop
-		continue
-	fi
+	# Print Warning
+	warning "This module requires the php5-fpm package to be installed, please install it using the http-install-php module and try again!"
+	# Continue Loop
+	continue
 fi
+
+# Package List Update Question
+package_update_question
 
 # Install Packages
 subheader "Installing Extra Packages..."
