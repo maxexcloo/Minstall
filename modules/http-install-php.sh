@@ -11,6 +11,12 @@ package_update_question
 subheader "Installing Package..."
 package_install php5-fpm
 
+# Ubuntu PHP Suhosin Install
+if [ $DISTRIBUTION = "ubuntu" ]; then
+	subheader "Installing PHP Suhosin Extension..."
+	package_install php5-suhosin
+fi
+
 # Check MySQL
 if check_package "mysql-server"; then
 	subheader "Installing PHP MySQL Package..."
@@ -20,12 +26,7 @@ fi
 # Copy Configuration
 subheader "Copying Configuration..."
 rm /etc/php5/fpm/pool.d/www.conf
-cp -r $MODULEPATH/$MODULE/php5/fpm/* /etc/php5/fpm/
-
-# Check PHP Suhosin
-if check_package "php5-suhosin"; then
-	cp -r $MODULEPATH/$MODULE/php5/conf.d/suhosin.ini /etc/php5/conf.d/
-fi
+cp -r $MODULEPATH/$MODULE/php5/* /etc/php5/
 
 # Restart Daemon
 subheader "Restarting Daemon..."
