@@ -1,5 +1,5 @@
 #!/bin/bash
-# HTTP Install: Extra Packages
+# HTTP Install: Extra PHP Packages
 
 # Common Functions
 source $MODULEPATH/http-install-common.sh
@@ -16,7 +16,7 @@ fi
 package_update_question
 
 # Install Packages
-subheader "Installing Extra Packages..."
+subheader "Installing Extra PHP Packages..."
 
 # Define Packages
 PACKAGELIST=$(read_var_module_var packages_$DISTRIBUTION),
