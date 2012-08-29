@@ -13,11 +13,9 @@ if question --default yes "Do you want to optimise the default repositories? War
 		MIRROR=$(read_var_module_var mirror_ubuntu)
 	fi
 	# Update Precise Repository
-	echo "deb $MIRROR precise main restricted universe" > /etc/apt/sources.list
+	echo "deb $MIRROR precise main restricted universe multiverse" > /etc/apt/sources.list
 	# Update Precise Updates Repository
-	echo "deb $MIRROR precise-updates main restricted universe" >> /etc/apt/sources.list
+	echo "deb $MIRROR precise-updates main restricted universe multiverse" >> /etc/apt/sources.list
 	# Update Precise Security Repository
 	echo "deb $MIRROR precise-security main restricted universe multiverse" >> /etc/apt/sources.list
-	# Update Precise Partner Repository
-	echo "deb $MIRROR precise partner" >> /etc/apt/sources.list
 fi
