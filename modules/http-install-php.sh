@@ -20,7 +20,12 @@ fi
 # Copy Configuration
 subheader "Copying Configuration..."
 rm /etc/php5/fpm/pool.d/www.conf
-cp -r $MODULEPATH/$MODULE/php5/* /etc/php5/
+cp -r $MODULEPATH/$MODULE/php5/fpm/* /etc/php5/fpm/
+
+# Check PHP Suhosin
+if check_package "php5-suhosin"; then
+	cp -r $MODULEPATH/$MODULE/php5/conf.d/suhosin.ini /etc/php5/conf.d/
+fi
 
 # Restart Daemon
 subheader "Restarting Daemon..."
