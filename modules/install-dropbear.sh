@@ -30,6 +30,7 @@ source $MODULEPATH/install-ssh.sh
 
 # Remove OpenSSH Daemon
 subheader "Removing OpenSSH Daemon..."
+daemon_manage ssh stop
 daemon_remove ssh
 
 # Restart Daemon
