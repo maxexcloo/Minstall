@@ -81,7 +81,7 @@ if [ $DISTRIBUTION = "debian" ] || [ $DISTRIBUTION = "ubuntu" ]; then
 		# Set Package Selections
 		dpkg --set-selections < $MODULEPATH/$MODULE/temp
 		# Update DPKG
-		DEBIAN_FRONTEND=noninteractive apt-get -q -y dselect-upgrade
+		DEBIAN_FRONTEND=noninteractive apt-get -q -y dselect-upgrade 2>&1 | tee -a $MODULEPATH/$MODULE/log
 	done
 fi
 
@@ -89,7 +89,7 @@ fi
 source $MODULEPATH/$MODULE/$DISTRIBUTION/post.sh
 
 # Remove Temporary Package List
-rm $MODULEPATH/$MODULE/temp
+rm $MODULEPATH/$MODULE/log $MODULEPATH/$MODULE/temp
 
 # Upgrade Any Outdated Packages
 package_upgrade
