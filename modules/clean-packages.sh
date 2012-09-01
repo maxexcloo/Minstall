@@ -17,7 +17,7 @@ package_update
 # Create Package List
 subheader "Creating Package List..."
 
-# Copy Base List
+# Copy Base Package List
 cp $MODULEPATH/$MODULE/$DISTRIBUTION/base $MODULEPATH/$MODULE/temp
 
 # Detect OpenVZ

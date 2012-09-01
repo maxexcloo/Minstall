@@ -25,7 +25,9 @@ grep install
 gzip install
 hostname install
 ifupdown install
+inetutils-ping install
 inetutils-syslogd install
+inetutils-traceroute install
 initramfs-tools install
 initramfs-tools-bin install
 initscripts install
@@ -33,7 +35,6 @@ insserv install
 install-info install
 iproute install
 iptables install
-iputils-ping install
 klibc-utils install
 libacl1 install
 libapt-inst1.4 install
@@ -106,7 +107,6 @@ sensible-utils install
 sysv-rc install
 sysvinit-utils install
 tar install
-traceroute install
 tzdata install
 ubuntu-keyring install
 udev install
