@@ -85,6 +85,15 @@ if [ $DISTRIBUTION = "debian" ] || [ $DISTRIBUTION = "ubuntu" ]; then
 	done
 fi
 
+# Clean Files
+subheader "Cleaning Files..."
+
+# Clean Files (Debian/Ubuntu)
+if [ $DISTRIBUTION = "debian" ] || [ $DISTRIBUTION = "ubuntu" ]; then
+	# Remove Files Not Removed By Apt
+	rm -rf $(grep "not empty so not removed" $MODULEPATH/$MODULE/log | sed "s/[^']*'//;s/'[^']*$//")
+fi
+
 # Run Post Install Commands
 source $MODULEPATH/$MODULE/$DISTRIBUTION/post.sh
 
@@ -100,5 +109,6 @@ package_clean
 # Clean Package List
 package_clean_list
 
-# SSH Warning
+# Warnings
 warning "All SSH Servers have been uninstalled! Be sure to install an SSH server again using the modules provided (install-dropbear or install-ssh)!"
+warning "It's recommend that you reboot after installing an SSH server, this will ensure that no remnants of uninstalled packages are left running!"
