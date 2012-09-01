@@ -8,12 +8,10 @@ if question --default yes "Do you want to enable root SSH login? (Y/n)" || [ $(r
 	if check_package "dropbear"; then
 		sed -i 's/-w //g' /etc/default/dropbear
 		sed -i 's/-w//g' /etc/default/dropbear
-		daemon_manage dropbear restart
 	fi
 	# Enable Root SSH Login For OpenSSH
 	if check_package "openssh-server"; then
 		sed -i "s/PermitRootLogin no/PermitRootLogin yes/g" /etc/ssh/sshd_config
-		daemon_manage ssh restart
 	fi
 # Disable Root SSH Login
 else
@@ -23,12 +21,10 @@ else
 		sed -i 's/DROPBEAR_EXTRA_ARGS="-/DROPBEAR_EXTRA_ARGS="-w -/g' /etc/default/dropbear
 		sed -i 's/DROPBEAR_EXTRA_ARGS=""/DROPBEAR_EXTRA_ARGS="-w"/g' /etc/default/dropbear
 		sed -i 's/-w -w/-w/g' /etc/default/dropbear
-		daemon_manage dropbear restart
 	fi
 	# Disable Root SSH Login For OpenSSH
 	if check_package "openssh-server"; then
 		sed -i "s/PermitRootLogin yes/PermitRootLogin no/g" /etc/ssh/sshd_config
-		daemon_manage ssh restart
 	fi
 fi
 
@@ -37,13 +33,23 @@ if question --default yes "Do you want to enable private SFTP umask settings (um
 	subheader "Enabling SFTP Umask Privacy..."
 	if check_package "openssh-server"; then
 		sed -i "s/sftp-serve.*/sftp-server -u 0007/g" /etc/ssh/sshd_config
-		daemon_manage ssh restart
 	fi
 # Disable SFTP Umask Privacy
 else
 	subheader "Disabling SFTP Umask Privacy..."
 	if check_package "openssh-server"; then
 		sed -i "s/sftp-serve.*/sftp-server/g" /etc/ssh/sshd_config
-		daemon_manage ssh restart
 	fi
+fi
+
+# Check Dropbear
+if check_package "dropbear"; then
+	subheader "Restarting Daemon (Dropbear)..."
+	daemon_manage dropbear restart
+fi
+
+# Check SSH
+if check_package "openssh-server"; then
+	subheader "Restarting Daemon (SSH)..."
+	daemon_manage ssh restart
 fi
