@@ -36,8 +36,8 @@ libacl1 install
 libattr1 install
 libblkid1 install
 libbz2-1.0 install
-libc6 install
 libc-bin install
+libc6 install
 libcomerr2 install
 libdb4.8 install
 libgcc1 install
@@ -46,9 +46,9 @@ libncurses5 install
 libncursesw5 install
 libnewt0.52 install
 libnfnetlink0 install
-libpam0g install
 libpam-modules install
 libpam-runtime install
+libpam0g install
 libpopt0 install
 libreadline6 install
 libselinux1 install

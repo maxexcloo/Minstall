@@ -1,11 +1,11 @@
 crda install
 dmsetup install
 gettext-base install
-grub2-common install
 grub-common install
 grub-gfxpayload-lists install
 grub-pc install
 grub-pc-bin install
+grub2-common install
 isc-dhcp-client install
 isc-dhcp-common install
 libdevmapper1.02.1 install

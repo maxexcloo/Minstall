@@ -1,2 +1,2 @@
-linux-image-3.2.0-29-generic install
-linux-image-generic install
+linux-image-3.2.0-29-generic-pae install
+linux-image-generic-pae install
