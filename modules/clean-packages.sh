@@ -17,7 +17,7 @@ package_update
 # Create Package List
 subheader "Creating Package List..."
 
-# Copy Base Package List
+# Copy Base List
 cp $MODULEPATH/$MODULE/$DISTRIBUTION/base $MODULEPATH/$MODULE/temp
 
 # Detect OpenVZ
@@ -99,12 +99,14 @@ source $MODULEPATH/$MODULE/$DISTRIBUTION/post.sh
 # Remove Temporary Files
 rm $MODULEPATH/$MODULE/log $MODULEPATH/$MODULE/temp
 
-# Upgrade Any Outdated Packages
-package_upgrade
-
 # Clean Packages
 package_clean
 
-# Warnings
+# Clean Package List
+package_clean_list
+
+# SSH Warning
 warning "All SSH Servers have been uninstalled! Be sure to install an SSH server again using the modules provided (install-dropbear or install-ssh)!"
+
+# Reboot Warning
 warning "It's recommend that you reboot after installing an SSH server, this will ensure that no remnants of uninstalled packages are left running!"
