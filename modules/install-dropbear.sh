@@ -6,7 +6,7 @@ package_update_question
 
 # Module Warning
 warning "This package will install the Dropbear SSH Server. If you want the OpenSSH server (they are functionally identical) cancel and run its module instead."
-if question --default yes "Do you still want to run this module? (Y/n)" || [ $UNATTENDED = 1 ]; then
+if (! question --default yes "Do you still want to run this module? (Y/n)") || [ $UNATTENDED = 1 ]; then
 	# Skipped Message
 	subheader "Skipping Module..."
 	# Continue Loop

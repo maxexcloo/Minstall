@@ -3,7 +3,7 @@
 
 # Module Warning
 warning "This module will remove all non-essential packages on this system, you have been warned!"
-if question --default yes "Do you still want to run this module and purge all non-essential packages? (Y/n)" || [ $UNATTENDED = 1 ]; then
+if (! question --default yes "Do you still want to run this module and purge all non-essential packages? (Y/n)") || [ $UNATTENDED = 1 ]; then
 	# Skipped Message
 	subheader "Skipping Module..."
 	# Skip Module
