@@ -23,8 +23,8 @@ Platforms:
 
 >> SAMPLE COMMANDS <<
 > Download <
-cd ~; rm -rf mini mini.tgz; mkdir mini; cd mini; wget --no-check-certificate -O mini.tgz http://www.github.com/downloads/maxexcloo/Minstall/Latest.tar.gz; tar zxvf mini.tgz
-cd ~; rm -rf *Minstall* mini.tgz
+cd ~; rm -rf minstall minstall.tar.gz; mkdir minstall; cd minstall; wget --no-check-certificate -O minstall.tar.gz http://www.github.com/downloads/maxexcloo/Minstall/Latest.tar.gz; tar zxvf minstall.tgz
+cd ~; rm -rf minstall minstall.tar.gz
 
 > Install <
 bash minstall.sh install-extra-repositories

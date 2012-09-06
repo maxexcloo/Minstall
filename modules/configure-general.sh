@@ -4,7 +4,7 @@
 # Enable BASH History
 if question --default no "Do you want to enable BASH history? (y/N)" || [ $(read_var_module bash_history) = 1 ]; then
 	subheader "Enabling BASH History..."
-	rm /etc/profile.d/disable_history.sh
+	rm /etc/profile.d/disable_history.sh > /dev/null 2>&1
 # Disable BASH History
 else
 	subheader "Disabling BASH History..."
