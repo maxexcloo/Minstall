@@ -107,6 +107,3 @@ package_clean_list
 
 # SSH Warning
 warning "All SSH Servers have been uninstalled! Be sure to install an SSH server again using the modules provided (install-dropbear or install-ssh)!"
-
-# Reboot Warning
-warning "It's recommend that you reboot after installing an SSH server, this will ensure that no remnants of uninstalled packages are left running!"
