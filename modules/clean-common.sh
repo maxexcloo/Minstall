@@ -20,3 +20,8 @@ if check_package "php5-fpm"; then
 	cp -rf $MODULEPATH/http-install-php/php5/fpm/*.conf /etc/php5/fpm/ > /dev/null 2>&1
 	rm -rf /etc/php5/fpm/pool.d/www.conf > /dev/null 2>&1
 fi
+
+# Freeing up disk space if locales are not installed
+if ( [ $DISTRIBUTION = "debian" ] ) && ! check_package "locales"; then
+	rm -rf /usr/share/locale > /dev/null 2>&1
+fi
