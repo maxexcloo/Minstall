@@ -70,18 +70,21 @@ subheader "Cleaning Packages..."
 
 # Clean Packages (Debian/Ubuntu)
 if [ $DISTRIBUTION = "debian" ] || [ $DISTRIBUTION = "ubuntu" ]; then
-	# Clear DPKG Package Selections
-	dpkg --clear-selections
-	# Set Package Selections
-	dpkg --set-selections < $MODULEPATH/$MODULE/temp
-	# Get Selections & Set To Purge
-	dpkg --get-selections | sed -e "s/deinstall/purge/" > $MODULEPATH/$MODULE/temp
-	# Set Package Selections
-	dpkg --set-selections < $MODULEPATH/$MODULE/temp
-	# Update DPKG
-	DEBIAN_FRONTEND=noninteractive apt-get -q -y dselect-upgrade 2>&1 | tee -a $MODULEPATH/$MODULE/log
-	# Clean Package List
-	package_clean_list
+	# Loop To Ensure All Packages Are Cleaned
+	for i in {1..2}; do
+		# Clear DPKG Package Selections
+		dpkg --clear-selections
+		# Set Package Selections
+		dpkg --set-selections < $MODULEPATH/$MODULE/temp
+		# Get Selections & Set To Purge
+		dpkg --get-selections | sed -e "s/deinstall/purge/" > $MODULEPATH/$MODULE/temp-system
+		# Set Package Selections
+		dpkg --set-selections < $MODULEPATH/$MODULE/temp-system
+		# Update DPKG
+		DEBIAN_FRONTEND=noninteractive apt-get -q -y dselect-upgrade 2>&1 | tee -a $MODULEPATH/$MODULE/temp-log
+		# Clean Package List
+		package_clean_list
+	done
 fi
 
 # Clean Files
@@ -90,14 +93,14 @@ subheader "Cleaning Files..."
 # Clean Files (Debian/Ubuntu)
 if [ $DISTRIBUTION = "debian" ] || [ $DISTRIBUTION = "ubuntu" ]; then
 	# Remove Files Not Removed By Apt
-	rm -rf $(grep "not empty so not removed" $MODULEPATH/$MODULE/log | sed "s/[^']*'//;s/'[^']*$//")
+	rm -rf $(grep "not empty so not removed" $MODULEPATH/$MODULE/temp-log | sed "s/[^']*'//;s/'[^']*$//")
 fi
 
 # Run Post Install Commands
 source $MODULEPATH/$MODULE/$DISTRIBUTION/post.sh
 
 # Remove Temporary Files
-rm $MODULEPATH/$MODULE/log $MODULEPATH/$MODULE/temp
+rm $MODULEPATH/$MODULE/temp-log $MODULEPATH/$MODULE/temp $MODULEPATH/$MODULE/temp-system
 
 # Clean Packages
 package_clean
