@@ -71,7 +71,7 @@ subheader "Cleaning Packages..."
 # Clean Packages (Debian/Ubuntu)
 if [ $DISTRIBUTION = "debian" ] || [ $DISTRIBUTION = "ubuntu" ]; then
 	# Loop To Ensure All Packages Are Cleaned
-	for i in {1..2}; do
+	for i in {1..3}; do
 		# Clear DPKG Package Selections
 		dpkg --clear-selections
 		# Set Package Selections

@@ -10,16 +10,17 @@ Simply run the below download command then run "bash minstall.sh help" or "bash 
 Operating Systems:
  + Debian 6 (Squeeze) i686
  + Debian 6 (Squeeze) x86_64
- + Ubuntu 12.04 (Precise Pangolin) i686 (Incomplete!)
- + Ubuntu 12.04 (Precise Pangolin) x86_64 (Incomplete!)
+ + Ubuntu 12.04 (Precise Pangolin) i686
+ + Ubuntu 12.04 (Precise Pangolin) x86_64
 Platforms:
  + KVM
  + OpenVZ
  + Physical Hardware
  + Virtualbox
  + VMware
- + vServer
- + Xen
+ + vServer (Debian Only)
+ + Xen HVM
+ + Xen PV
 
 >> SAMPLE COMMANDS <<
 > Download <
