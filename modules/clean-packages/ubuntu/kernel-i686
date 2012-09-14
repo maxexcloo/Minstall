@@ -1,4 +1,2 @@
-linux-generic-pae install
 linux-image-3.2.0-30-generic-pae install
 linux-image-generic-pae install
-linux-server install
