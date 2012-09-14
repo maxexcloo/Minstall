@@ -200,8 +200,8 @@ END
 listen = /home/$USER/http/private/php.socket
 user = $USER
 group = $USER
-pm = dynamic
-pm.start_servers = 1
+pm = ondemand
+pm.start_servers = 0
 pm.max_children = 4
 pm.min_spare_servers = 1
 pm.max_spare_servers = 2
