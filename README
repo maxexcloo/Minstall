@@ -20,7 +20,7 @@ Platforms:
  + VMware
  + vServer (Debian Only)
  + Xen HVM
- + Xen PV
+ + Xen PV (Unsupported)
 
 >> SAMPLE COMMANDS <<
 > Download <
