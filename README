@@ -24,7 +24,7 @@ Platforms:
 
 >> SAMPLE COMMANDS <<
 > Download <
-cd ~; rm -rf minstall minstall.tar.gz; mkdir minstall; cd minstall; wget --no-check-certificate -O minstall.tar.gz http://www.github.com/downloads/maxexcloo/Minstall/Latest.tar.gz; tar zxvf minstall.tgz
+cd ~; rm -rf minstall minstall.tar.gz; mkdir minstall; cd minstall; wget --no-check-certificate -O minstall.tar.gz http://www.github.com/downloads/KnightSwarm/Minstall/Latest.tar.gz; tar zxvf minstall.tgz
 cd ~; rm -rf minstall minstall.tar.gz
 
 > Install <
