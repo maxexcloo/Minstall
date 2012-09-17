@@ -96,6 +96,11 @@ if [ $DISTRIBUTION = "debian" ] || [ $DISTRIBUTION = "ubuntu" ]; then
 	rm -rf $(grep "not empty so not removed" $MODULEPATH/$MODULE/temp-log | sed "s/[^']*'//;s/'[^']*$//")
 fi
 
+# Freeing up disk space if locales are not installed
+if ( [ $DISTRIBUTION = "debian" ] ) && ! check_package "locales"; then
+	rm -rf /usr/share/locale > /dev/null 2>&1
+fi
+
 # Run Post Install Commands
 source $MODULEPATH/$MODULE/$DISTRIBUTION/post.sh
 
