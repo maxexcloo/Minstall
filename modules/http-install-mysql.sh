@@ -22,8 +22,30 @@ if [ $UNATTENDED = 0 ]; then
 else
 	# Install Package
 	DEBIAN_FRONTEND=noninteractive package_install mysql-server
+
+	# Stop Daemon
+	daemon_manage mysql stop
+
+	# Create Set Password Script
+	cat > /var/lib/mysql/mysql-init <<END
+UPDATE mysql.user SET Password=PASSWORD(\'$(read_var_module root_password)\') WHERE User='root';
+FLUSH PRIVILEGES;
+END
+
 	# Set Password
-	mysqladmin -u root password $(read_var_module root_password)
+	mysqld_safe --init-file=/var/lib/mysql/mysql-init &
+
+	# Sleep
+	sleep 2
+
+	# Stop Daemon
+	killall mysqld
+
+	# Remove Set Password Script
+	rm /var/lib/mysql/mysql-init
+
+	# Start Daemon
+	daemon_manage mysql start
 fi
 
 # Check PHP
