@@ -16,7 +16,6 @@ fi
 # Check Package
 if check_package "php5-fpm"; then
 	# Update PHP Config
-	cp -rf $MODULEPATH/http-install-php/php5/conf.d/*.ini /etc/php5/fpm/conf.d/ > /dev/null 2>&1
 	cp -rf $MODULEPATH/http-install-php/php5/fpm/*.conf /etc/php5/fpm/ > /dev/null 2>&1
 	rm -rf /etc/php5/fpm/pool.d/www.conf > /dev/null 2>&1
 fi
