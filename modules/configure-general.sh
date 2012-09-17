@@ -18,7 +18,7 @@ if question --default no "Do you want to enable extra getty instances (uneeded o
 	if [ $DISTRIBUTION = "debian" ]; then
 		warning "This option is currently unsupported in Debian."
 	elif [ $DISTRIBUTION = "ubuntu" ]; then
-		rename.ul .conf.disabled .conf /etc/init/tty{3..6}.conf.disabled
+		rename.ul .conf.disabled .conf /etc/init/tty{3..6}.conf.disabled > /dev/null 2>&1
 	fi
 # Disable Additional Getty Instances
 else
@@ -27,7 +27,7 @@ else
 	if [ $DISTRIBUTION = "debian" ]; then
 		sed -e "s/\(^[2-6].*getty.*\)/#\1/" -i /etc/inittab
 	elif [ $DISTRIBUTION = "ubuntu" ]; then
-		rename.ul .conf .conf.disabled /etc/init/tty{3..6}.conf
+		rename.ul .conf .conf.disabled /etc/init/tty{3..6}.conf > /dev/null 2>&1
 	fi
 fi
 

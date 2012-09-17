@@ -11,12 +11,6 @@ package_update_question
 subheader "Installing Package..."
 package_install php5-fpm
 
-# Ubuntu PHP Suhosin Install
-if [ $DISTRIBUTION = "ubuntu" ]; then
-	subheader "Installing PHP Suhosin Extension..."
-	package_install php5-suhosin
-fi
-
 # Check MySQL
 if check_package "mysql-server"; then
 	subheader "Installing PHP MySQL Package..."
