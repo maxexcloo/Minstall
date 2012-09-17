@@ -22,18 +22,24 @@ if [ $UNATTENDED = 0 ]; then
 else
 	# Install Package
 	DEBIAN_FRONTEND=noninteractive package_install mysql-server
+fi
+
+# Unattended Mode
+if [ $UNATTENDED = 1 ]; then
+	# Set Password
+	subheader "Setting Password..."
 
 	# Stop Daemon
 	daemon_manage mysql stop
 
 	# Create Set Password Script
-	cat > /var/lib/mysql/mysql-init <<END
-UPDATE mysql.user SET Password=PASSWORD(\'$(read_var_module root_password)\') WHERE User='root';
+	cat > /tmp/mysql-init <<END
+UPDATE mysql.user SET Password=PASSWORD('$(read_var_module root_password)') WHERE User='root';
 FLUSH PRIVILEGES;
 END
 
 	# Set Password
-	mysqld_safe --init-file=/var/lib/mysql/mysql-init &
+	mysqld_safe --init-file=/tmp/mysql-init &
 
 	# Sleep
 	sleep 2
@@ -42,7 +48,7 @@ END
 	killall mysqld
 
 	# Remove Set Password Script
-	rm /var/lib/mysql/mysql-init
+	rm /tmp/mysql-init
 
 	# Start Daemon
 	daemon_manage mysql start
