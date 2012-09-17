@@ -177,8 +177,4 @@ if [ $UNATTENDED = 1 ]; then
 			read -p "Press any key to continue..."
 		fi
 	done
-	
-	warning "Unattended Minstall completed!"
-	warning "It is recommend that you restart your server now to ensure everything is functional (due to kernel updates and such) and to ensure that all changes are loaded."
 fi
-

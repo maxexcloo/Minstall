@@ -204,7 +204,6 @@ pm = ondemand
 pm.max_children = 4
 pm.max_requests = 500
 php_flag[expose_php] = off
-php_flag[short_open_tag] = on
 php_value[max_execution_time] = 120
 php_value[memory_limit] = 64M
 END
