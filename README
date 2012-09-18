@@ -1,20 +1,25 @@
+=====
 Notes
-======
+=====
+
 Run on a freshly installed server under root, may not work under an already setup server!
 No warranty. For help visit www.excloo.com and contact me using any method shown!
 
+============
 Instructions
-=============
+============
+
 This script contains several modules designed to help you set up your server how you want it.
 Simply run the below download command then run "bash minstall.sh help" or "bash minstall.sh modules" to see help or modules respectively.
 
-Updating packages
+Updating Packages
 -----------------
-Use `bash minstall.sh configure-upgrade` to upgrade your installed packages regularly.
+Use "bash minstall.sh configure-upgrade" to upgrade your installed packages regularly.
 
-
+=============
 Compatibility
 =============
+
 Operating Systems:
  + Debian 6 (Squeeze) i686
  + Debian 6 (Squeeze) x86_64
@@ -30,8 +35,10 @@ Platforms:
  + Xen HVM
  + Xen PV (Unsupported)
 
+===============
 Sample Commands
 ===============
+
 Download
 --------
 cd ~; rm -rf minstall minstall.tar.gz; mkdir minstall; cd minstall; wget --no-check-certificate -O minstall.tar.gz http://www.github.com/downloads/KnightSwarm/Minstall/Latest.tar.gz; tar zxvf minstall.tgz
