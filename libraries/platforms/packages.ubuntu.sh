@@ -44,3 +44,8 @@ function repo_add() {
 function repo_key() {
 	wget "$1" -qO - | apt-key add -
 }
+
+# Add Repository Key (From Server)
+function repo_key_server() {
+	apt-key adv --keyserver "$1" --recv-keys "$2"
+}

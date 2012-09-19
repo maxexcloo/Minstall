@@ -3,7 +3,7 @@
 
 # Ask If Repository Should Be Installed
 if question --default yes "Do you want to install the Medibuntu repository? (Y/n)" || [ $UNATTENDED = 1 ]; then
-	subheader "Installing The Medibuntu Repository..."
+	subheader "Installing Medibuntu Repository..."
 	# Add Repository
 	repo_add "medibuntu" "deb http://packages.medibuntu.org/ precise free non-free"
 	# Update Package Lists

@@ -3,7 +3,7 @@
 
 # Ask If Repository Should Be Installed
 if question --default yes "Do you want to install the Debian Multimedia repository? (Y/n)" || [ $UNATTENDED = 1 ]; then
-	subheader "Installing The Debian Multimedia Repository..."
+	subheader "Installing Debian Multimedia Repository..."
 	# Download Repository Key
 	wget -O $MODULEPATH/$MODULE/temp.deb "http://www.deb-multimedia.org/pool/main/d/deb-multimedia-keyring/deb-multimedia-keyring_2012.05.10-dmo3_all.deb"
 	# Install Repository Key
