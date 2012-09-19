@@ -15,7 +15,7 @@ HOST="host.example.com"
 DIRECTORY="mysql"
 
 # Download Link
-LINK="http://www.sourceforge.net/projects/phpmyadmin/files/phpMyAdmin/3.5.2.1/phpMyAdmin-3.5.2.1-english.tar.gz/download"
+LINK="http://www.sourceforge.net/projects/phpmyadmin/files/phpMyAdmin/3.5.2.2/phpMyAdmin-3.5.2.2-english.tar.gz/download"
 
 ###############
 ## Functions ##
