@@ -2,7 +2,7 @@ Notes
 =====
 
 Run on a freshly installed server under root, may not work under an already setup server!
-No warranty. For help visit www.excloo.com and contact me using any method shown!
+No warranty. For help visit #minstall on Freenode and ask your question (I'm busy with school so repsonse times may be slow...)
 
 Instructions
 ============
