@@ -8,8 +8,8 @@ if grep -iq "debian" /etc/issue; then
 fi
 
 # Debian Detection (LSB Release)
-if [ -f /etc/lsb-release ]; then
-	if grep -iq "debian" /etc/lsb-release; then
+if command -v lsb_release >/dev/null 2>&1; then
+	if lsb_release -a | grep -iq "debian"; then
 		# Set Distribution To Debian
 		DISTRIBUTION=debian
 	fi
@@ -22,8 +22,8 @@ if grep -iq "ubuntu" /etc/issue; then
 fi
 
 # Ubuntu Detection (LSB Release)
-if [ -f /etc/lsb-release ]; then
-	if grep -iq "ubuntu" /etc/lsb-release; then
+if command -v lsb_release >/dev/null 2>&1; then
+	if lsb_release -a | grep -iq "ubuntu"; then
 		# Set Distribution To Ubuntu
 		DISTRIBUTION=ubuntu
 	fi
