@@ -13,7 +13,7 @@ This script contains several modules designed to help you set up your server how
 
 To download Minstall to your home directory (it's recomended that you download and run as root) use the following command:
 
-`cd ~; rm -rf minstall minstall.tar.gz; mkdir minstall; cd minstall; wget --no-check-certificate -O minstall.tar.gz http://www.github.com/downloads/KnightSwarm/Minstall/Latest.tar.gz; tar zxvf minstall.tgz`
+`cd ~; rm -rf minstall; mkdir minstall; cd minstall; wget --no-check-certificate -O minstall.tar.gz http://www.github.com/downloads/KnightSwarm/Minstall/Latest.tar.gz; tar zxvf minstall.tar.gz; rm minstall.tar.gz`
 
 **Upgrading Packages**
 
@@ -25,7 +25,7 @@ To upgrade your installed packages regularly and retain Minstall system structur
 
 To remove the Minstall script run the following command under the same user you installed Minstall under:
 
-`cd ~; rm -rf minstall minstall.tar.gz`
+`cd ~; rm -rf minstall`
 
 Compatibility
 =============

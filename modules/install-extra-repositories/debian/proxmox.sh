@@ -11,4 +11,8 @@ if [ $(uname -m) = "x86_64" ]; then
 		# Add Repository
 		repo_add "proxmox" "deb http://download.proxmox.com/debian/ squeeze pve"
 	fi
+else
+	subheader "Installing Proxmox Repository..."
+	# Print Error
+	warning "Not supported on x86, server must be x86_64."
 fi
