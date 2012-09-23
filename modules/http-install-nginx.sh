@@ -7,6 +7,12 @@ source $MODULEPATH/http-install-common.sh
 # Package List Update Question
 package_update_question
 
+# Check OpenSSL
+if ! check_package "openss;"; then
+	subheader "Installing OpenSSL..."
+	package_install openssl
+fi
+
 # Install Package
 subheader "Installing Package..."
 package_install nginx
