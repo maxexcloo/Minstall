@@ -1,6 +1,9 @@
 #!/bin/bash
 # Post Clean Commands (Ubuntu)
 
+# Install Missing Network Utilities
+apt-get install inetutils-ping inetutils-syslogd inetutils-traceroute
+
 # Check Architecture
 if [ $(uname -m) = "x86_64" ]; then
 	# Clean GCC
