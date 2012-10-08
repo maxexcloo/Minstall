@@ -16,7 +16,7 @@ if question --default yes "Do you want to configure MySQL for minimal memory usa
 # Configure MySQL For Normal Memory Usage
 else
 	subheader "Removing Configuration..."
-	rm /etc/mysql/conf.d/minimal.cnf > /dev/null 2>&1
+	rm /etc/mysql/conf.d/minimal.cnf &> /dev/null
 fi
 
 # Disable InnoDB Database Engine
@@ -24,11 +24,11 @@ if question --default yes "Do you want to disable the InnoDB database engine and
 	subheader "Disabling InnoDB..."
 	cp -r $MODULEPATH/$MODULE/mysql/conf.d/disable_innodb.cnf /etc/mysql/conf.d/
 	subheader "Removing InnoDB Files..."
-	rm -f /var/lib/mysql/ib* > /dev/null 2>&1
+	rm -f /var/lib/mysql/ib* &> /dev/null
 # Enable InnoDB Database Engine
 else
 	subheader "Enabling InnoDB..."
-	rm /etc/mysql/conf.d/disable_innodb.cnf > /dev/null 2>&1
+	rm /etc/mysql/conf.d/disable_innodb.cnf &> /dev/null
 fi
 
 # Restart Daemon

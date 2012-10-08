@@ -18,8 +18,8 @@ if question --default yes "Do you want to enable cache support and create a cach
 # Disable Cache
 else
 	subheader "Disabling Cache Support..."
-	rm /etc/nginx/nginx.d/cache.conf > /dev/null 2>&1
-	rm -rf /var/lib/nginx/cache > /dev/null 2>&1
+	rm /etc/nginx/nginx.d/cache.conf &> /dev/null
+	rm -rf /var/lib/nginx/cache &> /dev/null
 fi
 
 # Enable Caching SSL Sessions
@@ -29,7 +29,7 @@ if question --default yes "Do you want to enable caching of SSL sessions (can in
 # Disable Caching SSL Sessions
 else
 	subheader "Disabling SSL Session Caching..."
-	rm /etc/nginx/nginx.d/cache_ssl.conf > /dev/null 2>&1
+	rm /etc/nginx/nginx.d/cache_ssl.conf &> /dev/null
 fi
 
 # Enable Compression
@@ -39,7 +39,7 @@ if question --default yes "Do you want to enable gzip compression to save bandwi
 # Disable Compression
 else
 	subheader "Disabling Compression..."
-	rm /etc/nginx/nginx.d/gzip.conf > /dev/null 2>&1
+	rm /etc/nginx/nginx.d/gzip.conf &> /dev/null
 fi
 
 # Protect Default Host

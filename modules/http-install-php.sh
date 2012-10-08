@@ -19,7 +19,7 @@ fi
 
 # Copy Configuration
 subheader "Copying Configuration..."
-rm /etc/php5/fpm/pool.d/www.conf > /dev/null 2>&1
+rm /etc/php5/fpm/pool.d/www.conf &> /dev/null
 cp -r $MODULEPATH/$MODULE/php5/* /etc/php5/
 
 # Restart Daemon

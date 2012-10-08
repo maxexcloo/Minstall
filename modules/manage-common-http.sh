@@ -89,7 +89,7 @@ manage-http-check-host-existence() {
 # Create Directories
 manage-http-create-directories() {
 	subheader "Creating Host Directory"
-	mkdir /home/$USER/http/hosts/$HOST_DIR > /dev/null 2>&1
+	mkdir /home/$USER/http/hosts/$HOST_DIR &> /dev/null
 	chown -R $USER:$USER /home/$USER/http/hosts/$HOST_DIR
 	find /home/$USER/http/hosts/$HOST_DIR -type d -exec chmod 770 {} \;
 }
@@ -253,12 +253,12 @@ manage-http-enable-php() {
 manage-http-enable-ssl() {
 	if [ $1 = 1 ]; then
 		subheader "Enabling SSL..."
-		mv /etc/nginx/hosts.d/$USER-$HOST_DIR-ssl.disabled /etc/nginx/hosts.d/$USER-$HOST_DIR-ssl.conf > /dev/null 2>&1
+		mv /etc/nginx/hosts.d/$USER-$HOST_DIR-ssl.disabled /etc/nginx/hosts.d/$USER-$HOST_DIR-ssl.conf &> /dev/null
 		# Enable SSH Variable
 		SSL=1
 	else
 		subheader "Disabling SSL..."
-		mv /etc/nginx/hosts.d/$USER-$HOST_DIR-ssl.conf /etc/nginx/hosts.d/$USER-$HOST_DIR-ssl.disabled > /dev/null 2>&1
+		mv /etc/nginx/hosts.d/$USER-$HOST_DIR-ssl.conf /etc/nginx/hosts.d/$USER-$HOST_DIR-ssl.disabled &> /dev/null
 		# Disable SSH Variable
 		SSL=0
 	fi
@@ -273,7 +273,7 @@ manage-http-remove-host() {
 	subheader "Removing Host..."
 	rm /home/$USER/http/logs/$HOST_DIR.log
 	rm /etc/nginx/hosts.d/$USER-$HOST_DIR{.conf,-ssl*}
-	if ! ls /etc/nginx/hosts.d/$USER-*.conf > /dev/null 2>&1; then
+	if ! ls /etc/nginx/hosts.d/$USER-*.conf &> /dev/null; then
 		rm /etc/nginx/php.d/$USER.conf
 		rm /etc/php5/fpm/pool.d/$USER.conf
 	fi

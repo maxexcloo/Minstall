@@ -5,11 +5,11 @@
 if question --default yes "Do you want to clean and update default user files (in /etc/skel)? (Y/n)" || [ $(read_var_module clean_default_user) = 1 ]; then
 	subheader "Cleaning Default User Files..."
 	# Remove Home Dotfiles
-	rm -rf ~/.??* > /dev/null 2>&1
+	rm -rf ~/.??* &> /dev/null
 	# Remove Skel Dotfiles
-	rm -rf /etc/skel/.??* > /dev/null 2>&1
+	rm -rf /etc/skel/.??* &> /dev/null
 	# Remove Skel Files
-	rm -rf /etc/skel/* > /dev/null 2>&1
+	rm -rf /etc/skel/* &> /dev/null
 	# Update Home Dotfiles
 	cp -a -R $MODULEPATH/$MODULE/$DISTRIBUTION/.??* ~
 	# Update Skel Dotfiles

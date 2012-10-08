@@ -19,7 +19,7 @@ package_install nginx
 
 # Remove System Sites
 subheader "Removing System Sites..."
-rm -rf /etc/nginx/sites-* > /dev/null 2>&1
+rm -rf /etc/nginx/sites-* &> /dev/null
 
 # Copy Configuration
 subheader "Copying Configuration..."
@@ -27,7 +27,7 @@ cp -r $MODULEPATH/$MODULE/nginx/* /etc/nginx/
 
 # Move System Configuration
 subheader "Moving System Configuration..."
-mv /etc/nginx/mime.types /etc/nginx/nginx.d/mime.conf > /dev/null 2>&1
+mv /etc/nginx/mime.types /etc/nginx/nginx.d/mime.conf &> /dev/null
 
 # Create Caching Directory
 subheader "Creating Caching Directory..."
