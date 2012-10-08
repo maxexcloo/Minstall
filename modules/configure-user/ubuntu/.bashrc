@@ -32,4 +32,5 @@ if [ -x /usr/bin/dircolors ]; then
 	alias ls='ls --color=auto'
 fi
 
+export LC_COLLATE="C"
 umask o=

@@ -7,7 +7,7 @@ if question --default yes "Do you want to optimise the default repositories? War
 	# Check Country
 	if [ $(read_var_module_var mirror_debian) = 0 ]; then
 		# Set Country
-		MIRROR="http://cdn.debian.net/debian/"
+		MIRROR="http://ftp.us.debian.org/debian/"
 	else
 		# Set Country
 		MIRROR=$(read_var_module_var mirror_debian)
