@@ -42,6 +42,13 @@ openssl req -new -days 3650 -newkey rsa:2048 -nodes -x509 -subj "/C=/ST=/L=/O=/C
 chown -R www-data:www-data /etc/ssl/http
 chmod -R o= /etc/ssl/http
 
+# Set Default Host Root
+if [ $DISTRIBUTION = "debian" ]; then
+	sed -i "s/root path/root \/usr\/share\/nginx\/html/g" /etc/nginx/hosts.d/default*
+elif [ $DISTRIBUTION = "ubuntu" ]; then
+	sed -i "s/root path/root \/usr\/share\/nginx\/www/g" /etc/nginx/hosts.d/default*
+fi
+
 # Restart Daemon
 subheader "Restarting Daemon..."
 daemon_manage nginx restart
