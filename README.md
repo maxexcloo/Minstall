@@ -2,7 +2,29 @@ Notes
 =====
 
 Run on a freshly installed server under root, may not work under an already setup server!
+
 No warranty. For help visit #minstall on Freenode and ask your question (I'm busy with school so repsonse times may be slow...)
+
+Compatibility
+=============
+
+**Operating Systems:**
+
+ + Debian 6 (Squeeze) i686
+ + Debian 6 (Squeeze) x86_64
+ + Ubuntu 12.04 (Precise Pangolin) i686
+ + Ubuntu 12.04 (Precise Pangolin) x86_64
+
+**Platforms:**
+
+ + KVM
+ + OpenVZ
+ + Physical Hardware
+ + Virtualbox
+ + VMware
+ + vServer (Debian Only)
+ + Xen HVM
+ + Xen PV (Unsupported)
 
 Instructions
 ============
@@ -26,27 +48,6 @@ To upgrade your installed packages regularly and retain Minstall system structur
 To remove the Minstall script run the following command under the same user you installed Minstall under:
 
 `cd ~; rm -rf minstall`
-
-Compatibility
-=============
-
-**Operating Systems:**
-
- + Debian 6 (Squeeze) i686
- + Debian 6 (Squeeze) x86_64
- + Ubuntu 12.04 (Precise Pangolin) i686
- + Ubuntu 12.04 (Precise Pangolin) x86_64
-
-**Platforms:**
-
- + KVM
- + OpenVZ
- + Physical Hardware
- + Virtualbox
- + VMware
- + vServer (Debian Only)
- + Xen HVM
- + Xen PV (Unsupported)
 
 Sample Commands
 ===============
