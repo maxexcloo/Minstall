@@ -49,7 +49,7 @@ else
 	PERMLIST=$(read_var_module perm),
 
 	# Loop Through Users
-	while echo $USERLIST | grep \, &> /dev/null; do
+	while echo $USERLIST | grep -q \,; do
 		# Define Current
 		USER=${USERLIST%%\,*}
 		PASS=${PASSLIST%%\,*}

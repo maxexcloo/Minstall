@@ -10,21 +10,23 @@ Compatibility
 
 **Operating Systems:**
 
- + Debian 6 (Squeeze) i686
- + Debian 6 (Squeeze) x86_64
- + Ubuntu 12.04 (Precise Pangolin) i686
- + Ubuntu 12.04 (Precise Pangolin) x86_64
+ + CentOS 6.3 32 Bit
+ + CentOS 6.3 64 Bit
+ + Debian 6 (Squeeze) 64 Bit
+ + Debian 6 (Squeeze) 32 Bit
+ + Ubuntu 12.04 (Precise Pangolin) 32 Bit
+ + Ubuntu 12.04 (Precise Pangolin) 64 Bit
 
 **Platforms:**
 
+ + Hardware
  + KVM
  + OpenVZ
- + Physical Hardware
  + Virtualbox
  + VMware
  + vServer (Debian Only)
  + Xen HVM
- + Xen PV (Unsupported)
+ + Xen PV
 
 Instructions
 ============
@@ -75,8 +77,3 @@ Sample Commands
 	bash minstall.sh http-install-php-extra
 	bash minstall.sh http-configure-mysql
 	bash minstall.sh http-configure-nginx
-
-**Manage**
-
-	bash minstall.sh manage-add-user
-	bash minstall.sh manage-add-host

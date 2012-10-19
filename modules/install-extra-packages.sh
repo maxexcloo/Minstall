@@ -11,7 +11,7 @@ subheader "Installing Extra Packages..."
 PACKAGELIST=$(read_var_module_var packages_$DISTRIBUTION),
 
 # Loop Through Packages
-while echo $PACKAGELIST | grep \, &> /dev/null; do
+while echo $PACKAGELIST | grep -q \,; do
 	# Define Current Package
 	FILE=${PACKAGELIST%%\,*}
 

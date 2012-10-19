@@ -54,7 +54,7 @@ else
 	SSLLIST=$(read_var_module ssl),
 
 	# Loop Through Users
-	while echo $USERLIST | grep \, &> /dev/null; do
+	while echo $USERLIST | grep -q \,; do
 		# Define Current
 		USER=${USERLIST%%\,*}
 		HOST=${HOSTLIST%%\,*}
