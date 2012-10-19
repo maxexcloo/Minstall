@@ -1,20 +1,14 @@
 #!/bin/bash
 # Minstall Default Variable Definitions
 
-# Default Config File
+# Default Config
 CONFIGFILE=config.ini
-
-# Default Distribution
-DISTRIBUTION=none
 
 # Library Path
 LIBRARYPATH=libraries
 
-# Default Module
-MODULE=none
-
 # Module Path
 MODULEPATH=modules
 
-# Disable Unattended Mode
+# Default Mode
 UNATTENDED=0

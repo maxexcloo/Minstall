@@ -20,20 +20,6 @@ for file in $LIBRARYPATH/*.sh; do
 	source $file
 done
 
-# Check Distribution
-if [ $DISTRIBUTION = "none" ]; then
-	# Error Message
-	error "Your distribution is unsupported! If you are sure that your distribution is supported please install the lsb-release package as it will improve detection."
-	# Exit If Not Supported
-	exit
-fi
-
-# Load Libraries (Distribution Specific)
-for file in $LIBRARYPATH/platforms/*.$DISTRIBUTION.sh; do
-	# Source Scripts
-	source $file
-done
-
 #####################
 ## Default Actions ##
 #####################
@@ -120,7 +106,7 @@ if [ $UNATTENDED = 0 ]; then
 					# Ask If User Wants To Abort
 					if question --default no "Module $MODULE not found. Do you want to abort? (y/N)"; then
 						# Print Message
-						error "Aborted!"
+						error "Aborted Module!"
 						# Exit Script
 						exit
 					fi
@@ -132,6 +118,9 @@ if [ $UNATTENDED = 0 ]; then
 					read -p "Press any key to continue..."
 				fi
 			done
+
+			# Unset Module List
+			unset MODULELIST
 		;;
 	esac
 fi
@@ -177,4 +166,7 @@ if [ $UNATTENDED = 1 ]; then
 			read -p "Press any key to continue..."
 		fi
 	done
+
+	# Unset Module List
+	unset MODULELIST
 fi

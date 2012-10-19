@@ -1,5 +1,5 @@
 #!/bin/bash
-# Functions For Checking Package/Repository Installation Status In Debian Linux
+# Functions For Checking Package/Repository Installation Status In Debian
 
 # Check If Package Installed
 function check_package() {
