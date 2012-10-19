@@ -1,14 +1,14 @@
 #!/bin/bash
 # Post Clean Commands (Ubuntu)
 
-# Install Missing Network Utilities
-apt-get install inetutils-ping inetutils-syslogd inetutils-traceroute
+# Hack: Install Missing Network Utilities
+package_install inetutils-ping inetutils-syslogd inetutils-traceroute
 
 # Check Architecture
-if [ $(uname -m) = "x86_64" ]; then
-	# Clean GCC
-	apt-get purge -q -y gcc-4.6-base:i386 libc6:i386 libgcc1:i386
+if [ $ARCHITECTURE = "x64" ]; then
+	# Hack: Purge x32 GCC
+	package_remove gcc-4.6-base:i386 libc6:i386 libgcc1:i386
 fi
 
-# Clean Python
-echo 'Yes, do as I say!' | apt-get purge -q -y --force-yes python2.7-minimal
+# Hack: Purge Python
+echo 'Yes, do as I say!' | package_remove --force-yes python2.7-minimal
