@@ -1,8 +1,8 @@
 #!/bin/bash
 # HTTP Install: Extra PHP Packages
 
-# Common Functions
-source $MODULEPATH/http-install-common.sh
+# HTTP Install Common Functions
+module-http-install-common
 
 # Check Package
 if ! check_package "php5-fpm"; then

@@ -1,8 +1,8 @@
 #!/bin/bash
 # HTTP Install: PHP Application Server
 
-# Common Functions
-source $MODULEPATH/http-install-common.sh
+# HTTP Install Common Functions
+module-http-install-common
 
 # Package List Update Question
 package_update_question

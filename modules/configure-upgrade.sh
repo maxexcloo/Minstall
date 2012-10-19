@@ -13,5 +13,5 @@ package_upgrade
 subheader "Cleaning Package Cache..."
 package_clean
 
-# Run Clean Common Module
-source $MODULEPATH/clean-common.sh
+# Clean Common Functions
+module-clean-common
