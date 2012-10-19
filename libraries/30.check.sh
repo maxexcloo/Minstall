@@ -5,6 +5,7 @@
 if [ $DISTRIBUTION = "none" ]; then
 	# Error Message
 	error "Your distribution is unsupported! To improve distribution detection install the lsb-release package."
+
 	# Exit
 	exit
 fi
@@ -13,6 +14,7 @@ fi
 if [ $ARCHITECTURE = "none" ]; then
 	# Error Message
 	error "Your architecture is unsupported! Please ensure you are using a compatible system."
+
 	# Exit
 	exit
 fi
@@ -21,6 +23,7 @@ fi
 if [ $PLATFORM = "none" ]; then
 	# Error Message
 	error "Your platform is unsupported! Please ensure you are using a compatible system."
+
 	# Exit
 	exit
 fi

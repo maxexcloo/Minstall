@@ -13,6 +13,7 @@ function package_update_question() {
 			# Update Package Lists
 			package_update
 		fi
+
 		# Set Package List Update Variable
 		PACKAGE_LIST_UPDATE=1
 	fi
@@ -31,6 +32,7 @@ function package_clean_question() {
 			package_clean
 		fi
 	fi
+
 	# Set Package List Clean Variable
 	PACKAGE_LIST_CLEAN=1
 }

@@ -47,29 +47,32 @@ read_ini $CONFIGFILE
 
 # Check For Setup Mode
 if [ $1 = "-s" ]; then
-	# Create Base Configuration File
-	cp extra/config.ini $CONFIGFILE
+	# Check Module List
+	if [ $(read_var minstall__modules) = 0 ]; then
+		# Create Base Configuration File
+		cp extra/config.ini $CONFIGFILE
+	else
+		# Define Modules
+		MODULELIST=$(read_var minstall__modules),
 
-	# Define Modules
-	MODULELIST=$(read_var minstall__modules),
+		# Loop Through Modules
+		while echo $MODULELIST | grep -q \,; do
+			# Define Current Module
+			MODULE=${MODULELIST%%\,*}
 
-	# Loop Through Modules
-	while echo $MODULELIST | grep -q \,; do
-		# Define Current Module
-		MODULE=${MODULELIST%%\,*}
+			# Remove Current Module From List
+			MODULELIST=${MODULELIST#*\,}
 
-		# Remove Current Module From List
-		MODULELIST=${MODULELIST#*\,}
+			# Check If Section Exists
+			if ! grep -Eq "^\[$MODULE\]" $CONFIGFILE; then
+				# Append Space
+				echo >> $CONFIGFILE
 
-		# Check If Section Exists
-		if ! grep -Eq "^\[$MODULE\]" $CONFIGFILE; then
-			# Append Space
-			echo >> $CONFIGFILE
-
-			# Append Module Configuration
-			cat $MODULEPATH/$MODULE/config.ini >> $CONFIGFILE
-		fi
-	done
+				# Append Module Configuration
+				cat $MODULEPATH/$MODULE/config.ini >> $CONFIGFILE
+			fi
+		done
+	fi
 
 	# Exit
 	exit
