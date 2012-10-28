@@ -3,11 +3,11 @@
 
 # Clean System Packages
 function clean_packages() {
-	# Loop Through Package List
-	for package in $(cat temp.packages.list); do
-		# Install Package
-		package_install $package
-	done
+	# Upgrade Packages
+	package_upgrade
+
+	# Install Packages
+	package_install $(cat temp.packages.list)
 
 	# Create Local List
 	rpm -qa --queryformat "%{NAME}\n" > temp.packages.system
@@ -21,14 +21,11 @@ function clean_packages() {
 	# Find Unique Entries In Complete List
 	uniq -iu temp.packages.all temp.packages.unique
 
-	# Loop Through Unique List
-	for package in $(cat temp.packages.unique); do
-		# Install Package
-		package_remove $package
-	done
+	# Remove Packages
+	package_remove $(cat temp.packages.unique)
 }
 
 # Clean Unused Files
 function clean_files() {
-# # 	# Unsupported
+	# Unsupported
 }
