@@ -22,6 +22,7 @@ if [ -f /etc/redhat-release ]; then
 	if grep -iq "CentOS Release 6.3" /etc/redhat-release; then
 		# Set Distribution
 		DISTRIBUTION=centos
+
 		# Set Version
 		VERSION=6.3
 	fi
@@ -33,6 +34,7 @@ if [ -f /etc/issue ]; then
 	if grep -iq "Debian GNU/Linux 6.0" /etc/issue; then
 		# Set Distribution
 		DISTRIBUTION=debian
+
 		# Set Version
 		VERSION=6
 	fi
@@ -44,6 +46,7 @@ if command -v lsb_release &> /dev/null; then
 	if [ $(lsb_release -is) = "Debian" ] && [[ $(lsb_release -rs) == 6.* ]]; then
 		# Set Distribution
 		DISTRIBUTION=debian
+
 		# Set Version
 		VERSION=6
 	fi
@@ -55,6 +58,7 @@ if [ -f /etc/issue ]; then
 	if grep -iq "Ubuntu 12.04" /etc/issue; then
 		# Set Distribution
 		DISTRIBUTION=ubuntu
+
 		# Set Version
 		VERSION=12.04
 	fi
@@ -66,6 +70,7 @@ if command -v lsb_release &> /dev/null; then
 	if [ $(lsb_release -is) = "Ubuntu" ] && [ $(lsb_release -rs) = "12.04" ]; then
 		# Set Distribution
 		DISTRIBUTION=ubuntu
+
 		# Set Version
 		VERSION=12.04
 	fi
