@@ -1,6 +1,7 @@
 #!/bin/bash
 # Functions For INI Parsing
 
+# Read INI
 function read_ini() {
 	function check_ini_file() {
 		if [ ! -r "$INI_FILE" ]; then
