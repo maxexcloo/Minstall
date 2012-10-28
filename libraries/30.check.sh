@@ -10,6 +10,15 @@ if [ $DISTRIBUTION = "none" ]; then
 	exit
 fi
 
+# Version Check
+if [ $VERSION = "none" ]; then
+	# Error Message
+	error "Your distribution version is unsupported! To improve version detection install the lsb-release package."
+
+	# Exit
+	exit
+fi
+
 # Architecture Check
 if [ $ARCHITECTURE = "none" ]; then
 	# Error Message
