@@ -19,7 +19,7 @@ subheader "Creating Package List..."
 cp $MODULEPATH/$MODULE/$DISTRIBUTION/base temp.packages.list
 
 # Check Platform
-if ! ([ $PLATFORM = "openvz" ] || [ $PLATFORM = "vserver" ]); then
+if [ $PLATFORM = "hardware" ]; then
 	# Append Hardware Package List
 	cat $MODULEPATH/$MODULE/$DISTRIBUTION/base-hardware >> temp.packages.list
 fi
@@ -60,5 +60,5 @@ package_clean
 package_clean_list
 
 # Show Warnings
-warning "All SSH Servers have been uninstalled! Be sure to install an SSH server again using the modules provided (install-dropbear or install-ssh)!"
-warning "Also, it is recommend that you restart your server after installing an SSH server to ensure everything is functional (due to kernel updates and such) and to ensure that all changes are loaded."
+warning "All SSH Servers have been uninstalled! Be sure to install an SSH server again using the modules provided (e.g install-ssh)!"
+warning "Also, it is recommend that you restart your server after installing an SSH server to ensure everything is functional (due to kernel updates and such) and to ensure that all changes have been correctly applied."

@@ -26,7 +26,6 @@ Compatibility
  + VMware
  + vServer (Debian Only)
  + Xen HVM
- + Xen PV
 
 Instructions
 ============

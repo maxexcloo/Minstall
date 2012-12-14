@@ -31,9 +31,3 @@ if uname -a | grep -q "vserver"; then
 	# Set Platform
 	PLATFORM=vserver
 fi
-
-# Platform Detection: Xen PV
-if [ $(uname -r) = *xen* ]; then
-	# Set Platform
-	PLATFORM=xenpv
-fi

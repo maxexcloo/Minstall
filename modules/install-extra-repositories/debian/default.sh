@@ -4,12 +4,12 @@
 # Ask If Repositories Should Be Optimised
 if question --default yes "Do you want to optimise the default repositories? Warning, this replaces the default repository list! (Y/n)" || [ $UNATTENDED = 1 ]; then
 	subheader "Optimising Default Repositories..."
-	# Check Country
+	# Check Mirror
 	if [ $(read_var_module_var mirror_debian) = 0 ]; then
-		# Set Country
+		# Set Mirror
 		MIRROR="http://ftp.us.debian.org/debian/"
 	else
-		# Set Country
+		# Set Mirror
 		MIRROR=$(read_var_module_var mirror_debian)
 	fi
 	# Update Squeeze Repository

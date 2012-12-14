@@ -15,7 +15,9 @@ fi
 if question --default no "Do you want to enable extra getty instances (uneeded on virtual machines, can save memory if disabled)? (y/N)" || [ $(read_var_module getty_extra) = 1 ]; then
 	subheader "Enabling Additional Getty Instances..."
 	# Check Distribution
-	if [ $DISTRIBUTION = "debian" ]; then
+	if [ $DISTRIBUTION = "centos" ]; then
+		warning "This option is currently unsupported in CentOS."
+	elif [ $DISTRIBUTION = "debian" ]; then
 		warning "This option is currently unsupported in Debian."
 	elif [ $DISTRIBUTION = "ubuntu" ]; then
 		rename.ul .conf.disabled .conf /etc/init/tty{3..6}.conf.disabled &> /dev/null
@@ -24,7 +26,9 @@ if question --default no "Do you want to enable extra getty instances (uneeded o
 else
 	subheader "Disabling Additional Getty Instances..."
 	# Check Distribution
-	if [ $DISTRIBUTION = "debian" ]; then
+	if [ $DISTRIBUTION = "centos" ]; then
+		warning "This option is currently unsupported in CentOS."
+	elif [ $DISTRIBUTION = "debian" ]; then
 		sed -e "s/\(^[2-6].*getty.*\)/#\1/" -i /etc/inittab
 	elif [ $DISTRIBUTION = "ubuntu" ]; then
 		rename.ul .conf .conf.disabled /etc/init/tty{3..6}.conf &> /dev/null
@@ -35,7 +39,9 @@ fi
 if question --default yes "Do you want to change the default system shell? (Y/n)" || [ $(read_var_module shell) != 0 ]; then
 	subheader "Changing Default System Shell..."
 	# Check Distribution
-	if [ $DISTRIBUTION = "debian" ] || [ $DISTRIBUTION = "ubuntu" ]; then
+	if [ $DISTRIBUTION = "centos" ]; then
+		warning "This option is currently unsupported in CentOS."
+	elif [ $DISTRIBUTION = "debian" ] || [ $DISTRIBUTION = "ubuntu" ]; then
 		# Attended Mode
 		if [ $UNATTENDED = 0 ]; then
 			dpkg-reconfigure dash
@@ -53,6 +59,7 @@ if question --default yes "Do you want to change the default system shell? (Y/n)
 				ln -f -s bash /bin/sh.distrib
 				ln -f -s dash.1.gz /usr/share/man/man1/sh.1.gz
 				ln -f -s bash.1.gz /usr/share/man/man1/sh.distrib.1.gz
+			# Unsupported Condition
 			else
 				warning "Unsupported value for default shell."
 			fi
@@ -64,7 +71,9 @@ fi
 if question --default yes "Do you want to change the system timezone? (Y/n)" || [ $(read_var_module timezone) != 0 ]; then
 	subheader "Changing System Timezone..."
 	# Check Distribution
-	if [ $DISTRIBUTION = "debian" ] || [ $DISTRIBUTION = "ubuntu" ]; then
+	if [ $DISTRIBUTION = "centos" ]; then
+		warning "This option is currently unsupported in CentOS."
+	elif [ $DISTRIBUTION = "debian" ] || [ $DISTRIBUTION = "ubuntu" ]; then
 		# Attended Mode
 		if [ $UNATTENDED = 0 ]; then
 			# Set Timezone Manually
@@ -77,6 +86,7 @@ if question --default yes "Do you want to change the system timezone? (Y/n)" || 
 				cp /usr/share/zoneinfo/$(read_var_module timezone) /etc/localtime
 				echo $(read_var_module timezone) > /etc/timezone
 				dpkg-reconfigure -f noninteractive tzdata
+			# Unsupported Timezone
 			else
 				# Show Warning
 				warning "Timezone does not exist, please ensure you entered a valid timezone!"
