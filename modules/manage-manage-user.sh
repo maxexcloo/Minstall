@@ -1,8 +1,8 @@
 #!/bin/bash
 # Manage: Manage User
 
-# Common Functions
-source $MODULEPATH/manage-common.sh
+# Manage Common Functions
+module-manage-common
 
 # Attended Mode
 if [ $UNATTENDED = 0 ]; then

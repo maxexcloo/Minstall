@@ -33,7 +33,7 @@ if [ $UNATTENDED = 1 ]; then
 	daemon_manage mysql stop
 
 	# Create Set Password Script
-	cat > /tmp/mysql-init <<END
+cat > /tmp/mysql-init <<END
 UPDATE mysql.user SET Password=PASSWORD('$(read_var_module root_password)') WHERE User='root';
 FLUSH PRIVILEGES;
 END

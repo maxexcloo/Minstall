@@ -72,7 +72,22 @@ if question --default yes "Do you want to change the system timezone? (Y/n)" || 
 	subheader "Changing System Timezone..."
 	# Check Distribution
 	if [ $DISTRIBUTION = "centos" ]; then
-		warning "This option is currently unsupported in CentOS."
+		# Attended Mode
+		if [ $UNATTENDED = 0 ]; then
+			# Set Timezone Manually
+			warning "This option is currently unsupported in CentOS."
+		# Unattended Mode
+		else
+			# Check Timezone Existance
+			if [ -f /usr/share/zoneinfo/$(read_var_module timezone) ]; then
+				# Set Timezone From File
+				cp /usr/share/zoneinfo/$(read_var_module timezone) /etc/localtime
+			# Unsupported Timezone
+			else
+				# Show Warning
+				warning "Timezone does not exist, please ensure you entered a valid timezone!"
+			fi
+		fi
 	elif [ $DISTRIBUTION = "debian" ] || [ $DISTRIBUTION = "ubuntu" ]; then
 		# Attended Mode
 		if [ $UNATTENDED = 0 ]; then

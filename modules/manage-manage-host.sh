@@ -1,11 +1,11 @@
 #!/bin/bash
 # Manage: Manage Virtual Host
 
-# Common Functions
-source $MODULEPATH/manage-common.sh
+# Manage Common Functions
+module-manage-common
 
-# Common HTTP Functions
-source $MODULEPATH/manage-common-http.sh
+# Manage HTTP Common Functions
+module-manage-http-common
 
 # Attended Mode
 if [ $UNATTENDED = 0 ]; then

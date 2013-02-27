@@ -3,6 +3,6 @@
 
 # Check Package
 if check_package "sendmail"; then
-	# Hack: Stop Sendmail
+	# Stop Sendmail
 	daemon_manage sendmail stop
 fi

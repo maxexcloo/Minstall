@@ -8,7 +8,7 @@ module-http-install-common
 package_update_question
 
 # Check OpenSSL
-if ! check_package "openss;"; then
+if ! check_package "openssl;"; then
 	subheader "Installing OpenSSL..."
 	package_install openssl
 fi
@@ -43,7 +43,9 @@ chown -R www-data:www-data /etc/ssl/http
 chmod -R o= /etc/ssl/http
 
 # Set Default Host Root
-if [ $DISTRIBUTION = "debian" ]; then
+if [ $DISTRIBUTION = "centos" ]; then
+	warning "This option is currently unsupported in CentOS."
+elif [ $DISTRIBUTION = "debian" ]; then
 	sed -i "s/root path/root \/usr\/share\/nginx\/html/g" /etc/nginx/hosts.d/default*
 elif [ $DISTRIBUTION = "ubuntu" ]; then
 	sed -i "s/root path/root \/usr\/share\/nginx\/www/g" /etc/nginx/hosts.d/default*

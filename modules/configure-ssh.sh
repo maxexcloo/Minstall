@@ -6,8 +6,13 @@ if question --default yes "Do you want to enable root SSH login? (Y/n)" || [ $(r
 	subheader "Enabling Root SSH Login..."
 	# Enable Root SSH Login For Dropbear
 	if check_package "dropbear"; then
-		sed -i 's/-w //g' /etc/default/dropbear
-		sed -i 's/-w//g' /etc/default/dropbear
+		# Check Distribution
+		if [ $DISTRIBUTION = "centos" ]; then
+			warning "This option is currently unsupported in CentOS."
+		elif [ $DISTRIBUTION = "debian" ] || [ $DISTRIBUTION = "ubuntu" ]; then
+			sed -i 's/-w //g' /etc/default/dropbear
+			sed -i 's/-w//g' /etc/default/dropbear
+		fi
 	fi
 	# Enable Root SSH Login For OpenSSH
 	if check_package "openssh-server"; then
@@ -18,9 +23,14 @@ else
 	subheader "Disabling Root SSH Login..."
 	# Disable Root SSH Login For Dropbear
 	if check_package "dropbear"; then
-		sed -i 's/DROPBEAR_EXTRA_ARGS="-/DROPBEAR_EXTRA_ARGS="-w -/g' /etc/default/dropbear
-		sed -i 's/DROPBEAR_EXTRA_ARGS=""/DROPBEAR_EXTRA_ARGS="-w"/g' /etc/default/dropbear
-		sed -i 's/-w -w/-w/g' /etc/default/dropbear
+		# Check Distribution
+		if [ $DISTRIBUTION = "centos" ]; then
+			warning "This option is currently unsupported in CentOS."
+		elif [ $DISTRIBUTION = "debian" ] || [ $DISTRIBUTION = "ubuntu" ]; then
+			sed -i 's/DROPBEAR_EXTRA_ARGS="-/DROPBEAR_EXTRA_ARGS="-w -/g' /etc/default/dropbear
+			sed -i 's/DROPBEAR_EXTRA_ARGS=""/DROPBEAR_EXTRA_ARGS="-w"/g' /etc/default/dropbear
+			sed -i 's/-w -w/-w/g' /etc/default/dropbear
+		fi
 	fi
 	# Disable Root SSH Login For OpenSSH
 	if check_package "openssh-server"; then
