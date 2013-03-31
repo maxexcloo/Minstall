@@ -73,6 +73,5 @@ Sample Commands
 	bash minstall.sh http-install-mysql
 	bash minstall.sh http-install-nginx
 	bash minstall.sh http-install-php
-	bash minstall.sh http-install-php-extra
 	bash minstall.sh http-configure-mysql
 	bash minstall.sh http-configure-nginx

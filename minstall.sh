@@ -74,7 +74,7 @@ if [ $UNATTENDED = 0 ]; then
 		# Help Function
 		help)
 			# Load Help Script
-			source $MODULEPATH/help.sh
+			source $MODULEPATH/help/init.sh
 
 			# Exit
 			exit
@@ -82,7 +82,7 @@ if [ $UNATTENDED = 0 ]; then
 		# Module List Function
 		modules)
 			# Load Module Listing Script
-			source $MODULEPATH/help-modules.sh
+			source $MODULEPATH/help-modules/init.sh
 
 			# Exit
 			exit
@@ -101,12 +101,12 @@ if [ $UNATTENDED = 0 ]; then
 				MODULELIST=${MODULELIST#*\,}
 
 				# Check If Module Exists
-				if [ -f $MODULEPATH/$MODULE.sh ]; then
+				if [ -f $MODULEPATH/$MODULE/init.sh ]; then
 					# Print Module Description
-					header $(describe $MODULEPATH/$MODULE.sh)
+					header $(describe $MODULEPATH/$MODULE/init.sh)
 
 					# Load Module
-					source $MODULEPATH/$MODULE.sh
+					source $MODULEPATH/$MODULE/init.sh
 				# Module Doesn't Exist
 				else
 					# Ask If User Wants To Abort
@@ -152,12 +152,12 @@ if [ $UNATTENDED = 1 ]; then
 		fi
 
 		# Check If Module Exists
-		if [ -f $MODULEPATH/$MODULE.sh ]; then
+		if [ -f $MODULEPATH/$MODULE/init.sh ]; then
 			# Print Module Description
-			header $(describe $MODULEPATH/$MODULE.sh)
+			header $(describe $MODULEPATH/$MODULE/init.sh)
 
 			# Load Module
-			source $MODULEPATH/$MODULE.sh
+			source $MODULEPATH/$MODULE/init.sh
 		# Module Doesn't Exist
 		else
 			# Print Message
