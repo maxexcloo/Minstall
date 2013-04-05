@@ -12,10 +12,10 @@ USER="main"
 HOST="host.example.com"
 
 # Directory Under Virtual Host Where Script Will Be Installed, Leave Empty For Installation Into Virtual Host Root
-DIRECTORY="mysql"
+DIRECTORY="phpmyadmin"
 
-# Download Link
-LINK="http://www.sourceforge.net/projects/phpmyadmin/files/phpMyAdmin/3.5.7/phpMyAdmin-3.5.7-english.tar.gz/download"
+# Script URL
+URL="http://www.sourceforge.net/projects/phpmyadmin/files/phpMyAdmin/3.5.7/phpMyAdmin-3.5.7-english.tar.gz/download"
 
 ###############
 ## Functions ##
@@ -48,16 +48,13 @@ if [[ $DIRECTORY != "" ]]; then
 fi
 
 # Download Script
-wget -O script.tar.gz $LINK
+wget -O phpmyadmin.tar.gz "$URL"
 
 # Extract Script
-tar xfvz script.tar.gz
+tar xfvz phpmyadmin.tar.gz
 
 # Move Script
 mv phpMyAdmin-*/* .
-
-# Remove Temp
-rm -rf phpMyAdmin-* script.tar.gz
 
 # Update Config
 cat > config.inc.php <<END
@@ -67,10 +64,8 @@ cat > config.inc.php <<END
 \$i = 0;
 \$i++;
 \$cfg['Servers'][\$i]['auth_type'] = 'cookie';
-\$cfg['Servers'][\$i]['compress'] = false;
 \$cfg['Servers'][\$i]['connect_type'] = 'tcp';
 \$cfg['Servers'][\$i]['extension'] = 'mysqli';
-\$cfg['Servers'][\$i]['hide_db'] = '^(information_schema|mysql|performance_schema|test)\$';
 \$cfg['Servers'][\$i]['host'] = 'localhost';
 
 \$cfg['PmaNoRelation_DisableWarning'] = true;
@@ -81,10 +76,10 @@ cat > config.inc.php <<END
 END
 
 # Clean Useless Files
-rm -rf examples setup ChangeLog config.sample.inc.php LICENSE README README.VENDOR RELEASE-DATE-*
-
-# Update Permissions
-chmod -R o= /home/$USER/http/hosts/$HOST/$DIRECTORY
+rm -rf ChangeLog config.sample.inc.php examples LICENSE phpMyAdmin-* phpmyadmin.tar.gz README README.VENDOR RELEASE-DATE-* setup
 
 # Update Owner
-chown -R $USER:$USER /home/$USER/http/hosts/$HOST/$DIRECTORY
+chown -R $USER:$USER .
+
+# Update Permissions
+chmod -R o= .
