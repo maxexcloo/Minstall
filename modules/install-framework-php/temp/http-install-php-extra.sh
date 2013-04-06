@@ -2,7 +2,7 @@
 # HTTP Install: Extra PHP Packages
 
 # HTTP Install Common Functions
-module-http-install-common
+module-install-http-common
 
 # Check Package
 if ! check_package "php5-fpm"; then

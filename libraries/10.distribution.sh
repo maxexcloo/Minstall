@@ -8,23 +8,23 @@ VERSION=none
 # CentOS 6.3 Detection (Issue File)
 if [ -f /etc/issue ]; then
 	# Search Issue File
-	if grep -iq "CentOS Release 6.3" /etc/issue; then
+	if grep -iq "CentOS Release 6" /etc/issue; then
 		# Set Distribution
 		DISTRIBUTION=centos
 		# Set Version
-		VERSION=6.3
+		VERSION=6
 	fi
 fi
 
 # CentOS 6.3 Detection (Release File)
 if [ -f /etc/redhat-release ]; then
 	# Search Release File
-	if grep -iq "CentOS Release 6.3" /etc/redhat-release; then
+	if grep -iq "CentOS Release 6" /etc/redhat-release; then
 		# Set Distribution
 		DISTRIBUTION=centos
 
 		# Set Version
-		VERSION=6.3
+		VERSION=6
 	fi
 fi
 
@@ -49,6 +49,30 @@ if command -v lsb_release &> /dev/null; then
 
 		# Set Version
 		VERSION=6
+	fi
+fi
+
+# Debian 7 Detection (Issue File)
+if [ -f /etc/issue ]; then
+	# Search Issue File
+	if grep -iq "Debian GNU/Linux 7.0" /etc/issue; then
+		# Set Distribution
+		DISTRIBUTION=debian
+
+		# Set Version
+		VERSION=7
+	fi
+fi
+
+# Debian 7 Detection (LSB Release)
+if command -v lsb_release &> /dev/null; then
+	# Check LSB Release
+	if [ $(lsb_release -is) = "Debian" ] && [[ $(lsb_release -rs) == 7.* ]]; then
+		# Set Distribution
+		DISTRIBUTION=debian
+
+		# Set Version
+		VERSION=7
 	fi
 fi
 

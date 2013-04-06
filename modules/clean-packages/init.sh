@@ -6,6 +6,7 @@ warning "This module will remove all non-essential packages on this system, you 
 if ! (question --default yes "Do you still want to run this module and purge all non-essential packages? (Y/n)" || [ $UNATTENDED = 1 ]); then
 	# Skipped Message
 	subheader "Skipping Module..."
+
 	# Skip Module
 	continue
 fi
@@ -16,28 +17,28 @@ package_update
 
 # Create Package List
 subheader "Creating Package List..."
-cp $MODULEPATH/$MODULE/$DISTRIBUTION/base temp.packages.list
+cp $MODULEPATH/$MODULE/$DISTRIBUTION-$VERSION/base temp.packages.list
 
 # Check Platform
 if [ $PLATFORM = "hardware" ]; then
 	# Append Hardware Package List
-	cat $MODULEPATH/$MODULE/$DISTRIBUTION/base-hardware >> temp.packages.list
+	cat $MODULEPATH/$MODULE/$DISTRIBUTION-$VERSION/base-hardware >> temp.packages.list
 fi
 
 # Check Platform Package List
-if [ -f $MODULEPATH/$MODULE/$DISTRIBUTION/specific-$PLATFORM-$ARCHITECTURE ]; then
+if [ -f $MODULEPATH/$MODULE/$DISTRIBUTION-$VERSION/specific-$PLATFORM-$ARCHITECTURE ]; then
 	# Append Platform Package List
-	cat $MODULEPATH/$MODULE/$DISTRIBUTION/specific-$PLATFORM-$ARCHITECTURE >> temp.packages.list
+	cat $MODULEPATH/$MODULE/$DISTRIBUTION-$VERSION/specific-$PLATFORM-$ARCHITECTURE >> temp.packages.list
 fi
 
 # Append Custom Package List
-cat $MODULEPATH/$MODULE/$DISTRIBUTION/custom >> temp.packages.list
+cat $MODULEPATH/$MODULE/$DISTRIBUTION-$VERSION/custom >> temp.packages.list
 
 # Sort Package List
 sort -o temp.packages.list temp.packages.list
 
 # Run Pre Install Commands
-source $MODULEPATH/$MODULE/$DISTRIBUTION/script-install.sh
+source $MODULEPATH/$MODULE/$DISTRIBUTION-$VERSION/script-install.sh
 
 # Clean Packages
 subheader "Cleaning Packages..."
@@ -48,7 +49,7 @@ subheader "Cleaning Files..."
 clean_files
 
 # Run Post Install Commands
-source $MODULEPATH/$MODULE/$DISTRIBUTION/script-post.sh
+source $MODULEPATH/$MODULE/$DISTRIBUTION-$VERSION/script-post.sh
 
 # Remove Temporary Files
 rm temp.*

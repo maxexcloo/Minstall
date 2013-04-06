@@ -1,5 +1,5 @@
 #!/bin/bash
-# Post Clean Commands (Ubuntu)
+# Post Clean Commands (Ubuntu 12.04)
 
 # Hack: Install Missing Network Utilities
 package_install inetutils-ping inetutils-syslogd inetutils-traceroute

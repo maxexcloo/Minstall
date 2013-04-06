@@ -3,7 +3,7 @@
 
 # Set Defaults
 ARCHITECTURE=none
-PLATFORM=none
+PLATFORM=hardware
 
 # Architecture Detection: 32 Bit
 if [ $(uname -m) = "i386" ] || [ $(uname -m) = "i486" ] || [ $(uname -m) = "i586" ] || [ $(uname -m) = "i686" ]; then
@@ -16,9 +16,6 @@ if [ $(uname -m) = "x86_64" ]; then
 	# Set Architecture
 	ARCHITECTURE=x64
 fi
-
-# Platform Detection: Hardware/KVM/Xen HVM
-PLATFORM=hardware
 
 # Platform Detection: OpenVZ
 if [ -f /proc/user_beancounters ] || [ -d /proc/bc ]; then

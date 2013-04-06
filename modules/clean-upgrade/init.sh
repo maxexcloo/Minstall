@@ -1,5 +1,5 @@
 #!/bin/bash
-# Configure: Upgrade System
+# Clean: Upgrade System
 
 # Update Package Lists
 subheader "Updating Package Lists..."

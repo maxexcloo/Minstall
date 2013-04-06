@@ -2,7 +2,7 @@
 # HTTP Install: nginx Web Server
 
 # HTTP Install Common Functions
-module-http-install-common
+module-install-http-common
 
 # Package List Update Question
 package_update_question
