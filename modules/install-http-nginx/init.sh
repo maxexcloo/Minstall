@@ -1,7 +1,7 @@
 #!/bin/bash
 # HTTP Install: nginx Web Server
 
-# HTTP Install Common Functions
+# Install HTTP Common Functions
 module-install-http-common
 
 # Package List Update Question

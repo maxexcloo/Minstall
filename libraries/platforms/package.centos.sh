@@ -7,9 +7,7 @@ function package_clean() {
 }
 
 # Clean Package List
-function package_clean_list() {
-	# Unsupported
-}
+function package_clean_list() {}
 
 # Install Package(s)
 function package_install() {
@@ -33,20 +31,20 @@ function package_upgrade() {
 
 # Add Repository
 function repo_add() {
-	# Unsupported
+	if ! check_repository $1; then
+		echo -e "[$1]\nname = $1\nbaseurl = $2\ngpgcheck = 1\ngpgkey = $3" > /etc/yum.repos.d/$1.repo
+	fi
 }
 
 # Remove Repository
 function repo_remove() {
-	# Unsupported
+	if check_repository $1; then
+		rm /etc/yum.repos.d/$1.repo
+	fi
 }
 
 # Add Repository Key
-function repo_key() {
-	# Unsupported
-}
+function repo_key() {}
 
 # Add Repository Key (From Server)
-function repo_key_server() {
-	# Unsupported
-}
+function repo_key_server() {}

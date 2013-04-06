@@ -10,14 +10,14 @@ subheader "Installing Extra Repositories..."
 # Attended Mode
 if [ $UNATTENDED = 0 ]; then
 	# Loop Through Available Repositories
-	for file in $MODULEPATH/$MODULE/$DISTRIBUTION/*.sh; do
+	for file in $MODULEPATH/$MODULE/$DISTRIBUTION-$VERSION/*.sh; do
 		# Source Scripts
 		source $file
 	done
 # Unattended Mode
 else
 	# Define Repositories
-	REPOLIST=$(read_var_module repositories_$DISTRIBUTION),
+	REPOLIST=$(read_var_module repositories_$DISTRIBUTION_$VERSION),
 
 	# Loop Through Repositories
 	while echo $REPOLIST | grep -q \,; do
@@ -28,7 +28,7 @@ else
 		REPOLIST=${REPOLIST#*\,}
 
 		# Source Scripts
-		source $MODULEPATH/$MODULE/$DISTRIBUTION/$FILE.sh
+		source $MODULEPATH/$MODULE/$DISTRIBUTION-$VERSION/$FILE.sh
 	done
 fi
 

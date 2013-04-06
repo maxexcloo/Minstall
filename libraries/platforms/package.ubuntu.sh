@@ -13,12 +13,19 @@ function package_clean_list() {
 
 # Install Package(s)
 function package_install() {
-	apt-get -qy install "$*"
+	if [ $UNATTENDED = 1 ]; then
+		DEBIAN_FRONTEND=noninteractive apt-get -qy install "$*"
+	else
+		apt-get -qy install "$*"
+	fi
 }
 
 # Remove Package(s)
 function package_remove() {
-	apt-get -qy purge "$*"
+	if [ $UNATTENDED = 1 ]; then
+		DEBIAN_FRONTEND=noninteractive apt-get -qy purge "$*"
+	else
+		apt-get -qy purge "$*"
 }
 
 # Update Package List

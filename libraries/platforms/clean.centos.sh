@@ -26,6 +26,4 @@ function clean_packages() {
 }
 
 # Clean Unused Files
-function clean_files() {
-	# Unsupported
-}
+function clean_files() {}

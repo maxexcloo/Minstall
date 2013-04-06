@@ -28,4 +28,8 @@ cp -r $MODULEPATH/$MODULE/ssh/* /etc/ssh/
 
 # Restart Daemon
 subheader "Restarting Daemon..."
-daemon_manage ssh restart
+if [ $DISTRIBUTION = "centos" ]; then
+	daemon_manage sshd restart
+else
+	daemon_manage ssh restart
+fi

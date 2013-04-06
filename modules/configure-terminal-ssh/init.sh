@@ -1,5 +1,5 @@
 #!/bin/bash
-# Configure: SSH Configuration
+# Configure (Terminal): SSH Configuration
 
 # Enable Root SSH Login
 if question --default yes "Do you want to enable root SSH login? (Y/n)" || [ $(read_var_module root_login) = 1 ]; then
@@ -60,6 +60,11 @@ fi
 
 # Check SSH
 if check_package "openssh-server"; then
-	subheader "Restarting Daemon (SSH)..."
-	daemon_manage ssh restart
+	subheader "Restarting Daemon (OpenSSH)..."
+	# Check Distribution
+	if [ $DISTRIBUTION = "centos" ]; then
+		daemon_manage sshd restart
+	else
+		daemon_manage ssh restart
+	fi
 fi

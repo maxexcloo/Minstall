@@ -1,27 +1,29 @@
 #!/bin/bash
-# Configure: User Files/Settings
+# Configure (General): User Files/Settings
 
 # Clean & Update Default User Files
-if question --default yes "Do you want to clean and update default user files (in /etc/skel)? (Y/n)" || [ $(read_var_module clean_default_user) = 1 ]; then
+if question --default yes "Do you want to clean and update default user files (in /etc/skel)? (Y/n)" || [ $(read_var_module clean_default_skel) = 1 ]; then
 	subheader "Cleaning Default User Files..."
-	# Remove Home Dotfiles
-	rm -rf ~/.??* &> /dev/null
-	# Remove Skel Dotfiles
-	rm -rf /etc/skel/.??* &> /dev/null
 	# Remove Skel Files
-	rm -rf /etc/skel/* &> /dev/null
-	# Update Home Dotfiles
-	cp -a -R $MODULEPATH/$MODULE/$DISTRIBUTION/.??* ~
-	# Update Skel Dotfiles
-	cp -a -R $MODULEPATH/$MODULE/$DISTRIBUTION/.??* /etc/skel
-	# Clearing Root Mask
+	rm -rf /etc/skel/.??* /etc/skel/* &> /dev/null
+
+	# Update Skel Files
+	cp -a -R $MODULEPATH/$MODULE/$DISTRIBUTION-$VERSION/.??* /etc/skel
+
+	# Remove Home Files
+	rm -rf ~/.??* &> /dev/null
+
+	# Update Home Files
+	cp -a -R $MODULEPATH/$MODULE/$DISTRIBUTION-$VERSION/.??* ~
+
+	# Clear Root Permissions Mask
 	sed -i "s/^umask o=/#umask o=/g" ~/.bashrc
 fi
 
 # Clean & Wipe Root Crontab
-if question --default yes "Do you want to clean and wipe the root crontab? (Y/n)" || [ $(read_var_module clean_root_cron) = 1 ]; then
+if question --default yes "Do you want to clean and wipe the root crontab? (Y/n)" || [ $(read_var_module clean_root_crontab) = 1 ]; then
 	subheader "Cleaning Root Crontab..."
-	echo -n "" > /tmp/cron
-	crontab -u root /tmp/cron
-	rm /tmp/cron
+	echo -n "" > temp
+	crontab -u root temp
+	rm temp
 fi
