@@ -1,16 +1,16 @@
 #!/bin/bash
 # Install (Database): MySQL
 
-# Install HTTP Common Functions
-module-install-http-common
-
 # Package List Update Question
 package_update_question
+
+# Install HTTP Common Functions
+module-install-http-common
 
 # Copying Configuration
 subheader "Copying Configuration..."
 mkdir -p /etc/mysql/conf.d/
-cp -r $MODULEPATH/$MODULE/mysql/conf.d/* /etc/mysql/conf.d/
+cp -r $MODULEPATH/$MODULE/etc/conf.d/* /etc/mysql/conf.d/
 
 # Install Package
 subheader "Installing Package..."
@@ -40,7 +40,7 @@ if check_package "php5-fpm" || check_package "php-fpm"; then
 	subheader "Installing PHP MySQL Package..."
 	if [ $DISTRIBUTION = "centos" ]; then
 		package_install php-mysql
-	else
+elif [ $DISTRIBUTION = "debian" ] || [ $DISTRIBUTION = "ubuntu" ]; then
 		package_install php5-mysql
 	fi
 fi
@@ -49,18 +49,18 @@ fi
 subheader "Stopping Daemon..."
 if [ $DISTRIBUTION = "centos" ]; then
 	daemon_manage mysqld stop
-else
+elif [ $DISTRIBUTION = "debian" ] || [ $DISTRIBUTION = "ubuntu" ]; then
 	daemon_manage mysql stop
 fi
 
 # Copy Configuration
 subheader "Copying Configuration..."
-cp -r $MODULEPATH/$MODULE/mysql/* /etc/mysql/
+cp -r $MODULEPATH/$MODULE/etc/* /etc/mysql/
 
 # Start Daemon
 subheader "Starting Daemon..."
 if [ $DISTRIBUTION = "centos" ]; then
 	daemon_manage mysqld start
-else
+elif [ $DISTRIBUTION = "debian" ] || [ $DISTRIBUTION = "ubuntu" ]; then
 	daemon_manage mysql start
 fi

@@ -23,7 +23,7 @@ URL="http://www.sourceforge.net/projects/phpmyadmin/files/phpMyAdmin/3.5.7/phpMy
 
 # Random String Generator
 function rand() {
-	[ "$2" == "0" ] && CHAR="[:alnum:]" || CHAR="[:graph:]"
+	[ "$2" = "0" ] && CHAR="[:alnum:]" || CHAR="[:graph:]"
 	cat /dev/urandom | tr -cd "$CHAR" | head -c ${1:-48}
 	echo
 }

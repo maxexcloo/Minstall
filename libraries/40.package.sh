@@ -5,7 +5,7 @@
 PACKAGE_LIST_UPDATE=0
 
 # Package List Update Question
-function package_update_question() {
+package_update_question() {
 	# Check If Package List Update Has Been Run Previously
 	if [ $PACKAGE_LIST_UPDATE = 0 ]; then
 		# Ask Question

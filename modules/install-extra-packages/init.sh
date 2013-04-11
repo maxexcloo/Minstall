@@ -1,5 +1,5 @@
 #!/bin/bash
-# Install: Extra Packages
+# Install (Extra): Packages
 
 # Package List Update Question
 package_update_question

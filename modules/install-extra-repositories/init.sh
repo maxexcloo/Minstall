@@ -1,5 +1,5 @@
 #!/bin/bash
-# Install: Extra Repositories
+# Install (Extra): Repositories
 
 # Package List Update Question
 package_update_question

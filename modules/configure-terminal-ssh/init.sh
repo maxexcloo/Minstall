@@ -61,10 +61,9 @@ fi
 # Check SSH
 if check_package "openssh-server"; then
 	subheader "Restarting Daemon (OpenSSH)..."
-	# Check Distribution
 	if [ $DISTRIBUTION = "centos" ]; then
 		daemon_manage sshd restart
-	else
+	elif [ $DISTRIBUTION = "debian" ] || [ $DISTRIBUTION = "ubuntu" ]; then
 		daemon_manage ssh restart
 	fi
 fi

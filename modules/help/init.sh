@@ -1,5 +1,5 @@
 #!/bin/bash
-# Help: General Help Information
+# Help: General
 
 # Print Help
 cat README

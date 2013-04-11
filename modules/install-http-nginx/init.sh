@@ -1,11 +1,11 @@
 #!/bin/bash
-# HTTP Install: nginx Web Server
-
-# Install HTTP Common Functions
-module-install-http-common
+# Install (HTTP): nginx
 
 # Package List Update Question
 package_update_question
+
+# Install HTTP Common Functions
+module-install-http-common
 
 # Check OpenSSL
 if ! check_package "openssl;"; then
@@ -23,7 +23,7 @@ rm -rf /etc/nginx/sites-* &> /dev/null
 
 # Copy Configuration
 subheader "Copying Configuration..."
-cp -r $MODULEPATH/$MODULE/nginx/* /etc/nginx/
+cp -r $MODULEPATH/$MODULE/etc/* /etc/nginx/
 
 # Move System Configuration
 subheader "Moving System Configuration..."
@@ -37,10 +37,9 @@ chmod -R o= /var/lib/nginx/cache
 
 # Create Self Signed SSL Certificate
 subheader "Creating Self Signed SSL Certificate..."
-mkdir -p /etc/ssl/http
-openssl req -new -days 3650 -newkey rsa:2048 -nodes -x509 -subj "/C=/ST=/L=/O=/CN=$(hostname -f)" -out /etc/ssl/http/self.pem -keyout /etc/ssl/http/self.key
-chown -R www-data:www-data /etc/ssl/http
-chmod -R o= /etc/ssl/http
+openssl req -new -days 3650 -newkey rsa:2048 -nodes -x509 -subj "/C=/ST=/L=/O=/CN=$(hostname -f)" -out /etc/nginx/ssl.d/self.pem -keyout /etc/nginx/ssl.d/self.key
+chown -R www-data:www-data /etc/nginx/ssl.d
+chmod -R o= /etc/nginx/ssl.d
 
 # Set Default Host Root
 if [ $DISTRIBUTION = "centos" ]; then

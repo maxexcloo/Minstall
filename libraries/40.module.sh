@@ -2,13 +2,13 @@
 # Functions For Displaying Information About Modules
 
 # Print Module Description
-function describe() {
+describe() {
 	# Print Description
 	echo $(sed -n "2p" $1 | cut -c3-)
 }
 
 # Print All Module Information
-function list() {
+list() {
 	# Find Base Name
 	base=$(basename $1)
 

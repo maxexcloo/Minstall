@@ -19,7 +19,7 @@ function module-clean-common() {
 			# Remove Default PHP Pool
 			rm /etc/php-fpm.d/www.conf &> /dev/null
 		# Debian/Ubuntu Specific Tests
-		else
+		elif [ $DISTRIBUTION = "debian" ] || [ $DISTRIBUTION = "ubuntu" ]; then
 			# Remove Default Sites
 			rm -rf /etc/nginx/sites-* &> /dev/null
 
@@ -31,8 +31,8 @@ function module-clean-common() {
 		fi
 
 		# General Tasks
-		cp -f $MODULEPATH/install-http-nginx/nginx/* /etc/nginx/ &> /dev/null
-		cp -rf $MODULEPATH/install-http-nginx/nginx/conf.d/* /etc/nginx/conf.d/ &> /dev/null
+		cp -f $MODULEPATH/install-http-nginx/etc/* /etc/nginx/ &> /dev/null
+		cp -rf $MODULEPATH/install-http-nginx/etc/conf.d/* /etc/nginx/conf.d/ &> /dev/null
 		mv -f /etc/nginx/mime.types /etc/nginx/nginx.d/mime.conf &> /dev/null
 	fi
 }

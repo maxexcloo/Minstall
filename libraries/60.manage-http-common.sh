@@ -4,12 +4,7 @@
 # Module Functions
 function module-manage-http-common() {
 	# Check Package
-	if ! check_package "nginx"; then
-		# Print Warning
-		warning "This module requires the nginx package to be installed, please install it and run this module again!"
-		# Continue Loop
-		continue
-	fi
+	check_package_message "" "nginx" "install-http-nginx"
 
 	#################
 	## Check Loops ##

@@ -1,8 +1,5 @@
 #!/bin/bash
-# HTTP Install: Exim Mailserver
-
-# Install HTTP Common Functions
-module-install-http-common
+# Install (Mail): Exim
 
 # Package List Update Question
 package_update_question

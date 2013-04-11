@@ -1,18 +1,18 @@
 #!/bin/bash
-# HTTP Install: PHP Application Server
-
-# Install HTTP Common Functions
-module-install-http-common
+# Install (Framework): PHP
 
 # Package List Update Question
 package_update_question
+
+# Install HTTP Common Functions
+module-install-http-common
 
 # Install Package
 subheader "Installing Package..."
 # Distribution Check
 if [ $DISTRIBUTION = "centos" ]; then
 	package_install php-fpm
-else
+elif [ $DISTRIBUTION = "debian" ] || [ $DISTRIBUTION = "ubuntu" ]; then
 	package_install php5-fpm
 fi
 
@@ -22,7 +22,7 @@ if check_package "mysql-server"; then
 	# Distribution Check
 	if [ $DISTRIBUTION = "centos" ]; then
 		package_install php-mysql
-	else
+	elif [ $DISTRIBUTION = "debian" ] || [ $DISTRIBUTION = "ubuntu" ]; then
 		package_install php5-mysql
 	fi
 fi
