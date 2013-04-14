@@ -22,7 +22,7 @@ subheader "Installing Package..."
 package_install dropbear
 
 # Check Distribution
-if [ $DISTRIBUTION != "centos" ]; then
+if [ $DISTRIBUTION = "debian" ] || [ $DISTRIBUTION = "ubuntu" ]; then
 	subheader "Copying Configuration..."
 	cp -r $MODULEPATH/$MODULE/etc/* /etc/default/
 fi
