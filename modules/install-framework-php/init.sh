@@ -16,8 +16,8 @@ elif [ $DISTRIBUTION = "debian" ] || [ $DISTRIBUTION = "ubuntu" ]; then
 	package_install php5-fpm
 fi
 
-# Check MySQL
-if check_package "mysql-server"; then
+# Check MariaDB/MySQL
+if check_package "mariadb-server" || check_package "mysql-server"; then
 	subheader "Installing PHP MySQL Package..."
 	# Distribution Check
 	if [ $DISTRIBUTION = "centos" ]; then

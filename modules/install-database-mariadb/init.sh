@@ -1,15 +1,15 @@
 #!/bin/bash
-# Install (Database): MySQL
+# Install (Database): MariaDB
 
 # Package List Update Question
 package_update_question
 
-# Debian Specific Checks
-check_repository_message "debian" "dotdeb" "DotDeb"
+# Repository Checks
+check_repository_message "" "mariadb" "MariaDB"
 
 # Install Package
 subheader "Installing Package..."
-package_install mysql-server
+package_install mariadb-server
 
 # Set Password
 subheader "Setting Password..."
@@ -17,7 +17,7 @@ if [ $UNATTENDED = 1 ]; then
 	# Stop Daemon
 	daemon_manage mysql stop
 
-	# Start MySQL Server
+	# Start MariaDB Server
 	mysqld_safe --background --skip-grant-tables
 
 	# Sleep
@@ -32,8 +32,4 @@ fi
 
 # Start Daemon
 subheader "Starting Daemon..."
-if [ $DISTRIBUTION = "centos" ]; then
-	daemon_manage mysqld start
-elif [ $DISTRIBUTION = "debian" ] || [ $DISTRIBUTION = "ubuntu" ]; then
-	daemon_manage mysql start
-fi
+daemon_manage mysql start

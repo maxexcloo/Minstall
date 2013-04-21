@@ -4,11 +4,8 @@
 # Package List Update Question
 package_update_question
 
-# Debian Specific Checks
-check_repository_message "debian" "nodejs" "NodeJS"
-
-# Ubuntu Specific Checks
-check_repository_message "ubuntu" "nodejs" "NodeJS"
+# Repository Checks
+check_repository_message "" "nodejs" "NodeJS"
 
 # Install Package
 subheader "Installing Package..."
