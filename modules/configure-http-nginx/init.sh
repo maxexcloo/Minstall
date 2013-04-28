@@ -1,5 +1,5 @@
 #!/bin/bash
-# Configure (HTTP): nginx
+# Configure (HTTP): Nginx
 
 # Check Package
 check_package_message "" "nginx" "install-http-nginx"

@@ -10,8 +10,6 @@ Compatibility
 
 **Operating Systems:**
 
- + CentOS 6.x 32 Bit (WIP)
- + CentOS 6.x 64 Bit (WIP)
  + Debian 6 (Squeeze) 64 Bit
  + Debian 6 (Squeeze) 32 Bit
  + Debian 7 (Wheezy) 64 Bit (WIP)

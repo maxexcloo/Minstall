@@ -33,13 +33,8 @@ source $MODULEPATH/install-terminal-openssh/init.sh
 
 # Remove OpenSSH Daemon
 subheader "Removing OpenSSH Daemon..."
-if [ $DISTRIBUTION = "centos" ]; then
-	daemon_manage sshd restart
-	daemon_manage sshd stop
-elif [ $DISTRIBUTION = "debian" ] || [ $DISTRIBUTION = "ubuntu" ]; then
-	daemon_manage ssh restart
-	daemon_manage ssh stop
-fi
+daemon_manage ssh restart
+daemon_manage ssh stop
 
 # Restart Daemon
 subheader "Restarting Daemon..."

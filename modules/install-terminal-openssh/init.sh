@@ -29,8 +29,4 @@ cp -r $MODULEPATH/$MODULE/etc/* /etc/ssh/
 
 # Restart Daemon
 subheader "Restarting Daemon..."
-if [ $DISTRIBUTION = "centos" ]; then
-	daemon_manage sshd restart
-elif [ $DISTRIBUTION = "debian" ] || [ $DISTRIBUTION = "ubuntu" ]; then
-	daemon_manage ssh restart
-fi
+daemon_manage ssh restart

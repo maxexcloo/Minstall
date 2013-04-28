@@ -1,5 +1,5 @@
 #!/bin/bash
-# Install (HTTP): nginx
+# Install (HTTP): Nginx
 
 # Package List Update Question
 package_update_question
@@ -42,9 +42,7 @@ chown -R www-data:www-data /etc/nginx/ssl.d
 chmod -R o= /etc/nginx/ssl.d
 
 # Set Default Host Root
-if [ $DISTRIBUTION = "centos" ]; then
-	warning "This option is currently unsupported in CentOS."
-elif [ $DISTRIBUTION = "debian" ]; then
+if [ $DISTRIBUTION = "debian" ]; then
 	sed -i "s/root path/root \/usr\/share\/nginx\/html/g" /etc/nginx/hosts.d/default*
 elif [ $DISTRIBUTION = "ubuntu" ]; then
 	sed -i "s/root path/root \/usr\/share\/nginx\/www/g" /etc/nginx/hosts.d/default*

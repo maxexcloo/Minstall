@@ -9,22 +9,12 @@ module-install-http-common
 
 # Install Package
 subheader "Installing Package..."
-# Distribution Check
-if [ $DISTRIBUTION = "centos" ]; then
-	package_install php-fpm
-elif [ $DISTRIBUTION = "debian" ] || [ $DISTRIBUTION = "ubuntu" ]; then
-	package_install php5-fpm
-fi
+package_install php5-fpm
 
 # Check MariaDB/MySQL
 if check_package "mariadb-server" || check_package "mysql-server"; then
 	subheader "Installing PHP MySQL Package..."
-	# Distribution Check
-	if [ $DISTRIBUTION = "centos" ]; then
-		package_install php-mysql
-	elif [ $DISTRIBUTION = "debian" ] || [ $DISTRIBUTION = "ubuntu" ]; then
-		package_install php5-mysql
-	fi
+	package_install php5-mysql
 fi
 
 # Copy Configuration

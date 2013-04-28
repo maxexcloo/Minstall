@@ -5,29 +5,6 @@
 DISTRIBUTION=none
 VERSION=none
 
-# CentOS 6.3 Detection (Issue File)
-if [ -f /etc/issue ]; then
-	# Search Issue File
-	if grep -iq "CentOS Release 6" /etc/issue; then
-		# Set Distribution
-		DISTRIBUTION=centos
-		# Set Version
-		VERSION=6
-	fi
-fi
-
-# CentOS 6.3 Detection (Release File)
-if [ -f /etc/redhat-release ]; then
-	# Search Release File
-	if grep -iq "CentOS Release 6" /etc/redhat-release; then
-		# Set Distribution
-		DISTRIBUTION=centos
-
-		# Set Version
-		VERSION=6
-	fi
-fi
-
 # Debian 6 Detection (Issue File)
 if [ -f /etc/issue ]; then
 	# Search Issue File

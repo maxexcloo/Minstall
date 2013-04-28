@@ -32,8 +32,4 @@ fi
 
 # Start Daemon
 subheader "Starting Daemon..."
-if [ $DISTRIBUTION = "centos" ]; then
-	daemon_manage mysqld start
-elif [ $DISTRIBUTION = "debian" ] || [ $DISTRIBUTION = "ubuntu" ]; then
-	daemon_manage mysql start
-fi
+daemon_manage mysql start
