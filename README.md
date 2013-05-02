@@ -35,7 +35,7 @@ This script contains several modules designed to help you set up your server how
 
 To download Minstall to your home directory (it's recommended that you download and run as root) use the following command:
 
-	cd ~; rm -rf minstall; mkdir minstall; cd minstall; wget --no-check-certificate -O mnistall.tar.gz http://www.github.com/KnightSwarm/Minstall/archive/2.5.7.tar.gz; tar –strip-components=1 zxvf minstall.tar.gz; rm minstall.tar.gz
+	wget --no-check-certificate -O minstall.tar.gz http://www.github.com/KnightSwarm/Minstall/archive/2.5.7.tar.gz; tar zxvf minstall.tar.gz; rm minstall.tar.gz; cd Minstall-2.5.7
 
 **Upgrading Packages**
 
@@ -77,6 +77,7 @@ Sample Commands
 	bash minstall.sh http-configure-nginx
 
 **Manage**
+
 	bash minstall.sh manage-add-user
 	bash minstall.sh manage-add-host
 	bash minstall.sh manage-manage-user
