@@ -1,16 +1,16 @@
 #!/bin/bash
-# HTTP Install: Common Functions (Called Automatically, Do Not Run Manually!)
+# HTTP Install: Common Functions
 
-# Debian Specific Tests
-if [ $DISTRIBUTION = "debian" ]; then
-	# Check DotDeb
-	if ! check_repository "dotdeb"; then
-		# Print Warning
-		warning "This module requires the DotDeb repository to be installed, please install it and run this module again!"
-		# Continue Loop
-		continue
-	fi
+# Check DotDeb
+if check_repository_ni "dotdeb"; then
+	# Print Warning
+	warning "This module requires the DotDeb repository to be installed, please install it and run this module again!"
+	# Shift Variables
+	shift
+	# Continue Loop
+	continue
 fi
 
-# Run Clean Common Module
-source $MODULEPATH/clean-common.sh
+# Clean HTTP Config
+mv /etc/nginx/mime.types /etc/nginx/nginx.d/mime.conf > /dev/null 2>&1
+rm -rf /etc/nginx/sites-* > /dev/null 2>&1

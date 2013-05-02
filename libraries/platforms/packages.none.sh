@@ -24,6 +24,3 @@ function repo_add() {}
 
 # Add Repository Key
 function repo_key() {}
-
-# Add Repository Key (From Server)
-function repo_key_server() {}

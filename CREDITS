@@ -1,0 +1,13 @@
+# General
+minstall.sh:
+ + Argument function from Subsonic startup script (subsonic.sh), found here: http://subsonic.svn.sourceforge.net/viewvc/subsonic/
+
+# Functions
+libraries/check.sh:
+ + http://www.servercobra.com/bash-check-if-package-is-installed/
+libraries/detect.sh:
+ + http://www.doxer.org/learn-linux/linux-shell-centos-debian-ostype/
+libraries/message.sh:
+ + http://www.linuxjournal.com/content/asking-yesno-question-bash-script/
+libraries/question.sh:
+ + http://www.linuxjournal.com/content/asking-yesno-question-bash-script/

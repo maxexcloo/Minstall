@@ -7,23 +7,11 @@ package_update_question
 # Install Packages
 subheader "Installing Extra Packages..."
 
-# Define Packages
-PACKAGELIST=$(read_var_module_var packages_$DISTRIBUTION),
-
-# Loop Through Packages
-while echo $PACKAGELIST | grep \, &> /dev/null; do
-	# Define Current Package
-	FILE=${PACKAGELIST%%\,*}
-
-	# Remove Current Package From List
-	PACKAGELIST=${PACKAGELIST#*\,}
-
+# Loop Through Package List
+while read package; do
 	# Install Currently Selected Package
-	package_install $FILE
-done
-
-# Unset Array
-unset PACKAGELIST
+	package_install $package
+done < $MODULEPATH/$MODULE/$DISTRIBUTION
 
 # Package List Clean Question
 package_clean_question
