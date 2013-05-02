@@ -14,7 +14,45 @@ cp -r $MODULEPATH/$MODULE/mysql/conf.d/* /etc/mysql/conf.d/
 
 # Install Package
 subheader "Installing Package..."
-package_install mysql-server
+# Attended Mode
+if [ $UNATTENDED = 0 ]; then
+	# Install Package
+	package_install mysql-server
+# Unattended Mode
+else
+	# Install Package
+	DEBIAN_FRONTEND=noninteractive package_install mysql-server
+fi
+
+# Unattended Mode
+if [ $UNATTENDED = 1 ]; then
+	# Set Password
+	subheader "Setting Password..."
+
+	# Stop Daemon
+	daemon_manage mysql stop
+
+	# Create Set Password Script
+	cat > /tmp/mysql-init <<END
+UPDATE mysql.user SET Password=PASSWORD('$(read_var_module root_password)') WHERE User='root';
+FLUSH PRIVILEGES;
+END
+
+	# Set Password
+	mysqld_safe --init-file=/tmp/mysql-init &
+
+	# Sleep
+	sleep 2
+
+	# Stop Daemon
+	killall mysqld
+
+	# Remove Set Password Script
+	rm /tmp/mysql-init
+
+	# Start Daemon
+	daemon_manage mysql start
+fi
 
 # Check PHP
 if check_package "php5-fpm"; then
@@ -28,7 +66,7 @@ daemon_manage mysql stop
 
 # Copy Configuration
 subheader "Copying Configuration..."
-cp -r $MODULEPATH/$MODULE/* /etc/
+cp -r $MODULEPATH/$MODULE/mysql/* /etc/mysql/
 
 # Start Daemon
 subheader "Starting Daemon..."

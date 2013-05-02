@@ -1,5 +1,5 @@
 #!/bin/bash
-# Functions For Handling Package Management In  Debian Linux
+# Functions For Handling Package Management In Debian Linux
 
 # Clean Package Cache
 function package_clean() {
@@ -28,7 +28,7 @@ function package_update() {
 
 # Upgrade Packages
 function package_upgrade() {
-	apt-get -q -y update
+	apt-get -q -y upgrade
 }
 
 # Add Repository
@@ -42,5 +42,10 @@ function repo_add() {
 
 # Add Repository Key
 function repo_key() {
-	wget $1 -qO - | apt-key add -
+	wget "$1" -qO - | apt-key add -
+}
+
+# Add Repository Key (From Server)
+function repo_key_server() {
+	apt-key adv --keyserver "$1" --recv-keys "$2"
 }

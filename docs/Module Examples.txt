@@ -1,0 +1,8 @@
+Here are a few sample module configurations.
+Copy and paste the sample you'd like to use into config.ini (replace the existing modules list) and modify to your liking.
+
+; Sample 1 - Minimalist install, using OpenSSH as SSH server.
+modules="install-extra-repositories,clean-packages,install-ssh,install-extra-packages,configure-general,configure-ssh,configure-user"
+
+; Sample 2 - Complete install of a web server LEMP stack (Linux nginx MySQL PHP), using Dropbear as SSH server and one added user.
+modules="install-extra-repositories,clean-packages,install-dropbear,install-extra-packages,configure-general,configure-ssh,configure-user,http-install-exim,http-install-mysql,http-install-nginx,http-install-php,http-install-php-extra,http-configure-mysql,http-configure-nginx,manage-add-user"
