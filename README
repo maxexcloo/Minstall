@@ -1,6 +1,6 @@
 >> NOTES <<
 Run on a freshly installed server under root!
-No warranty. For help come on #frantech on irc.dairc.net and look for maxexcloo!
+No warranty.
 
 >> INSTRUCTIONS <<
 This script contains several modules designed to help you set up your server how you want it.
@@ -48,7 +48,7 @@ Manage: Remove Host (System) (QC Pass)
 
 >> SAMPLE COMMANDS <<
 > Download <
-cd ~; rm -rf *Minstall* mini.tgz; wget --no-check-certificate -O mini.tgz http://www.github.com/maxexcloo/Minstall/tarball/master; tar zxvf mini.tgz; cd *Minstall*
+wget --no-check-certificate -O minstall.tar.gz http://www.github.com/KnightSwarm/Minstall/archive/1.0.tar.gz; tar zxvf minstall.tar.gz; rm minstall.tar.gz; cd Minstall-1.0
 
 > Clean Install <
 bash minstall.sh install-extra-repositories
