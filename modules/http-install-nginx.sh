@@ -1,8 +1,8 @@
 #!/bin/bash
 # HTTP Install: nginx Web Server
 
-# HTTP Install Common Functions
-module-http-install-common
+# Common Functions
+source $MODULEPATH/http-install-common.sh
 
 # Package List Update Question
 package_update_question

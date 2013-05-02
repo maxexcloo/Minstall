@@ -16,42 +16,91 @@ package_update
 
 # Create Package List
 subheader "Creating Package List..."
-cp $MODULEPATH/$MODULE/$DISTRIBUTION/base temp.packages.list
 
-# Check Platform
-if ! ([ $PLATFORM = "openvz" ] || [ $PLATFORM = "vserver" ]); then
-	# Append Hardware Package List
-	cat $MODULEPATH/$MODULE/$DISTRIBUTION/base-hardware >> temp.packages.list
+# Copy Base Package List
+cp $MODULEPATH/$MODULE/$DISTRIBUTION/base $MODULEPATH/$MODULE/temp
+
+# Detect OpenVZ
+if [ -f /proc/user_beancounters ] || [ -d /proc/bc ]; then
+	warning "Detected OpenVZ!"
+# Detect vServer
+elif [[ $(uname -a | grep "vserver") ]]; then
+	warning "Detected vServer!"
+else
+	# Copy Hardware Package List
+	cat $MODULEPATH/$MODULE/$DISTRIBUTION/base-hw >> $MODULEPATH/$MODULE/temp
+
+	# Detect i686
+	if [ $(uname -m) = "i686" ]; then
+		warning "Detected i686!"
+		# Append Platform Relevent Packages To Package List
+		cat $MODULEPATH/$MODULE/$DISTRIBUTION/kernel-i686 >> $MODULEPATH/$MODULE/temp
+	fi
+
+	# Detect x86_64
+	if [ $(uname -m) = "x86_64" ]; then
+		warning "Detected x86_64!"
+		# Append Platform Relevent Packages To Package List
+		cat $MODULEPATH/$MODULE/$DISTRIBUTION/kernel-x86_64 >> $MODULEPATH/$MODULE/temp
+	fi
+
+	# Detect XEN PV i686
+	if [ $(uname -r) = *xen* ] && [ $(uname -m) = "i686" ]; then
+		warning "Detected XEN PV i686!"
+		# Append Platform Relevent Packages To Package List
+		cat $MODULEPATH/$MODULE/$DISTRIBUTION/kernel-xen-i686 >> $MODULEPATH/$MODULE/temp
+	fi
+
+	# Detect XEN PV x86_64
+	if [ $(uname -r) = *xen* ] && [ $(uname -m) = "x86_64" ]; then
+		warning "Detected XEN PV x86_64!"
+		# Append Platform Relevent Packages To Package List
+		cat $MODULEPATH/$MODULE/$DISTRIBUTION/kernel-xen-x86_64 >> $MODULEPATH/$MODULE/temp
+	fi
 fi
 
-# Check Platform Package List
-if [ -f $MODULEPATH/$MODULE/$DISTRIBUTION/specific-$PLATFORM-$ARCHITECTURE ]; then
-	# Append Platform Package List
-	cat $MODULEPATH/$MODULE/$DISTRIBUTION/specific-$PLATFORM-$ARCHITECTURE >> temp.packages.list
-fi
-
-# Append Custom Package List
-cat $MODULEPATH/$MODULE/$DISTRIBUTION/custom >> temp.packages.list
+# Copy Custom Package List
+cat $MODULEPATH/$MODULE/$DISTRIBUTION/custom >> $MODULEPATH/$MODULE/temp
 
 # Sort Package List
-sort -o temp.packages.list temp.packages.list
-
-# Run Pre Install Commands
-source $MODULEPATH/$MODULE/$DISTRIBUTION/script-install.sh
+sort -o $MODULEPATH/$MODULE/temp $MODULEPATH/$MODULE/temp
 
 # Clean Packages
 subheader "Cleaning Packages..."
-clean_packages
+
+# Clean Packages (Debian/Ubuntu)
+if [ $DISTRIBUTION = "debian" ] || [ $DISTRIBUTION = "ubuntu" ]; then
+	# Loop To Ensure All Packages Are Cleaned
+	for i in {1..3}; do
+		# Clear DPKG Package Selections
+		dpkg --clear-selections
+		# Set Package Selections
+		dpkg --set-selections < $MODULEPATH/$MODULE/temp
+		# Get Selections & Set To Purge
+		dpkg --get-selections | sed -e "s/deinstall/purge/" > $MODULEPATH/$MODULE/temp-system
+		# Set Package Selections
+		dpkg --set-selections < $MODULEPATH/$MODULE/temp-system
+		# Update DPKG
+		DEBIAN_FRONTEND=noninteractive apt-get -q -y dselect-upgrade 2>&1 | tee -a $MODULEPATH/$MODULE/temp-log
+		# Clean Package List
+		package_clean_list
+	done
+fi
 
 # Clean Files
 subheader "Cleaning Files..."
-clean_files
+
+# Clean Files (Debian/Ubuntu)
+if [ $DISTRIBUTION = "debian" ] || [ $DISTRIBUTION = "ubuntu" ]; then
+	# Remove Files Not Removed By Apt
+	rm -rf $(grep "not empty so not removed" $MODULEPATH/$MODULE/temp-log | sed "s/[^']*'//;s/'[^']*$//")
+fi
 
 # Run Post Install Commands
-source $MODULEPATH/$MODULE/$DISTRIBUTION/script-post.sh
+source $MODULEPATH/$MODULE/$DISTRIBUTION/post.sh
 
 # Remove Temporary Files
-rm temp.*
+rm $MODULEPATH/$MODULE/temp-log $MODULEPATH/$MODULE/temp $MODULEPATH/$MODULE/temp-system
 
 # Clean Packages
 package_clean
@@ -59,6 +108,6 @@ package_clean
 # Clean Package List
 package_clean_list
 
-# Show Warnings
+# Warnings
 warning "All SSH Servers have been uninstalled! Be sure to install an SSH server again using the modules provided (install-dropbear or install-ssh)!"
 warning "Also, it is recommend that you restart your server after installing an SSH server to ensure everything is functional (due to kernel updates and such) and to ensure that all changes are loaded."

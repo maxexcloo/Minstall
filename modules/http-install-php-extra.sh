@@ -1,8 +1,8 @@
 #!/bin/bash
 # HTTP Install: Extra PHP Packages
 
-# HTTP Install Common Functions
-module-http-install-common
+# Common Functions
+source $MODULEPATH/http-install-common.sh
 
 # Check Package
 if ! check_package "php5-fpm"; then
@@ -22,7 +22,7 @@ subheader "Installing Extra PHP Packages..."
 PACKAGELIST=$(read_var_module_var packages_$DISTRIBUTION),
 
 # Loop Through Packages
-while echo $PACKAGELIST | grep -q \,; do
+while echo $PACKAGELIST | grep \, &> /dev/null; do
 	# Define Current Package
 	FILE=${PACKAGELIST%%\,*}
 

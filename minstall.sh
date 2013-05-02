@@ -20,6 +20,20 @@ for file in $LIBRARYPATH/*.sh; do
 	source $file
 done
 
+# Check Distribution
+if [ $DISTRIBUTION = "none" ]; then
+	# Error Message
+	error "Your distribution is unsupported! If you are sure that your distribution is supported please install the lsb-release package as it will improve detection."
+	# Exit If Not Supported
+	exit
+fi
+
+# Load Libraries (Distribution Specific)
+for file in $LIBRARYPATH/platforms/*.$DISTRIBUTION.sh; do
+	# Source Scripts
+	source $file
+done
+
 #####################
 ## Default Actions ##
 #####################
@@ -28,7 +42,6 @@ done
 if [ $# = 0 ]; then
 	# Load Module Listing Script
 	source $MODULEPATH/help-modules.sh
-
 	# Exit
 	exit
 fi
@@ -37,46 +50,29 @@ fi
 if [ $1 = "-u" ]; then
 	# Enable Unattended Mode
 	UNATTENDED=1
+	# Check For Unattended Config
+	if [[ $2 != "" ]]; then
+		# Check If File Exists
+		if [ -f $2 ]; then
+			# Set Config File
+			CONFIGFILE=$2
+			# Print Notification
+			warning "Loaded unattended config file \"$2\"!"
+		else
+			error "Unattended config file not found!"
+			exit
+		fi
+	else
+		# Print Notification
+		warning "Loaded default unattended config file!"
+	fi
 else
 	# Disable Unattended Mode
 	UNATTENDED=0
 fi
 
-# Read Configuration
+# Read Config
 read_ini $CONFIGFILE
-
-# Check For Setup Mode
-if [ $1 = "-s" ]; then
-	# Check Module List
-	if [ $(read_var minstall__modules) = 0 ]; then
-		# Create Base Configuration File
-		cp extra/config.ini $CONFIGFILE
-	else
-		# Define Modules
-		MODULELIST=$(read_var minstall__modules),
-
-		# Loop Through Modules
-		while echo $MODULELIST | grep -q \,; do
-			# Define Current Module
-			MODULE=${MODULELIST%%\,*}
-
-			# Remove Current Module From List
-			MODULELIST=${MODULELIST#*\,}
-
-			# Check If Section Exists
-			if ! grep -Eq "^\[$MODULE\]" $CONFIGFILE; then
-				# Append Space
-				echo >> $CONFIGFILE
-
-				# Append Module Configuration
-				cat $MODULEPATH/$MODULE/config.ini >> $CONFIGFILE
-			fi
-		done
-	fi
-
-	# Exit
-	exit
-fi
 
 ###########
 ## Modes ##
@@ -90,7 +86,6 @@ if [ $UNATTENDED = 0 ]; then
 		help)
 			# Load Help Script
 			source $MODULEPATH/help.sh
-
 			# Exit
 			exit
 		;;
@@ -98,7 +93,6 @@ if [ $UNATTENDED = 0 ]; then
 		modules)
 			# Load Module Listing Script
 			source $MODULEPATH/help-modules.sh
-
 			# Exit
 			exit
 		;;
@@ -108,7 +102,7 @@ if [ $UNATTENDED = 0 ]; then
 			MODULELIST=$1,
 
 			# Loop Through Modules
-			while echo $MODULELIST | grep -q \,; do
+			while echo $MODULELIST | grep \, &> /dev/null; do
 				# Define Current Module
 				MODULE=${MODULELIST%%\,*}
 
@@ -119,7 +113,6 @@ if [ $UNATTENDED = 0 ]; then
 				if [ -f $MODULEPATH/$MODULE.sh ]; then
 					# Print Module Description
 					header $(describe $MODULEPATH/$MODULE.sh)
-
 					# Load Module
 					source $MODULEPATH/$MODULE.sh
 				# Module Doesn't Exist
@@ -127,8 +120,7 @@ if [ $UNATTENDED = 0 ]; then
 					# Ask If User Wants To Abort
 					if question --default no "Module $MODULE not found. Do you want to abort? (y/N)"; then
 						# Print Message
-						error "Aborted Module!"
-
+						error "Aborted!"
 						# Exit Script
 						exit
 					fi
@@ -150,7 +142,7 @@ if [ $UNATTENDED = 1 ]; then
 	MODULELIST=$(read_var minstall__modules),
 
 	# Loop Through Modules
-	while echo $MODULELIST | grep -q \,; do
+	while echo $MODULELIST | grep \, &> /dev/null; do
 		# Define Current Module
 		MODULE=${MODULELIST%%\,*}
 
@@ -161,7 +153,6 @@ if [ $UNATTENDED = 1 ]; then
 		if [ $MODULE = 0 ]; then
 			# Print Message
 			error "No modules in modules array. Aborting."
-
 			# Exit Script
 			exit
 		fi
@@ -170,14 +161,12 @@ if [ $UNATTENDED = 1 ]; then
 		if [ -f $MODULEPATH/$MODULE.sh ]; then
 			# Print Module Description
 			header $(describe $MODULEPATH/$MODULE.sh)
-
 			# Load Module
 			source $MODULEPATH/$MODULE.sh
 		# Module Doesn't Exist
 		else
 			# Print Message
 			error "Module $MODULE not found. Aborting."
-
 			# Exit Script
 			exit
 		fi

@@ -20,7 +20,7 @@ else
 	REPOLIST=$(read_var_module repositories_$DISTRIBUTION),
 
 	# Loop Through Repositories
-	while echo $REPOLIST | grep -q \,; do
+	while echo $REPOLIST | grep \, &> /dev/null; do
 		# Define Current Package
 		FILE=${REPOLIST%%\,*}
 
