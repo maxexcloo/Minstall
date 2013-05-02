@@ -1,114 +1,82 @@
 #!/bin/bash
 # Manage: Manage Virtual Host
 
-# Common Functions
-source $MODULEPATH/manage-common.sh
-
-# Common HTTP Functions
-source $MODULEPATH/manage-common-http.sh
-
-# Attended Mode
-if [ $UNATTENDED = 0 ]; then
-	# User Check Loop
-	manage-http-check-user-loop
-
-	# Host Check Loop
-	manage-http-check-host-loop
-
-	# Check Host
-	manage-http-check-host
-
-	# Check Directory
-	manage-http-check-directory
-
-	# Check Package
-	if check_package "php5-fpm"; then
-		# PHP Question
-		if question --default yes "Do you want to enable PHP for this virtual host? (Y/n)"; then
-			manage-http-enable-php 1
-		else
-			manage-http-enable-php 0
-		fi
-	else
-		manage-http-enable-php 0
-	fi
-
-	# SSL Question
-	if question --default yes "Do you want to enable SSL for this virtual host? (Y/n)"; then
-		manage-http-enable-ssl 1
-	else
-		manage-http-enable-ssl 0
-	fi
-
-	# Default Question
-	if question --default no "Do you want to set this virtual host as the default host? (y/N)"; then
-		manage-http-default-host
-	fi
-# Unattended Mode
-else
-	# Define Arrays
-	USERLIST=$(read_var_module user),
-	HOSTLIST=$(read_var_module host),
-	DEFAULTLIST=$(read_var_module default),
-	PHPLIST=$(read_var_module php),
-	SSLLIST=$(read_var_module ssl),
-
-	# Loop Through Users
-	while echo $USERLIST | grep \, &> /dev/null; do
-		# Define Current
-		USER=${USERLIST%%\,*}
-		HOST=${HOSTLIST%%\,*}
-		DEFAULT=${DEFAULTLIST%%\,*}
-		PHP=${PHPLIST%%\,*}
-		SSL=${SSLLIST%%\,*}
-
-		# Remove Current User From List
-		USERLIST=${USERLIST#*\,}
-		HOSTLIST=${HOSTLIST#*\,}
-		DEFAULTLIST=${DEFAULTLIST#*\,}
-		PHPLIST=${PHPLIST#*\,}
-		SSLLIST=${SSLLIST#*\,}
-
-		# Check If Array Empty
-		manage-check-array
-
-		# Check User
-		manage-check-user
-
-		# Check Host
-		manage-http-check-host
-
-		# Check Directory
-		manage-http-check-directory
-
-		# Default Check
-		if [ $DEFAULT = 1 ]; then
-			manage-http-default-host
-		fi
-
-		# Check Package
-		if check_package "php5-fpm"; then
-			# PHP Check
-			if [ $PHP = 1 ]; then
-				manage-http-enable-php 1
-			else
-				manage-http-enable-php 0
-			fi
-		else
-			manage-http-enable-php 0
-		fi
-
-		# SSL Check
-		if [ $SSL = 1 ]; then
-			manage-http-enable-ssl 1
-		else
-			manage-http-enable-ssl 0
-		fi
-	done
+# Check Package
+if check_package_ni "nginx"; then
+	# Print Warning
+	warning "This module requires the nginx package to be installed, please install it and run this module again!"
+	# Shift Variables
+	shift
+	# Continue Loop
+	continue
 fi
 
-# Reset Host WWW Variable
-HOST_WWW=0
+# User Check Loop
+while true; do
+	# Take User Input
+	read -p "Please enter a user name: " USERNAME
+	# Check If User Directory Exists
+	if [ -d /home/$USERNAME ]; then
+		break
+	else
+		echo "Please enter a valid username."
+	fi
+done
 
-# Reload Daemons
-manage-http-reload-daemons
+# Host Check Loop
+while true; do
+	# Take Host Input
+	read -p "Please enter the virtual host (e.g. www.example.com): " HOST
+	# Check If User Directory Exists
+	if [[ $HOST = *.*.* ]]; then
+		break
+	else
+		echo "Please enter a valid virtual host."
+	fi
+done
+
+# Check Host
+subheader "Checking Host..."
+if [[ $HOST = www.*.* ]]; then
+	HOST_DIR=$(echo $HOST | sed 's/....\(.*\)/\1/')
+	HOST_WWW=1
+else
+	HOST_DIR=$HOST
+	HOST_WWW=0
+fi
+
+# Check Directory
+if [ ! -f /etc/nginx/hosts.d/$USERNAME-$HOST_DIR.conf ]; then
+	# Print Warning
+	warning "The virtual host configuration file does not exist (/etc/nginx/hosts.d/$USERNAME-$HOST_DIR.conf), run this module again and re-enter the information!"
+	# Shift Variables
+	shift
+	# Continue Loop
+	continue
+fi
+
+# Check Package
+if check_package "php5-fpm"; then
+	# PHP Question
+	if question --default yes "Do you want to enable PHP for this virtual host? (Y/n)"; then
+		subheader "Enabling PHP..."
+		sed -i 's/\o011#include \/etc\/nginx\/php.d/\o011include \/etc\/nginx\/php.d/g' /etc/nginx/hosts.d/$USERNAME-$HOST_DIR.conf
+	else
+		subheader "Disabling PHP..."
+		sed -i 's/\o011include \/etc\/nginx\/php.d/\o011#include \/etc\/nginx\/php.d/g' /etc/nginx/hosts.d/$USERNAME-$HOST_DIR.conf
+	fi
+else
+	sed -i 's/include \/etc\/nginx\/php.d/#include \/etc\/nginx\/php.d/g' /etc/nginx/hosts.d/$USERNAME-$HOST_DIR.conf
+fi
+
+# Check Package
+if check_package "php5-fpm"; then
+	subheader "Restarting Daemon (PHP-FPM)..."
+	daemon_manage php5-fpm restart
+fi
+
+# Check Package
+if check_package "nginx"; then
+	subheader "Restarting Daemon (nginx)..."
+	daemon_manage nginx restart
+fi

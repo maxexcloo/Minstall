@@ -3,35 +3,29 @@
 
 # Add Daemon
 function daemon_add() {
-	if [ -e /etc/init.d/$1 ]; then
-		update-rc.d $1 defaults
-	fi
+	update-rc.d $1 defaults
 }
 
 # Remove Daemon
 function daemon_remove() {
-	if [ -e /etc/init.d/$1 ]; then
-		update-rc.d -f $1 remove
-	fi
+	update-rc.d -f $1 remove
 }
 
 # Enable Daemon
 function daemon_enable() {
-	if [ -e /etc/init.d/$1 ]; then
-		update-rc.d $1 enable
-	fi
+	update-rc.d $1 enable
 }
 
 # Disable Daemon
 function daemon_disable() {
-	if [ -e /etc/init.d/$1 ]; then
-		update-rc.d $1 disable
-	fi
+	update-rc.d $1 disable
 }
 
 # Manage Daemon
 function daemon_manage() {
 	if [ -e /etc/init.d/$1 ]; then
 		invoke-rc.d $1 $2
+	else
+		warning "Daemon Not Found, Skipping..."
 	fi
 }

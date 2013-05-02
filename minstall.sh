@@ -1,86 +1,52 @@
 #!/bin/bash
 # Script Initialisation Functions
 
-# Load Variables
-source config.sh
+# Default Distribution
+DISTRIBUTION=none
 
-###############
-## Libraries ##
-###############
+# Default Module
+MODULE=none
 
-# Load Libraries (External)
-for file in $LIBRARYPATH/external/*.sh; do
-	# Source Libraries
-	source $file
-done
+# Libraries Path
+LIBRARYPATH=libraries
 
-# Load Libraries
+# Module Path
+MODULEPATH=modules
+
+# Loop Through Libraries
 for file in $LIBRARYPATH/*.sh; do
-	# Source Libraries
-	source $file
-done
-
-# Check Distribution
-if [ $DISTRIBUTION = "none" ]; then
-	# Error Message
-	error "Your distribution is unsupported! If you are sure that your distribution is supported please install the lsb-release package as it will improve detection."
-	# Exit If Not Supported
-	exit
-fi
-
-# Load Libraries (Distribution Specific)
-for file in $LIBRARYPATH/platforms/*.$DISTRIBUTION.sh; do
 	# Source Scripts
 	source $file
 done
 
-#####################
-## Default Actions ##
-#####################
+# Check Distribution
+if [ $DISTRIBUTION = 'none' ]; then
+	# Print Distribution Not Supported Message
+	warning "Your distribution is unsupported!"
+fi
+
+# Load Distribution Specific Libraries
+for file in $LIBRARYPATH/platforms/*.$DISTRIBUTION.sh; do
+	# Check Distribution
+	if [ $DISTRIBUTION != 'none' ]; then
+		# Source Scripts
+		source $file
+	fi
+done
 
 # Print Help If No Parameters Are Specified
-if [ $# = 0 ]; then
+if [ $# == 0 ]; then
 	# Load Module Listing Script
 	source $MODULEPATH/help-modules.sh
 	# Exit
 	exit
 fi
 
-# Check For Unattended Mode
-if [ $1 = "-u" ]; then
-	# Enable Unattended Mode
-	UNATTENDED=1
-	# Check For Unattended Config
-	if [[ $2 != "" ]]; then
-		# Check If File Exists
-		if [ -f $2 ]; then
-			# Set Config File
-			CONFIGFILE=$2
-			# Print Notification
-			warning "Loaded unattended config file \"$2\"!"
-		else
-			error "Unattended config file not found!"
-			exit
-		fi
-	else
-		# Print Notification
-		warning "Loaded default unattended config file!"
-	fi
-else
-	# Disable Unattended Mode
-	UNATTENDED=0
-fi
-
-# Read Config
-read_ini $CONFIGFILE
-
-###########
-## Modes ##
-###########
-
-# Attended Mode
-if [ $UNATTENDED = 0 ]; then
-	# Check Parameters Against Options
+# Loop Through Parameters
+while [ $# -ne 0 ]; do
+	# Set Current Module Variable
+	MODULE=$1
+	# Check Parameters Against Known Scripts
 	case $1 in
 		# Help Function
 		help)
@@ -89,92 +55,35 @@ if [ $UNATTENDED = 0 ]; then
 			# Exit
 			exit
 		;;
-		# Module List Function
+		# Module Listing Function
 		modules)
 			# Load Module Listing Script
 			source $MODULEPATH/help-modules.sh
 			# Exit
 			exit
 		;;
-		# Load Modules
+		# Load Scripts
 		*)
-			# Define Modules
-			MODULELIST=$1,
-
-			# Loop Through Modules
-			while echo $MODULELIST | grep \, &> /dev/null; do
-				# Define Current Module
-				MODULE=${MODULELIST%%\,*}
-
-				# Remove Current Module From List
-				MODULELIST=${MODULELIST#*\,}
-
-				# Check If Module Exists
-				if [ -f $MODULEPATH/$MODULE.sh ]; then
-					# Print Module Description
-					header $(describe $MODULEPATH/$MODULE.sh)
-					# Load Module
-					source $MODULEPATH/$MODULE.sh
-				# Module Doesn't Exist
-				else
-					# Ask If User Wants To Abort
-					if question --default no "Module $MODULE not found. Do you want to abort? (y/N)"; then
-						# Print Message
-						error "Aborted!"
-						# Exit Script
-						exit
-					fi
+			# Check If Module Exists
+			if [ -f $MODULEPATH/$1.sh ]; then
+				# Print Module Description
+				header $(describe $MODULEPATH/$1.sh)
+				# Load Module
+				source $MODULEPATH/$1.sh
+			# Module Doesn't Exist
+			else
+				# Ask If User Wants To Abort
+				if question --default yes "Module $1 not found. Do you want to abort? (Y/n)"; then
+					# Print Message
+					error "Aborted!"
+					# Exit Script
+					exit
 				fi
-
-				# Debug Pause
-				if [ $(read_var minstall__debug) = 1 ]; then
-					# Wait For User Input
-					read -p "Press any key to continue..."
-				fi
-			done
+			fi
+			echo ""
 		;;
 	esac
-fi
-
-# Unattended Mode
-if [ $UNATTENDED = 1 ]; then
-	# Define Modules
-	MODULELIST=$(read_var minstall__modules),
-
-	# Loop Through Modules
-	while echo $MODULELIST | grep \, &> /dev/null; do
-		# Define Current Module
-		MODULE=${MODULELIST%%\,*}
-
-		# Remove Current Module From List
-		MODULELIST=${MODULELIST#*\,}
-
-		# Check If Array Empty
-		if [ $MODULE = 0 ]; then
-			# Print Message
-			error "No modules in modules array. Aborting."
-			# Exit Script
-			exit
-		fi
-
-		# Check If Module Exists
-		if [ -f $MODULEPATH/$MODULE.sh ]; then
-			# Print Module Description
-			header $(describe $MODULEPATH/$MODULE.sh)
-			# Load Module
-			source $MODULEPATH/$MODULE.sh
-		# Module Doesn't Exist
-		else
-			# Print Message
-			error "Module $MODULE not found. Aborting."
-			# Exit Script
-			exit
-		fi
-
-		# Debug Pause
-		if [ $(read_var minstall__debug) = 1 ]; then
-			# Wait For User Input
-			read -p "Press any key to continue..."
-		fi
-	done
-fi
+	# Shift Variables
+	shift
+done
+final

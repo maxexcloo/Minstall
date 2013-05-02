@@ -4,7 +4,7 @@
 # Print Module Description
 function describe() {
 	# Print Description
-	echo $(sed -n "2p" $1 | cut -c3-)
+	echo $(sed -n '2p' $1 | cut -c3-)
 }
 
 # Print All Module Information
