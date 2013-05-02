@@ -3,7 +3,7 @@ Notes
 
 Run on a freshly installed server under root, may not work under an already setup server!
 
-No warranty. For help visit #minstall on Freenode and ask your question (I'm busy with school so response times may be slow...)
+No warranty.
 
 Compatibility
 =============
@@ -36,7 +36,7 @@ This script contains several modules designed to help you set up your server how
 
 To download Minstall to your home directory (it's recommended that you download and run as root) use the following command:
 
-	cd ~; rm -rf minstall; mkdir minstall; cd minstall; wget --no-check-certificate -O minstall.tar.gz http://www.github.com/downloads/KnightSwarm/Minstall/Latest.tar.gz; tar zxvf minstall.tar.gz; rm minstall.tar.gz
+	wget --no-check-certificate -O minstall.tar.gz http://www.github.com/KnightSwarm/Minstall/archive/master.tar.gz; tar zxvf minstall.tar.gz; rm minstall.tar.gz; cd Minstall-*
 
 **Remove Minstall**
 
