@@ -2,4 +2,4 @@
 # Help: General Help Information
 
 # Print Help
-cat README
+cat README.md

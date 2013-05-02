@@ -75,3 +75,10 @@ Sample Commands
 	bash minstall.sh http-install-php-extra
 	bash minstall.sh http-configure-mysql
 	bash minstall.sh http-configure-nginx
+
+**Manage**
+	bash minstall.sh manage-add-user
+	bash minstall.sh manage-add-host
+	bash minstall.sh manage-manage-user
+	bash minstall.sh manage-manage-host
+	bash minstall.sh manage-remove-host
