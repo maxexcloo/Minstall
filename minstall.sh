@@ -1,5 +1,5 @@
 #!/bin/bash
-# Script Initialisation Functions
+# Script Loader
 
 # Load Variables
 source config.sh
@@ -21,32 +21,73 @@ for file in $LIBRARYPATH/*.sh; do
 done
 
 #####################
-## Default Actions ##
+## Parse Arguments ##
 #####################
 
-# Print Help If No Parameters Are Specified
-if [ $# = 0 ]; then
-	# Load Module Listing Script
-	source $MODULEPATH/help-modules.sh
+# Check Arguments
+while getopts ":c:m:su" option; do
+	# Argument List
+	case $option in
+		# Config File
+		c)
+			# Check Config File Existance
+			if [ -f $OPTARG ]; then
+				# Print Warning
+				warning "Loaded Custom Config File \"$OPTARG\"."
 
-	# Exit
-	exit
-fi
+				# Set Config File Variable
+				CONFIGFILE=$OPTARG
+			# Error Condition
+			else
+				# Print Error
+				error "Custom Config File \"$OPTARG\" does not exist."
 
-# Check For Unattended Mode
-if [ $1 = "-u" ]; then
-	# Enable Unattended Mode
-	UNATTENDED=1
-else
-	# Disable Unattended Mode
-	UNATTENDED=0
-fi
+				# Exit
+				exit
+			fi
+		;;
+		# Module List
+		m)
+			# Set Module List Variable
+			MODULELIST=$OPTARG,
+		;;
+		# Setup Mode
+		s)
+			# Print Warning
+			warning "Setup Mode Running..."
 
-# Read Configuration
-read_ini $CONFIGFILE
+			# Set Setup Variable State
+			SETUP=1
+		;;
+		# Unattended Mode
+		u)
+			# Print Warning
+			warning "Unattended Mode Running..."
 
-# Check For Setup Mode
-if [ $1 = "-s" ]; then
+			# Enable Unattended Mode
+			UNATTENDED=1
+		;;
+		# No Arguments
+		\?)
+			# Load Module Listing Script
+			source $MODULEPATH/help-modules.sh
+
+			# Exit
+			exit
+		;;
+		# Invalid Argument
+		:)
+			# Print Error
+			error "Option -$OPTARG requires an argument."
+
+			# Exit
+			exit
+		;;
+	esac
+done
+
+# Setup Mode
+if [ $SETUP = 1 ]; then
 	# Create Base Configuration File
 	cp extra/config.ini $CONFIGFILE
 
@@ -63,114 +104,39 @@ if [ $1 = "-s" ]; then
 	exit
 fi
 
-###########
-## Modes ##
-###########
+# Read Configuration
+read_ini $CONFIGFILE
 
-# Attended Mode
-if [ $UNATTENDED = 0 ]; then
-	# Check Parameters Against Options
-	case $1 in
-		# Help Function
-		help)
-			# Load Help Script
-			source $MODULEPATH/help/init.sh
+# Execute Modules
+while echo $MODULELIST | grep -q \,; do
+	# Define Module
+	MODULE=${MODULELIST%%\,*}
 
-			# Exit
-			exit
-		;;
-		# Module List Function
-		modules)
-			# Load Module Listing Script
-			source $MODULEPATH/help-modules/init.sh
+	# Remove Current Module From Module List
+	MODULELIST=${MODULELIST#*\,}
 
-			# Exit
-			exit
-		;;
-		# Load Modules
-		*)
-			# Define Modules
-			MODULELIST=$1,
+	# Check If Module Exists
+	if [ -f $MODULEPATH/$MODULE/init.sh ]; then
+		# Print Module Description
+		header $(describe $MODULEPATH/$MODULE/init.sh)
 
-			# Loop Through Modules
-			while echo $MODULELIST | grep -q \,; do
-				# Define Current Module
-				MODULE=${MODULELIST%%\,*}
-
-				# Remove Current Module From List
-				MODULELIST=${MODULELIST#*\,}
-
-				# Check If Module Exists
-				if [ -f $MODULEPATH/$MODULE/init.sh ]; then
-					# Print Module Description
-					header $(describe $MODULEPATH/$MODULE/init.sh)
-
-					# Load Module
-					source $MODULEPATH/$MODULE/init.sh
-				# Module Doesn't Exist
-				else
-					# Ask If User Wants To Abort
-					if question --default no "Module $MODULE not found. Do you want to abort? (y/N)"; then
-						# Print Message
-						error "Aborted Module!"
-
-						# Exit Script
-						exit
-					fi
-				fi
-
-				# Debug Pause
-				if [ $(read_var minstall__debug) = 1 ]; then
-					# Wait For User Input
-					read -p "Press any key to continue..."
-				fi
-			done
-		;;
-	esac
-fi
-
-# Unattended Mode
-if [ $UNATTENDED = 1 ]; then
-	# Define Modules
-	MODULELIST=$(read_var minstall__modules),
-
-	# Loop Through Modules
-	while echo $MODULELIST | grep -q \,; do
-		# Define Current Module
-		MODULE=${MODULELIST%%\,*}
-
-		# Remove Current Module From List
-		MODULELIST=${MODULELIST#*\,}
-
-		# Check If Array Empty
-		if [ $MODULE = 0 ]; then
-			# Print Message
-			error "No modules in modules array. Aborting."
-
-			# Exit Script
-			exit
-		fi
-
-		# Check If Module Exists
-		if [ -f $MODULEPATH/$MODULE/init.sh ]; then
-			# Print Module Description
-			header $(describe $MODULEPATH/$MODULE/init.sh)
-
-			# Load Module
-			source $MODULEPATH/$MODULE/init.sh
-		# Module Doesn't Exist
-		else
+		# Load Module
+		source $MODULEPATH/$MODULE/init.sh
+	# Error Condition
+	else
+		# Ask If User Wants To Abort
+		if question --default no "Module $MODULE not found. Do you want to abort? (y/N)" || [ $UNATTENDED = 1 ]; then
 			# Print Message
 			error "Module $MODULE not found. Aborting."
 
 			# Exit Script
 			exit
 		fi
+	fi
 
-		# Debug Pause
-		if [ $(read_var minstall__debug) = 1 ]; then
-			# Wait For User Input
-			read -p "Press any key to continue..."
-		fi
-	done
-fi
+	# Debug Pause
+	if [ $(read_var minstall__debug) = 1 ]; then
+		# Wait For User Input
+		read -p "Press any key to continue..."
+	fi
+done

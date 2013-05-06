@@ -54,7 +54,7 @@ if question --default no "Do you want to protect the default host by denying unm
 # Disable Default Host Protection
 else
 	# Default Host Reset
-	if question --default no "Do you want to reset the default host to the script default  (this will override your default virtual host if you have assigned one)? (y/N)" || [ $(read_var_module default_host_reset) = 1 ]; then
+	if question --default no "Do you want to reset the default host to the script default (this will override your default virtual host if you have assigned one)? (y/N)" || [ $(read_var_module default_host_reset) = 1 ]; then
 		subheader "Resetting Default Host..."
 		cp $MODULEPATH/install-http-nginx/etc/hosts.d/default.conf /etc/nginx/hosts.d/
 	fi

@@ -3,7 +3,7 @@ Notes
 
 Run on a freshly installed server under root, may not work under an already setup server!
 
-No warranty.
+No warranty. Limited support available (although I will try my best to make your experience with the script a good one!)
 
 Compatibility
 =============
@@ -26,20 +26,21 @@ Compatibility
  + VMware
  + vServer (Debian Only)
  + Xen HVM
+ + Xen PV (WIP)
 
 Instructions
 ============
 
-This script contains several modules designed to help you set up your server how you want it. Simply run the below download command then run "bash minstall.sh help" or "bash minstall.sh modules" to see help or modules respectively.
+This script contains several modules designed to help you set up your server how you want it. Simply run the download command below to install to your server.
 
 **Download Minstall**
 
-To download Minstall to your home directory (it's recommended that you download and run as root) use the following command:
+To download Minstall run the following command under root:
 
-	wget --no-check-certificate -O minstall.tar.gz http://www.github.com/KnightSwarm/Minstall/archive/master.tar.gz; tar zxvf minstall.tar.gz; rm minstall.tar.gz; cd Minstall-*
+	wget -O /opt/minstall.tar.gz --no-check-certificate http://www.github.com/KnightSwarm/Minstall/archive/master.tar.gz; mkdir /opt/minstall/; tar --directory=/opt/minstall/ --file=/opt/minstall.tar.gz --strip-components=1 -v -x -z; mv /opt/minstall/extra/launcher.sh /usr/bin/minstall
 
 **Remove Minstall**
 
-To remove the Minstall script run the following command under the same user you installed Minstall under:
+To remove the Minstall script run the following command under root:
 
-	cd ~; rm -rf minstall
+	rm -rf /opt/minstall/ /usr/bin/minstall
