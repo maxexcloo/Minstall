@@ -2,10 +2,10 @@
 # Manage: Add Virtual Host
 
 # Manage Common Functions
-module-manage-common
+manage-common
 
 # Manage HTTP Common Functions
-module-manage-http-common
+http-common
 
 # Attended Mode
 if [ $UNATTENDED = 0 ]; then

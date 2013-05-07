@@ -2,7 +2,7 @@
 # Manage: Manage User
 
 # Manage Common Functions
-module-manage-common
+manage-common
 
 # Attended Mode
 if [ $UNATTENDED = 0 ]; then

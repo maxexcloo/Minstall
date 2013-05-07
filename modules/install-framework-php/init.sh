@@ -1,11 +1,11 @@
 #!/bin/bash
 # Install (Framework): PHP
 
+# Distribution Checks
+check_repository_message "debian" "dotdeb" "DotDeb"
+
 # Package List Update Question
 package_update_question
-
-# Install HTTP Common Functions
-module-install-http-common
 
 # Install Package
 subheader "Installing Package..."
@@ -19,8 +19,10 @@ fi
 
 # Copy Configuration
 subheader "Copying Configuration..."
-rm /etc/php5/fpm/pool.d/www.conf &> /dev/null
-cp -r $MODULEPATH/$MODULE/php5/* /etc/php5/
+cp -r $MODULEPATH/$MODULE/etc/* /etc/php5/
+
+# Clean Common Function
+clean-common
 
 # Restart Daemon
 subheader "Restarting Daemon..."

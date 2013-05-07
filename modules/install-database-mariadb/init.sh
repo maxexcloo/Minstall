@@ -1,11 +1,11 @@
 #!/bin/bash
 # Install (Database): MariaDB
 
-# Package List Update Question
-package_update_question
-
 # Repository Checks
 check_repository_message "" "mariadb" "MariaDB"
+
+# Package List Update Question
+package_update_question
 
 # Install Package
 subheader "Installing Package..."

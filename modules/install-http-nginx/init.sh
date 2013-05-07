@@ -1,11 +1,11 @@
 #!/bin/bash
 # Install (HTTP): Nginx
 
+# Distribution Checks
+check_repository_message "debian" "dotdeb" "DotDeb"
+
 # Package List Update Question
 package_update_question
-
-# Install HTTP Common Functions
-module-install-http-common
 
 # Check OpenSSL
 if ! check_package "openssl;"; then

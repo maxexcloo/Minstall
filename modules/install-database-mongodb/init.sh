@@ -1,11 +1,11 @@
 #!/bin/bash
 # Install (Database): MongoDB
 
+# Distribution Checks
+check_repository_message "" "mongodb" "MongoDB"
+
 # Package List Update Question
 package_update_question
-
-# Debian Specific Checks
-check_repository_message "" "mongodb" "MongoDB"
 
 # Install Package
 subheader "Installing Package..."

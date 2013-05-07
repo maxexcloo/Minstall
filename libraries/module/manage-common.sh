@@ -2,10 +2,7 @@
 # Common Functions For Module Category: Manage
 
 # Module Functions
-function module-manage-common() {
-	# Clean Common Function
-	module-clean-common
-
+function manage-common() {
 	#####################
 	## Check Functions ##
 	#####################
@@ -15,6 +12,7 @@ function module-manage-common() {
 		if [ $USER = 0 ]; then
 			# Print Message
 			error "No users in user array. Aborting."
+
 			# Exit Loop
 			break
 		fi
@@ -25,6 +23,7 @@ function module-manage-common() {
 		if [ ! -d /home/$USER ]; then
 			# Print Message
 			echo "Invalid user ($USER)."
+
 			# Continue In Array
 			continue
 		fi

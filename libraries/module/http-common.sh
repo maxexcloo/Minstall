@@ -2,10 +2,7 @@
 # Common Functions For Module Category: Manage HTTP
 
 # Module Functions
-function module-manage-http-common() {
-	# Check Package
-	check_package_message "" "nginx" "install-http-nginx"
-
+function http-common() {
 	#################
 	## Check Loops ##
 	#################
@@ -29,11 +26,11 @@ function module-manage-http-common() {
 		while true; do
 			# Take User Input
 			read -p "Please enter a user name: " USER
+
 			# Check If User Directory Exists
 			if [ -d /home/$USER ]; then
 				if [ ! -d /home/$USER/http ]; then
 					warning "User valid but no HTTP directory was found, run the manage user module to fix and then retry."
-					# Continue Loop
 					continue
 				fi
 				break
@@ -50,9 +47,7 @@ function module-manage-http-common() {
 	# Check Directory
 	manage-http-check-directory() {
 		if [ ! -f /etc/nginx/hosts.d/$USER-$HOST_DIR.conf ]; then
-			# Print Warning
 			warning "The virtual host configuration file does not exist (/etc/nginx/hosts.d/$USER-$HOST_DIR.conf), run this module again and re-enter the information!"
-			# Continue Loop
 			continue
 		fi
 	}
@@ -72,9 +67,7 @@ function module-manage-http-common() {
 	# Check Host Existence
 	manage-http-check-host-existence() {
 		if [ -f /etc/nginx/hosts.d/$USER-$HOST_DIR.conf ]; then
-			# Print Warning
 			warning "This virtual host already exists, please use the manage-manage-host module to edit it!"
-			# Continue Loop
 			continue
 		fi
 	}

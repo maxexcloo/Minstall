@@ -1,11 +1,11 @@
 #!/bin/bash
 # Install (Database): PostgreSQL
 
-# Package List Update Question
-package_update_question
-
 # Repository Checks
 check_repository_message "" "postgresql" "PostgreSQL"
+
+# Package List Update Question
+package_update_question
 
 # Install Package
 subheader "Installing Package..."

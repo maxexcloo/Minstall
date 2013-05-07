@@ -14,4 +14,4 @@ subheader "Cleaning Package Cache..."
 package_clean
 
 # Clean Common Functions
-module-clean-common
+clean-common
