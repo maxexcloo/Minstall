@@ -38,7 +38,7 @@ cat $MODULEPATH/$MODULE/$DISTRIBUTION-$VERSION/custom >> temp.packages.list
 sort -o temp.packages.list temp.packages.list
 
 # Run Pre Install Commands
-source $MODULEPATH/$MODULE/$DISTRIBUTION-$VERSION/script-install.sh
+source $MODULEPATH/$MODULE/$DISTRIBUTION-$VERSION/script-pre.sh
 
 # Clean Packages
 subheader "Cleaning Packages..."
@@ -62,4 +62,4 @@ package_clean_list
 
 # Show Warnings
 warning "All SSH Servers have been uninstalled! Be sure to install an SSH server again using the modules provided (e.g install-ssh)!"
-warning "Also, it is recommend that you restart your server after installing an SSH server to ensure everything is functional (due to kernel updates and such) and to ensure that all changes have been correctly applied."
+warning "Also, it is recommend that you restart your server after installing an SSH server to ensure everything is functional and to ensure that all changes have been correctly applied."

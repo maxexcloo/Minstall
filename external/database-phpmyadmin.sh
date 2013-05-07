@@ -1,5 +1,5 @@
 #!/bin/bash
-# Basic phpMyAdmin Installer.
+# Basic phpMyAdmin Installer
 
 ###############
 ## Variables ##
@@ -11,11 +11,11 @@ USER="main"
 # Virtual Host
 HOST="host.example.com"
 
-# Directory Under Virtual Host Where Script Will Be Installed, Leave Empty For Installation Into Virtual Host Root
+# Directory Under Virtual Host In Which Script Will Be Installed, Leave Empty For Installation Into Virtual Host Root
 DIRECTORY="phpmyadmin"
 
 # Script URL
-URL="http://www.sourceforge.net/projects/phpmyadmin/files/phpMyAdmin/3.5.7/phpMyAdmin-3.5.7-english.tar.gz/download"
+URL="http://www.sourceforge.net/projects/phpmyadmin/files/phpMyAdmin/4.0.0/phpMyAdmin-4.0.0-english.tar.gz/download"
 
 ###############
 ## Functions ##

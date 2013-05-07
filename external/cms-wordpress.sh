@@ -1,5 +1,5 @@
 #!/bin/bash
-# Basic Adminer Installer
+# Basic phpMyAdmin Installer
 
 ###############
 ## Variables ##
@@ -12,16 +12,10 @@ USER="main"
 HOST="host.example.com"
 
 # Directory Under Virtual Host In Which Script Will Be Installed, Leave Empty For Installation Into Virtual Host Root
-DIRECTORY="adminer"
-
-# Script File Name
-NAME="index.php"
+DIRECTORY="wordpress"
 
 # Script URL
-URL="http://www.sourceforge.net/projects/adminer/files/Adminer/Adminer 3.6.4/adminer-3.6.4.php/download"
-
-# Theme URL, Leave Empty For Default
-THEME="http://raw.github.com/vrana/adminer/master/designs/pokorny/adminer.css"
+URL="http://www.wordpress.org/latest.tar.gz"
 
 ############
 ## Script ##
@@ -40,13 +34,16 @@ if [[ $DIRECTORY != "" ]]; then
 fi
 
 # Download Script
-wget -O $NAME "$URL"
+wget -O wordpress.tar.gz "$URL"
 
-# Check If Theme Variable Empty
-if [[ $THEME != "" ]]; then
-	# Download Theme
-	wget -O adminer.css "$THEME"
-fi
+# Extract Script
+tar xfvz wordpress.tar.gz
+
+# Move Script
+mv wordpress/* .
+
+# Clean Useless Files
+rm -rf license.txt readme.html
 
 # Update Owner
 chown -R $USER:$USER .
