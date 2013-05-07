@@ -21,11 +21,9 @@ MODULE=install-terminal-dropbear
 subheader "Installing Package..."
 package_install dropbear
 
-# Check Distribution
-if [ $DISTRIBUTION = "debian" ] || [ $DISTRIBUTION = "ubuntu" ]; then
-	subheader "Copying Configuration..."
-	cp -r $MODULEPATH/$MODULE/etc/* /etc/default/
-fi
+# Copy Configuration
+subheader "Copying Configuration..."
+cp -r $MODULEPATH/$MODULE/etc/* /etc/
 
 # Install OpenSSH SFTP Support
 subheader "Installing OpenSSH SFTP Support..."
@@ -33,7 +31,6 @@ source $MODULEPATH/install-terminal-openssh/init.sh
 
 # Remove OpenSSH Daemon
 subheader "Removing OpenSSH Daemon..."
-daemon_manage ssh restart
 daemon_manage ssh stop
 
 # Restart Daemon

@@ -25,7 +25,11 @@ package_install openssh-server
 
 # Copy Configuration
 subheader "Copying Configuration..."
-cp -r $MODULEPATH/$MODULE/etc/* /etc/ssh/
+cp -r $MODULEPATH/$MODULE/etc/* /etc/
+
+# Creating Groups
+addgroup sftp-access
+addgroup ssh-access
 
 # Restart Daemon
 subheader "Restarting Daemon..."

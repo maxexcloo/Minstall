@@ -1,0 +1,14 @@
+AllowGroups sftp-access ssh-access
+ChallengeResponseAuthentication no
+Protocol 2
+UsePAM yes
+
+AllowUsers root
+PermitRootLogin no
+Port 22
+Subsystem sftp /usr/lib/openssh/sftp-server -u 0007
+
+Match Group sftp-access
+	AllowTcpForwarding no
+	ChrootDirectory /home/%u
+	ForceCommand internal-sftp
