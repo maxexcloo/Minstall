@@ -39,10 +39,10 @@ if [ $UNATTENDED = 0 ]; then
 # Unattended Mode
 else
 	# Define Arrays
-	USERLIST=$(read_var_module user),
-	PASSLIST=$(read_var_module pass),
-	HTTPLIST=$(read_var_module http),
-	PERMLIST=$(read_var_module perm),
+	USERLIST=$(read_variable_module user),
+	PASSLIST=$(read_variable_module pass),
+	HTTPLIST=$(read_variable_module http),
+	PERMLIST=$(read_variable_module perm),
 
 	# Loop Through Users
 	while echo $USERLIST | grep -q \,; do

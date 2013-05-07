@@ -13,10 +13,10 @@ list() {
 	base=$(basename $1)
 
 	# Find File Name
-	filename=${base%.*}
+	file=${base%.*}
 
 	# Print Module Name
-	echo -en "\e[1;32m$filename:\e[0m "
+	echo -en "\e[1;32m$file:\e[0m "
 
 	# Print Description
 	echo $(describe $1)

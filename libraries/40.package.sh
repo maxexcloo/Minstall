@@ -1,5 +1,5 @@
 #!/bin/bash
-# Functions For Managing Package Cleaning/Updating
+# Functions For Managing Package List Updates
 
 # Set Package List Update Variable
 PACKAGE_LIST_UPDATE=0
@@ -9,7 +9,7 @@ package_update_question() {
 	# Check If Package List Update Has Been Run Previously
 	if [ $PACKAGE_LIST_UPDATE = 0 ]; then
 		# Ask Question
-		if question --default yes "Do you want to update the package list? (Y/n)" || [[ $UNATTENDED = 1 && $(read_var minstall__package_update) = 1 ]]; then
+		if question --default yes "Do you want to update the package list? (Y/n)" || [[ $UNATTENDED = 1 && $(read_variable minstall__package_update) = 1 ]]; then
 			# Update Package Lists
 			package_update
 		fi

@@ -2,7 +2,7 @@
 # Functions For Configuration Parsing
 
 # INI Variable Tester
-read_var() {
+read_variable() {
 	# Check If Variable Exists
 	if [[ $(eval "echo \${INI__$1}") = "" ]]; then
 		# Echo False
@@ -14,7 +14,7 @@ read_var() {
 }
 
 # INI Variable Tester (Module)
-read_var_module() {
+read_variable_module() {
 	# If Unattended Mode, Check Variables
 	if [ $UNATTENDED = 1 ]; then
 		# Check If Variable Exists
@@ -32,7 +32,7 @@ read_var_module() {
 }
 
 # INI Variable Tester (Module Variable)
-read_var_module_var() {
+read_variable_module_variable() {
 	# Check If Variable Exists
 	if [[ $(eval "echo \${INI__$(safe_string $MODULE)__$1}") = "" ]]; then
 		# Echo False

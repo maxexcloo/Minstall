@@ -6,12 +6,12 @@ if question --default yes "Do you want to optimise the default repositories? War
 	subheader "Optimising Default Repositories..."
 
 	# Check Mirror
-	if [ $(read_var_module_var mirror_debian) = 0 ]; then
+	if [ $(read_variable_module_variable mirror_debian) = 0 ]; then
 		# Set Mirror
 		MIRROR="http://ftp.us.debian.org/debian/"
 	else
 		# Set Mirror
-		MIRROR=$(read_var_module_var mirror_debian)
+		MIRROR=$(read_variable_module_variable mirror_debian)
 	fi
 
 	# Update Squeeze Repository

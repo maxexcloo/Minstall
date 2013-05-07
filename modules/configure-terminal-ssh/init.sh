@@ -2,7 +2,7 @@
 # Configure (Terminal): SSH Configuration
 
 # Enable Root SSH Login
-if question --default yes "Do you want to enable root SSH login? (Y/n)" || [ $(read_var_module root_login) = 1 ]; then
+if question --default yes "Do you want to enable root SSH login? (Y/n)" || [ $(read_variable_module root_login) = 1 ]; then
 	subheader "Enabling Root SSH Login..."
 	# Enable Root SSH Login For Dropbear
 	if check_package "dropbear"; then
@@ -29,7 +29,7 @@ else
 fi
 
 # Enable SFTP Umask Privacy
-if question --default yes "Do you want to enable private SFTP umask settings (umask 0007 on SFTP file uploads/folder creation)? (Y/n)" || [ $(read_var_module sftp_umask) = 1 ]; then
+if question --default yes "Do you want to enable private SFTP umask settings (umask 0007 on SFTP file uploads/folder creation)? (Y/n)" || [ $(read_variable_module sftp_umask) = 1 ]; then
 	subheader "Enabling SFTP Umask Privacy..."
 	if check_package "openssh-server"; then
 		sed -i "s/sftp-serve.*/sftp-server -u 0007/g" /etc/ssh/sshd_config

@@ -37,10 +37,10 @@ This script contains several modules designed to help you set up your server how
 
 To download Minstall run the following command under root:
 
-	wget -O /opt/minstall.tar.gz --no-check-certificate http://www.github.com/KnightSwarm/Minstall/archive/master.tar.gz; mkdir /opt/minstall/; tar --directory=/opt/minstall/ --file=/opt/minstall.tar.gz --strip-components=1 -v -x -z; mv /opt/minstall/extra/launcher.sh /usr/bin/minstall
+	wget -O /opt/minstall.tar.gz --no-check-certificate http://www.github.com/KnightSwarm/Minstall/archive/master.tar.gz; mkdir /opt/minstall/; tar -C /opt/minstall -f /opt/minstall.tar.gz --strip-components 1 -v -x -z; ln -s /opt/minstall/libraries/default/launcher.sh /usr/local/bin/minstall
 
 **Remove Minstall**
 
 To remove the Minstall script run the following command under root:
 
-	rm -rf /opt/minstall/ /usr/bin/minstall
+	rm -rf /opt/minstall /opt/minstall.tar.gz /usr/bin/minstall

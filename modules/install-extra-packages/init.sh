@@ -8,7 +8,7 @@ package_update_question
 subheader "Installing Extra Packages..."
 
 # Define Packages
-PACKAGELIST=$(read_var_module_var packages_$DISTRIBUTION),
+PACKAGELIST=$(read_variable_module_variable packages_$DISTRIBUTION),
 
 # Loop Through Packages
 while echo $PACKAGELIST | grep -q \,; do

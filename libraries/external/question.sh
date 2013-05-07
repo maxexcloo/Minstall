@@ -80,7 +80,7 @@ function question() {
 	fi
 }
 
-# Ask Question Numerical
+# Ask Question (Number)
 function question_number() {
 	if [ $UNATTENDED = 0 ]; then
 		while true; do

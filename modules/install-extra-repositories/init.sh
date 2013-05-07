@@ -17,7 +17,7 @@ if [ $UNATTENDED = 0 ]; then
 # Unattended Mode
 else
 	# Define Repositories
-	REPOLIST=$(read_var_module repositories_$DISTRIBUTION_$VERSION),
+	REPOLIST=$(read_variable_module repositories_$DISTRIBUTION_$VERSION),
 
 	# Loop Through Repositories
 	while echo $REPOLIST | grep -q \,; do

@@ -2,7 +2,7 @@
 # Configure (General): User Files/Settings
 
 # Clean & Update Default User Files
-if question --default yes "Do you want to clean and update default user files (in /etc/skel)? (Y/n)" || [ $(read_var_module clean_default_skel) = 1 ]; then
+if question --default yes "Do you want to clean and update default user files (in /etc/skel)? (Y/n)" || [ $(read_variable_module clean_default_skel) = 1 ]; then
 	subheader "Cleaning Default User Files..."
 	# Remove Skel Files
 	rm -rf /etc/skel/.??* /etc/skel/* &> /dev/null
@@ -21,7 +21,7 @@ if question --default yes "Do you want to clean and update default user files (i
 fi
 
 # Clean & Wipe Root Crontab
-if question --default yes "Do you want to clean and wipe the root crontab? (Y/n)" || [ $(read_var_module clean_root_crontab) = 1 ]; then
+if question --default yes "Do you want to clean and wipe the root crontab? (Y/n)" || [ $(read_variable_module clean_root_crontab) = 1 ]; then
 	subheader "Cleaning Root Crontab..."
 	echo -n "" > temp
 	crontab -u root temp

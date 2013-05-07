@@ -38,9 +38,9 @@ if [ $UNATTENDED = 0 ]; then
 # Unattended Mode
 else
 	# Define Arrays
-	USERLIST=$(read_var_module user),
-	HOSTLIST=$(read_var_module host),
-	RMLIST=$(read_var_module rm),
+	USERLIST=$(read_variable_module user),
+	HOSTLIST=$(read_variable_module host),
+	RMLIST=$(read_variable_module rm),
 
 	# Loop Through Users
 	while echo $USERLIST | grep -q \,; do

@@ -2,7 +2,7 @@
 # Configure (General): System Configuration
 
 # Enable BASH History
-if question --default no "Do you want to enable BASH history? (y/N)" || [ $(read_var_module bash_history) = 1 ]; then
+if question --default no "Do you want to enable BASH history? (y/N)" || [ $(read_variable_module bash_history) = 1 ]; then
 	subheader "Enabling BASH History..."
 	rm /etc/profile.d/disable_history.sh &> /dev/null
 # Disable BASH History
@@ -12,7 +12,7 @@ else
 fi
 
 # Enable Additional Getty Instances
-if question --default no "Do you want to enable extra getty instances (uneeded on virtual machines, can save memory if disabled)? (y/N)" || [ $(read_var_module getty_extra) = 1 ]; then
+if question --default no "Do you want to enable extra getty instances (uneeded on virtual machines, can save memory if disabled)? (y/N)" || [ $(read_variable_module getty_extra) = 1 ]; then
 	subheader "Enabling Additional Getty Instances..."
 	if [ $DISTRIBUTION = "debian" ]; then
 		sed -e 's/^#\([2-6].*getty.*\)/\1/' -i /etc/inittab
@@ -30,7 +30,7 @@ else
 fi
 
 # Change Default System Shell
-if question --default yes "Do you want to change the default system shell? (Y/n)" || [ $(read_var_module shell) != 0 ]; then
+if question --default yes "Do you want to change the default system shell? (Y/n)" || [ $(read_variable_module shell) != 0 ]; then
 	subheader "Changing Default System Shell..."
 	# Attended Mode
 	if [ $UNATTENDED = 0 ]; then
@@ -38,13 +38,13 @@ if question --default yes "Do you want to change the default system shell? (Y/n)
 	# Unattended Mode
 	else
 		# Set BASH As Default
-		if [ $(read_var_module shell) = "bash" ]; then
+		if [ $(read_variable_module shell) = "bash" ]; then
 			ln -fs bash /bin/sh
 			ln -fs dash /bin/sh.distrib
 			ln -fs bash.1.gz /usr/share/man/man1/sh.1.gz
 			ln -fs dash.1.gz /usr/share/man/man1/sh.distrib.1.gz
 		# Set DASH As Default
-		elif [ $(read_var_module shell) = "dash" ]; then
+		elif [ $(read_variable_module shell) = "dash" ]; then
 			ln -fs dash /bin/sh
 			ln -fs bash /bin/sh.distrib
 			ln -fs dash.1.gz /usr/share/man/man1/sh.1.gz
@@ -57,7 +57,7 @@ if question --default yes "Do you want to change the default system shell? (Y/n)
 fi
 
 # Change System Timezone
-if question --default yes "Do you want to change the system timezone? (Y/n)" || [ $(read_var_module timezone) != 0 ]; then
+if question --default yes "Do you want to change the system timezone? (Y/n)" || [ $(read_variable_module timezone) != 0 ]; then
 	subheader "Changing System Timezone..."
 	# Attended Mode
 	if [ $UNATTENDED = 0 ]; then
@@ -66,10 +66,10 @@ if question --default yes "Do you want to change the system timezone? (Y/n)" || 
 	# Unattended Mode
 	else
 		# Check Timezone Existance
-		if [ -f /usr/share/zoneinfo/$(read_var_module timezone) ]; then
+		if [ -f /usr/share/zoneinfo/$(read_variable_module timezone) ]; then
 			# Set Timezone From File
-			cp /usr/share/zoneinfo/$(read_var_module timezone) /etc/localtime
-			echo $(read_var_module timezone) > /etc/timezone
+			cp /usr/share/zoneinfo/$(read_variable_module timezone) /etc/localtime
+			echo $(read_variable_module timezone) > /etc/timezone
 			dpkg-reconfigure -f noninteractive tzdata
 		# Unsupported Timezone
 		else

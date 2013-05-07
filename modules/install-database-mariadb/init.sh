@@ -24,7 +24,7 @@ if [ $UNATTENDED = 1 ]; then
 	sleep 2
 
 	# Set Password
-	mysql -u root -e "UPDATE mysql.user SET Password=PASSWORD('$(read_var_module root_password)') WHERE User='root'; FLUSH PRIVILEGES;"
+	mysql -u root -e "UPDATE mysql.user SET Password=PASSWORD('$(read_variable_module root_password)') WHERE User='root'; FLUSH PRIVILEGES;"
 
 	# Stop Daemon
 	killall mysqld

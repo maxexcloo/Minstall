@@ -20,6 +20,18 @@ for file in $LIBRARYPATH/*.sh; do
 	source $file
 done
 
+# Load Module Specific Libraries
+for file in $LIBRARYPATH/module/*.sh; do
+	# Source Libraries
+	source $file
+done
+
+# Load Platform Specific Libraries
+for file in $LIBRARYPATH/platform/*.$DISTRIBUTION.sh; do
+	# Source Libraries
+	source $file
+done
+
 #####################
 ## Parse Arguments ##
 #####################
@@ -89,7 +101,7 @@ done
 # Setup Mode
 if [ $SETUP = 1 ]; then
 	# Create Base Configuration File
-	cp extra/config.ini $CONFIGFILE
+	cp $LIBRARYPATH/default/config.ini $CONFIGFILE
 
 	# Loop Through Modules
 	for MODULE in $MODULEPATH/*/config.ini; do
@@ -135,7 +147,7 @@ while echo $MODULELIST | grep -q \,; do
 	fi
 
 	# Debug Pause
-	if [ $(read_var minstall__debug) = 1 ]; then
+	if [ $(read_variable minstall__debug) = 1 ]; then
 		# Wait For User Input
 		read -p "Press any key to continue..."
 	fi

@@ -53,11 +53,11 @@ if [ $UNATTENDED = 0 ]; then
 # Unattended Mode
 else
 	# Define Arrays
-	USERLIST=$(read_var_module user),
-	HOSTLIST=$(read_var_module host),
-	DEFAULTLIST=$(read_var_module default),
-	PHPLIST=$(read_var_module php),
-	SSLLIST=$(read_var_module ssl),
+	USERLIST=$(read_variable_module user),
+	HOSTLIST=$(read_variable_module host),
+	DEFAULTLIST=$(read_variable_module default),
+	PHPLIST=$(read_variable_module php),
+	SSLLIST=$(read_variable_module ssl),
 
 	# Loop Through Users
 	while echo $USERLIST | grep -q \,; do

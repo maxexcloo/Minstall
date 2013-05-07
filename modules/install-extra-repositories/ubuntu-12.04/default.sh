@@ -6,12 +6,12 @@ if question --default yes "Do you want to optimise the default repositories? War
 	subheader "Optimising Default Repositories..."
 
 	# Check Mirror
-	if [ $(read_var_module_var mirror_ubuntu) = 0 ]; then
+	if [ $(read_variable_module_variable mirror_ubuntu) = 0 ]; then
 		# Set Mirror
 		MIRROR="http://archive.ubuntu.com/ubuntu/"
 	else
 		# Set Mirror
-		MIRROR=$(read_var_module_var mirror_ubuntu)
+		MIRROR=$(read_variable_module_variable mirror_ubuntu)
 	fi
 
 	# Update Precise Repository
