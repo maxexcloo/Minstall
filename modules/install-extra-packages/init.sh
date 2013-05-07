@@ -8,18 +8,18 @@ package_update_question
 subheader "Installing Extra Packages..."
 
 # Define Packages
-PACKAGELIST=$(read_variable_module_variable packages_$DISTRIBUTION),
+PACKAGELIST=$(read_variable_module_variable packages),
 
 # Loop Through Packages
 while echo $PACKAGELIST | grep -q \,; do
 	# Define Current Package
-	FILE=${PACKAGELIST%%\,*}
+	PACKAGE=${PACKAGELIST%%\,*}
 
 	# Remove Current Package From List
 	PACKAGELIST=${PACKAGELIST#*\,}
 
 	# Install Currently Selected Package
-	package_install $FILE
+	package_install $PACKAGE
 done
 
 # Unset Array
