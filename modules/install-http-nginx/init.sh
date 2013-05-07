@@ -17,17 +17,9 @@ fi
 subheader "Installing Package..."
 package_install nginx
 
-# Remove System Sites
-subheader "Removing System Sites..."
-rm -rf /etc/nginx/sites-* &> /dev/null
-
 # Copy Configuration
 subheader "Copying Configuration..."
-cp -r $MODULEPATH/$MODULE/etc/* /etc/nginx/
-
-# Move System Configuration
-subheader "Moving System Configuration..."
-mv /etc/nginx/mime.types /etc/nginx/nginx.d/mime.conf &> /dev/null
+cp -rf $MODULEPATH/$MODULE/etc/nginx/* /etc/nginx/
 
 # Create Caching Directory
 subheader "Creating Caching Directory..."
@@ -43,10 +35,20 @@ chmod -R o= /etc/nginx/ssl.d
 
 # Set Default Host Root
 if [ $DISTRIBUTION = "debian" ]; then
-	sed -i "s/root path/root \/usr\/share\/nginx\/html/g" /etc/nginx/hosts.d/default*
+	sed -i "s/root path/root \/usr\/share\/nginx\/html/g" /etc/nginx/hosts.d/default.conf
 elif [ $DISTRIBUTION = "ubuntu" ]; then
-	sed -i "s/root path/root \/usr\/share\/nginx\/www/g" /etc/nginx/hosts.d/default*
+	sed -i "s/root path/root \/usr\/share\/nginx\/www/g" /etc/nginx/hosts.d/default.conf
 fi
+
+# Set System Host Root
+if [ $DISTRIBUTION = "debian" ]; then
+	sed -i "s/root path/root \/usr\/share\/nginx\/html/g" /etc/nginx/hosts.d/system.conf
+elif [ $DISTRIBUTION = "ubuntu" ]; then
+	sed -i "s/root path/root \/usr\/share\/nginx\/www/g" /etc/nginx/hosts.d/system.conf
+fi
+
+# Clean Common
+clean-common
 
 # Restart Daemon
 subheader "Restarting Daemon..."

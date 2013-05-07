@@ -13,5 +13,5 @@ package_upgrade
 subheader "Cleaning Package Cache..."
 package_clean
 
-# Clean Common Functions
+# Clean Common
 clean-common

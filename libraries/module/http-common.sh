@@ -133,8 +133,8 @@ cat >> /etc/nginx/hosts.d/$USER-$HOST_DIR-ssl.conf <<END
 server {
 	listen 443 ssl;
 	server_name $HOST_DIR;
-	ssl_certificate /etc/ssl/http/self.pem;
-	ssl_certificate_key /etc/ssl/http/self.key;
+	ssl_certificate /etc/nginx/ssl.d/self.pem;
+	ssl_certificate_key /etc/nginx/ssl.d/self.key;
 
 	rewrite ^/(.*) https://$HOST/\$1 permanent;
 }
@@ -148,8 +148,8 @@ cat >> /etc/nginx/hosts.d/$USER-$HOST_DIR-ssl.conf <<END
 server {
 	listen 443 ssl;
 	server_name $HOST;
-	ssl_certificate /etc/ssl/http/self.pem;
-	ssl_certificate_key /etc/ssl/http/self.key;
+	ssl_certificate /etc/nginx/ssl.d/self.pem;
+	ssl_certificate_key /etc/nginx/ssl.d/self.key;
 
 	access_log off;
 	error_log /home/$USER/http/logs/$HOST_DIR.log;
@@ -215,8 +215,8 @@ END
 cat > /etc/nginx/hosts.d/default-ssl.conf <<END
 server {
 	listen 443 default_server ssl;
-	ssl_certificate /etc/ssl/http/self.pem;
-	ssl_certificate_key /etc/ssl/http/self.key;
+	ssl_certificate /etc/nginx/ssl.d/self.pem;
+	ssl_certificate_key /etc/nginx/ssl.d/self.key;
 	rewrite ^/(.*) https://$HOST/\$1 permanent;
 }
 END

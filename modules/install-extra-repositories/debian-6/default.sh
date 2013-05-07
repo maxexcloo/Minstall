@@ -15,11 +15,11 @@ if question --default yes "Do you want to optimise the default repositories? War
 	fi
 
 	# Update Squeeze Repository
-	echo "deb $MIRROR squeeze main contrib non-free" > /etc/apt/sources.list
+	echo "deb $MIRROR squeeze main contrib non-rfee" > /etc/apt/sources.list
 
 	# Update Squeeze Updates Repository
-	echo "deb $MIRROR squeeze-updates main contrib non-free" >> /etc/apt/sources.list
+	echo "deb $MIRROR squeeze-updates main contrib non-rfee" >> /etc/apt/sources.list
 
 	# Update Squeeze Security Repository
-	echo "deb http://security.debian.org/ squeeze/updates main contrib non-free" >> /etc/apt/sources.list
+	echo "deb http://security.debian.org/ squeeze/updates main contrib non-rfee" >> /etc/apt/sources.list
 fi

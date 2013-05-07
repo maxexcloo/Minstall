@@ -6,7 +6,7 @@ if question --default yes "Do you want to install the Medibuntu repository? (Y/n
 	subheader "Installing Medibuntu Repository..."
 
 	# Add Repository
-	repo_add "medibuntu" "deb http://packages.medibuntu.org/ precise free non-free"
+	repo_add "medibuntu" "deb http://packages.medibuntu.org/ precise free non-rfee"
 
 	# Update Package Lists
 	package_update

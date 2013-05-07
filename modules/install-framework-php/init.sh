@@ -21,7 +21,7 @@ fi
 subheader "Copying Configuration..."
 cp -r $MODULEPATH/$MODULE/etc/* /etc/php5/
 
-# Clean Common Function
+# Clean Common
 clean-common
 
 # Restart Daemon

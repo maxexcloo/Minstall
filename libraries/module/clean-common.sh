@@ -9,8 +9,8 @@ function clean-common() {
 		mkdir -p /etc/php5/fpm/pool.d &> /dev/null
 
 		# Copy Nginx Configuration
-		cp -f $MODULEPATH/install-http-nginx/etc/* /etc/nginx/ &> /dev/null
-		cp -rf $MODULEPATH/install-http-nginx/etc/conf.d/* /etc/nginx/conf.d/ &> /dev/null
+		cp -f $MODULEPATH/install-http-nginx/etc/nginx/* /etc/nginx/ &> /dev/null
+		cp -f $MODULEPATH/install-http-nginx/etc/nginx/conf.d/* /etc/nginx/conf.d/ &> /dev/null
 		mv -f /etc/nginx/mime.types /etc/nginx/nginx.d/mime.conf &> /dev/null
 	fi
 

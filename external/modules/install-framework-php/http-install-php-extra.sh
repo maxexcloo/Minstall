@@ -5,7 +5,7 @@
 module-install-http-common
 
 # Check Package
-check_package_message "" "php5-fpm" "install-framework-php"
+check_package_message "" "php5-fpm" "install-rfamework-php"
 
 # Package List Update Question
 package_update_question
