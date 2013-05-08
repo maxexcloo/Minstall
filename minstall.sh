@@ -1,12 +1,14 @@
 #!/bin/bash
 # Script Loader
 
+# Disable Ctrl+C
+trap '' 2
+
+# Change Directory
+cd $(dirname $0)
+
 # Load Variables
 source config.sh
-
-###############
-## Libraries ##
-###############
 
 # Load Libraries (External)
 for file in $LIBRARYPATH/external/*.sh; do
@@ -32,12 +34,8 @@ for file in $LIBRARYPATH/platform/*.$DISTRIBUTION.sh; do
 	source $file
 done
 
-#####################
-## Parse Arguments ##
-#####################
-
 # Check Arguments
-while getopts ":c:m:su" option; do
+while getopts ":c:hlm:su" option; do
 	# Argument List
 	case $option in
 		# Config File
@@ -58,7 +56,23 @@ while getopts ":c:m:su" option; do
 				exit
 			fi
 		;;
+		# Help
+		h)
+			# Load Help
+			source $MODULEPATH/help/init.sh
+
+			# Exit
+			exit
+		;;
 		# Module List
+		l)
+			# Load Module Listing Script
+			source $MODULEPATH/help/init.sh
+
+			# Exit
+			exit
+		;;
+		# Module Definition
 		m)
 			# Set Module List Variable
 			MODULELIST=$OPTARG,
@@ -82,7 +96,7 @@ while getopts ":c:m:su" option; do
 		# No Arguments
 		\?)
 			# Load Module Listing Script
-			source $MODULEPATH/help-modules.sh
+			source $MODULEPATH/help/init.sh
 
 			# Exit
 			exit
@@ -148,7 +162,16 @@ while echo $MODULELIST | grep -q \,; do
 
 	# Debug Pause
 	if [ $(read_variable minstall__debug) = 1 ]; then
+		# Enable Ctrl+C
+		trap 2
+
 		# Wait For User Input
-		read -p "Press any key to continue..."
+		read -p "Press any key to continue or press Ctrl+C to exit..."
+
+		# Disable Ctrl+C
+		trap '' 2
 	fi
 done
+
+# Enable Ctrl+C
+trap 2
