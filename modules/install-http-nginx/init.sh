@@ -3,6 +3,7 @@
 
 # Distribution Checks
 check_repository_message "debian" "dotdeb" "DotDeb"
+check_repository_message "ubuntu" "nginx" "Nginx"
 
 # Package List Update Question
 package_update_question
