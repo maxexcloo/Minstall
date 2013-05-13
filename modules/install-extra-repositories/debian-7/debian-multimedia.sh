@@ -6,7 +6,7 @@ if question --default yes "Do you want to install the Debian Multimedia reposito
 	subheader "Installing Debian Multimedia Repository..."
 
 	# Add Repository
-	repo_add "debian-multimedia" "deb http://www.deb-multimedia.org/ wheezy main non-rfee"
+	repo_add "debian-multimedia" "deb http://www.deb-multimedia.org/ wheezy main non-free"
 
 	# Update Package Lists
 	package_update
