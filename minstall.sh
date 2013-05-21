@@ -67,7 +67,7 @@ while getopts ":c:hlm:su" option; do
 		# Module List
 		l)
 			# Load Module Listing Script
-			source $MODULEPATH/help/init.sh
+			source $MODULEPATH/help-modules/init.sh
 
 			# Exit
 			exit
@@ -113,17 +113,20 @@ while getopts ":c:hlm:su" option; do
 done
 
 # Setup Mode
-if [ $SETUP = 1 ]; then
+if [[ -n "$SETUP" ]]; then
 	# Create Base Configuration File
 	cp $LIBRARYPATH/default/config.ini $CONFIGFILE
 
 	# Loop Through Modules
 	for MODULE in $MODULEPATH/*/config.ini; do
-		# Append Space
-		echo >> $CONFIGFILE
+		# Check If File Empty
+		if [ -s $MODULE ]; then
+			# Append Space
+			echo >> $CONFIGFILE
 
-		# Append Module Configuration
-		cat $MODULEPATH/$MODULE/config.ini >> $CONFIGFILE
+			# Append Module Configuration
+			cat $MODULE >> $CONFIGFILE
+		fi
 	done
 
 	# Exit
