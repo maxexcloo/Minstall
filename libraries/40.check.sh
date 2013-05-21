@@ -4,7 +4,7 @@
 # Combined Package Check Function
 check_package_message() {
 	# Distribution Test
-	if [ $1 = $DISTRIBUTION || $1 = $DISTRIBUTION-$VERSION || $1 = "" ]; then
+	if [ $1 == "" ] || [ $1 == $DISTRIBUTION ] || [ $1 == $DISTRIBUTION-$VERSION ]; then
 		# Check Package
 		if ! check_package $2; then
 			# Print Warning
@@ -25,7 +25,7 @@ check_package_message() {
 # Combined Repository Check Function
 check_repository_message() {
 	# Distribution Test
-	if [ $1 = $DISTRIBUTION || $1 = $DISTRIBUTION-$VERSION || $1 = "" ]; then
+	if [ $1 == "" ] || [ $1 == $DISTRIBUTION ] || [ $1 == $DISTRIBUTION-$VERSION ]; then
 		# Check Package
 		if ! check_repository $2; then
 			# Print Warning

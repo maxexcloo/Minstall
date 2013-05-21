@@ -43,4 +43,4 @@ To download Minstall run the following command under root:
 
 To remove the Minstall script run the following command under root:
 
-	rm -rf /opt/minstall /opt/minstall.tar.gz /usr/bin/minstall
+	rm -rf /opt/minstall /opt/minstall.tar.gz /usr/local/bin/minstall
