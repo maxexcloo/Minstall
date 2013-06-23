@@ -1,8 +1,11 @@
 #!/bin/bash
 # Functions For Cleaning System Packages/Files
 
-# Clean System Packages
-function clean_packages() {}
+# Clean Daemons
+function clean_daemons() {}
 
-# Clean Unused Files
+# Clean Files
 function clean_files() {}
+
+# Clean Packages
+function clean_packages() {}

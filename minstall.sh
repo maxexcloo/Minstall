@@ -163,6 +163,9 @@ while echo $MODULELIST | grep -q \,; do
 		fi
 	fi
 
+	# Remove Temporary Files
+	rm temp.*
+
 	# Debug Pause
 	if [ $(read_variable minstall__debug) = 1 ]; then
 		# Enable Ctrl+C

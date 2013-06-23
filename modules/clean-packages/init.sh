@@ -32,13 +32,17 @@ if [ -f $MODULEPATH/$MODULE/$DISTRIBUTION-$VERSION/specific-$PLATFORM-$ARCHITECT
 fi
 
 # Append Custom Package List
-cat $MODULEPATH/$MODULE/$DISTRIBUTION-$VERSION/custom >> temp.packages.list
+cat $MODULEPATH/$MODULE/custom/custom >> temp.packages.list
 
 # Sort Package List
 sort -o temp.packages.list temp.packages.list
 
 # Run Pre Install Commands
 source $MODULEPATH/$MODULE/$DISTRIBUTION-$VERSION/script-pre.sh
+
+# Clean Daemons
+subheader "Cleaning Daemons..."
+clean_daemons
 
 # Clean Packages
 subheader "Cleaning Packages..."
@@ -50,9 +54,6 @@ clean_files
 
 # Run Post Install Commands
 source $MODULEPATH/$MODULE/$DISTRIBUTION-$VERSION/script-post.sh
-
-# Remove Temporary Files
-rm temp.*
 
 # Clean Packages
 package_clean

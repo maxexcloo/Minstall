@@ -1,5 +1,5 @@
 #!/bin/bash
-# Functions For Configuration Parsing
+# Configuration Parsing
 
 # INI Variable Tester
 read_variable() {

@@ -1,5 +1,5 @@
 #!/bin/bash
-# Functions For Displaying Information About Modules
+# Module Information
 
 # Print Module Description
 describe() {

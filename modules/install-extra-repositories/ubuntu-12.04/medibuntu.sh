@@ -15,5 +15,5 @@ if question --default yes "Do you want to install the Medibuntu repository? (Y/n
 	apt-get -qy --allow-unauthenticated install medibuntu-keyring
 
 	# Add Package To Package List
-	echo "medibuntu-keyring install" >> $MODULEPATH/clean-packages/$DISTRIBUTION/custom
+	echo "medibuntu-keyring install" >> $MODULEPATH/clean-packages/custom/custom
 fi

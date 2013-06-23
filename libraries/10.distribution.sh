@@ -1,5 +1,5 @@
 #!/bin/bash
-# Functions For Detecting Current Distribution
+# Distribution Detection
 
 # Set Defaults
 DISTRIBUTION=none

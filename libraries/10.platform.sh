@@ -1,5 +1,5 @@
 #!/bin/bash
-# Functions For Detecting Current Architecture & Platform
+# Architecture & Platform Detection
 
 # Set Defaults
 ARCHITECTURE=none

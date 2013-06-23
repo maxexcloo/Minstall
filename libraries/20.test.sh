@@ -1,5 +1,5 @@
 #!/bin/bash
-# Compatibility Checks
+# Compatibility Tests
 
 # Distribution Check
 if [ $DISTRIBUTION = "none" ]; then

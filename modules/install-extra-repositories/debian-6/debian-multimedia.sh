@@ -15,5 +15,5 @@ if question --default yes "Do you want to install the Debian Multimedia reposito
 	apt-get -qy --allow-unauthenticated install deb-multimedia-keyring
 
 	# Add Package To Package List
-	echo "deb-multimedia-keyring install" >> $MODULEPATH/clean-packages/$DISTRIBUTION-$VERSION/custom
+	echo "deb-multimedia-keyring install" >> $MODULEPATH/clean-packages/custom/custom
 fi

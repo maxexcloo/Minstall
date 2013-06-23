@@ -26,6 +26,7 @@ function package_remove() {
 		DEBIAN_FRONTEND=noninteractive apt-get -qy purge "$*"
 	else
 		apt-get -qy purge "$*"
+	fi
 }
 
 # Update Package List

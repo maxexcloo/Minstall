@@ -1,5 +1,5 @@
 #!/bin/bash
-# Functions For Managing Package List Updates
+# Package List Update Management
 
 # Set Package List Update Variable
 PACKAGE_LIST_UPDATE=0

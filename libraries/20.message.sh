@@ -1,5 +1,5 @@
 #!/bin/bash
-# Functions For Displaying Headers & Messages
+# Headers & Messages
 
 # Print Header
 header() {

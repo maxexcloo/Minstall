@@ -1,5 +1,5 @@
 #!/bin/bash
-# Functions For Checking Packages & Repositories
+# Package & Repository Checks
 
 # Combined Package Check Function
 check_package_message() {
