@@ -1,5 +1,5 @@
 #!/bin/bash
-# Install (Terminal): OpenSSH Server/Client
+# Install (Terminal): OpenSSH Server
 
 # Package List Update Question
 package_update_question
@@ -28,8 +28,8 @@ subheader "Copying Configuration..."
 cp -r $MODULEPATH/$MODULE/etc/* /etc/
 
 # Creating Groups
-addgroup sftp-access
-addgroup ssh-access
+addgroup sftp
+addgroup ssh
 
 # Restart Daemon
 subheader "Restarting Daemon..."

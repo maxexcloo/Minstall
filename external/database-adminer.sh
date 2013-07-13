@@ -18,7 +18,7 @@ DIRECTORY="adminer"
 NAME="index.php"
 
 # Script URL
-URL="http://www.sourceforge.net/projects/adminer/files/Adminer/Adminer 3.6.4/adminer-3.6.4.php/download"
+URL="http://www.sourceforge.net/projects/adminer/files/Adminer/Adminer%203.7.1/editor-3.7.1.php/download"
 
 # Theme URL, Leave Empty For Default
 THEME="http://raw.github.com/vrana/adminer/master/designs/pokorny/adminer.css"

@@ -5,5 +5,5 @@
 package_update_question
 
 # Install Package
-subheader "Installing Package..."
+subheader "Installing Python..."
 package_install python python-pip

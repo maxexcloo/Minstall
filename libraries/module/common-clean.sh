@@ -2,7 +2,7 @@
 # Common Functions For Module Category: Clean
 
 # Module Functions
-function clean-common() {
+common-clean() {
 	# Check Package
 	if check_package "nginx"; then
 		# Create PHP Directories
@@ -13,9 +13,6 @@ function clean-common() {
 		cp -f $MODULEPATH/install-http-nginx/etc/nginx/conf.d/* /etc/nginx/conf.d/ &> /dev/null
 		mv -f /etc/nginx/mime.types /etc/nginx/nginx.d/mime.conf &> /dev/null
 	fi
-
-	# Remove Nginx Default Sites
-	rm -rf /etc/nginx/sites-* &> /dev/null
 
 	# Remove PHP Default Pool
 	rm /etc/php5/fpm/pool.d/www.conf &> /dev/null

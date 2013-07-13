@@ -3,7 +3,7 @@
 
 # Distribution Checks
 check_repository_message "debian" "dotdeb" "DotDeb"
-check_repository_message "ubuntu" "nginx" "Nginx"
+check_repository_message "ubuntu" "nginx"
 
 # Package List Update Question
 package_update_question
@@ -20,7 +20,7 @@ package_install nginx
 
 # Copy Configuration
 subheader "Copying Configuration..."
-cp -rf $MODULEPATH/$MODULE/etc/nginx/* /etc/nginx/
+cp -rf $MODULEPATH/$MODULE/etc/* /etc/
 
 # Create Caching Directory
 subheader "Creating Caching Directory..."
@@ -34,22 +34,17 @@ openssl req -new -days 3650 -newkey rsa:2048 -nodes -x509 -subj "/C=/ST=/L=/O=/C
 chown -R www-data:www-data /etc/nginx/ssl.d
 chmod -R o= /etc/nginx/ssl.d
 
-# Set Default Host Root
+# Set Distribution Specific Variables
 if [ $DISTRIBUTION = "debian" ]; then
-	sed -i "s/root path/root \/usr\/share\/nginx\/html/g" /etc/nginx/hosts.d/default.conf
+	file_replace /etc/nginx/sites-available/default.conf "root path" "root /usr/share/nginx/html"
+	file_replace /etc/nginx/sites-available/system.conf "root path" "root /usr/share/nginx/html"
 elif [ $DISTRIBUTION = "ubuntu" ]; then
-	sed -i "s/root path/root \/usr\/share\/nginx\/www/g" /etc/nginx/hosts.d/default.conf
+	file_replace /etc/nginx/sites-available/default.conf "root path" "root /usr/share/nginx/www"
+	file_replace /etc/nginx/sites-available/system.conf "root path" "root /usr/share/nginx/www"
 fi
 
-# Set System Host Root
-if [ $DISTRIBUTION = "debian" ]; then
-	sed -i "s/root path/root \/usr\/share\/nginx\/html/g" /etc/nginx/hosts.d/system.conf
-elif [ $DISTRIBUTION = "ubuntu" ]; then
-	sed -i "s/root path/root \/usr\/share\/nginx\/www/g" /etc/nginx/hosts.d/system.conf
-fi
-
-# Clean Common
-clean-common
+# Common Clean
+common-clean
 
 # Restart Daemon
 subheader "Restarting Daemon..."

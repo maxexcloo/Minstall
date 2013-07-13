@@ -15,7 +15,7 @@ HOST="host.example.com"
 DIRECTORY="phpmyadmin"
 
 # Script URL
-URL="http://www.sourceforge.net/projects/phpmyadmin/files/phpMyAdmin/4.0.0/phpMyAdmin-4.0.0-english.tar.gz/download"
+URL="http://www.sourceforge.net/projects/phpmyadmin/files/phpMyAdmin/4.0.4.1/phpMyAdmin-4.0.4.1-english.tar.gz/download"
 
 ###############
 ## Functions ##

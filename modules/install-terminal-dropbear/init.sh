@@ -1,5 +1,5 @@
 #!/bin/bash
-# Install (Terminal): Dropbear SSH Server
+# Install (Terminal): Dropbear Server
 
 # Package List Update Question
 package_update_question

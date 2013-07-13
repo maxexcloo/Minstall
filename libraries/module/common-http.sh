@@ -1,8 +1,8 @@
 #!/bin/bash
-# Common Functions For Module Category: Manage HTTP
+# Common Functions For Module Category: HTTP
 
 # Module Functions
-function http-common() {
+common-http() {
 	#################
 	## Check Loops ##
 	#################
@@ -46,8 +46,8 @@ function http-common() {
 
 	# Check Directory
 	manage-http-check-directory() {
-		if [ ! -f /etc/nginx/hosts.d/$USER-$HOST_DIR.conf ]; then
-			warning "The virtual host configuration file does not exist (/etc/nginx/hosts.d/$USER-$HOST_DIR.conf), run this module again and re-enter the information!"
+		if [ ! -f /etc/nginx/sites-available/$USER-$HOST_DIR.conf ]; then
+			warning "The virtual host configuration file does not exist (/etc/nginx/sites-available/$USER-$HOST_DIR.conf), run this module again and re-enter the information!"
 			continue
 		fi
 	}
@@ -66,7 +66,7 @@ function http-common() {
 
 	# Check Host Existence
 	manage-http-check-host-existence() {
-		if [ -f /etc/nginx/hosts.d/$USER-$HOST_DIR.conf ]; then
+		if [ -f /etc/nginx/sites-available/$USER-$HOST_DIR.conf ]; then
 			warning "This virtual host already exists, please use the manage-manage-host module to edit it!"
 			continue
 		fi
@@ -88,12 +88,12 @@ function http-common() {
 	manage-http-generate-configuration() {
 		# Create Host Configuration
 		subheader "Creating Host Configuration..."
-		touch /etc/nginx/hosts.d/$USER-$HOST_DIR.conf
+		touch /etc/nginx/sites-available/$USER-$HOST_DIR.conf
 
 		# Update Host Configuration (WWW)
 		if [ $HOST_WWW = 1 ]; then
 			subheader "Updating Host Configuration (WWW)..."
-cat >> /etc/nginx/hosts.d/$USER-$HOST_DIR.conf <<END
+cat >> /etc/nginx/sites-available/$USER-$HOST_DIR.conf <<END
 server {
 	listen 80;
 	server_name $HOST_DIR;
@@ -101,12 +101,12 @@ server {
 	rewrite ^/(.*) http://$HOST/\$1 permanent;
 }
 END
-			echo "" >> /etc/nginx/hosts.d/$USER-$HOST_DIR.conf
+			echo "" >> /etc/nginx/sites-available/$USER-$HOST_DIR.conf
 		fi
 
 		# Update Host Configuration
 		subheader "Updating Host Configuration..."
-cat >> /etc/nginx/hosts.d/$USER-$HOST_DIR.conf <<END
+cat >> /etc/nginx/sites-available/$USER-$HOST_DIR.conf <<END
 server {
 	listen 80;
 	server_name $HOST;
@@ -124,12 +124,12 @@ END
 
 		# Create Host Configuration (SSL)
 		subheader "Creating Host Configuration (SSL)..."
-		touch /etc/nginx/hosts.d/$USER-$HOST_DIR-ssl.conf
+		touch /etc/nginx/sites-available/$USER-$HOST_DIR-ssl.conf
 
 		# Update Host Configuration (SSL WWW)
 		if [ $HOST_WWW = 1 ]; then
 			subheader "Updating Host Configuration (SSL WWW)..."
-cat >> /etc/nginx/hosts.d/$USER-$HOST_DIR-ssl.conf <<END
+cat >> /etc/nginx/sites-available/$USER-$HOST_DIR-ssl.conf <<END
 server {
 	listen 443 ssl;
 	server_name $HOST_DIR;
@@ -139,12 +139,12 @@ server {
 	rewrite ^/(.*) https://$HOST/\$1 permanent;
 }
 END
-			echo "" >> /etc/nginx/hosts.d/$USER-$HOST_DIR-ssl.conf
+			echo "" >> /etc/nginx/sites-available/$USER-$HOST_DIR-ssl.conf
 		fi
 
 		# Update Host Configuration (SSL)
 		subheader "Updating Host Configuration (SSL)..."
-cat >> /etc/nginx/hosts.d/$USER-$HOST_DIR-ssl.conf <<END
+cat >> /etc/nginx/sites-available/$USER-$HOST_DIR-ssl.conf <<END
 server {
 	listen 443 ssl;
 	server_name $HOST;
@@ -204,7 +204,7 @@ END
 	# Enable Host As Default Host
 	manage-http-default-host() {
 		subheader "Setting As Default..."
-cat > /etc/nginx/hosts.d/default.conf <<END
+cat > /etc/nginx/sites-available/default.conf <<END
 server {
 	listen 80 default_server;
 	rewrite ^/(.*) http://$HOST/\$1 permanent;
@@ -212,7 +212,7 @@ server {
 END
 
 		subheader "Setting As Default (SSL)..."
-cat > /etc/nginx/hosts.d/default-ssl.conf <<END
+cat > /etc/nginx/sites-available/default-ssl.conf <<END
 server {
 	listen 443 default_server ssl;
 	ssl_certificate /etc/nginx/ssl.d/self.pem;
@@ -224,7 +224,7 @@ END
 		# Disable If Default & SSL
 		if [ $SSL = 0 ]; then
 			# Redirect To HTTP
-			sed -i "s/https/http/g" /etc/nginx/hosts.d/default-ssl.conf
+			sed -i "s/https/http/g" /etc/nginx/sites-available/default-ssl.conf
 		fi
 	}
 
@@ -232,10 +232,10 @@ END
 	manage-http-enable-php() {
 		if [ $1 = 1 ]; then
 			subheader "Enabling PHP..."
-			sed -i "s/\o011#include \/etc\/nginx\/php.d/\o011include \/etc\/nginx\/php.d/g" /etc/nginx/hosts.d/$USER-$HOST_DIR{.conf,-ssl*}
+			sed -i "s/\o011#include \/etc\/nginx\/php.d/\o011include \/etc\/nginx\/php.d/g" /etc/nginx/sites-available/$USER-$HOST_DIR{.conf,-ssl*}
 		else
 			subheader "Disabling PHP..."
-			sed -i "s/\o011include \/etc\/nginx\/php.d/\o011#include \/etc\/nginx\/php.d/g" /etc/nginx/hosts.d/$USER-$HOST_DIR{.conf,-ssl*}
+			sed -i "s/\o011include \/etc\/nginx\/php.d/\o011#include \/etc\/nginx\/php.d/g" /etc/nginx/sites-available/$USER-$HOST_DIR{.conf,-ssl*}
 		fi
 	}
 
@@ -243,12 +243,12 @@ END
 	manage-http-enable-ssl() {
 		if [ $1 = 1 ]; then
 			subheader "Enabling SSL..."
-			mv /etc/nginx/hosts.d/$USER-$HOST_DIR-ssl.disabled /etc/nginx/hosts.d/$USER-$HOST_DIR-ssl.conf &> /dev/null
+			mv /etc/nginx/sites-available/$USER-$HOST_DIR-ssl.disabled /etc/nginx/sites-available/$USER-$HOST_DIR-ssl.conf &> /dev/null
 			# Enable SSH Variable
 			SSL=1
 		else
 			subheader "Disabling SSL..."
-			mv /etc/nginx/hosts.d/$USER-$HOST_DIR-ssl.conf /etc/nginx/hosts.d/$USER-$HOST_DIR-ssl.disabled &> /dev/null
+			mv /etc/nginx/sites-available/$USER-$HOST_DIR-ssl.conf /etc/nginx/sites-available/$USER-$HOST_DIR-ssl.disabled &> /dev/null
 			# Disable SSH Variable
 			SSL=0
 		fi
@@ -262,8 +262,8 @@ END
 	manage-http-remove-host() {
 		subheader "Removing Host..."
 		rm /home/$USER/http/logs/$HOST_DIR.log
-		rm /etc/nginx/hosts.d/$USER-$HOST_DIR{.conf,-ssl*}
-		if ! ls /etc/nginx/hosts.d/$USER-*.conf &> /dev/null; then
+		rm /etc/nginx/sites-available/$USER-$HOST_DIR{.conf,-ssl*}
+		if ! ls /etc/nginx/sites-available/$USER-*.conf &> /dev/null; then
 			rm /etc/nginx/php.d/$USER.conf
 			rm /etc/php5/fpm/pool.d/$USER.conf
 		fi

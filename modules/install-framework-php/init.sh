@@ -17,6 +17,12 @@ if check_package "mariadb-server" || check_package "mysql-server"; then
 	package_install php5-mysql
 fi
 
+# Check PostgreSQL
+if check_package "postgresql-9.1"; then
+	subheader "Installing PHP PostgreSQL Package..."
+	package_install php5-pgsql
+fi
+
 # Copy Configuration
 subheader "Copying Configuration..."
 cp -r $MODULEPATH/$MODULE/etc/* /etc/php5/
