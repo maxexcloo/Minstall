@@ -9,7 +9,11 @@ package_update_question
 
 # Install Package
 subheader "Installing Package..."
-package_install php5-fpm
+package_install pgp5-cli php5-fpm
+
+# Install Extras
+subheader "Installing Extras..."
+package_install php5-curl php5-gd php5-mcrypt php5-sqlite
 
 # Check MariaDB/MySQL
 if check_package "mariadb-server" || check_package "mysql-server"; then

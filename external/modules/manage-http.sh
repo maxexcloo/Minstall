@@ -1,8 +1,14 @@
 #!/bin/bash
-# Common Functions For Module Category: HTTP
+# Common Functions For Module: Manage HTTP
+
+#subheader "Removing User Database..."
+#subheader "Removing User HTTP..."
+#rm -rf /etc/nginx/php.d/$1.conf
+#rm -rf /etc/nginx/sites-*/$1-*.conf
+#rm -rf /etc/php5/fpm/pool.d/$1.conf
 
 # Module Functions
-common-http() {
+manage-http() {
 	#################
 	## Check Loops ##
 	#################

@@ -11,6 +11,12 @@ package_update_question
 subheader "Installing Package..."
 package_install mysql-server
 
+# Check PHP
+if check_package "php5-fpm"; then
+	subheader "Installing PHP MySQL Package..."
+	package_install php5-mysql
+fi
+
 # Set Password
 subheader "Setting Password..."
 if [ $UNATTENDED = 1 ]; then
@@ -28,8 +34,15 @@ if [ $UNATTENDED = 1 ]; then
 
 	# Stop Daemon
 	killall mysqld
+
+	# Write User Account Configuration
+	cat <<-EOF > /root/.my.cnf
+		[client]
+		user = root
+		password = $(read_variable_module root_password)
+	EOF
 fi
 
 # Start Daemon
 subheader "Starting Daemon..."
-daemon_manage mysql start
+daemon_manage mysql restart

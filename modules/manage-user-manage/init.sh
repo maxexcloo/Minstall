@@ -1,14 +1,11 @@
 #!/bin/bash
-# Manage: User Add
+# Manage: User Manage
 
 # Manage User
 manage-user
 
 # Module Function
 module() {
-	# Add User
-	manage-user-manage-add $USER
-
 	# Check User
 	manage-user-check-user $USER
 
@@ -40,8 +37,8 @@ module() {
 
 # Attended Mode
 if [ $UNATTENDED = 0 ]; then
-	# User Input
-	manage-user-input-user
+	# User Check
+	manage-user-input-check
 
 	# Module Function
 	module
