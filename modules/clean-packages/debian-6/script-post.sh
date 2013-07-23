@@ -1,2 +1,2 @@
 #!/bin/bash
-# Post Clean Commands (Debian)
+# Post Clean Commands (Debian 6)
