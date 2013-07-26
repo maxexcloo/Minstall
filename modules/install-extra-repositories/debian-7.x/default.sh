@@ -17,9 +17,6 @@ if question --default yes "Do you want to optimise the default repositories? War
 	# Update Squeeze Repository
 	echo "deb $MIRROR wheezy main contrib non-free" > /etc/apt/sources.list
 
-	# Update Squeeze Updates Repository
-	echo "deb $MIRROR wheezy-updates main contrib non-free" >> /etc/apt/sources.list
-
 	# Update Squeeze Security Repository
 	echo "deb http://security.debian.org/ wheezy/updates main contrib non-free" >> /etc/apt/sources.list
 fi
