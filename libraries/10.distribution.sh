@@ -13,7 +13,7 @@ if [ -f /etc/issue ]; then
 		DISTRIBUTION=debian
 
 		# Set Version
-		VERSION=6
+		VERSION=6.x
 	fi
 fi
 
@@ -49,7 +49,7 @@ if command -v lsb_release &> /dev/null; then
 		DISTRIBUTION=debian
 
 		# Set Version
-		VERSION=7
+		VERSION=7.x
 	fi
 fi
 
