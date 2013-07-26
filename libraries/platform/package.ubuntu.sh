@@ -1,5 +1,5 @@
 #!/bin/bash
-# Functions For Handling Package Management In Ubuntu
+# Functions For Package Management (Ubuntu)
 
 # Clean Package Cache
 function package_clean() {

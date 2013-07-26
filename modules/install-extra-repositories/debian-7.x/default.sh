@@ -1,5 +1,4 @@
 #!/bin/bash
-
 # Optimise Default Repositories
 
 # Ask If Repositories Should Be Optimised

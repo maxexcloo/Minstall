@@ -1,9 +1,9 @@
 #!/bin/bash
-# Functions For Cleaning System Packages/Files In Debian
+# Functions For Cleaning Packages/Files (Debian 6.x)
 
 # Clean Daemons
 function clean_daemons() {
-	# Loop Through Daemons
+	# Loop Daemons
 	for daemon in /etc/init.d/*; do
 		# Stop Daemon
 		$daemon stop

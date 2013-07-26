@@ -29,7 +29,7 @@ for file in $LIBRARYPATH/module/*.sh; do
 done
 
 # Load Platform Specific Libraries
-for file in $LIBRARYPATH/platform/*.$DISTRIBUTION.sh; do
+for file in $LIBRARYPATH/platform/*.$DISTRIBUTION.sh $LIBRARYPATH/platform/*.$DISTRIBUTION-$VERSION.sh; do
 	# Source Libraries
 	source $file
 done
@@ -164,7 +164,7 @@ while echo $MODULELIST | grep -q \,; do
 	fi
 
 	# Remove Temporary Files
-	rm temp.*
+	rm -f temp.*
 
 	# Debug Pause
 	if [ $(read_variable minstall__debug) = 1 ]; then

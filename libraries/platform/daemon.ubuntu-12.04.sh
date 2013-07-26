@@ -1,5 +1,5 @@
 #!/bin/bash
-# Functions For Handling Daemon Management In Ubuntu
+# Functions For Daemon Management (Ubuntu 12.04)
 
 # Add Daemon
 function daemon_add() {

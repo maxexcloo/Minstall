@@ -1,5 +1,5 @@
 #!/bin/bash
-# Functions For Handling Package Management In Debian
+# Functions For Package Management (Debian)
 
 # Clean Package Cache
 function package_clean() {

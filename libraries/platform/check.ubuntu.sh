@@ -1,5 +1,5 @@
 #!/bin/bash
-# Functions For Checking Package/Repository Installation Status In Ubuntu
+# Functions For Checking Package/Repository Installation Status (Ubuntu)
 
 # Check If Package Installed
 function check_package() {

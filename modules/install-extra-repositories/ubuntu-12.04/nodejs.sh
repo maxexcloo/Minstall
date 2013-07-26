@@ -2,7 +2,7 @@
 # Install Node.js Repository
 
 # Ask If Repository Should Be Installed
-if question --default yes "Do you want to install the Node.js repository? (Y/n)" || [ $UNATTENDED = 1 ]; then
+if question --default yes "Do you want to install the Node repository? (Y/n)" || [ $UNATTENDED = 1 ]; then
 	subheader "Installing Node.js Repository..."
 
 	# Add Repository Key

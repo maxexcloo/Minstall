@@ -1,15 +1,15 @@
 #!/bin/bash
-# Functions For Cleaning System Packages/Files In Ubuntu
+# Functions For Cleaning Packages/Files (Debian 7.x)
 
 # Clean Daemons
 function clean_daemons() {
-	# Loop Through Daemons (Upstart Based)
+	# Loop Daemons (Upstart Based)
 	for file in /etc/init/*.conf; do
 		# Stop Daemon
 		daemon_manage $file stop
 	done
 
-	# Loop Through Daemons (Init Based)
+	# Loop Daemons (Init Based)
 	for daemon in /etc/init.d/*; do
 		# Stop Daemon
 		$daemon stop

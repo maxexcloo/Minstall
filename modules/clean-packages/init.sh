@@ -42,7 +42,7 @@ source $MODULEPATH/$MODULE/$DISTRIBUTION-$VERSION/script-pre.sh
 
 # Clean Daemons
 subheader "Cleaning Daemons..."
-clean_daemons
+#clean_daemons
 
 # Clean Packages
 subheader "Cleaning Packages..."
