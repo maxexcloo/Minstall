@@ -7,13 +7,10 @@ if [ $ARCHITECTURE = "x64" ]; then
 fi
 
 # Remove Sendmail
-package_remove sendmail-base
-
-# TEMP: Create Hack Package List
-string_replace_output "temp.packages.list" "temp.packages.hack" " install" ""
+package_remove sendmail-base sendmail-bin
 
 # TEMP: Iterate Through Package Listed
-cat temp.packages.hack | while read line; do
+cat temp.list | while read line; do
 	if ! check_package $line; then
 		package_install $line
 	fi

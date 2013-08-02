@@ -1,20 +1,5 @@
 #!/bin/bash
-# Functions For Cleaning Packages/Files (Debian 7.x)
-
-# Clean Daemons
-function clean_daemons() {
-	# Loop Daemons (Upstart Based)
-	for file in /etc/init/*.conf; do
-		# Stop Daemon
-		daemon_manage $file stop
-	done
-
-	# Loop Daemons (Init Based)
-	for daemon in /etc/init.d/*; do
-		# Stop Daemon
-		$daemon stop
-	done
-}
+# Functions For Cleaning Packages/Files (Ubuntu 12.04)
 
 # Clean Files
 function clean_files() {
@@ -28,13 +13,13 @@ function clean_packages() {
 	dpkg --clear-selections
 
 	# Set Package Selections
-	dpkg --set-selections < temp.packages.list
+	dpkg --set-selections < temp.list
 
 	# Get Selections & Set To Purge
-	dpkg --get-selections | sed -e "s/deinstall/purge/" > temp.packages
+	dpkg --get-selections | sed -e "s/deinstall/purge/" > temp.dpkg
 
 	# Set Package Selections
-	dpkg --set-selections < temp.packages
+	dpkg --set-selections < temp.dpkg
 
 	# Update DPKG
 	DEBIAN_FRONTEND=noninteractive apt-get -qy dselect-upgrade 2>&1 | tee -a temp.log

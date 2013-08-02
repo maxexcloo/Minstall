@@ -1,18 +1,18 @@
-crda install
-dmsetup install
-gettext-base install
-grub-common install
-grub-gfxpayload-lists install
-grub-pc install
-grub-pc-bin install
-grub2-common install
-isc-dhcp-client install
-isc-dhcp-common install
-libdevmapper1.02.1 install
-libfreetype6 install
-libfuse2 install
-libnl-3-200 install
-libnl-genl-3-200 install
-linux-firmware install
-ucf install
-wireless-regdb install
+crda
+dmsetup
+gettext-base
+grub-common
+grub-gfxpayload-lists
+grub-pc
+grub-pc-bin
+grub2-common
+isc-dhcp-client
+isc-dhcp-common
+libdevmapper1.02.1
+libfreetype6
+libfuse2
+libnl-3-200
+libnl-genl-3-200
+linux-firmware
+ucf
+wireless-regdb

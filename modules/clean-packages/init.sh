@@ -17,32 +17,31 @@ package_update
 
 # Create Package List
 subheader "Creating Package List..."
-cp $MODULEPATH/$MODULE/$DISTRIBUTION-$VERSION/base temp.packages.list
+cp $MODULEPATH/$MODULE/$DISTRIBUTION-$VERSION/base temp.list
 
 # Check Platform
 if [ $PLATFORM = "hardware" ]; then
 	# Append Hardware Package List
-	cat $MODULEPATH/$MODULE/$DISTRIBUTION-$VERSION/base-hardware >> temp.packages.list
+	cat $MODULEPATH/$MODULE/$DISTRIBUTION-$VERSION/base-hardware >> temp.list
 fi
 
 # Check Platform Package List
 if [ -f $MODULEPATH/$MODULE/$DISTRIBUTION-$VERSION/specific-$PLATFORM-$ARCHITECTURE ]; then
 	# Append Platform Package List
-	cat $MODULEPATH/$MODULE/$DISTRIBUTION-$VERSION/specific-$PLATFORM-$ARCHITECTURE >> temp.packages.list
+	cat $MODULEPATH/$MODULE/$DISTRIBUTION-$VERSION/specific-$PLATFORM-$ARCHITECTURE >> temp.list
 fi
 
 # Append Custom Package List
-cat $MODULEPATH/$MODULE/custom/custom >> temp.packages.list
+cat $MODULEPATH/$MODULE/custom/custom >> temp.list
 
 # Sort Package List
-sort -o temp.packages.list temp.packages.list
+sort -o temp.list temp.list
+
+# Create DPKG Compatible List
+string_replace_output_ne "temp.list" "temp.dpkg" "$" " install"
 
 # Run Pre Install Commands
 source $MODULEPATH/$MODULE/$DISTRIBUTION-$VERSION/script-pre.sh
-
-# Clean Daemons
-subheader "Cleaning Daemons..."
-#clean_daemons
 
 # Clean Packages
 subheader "Cleaning Packages..."
