@@ -124,6 +124,7 @@ perl-base install
 perl-modules install
 plymouth install
 procps install
+psmisc install
 python install
 python-minimal install
 python2.7 install
@@ -136,6 +137,7 @@ sysvinit-utils install
 tar install
 traceroute install
 tzdata install
+ucf install
 udev install
 upstart install
 util-linux install
