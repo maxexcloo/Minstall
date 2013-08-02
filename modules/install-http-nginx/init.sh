@@ -36,11 +36,11 @@ chmod -R o= /etc/nginx/ssl.d
 
 # Set Distribution Specific Variables
 if [ $DISTRIBUTION = "debian" ]; then
-	file_replace /etc/nginx/sites-available/default.conf "root path" "root /usr/share/nginx/html"
-	file_replace /etc/nginx/sites-available/system.conf "root path" "root /usr/share/nginx/html"
+	string_replace_file /etc/nginx/sites-available/default.conf "root path" "root /usr/share/nginx/html"
+	string_replace_file /etc/nginx/sites-available/system.conf "root path" "root /usr/share/nginx/html"
 elif [ $DISTRIBUTION = "ubuntu" ]; then
-	file_replace /etc/nginx/sites-available/default.conf "root path" "root /usr/share/nginx/www"
-	file_replace /etc/nginx/sites-available/system.conf "root path" "root /usr/share/nginx/www"
+	string_replace_file /etc/nginx/sites-available/default.conf "root path" "root /usr/share/nginx/www"
+	string_replace_file /etc/nginx/sites-available/system.conf "root path" "root /usr/share/nginx/www"
 fi
 
 # Common Clean

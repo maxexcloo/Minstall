@@ -1,15 +1,15 @@
-dmsetup
-gettext-base
-grub-common
-grub-pc
-grub-pc-bin
-grub2-common
-isc-dhcp-client
-isc-dhcp-common
-libasprintf0c2
-libdevmapper1.02.1
-libfreetype6
-libfuse2
-libuuid-perl
-linux-base
-ucf
+dmsetup install
+gettext-base install
+grub-common install
+grub-pc install
+grub-pc-bin install
+grub2-common install
+isc-dhcp-client install
+isc-dhcp-common install
+libasprintf0c2 install
+libdevmapper1.02.1 install
+libfreetype6 install
+libfuse2 install
+libuuid-perl install
+linux-base install
+ucf install
