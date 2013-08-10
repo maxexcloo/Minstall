@@ -19,10 +19,10 @@ function clean_packages() {
 	dpkg --set-selections < temp.dpkg
 
 	# Get Selections & Set To Purge
-	dpkg --get-selections | sed -e "s/deinstall/purge/" > temp.dpkg
+	dpkg --get-selections | sed -e "s/deinstall/purge/" > temp.cur
 
 	# Set Package Selections
-	dpkg --set-selections < temp.dpkg
+	dpkg --set-selections < temp.cur
 
 	# Update DPKG
 	DEBIAN_FRONTEND=noninteractive apt-get -qy dselect-upgrade 2>&1 | tee -a temp.log
