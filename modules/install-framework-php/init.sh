@@ -9,7 +9,7 @@ package_update_question
 
 # Install Package
 subheader "Installing Package..."
-package_install pgp5-cli php5-fpm
+package_install php5-cli php5-fpm
 
 # Install Extras
 subheader "Installing Extras..."
