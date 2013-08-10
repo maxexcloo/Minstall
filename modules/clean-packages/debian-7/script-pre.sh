@@ -1,11 +1,6 @@
 #!/bin/bash
 # Pre Clean Commands (Debian 7)
 
-# Enable x32 Support On x64 Systems
-if [ $ARCHITECTURE = "x64" ]; then
-	dpkg --add-architecture i386
-fi
-
 # Remove Sendmail
 package_remove sendmail-base sendmail-bin
 
