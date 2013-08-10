@@ -16,7 +16,7 @@ function package_install() {
 	if [ $UNATTENDED = 1 ]; then
 		DEBIAN_FRONTEND=noninteractive apt-get -qy install "$*"
 	else
-		apt-get -qy install "$*"
+		apt-get -qy install "$@"
 	fi
 }
 
@@ -25,7 +25,7 @@ function package_remove() {
 	if [ $UNATTENDED = 1 ]; then
 		DEBIAN_FRONTEND=noninteractive apt-get -qy purge "$*"
 	else
-		apt-get -qy purge "$*"
+		apt-get -qy purge "$@"
 	fi
 }
 
