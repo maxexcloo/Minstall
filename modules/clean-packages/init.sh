@@ -37,9 +37,6 @@ cat $MODULEPATH/$MODULE/custom/custom >> temp.list
 # Sort Package List
 sort -o temp.list temp.list
 
-# Create DPKG Compatible List
-string_replace_output_ne "temp.list" "temp.dpkg" "$" " install"
-
 # Run Pre Install Commands
 source $MODULEPATH/$MODULE/$DISTRIBUTION-$VERSION/script-pre.sh
 

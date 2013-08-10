@@ -9,6 +9,9 @@ function clean_files() {
 
 # Clean Packages
 function clean_packages() {
+	# Create DPKG Compatible List
+	string_replace_output_ne "temp.list" "temp.dpkg" "$" " install"
+
 	# Clear DPKG Package Selections
 	dpkg --clear-selections
 
@@ -23,7 +26,4 @@ function clean_packages() {
 
 	# Update DPKG
 	DEBIAN_FRONTEND=noninteractive apt-get -qy dselect-upgrade 2>&1 | tee -a temp.log
-
-	# Clean Package List
-	package_clean_list
 }
