@@ -13,7 +13,7 @@ function clean_packages() {
 	dpkg --clear-selections
 
 	# Set Package Selections
-	dpkg --set-selections < temp.list
+	dpkg --set-selections < temp.dpkg
 
 	# Get Selections & Set To Purge
 	dpkg --get-selections | sed -e "s/deinstall/purge/" > temp.dpkg
