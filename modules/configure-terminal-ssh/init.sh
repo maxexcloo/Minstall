@@ -12,6 +12,7 @@ if question --default yes "Do you want to enable root SSH login? (Y/n)" || [ $(r
 	# Enable Root SSH Login For OpenSSH
 	if check_package "openssh-server"; then
 		sed -i "s/PermitRootLogin no/PermitRootLogin yes/g" /etc/ssh/sshd_config
+		adduser root ssh
 	fi
 # Disable Root SSH Login
 else
@@ -25,6 +26,7 @@ else
 	# Disable Root SSH Login For OpenSSH
 	if check_package "openssh-server"; then
 		sed -i "s/PermitRootLogin yes/PermitRootLogin no/g" /etc/ssh/sshd_config
+		deluser root ssh
 	fi
 fi
 
