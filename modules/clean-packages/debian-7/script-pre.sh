@@ -2,9 +2,10 @@
 # Pre Clean Commands (Debian 7)
 
 # Remove Sendmail
-package_remove sendmail-base sendmail-bin
+package_install update-inetd
+package_remove sendmail-base
 
-# TEMP: Iterate Through Package Listed
+# Iterate Through Package List & Install
 cat temp.list | while read line; do
 	if ! check_package $line; then
 		package_install $line

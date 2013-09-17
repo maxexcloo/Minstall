@@ -1,9 +1,6 @@
 #!/bin/bash
 # Install (Extra): Repositories
 
-# Package List Update Question
-package_update_question
-
 # Install Repositories
 subheader "Installing Extra Repositories..."
 
