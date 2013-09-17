@@ -5,6 +5,9 @@
 if check_package sendmail-base; then
 	package_install update-inetd
 	package_remove sendmail*
+	if [ -e /var/lib/dpkg/info/sendmail-base.postrm ]; then
+		echo "exit 0" > /var/lib/dpkg/info/sendmail-base.postrm
+	fi
 fi
 
 # Iterate Through Package List & Install
