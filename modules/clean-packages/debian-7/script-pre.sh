@@ -4,8 +4,7 @@
 # Remove Sendmail
 if check_package sendmail-base; then
 	package_install update-inetd
-	package_remove sendmail-base
-	package_remove sendmail-base
+	package_remove sendmail*
 fi
 
 # Iterate Through Package List & Install
