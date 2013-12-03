@@ -1,5 +1,4 @@
 AllowGroups sftp ssh
-AllowUsers root
 PermitRootLogin no
 UsePAM yes
 
