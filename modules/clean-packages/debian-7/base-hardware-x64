@@ -1,0 +1,14 @@
+dmsetup:amd64
+gettext-base:amd64
+grub-common:amd64
+grub-pc:amd64
+grub-pc-bin:amd64
+grub2-common:amd64
+isc-dhcp-client:amd64
+isc-dhcp-common:amd64
+libasprintf0c2:amd64
+libdevmapper1.02.1:amd64
+libfreetype6:amd64
+libfuse2:amd64
+libuuid-perl:amd64
+linux-base:amd64
