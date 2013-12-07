@@ -41,7 +41,10 @@ manage-user() {
 			read -p "Please enter a user: " USER
 
 			# Check Input
-			if [ ! -d /home/$USER ]; then
+			if [ -d /home/$USER ]; then
+				# Exit Loop
+				break
+			else
 				# Print Error
 				echo "Invalid user. Ensure the user exists on the system."
 			fi
