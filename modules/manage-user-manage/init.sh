@@ -62,6 +62,8 @@ else
 	PASSLIST=$(read_variable_module pass),
 	HTTPLIST=$(read_variable_module http),
 	PERMLIST=$(read_variable_module perm),
+	SSHLIST=$(read_variable_module ssh),
+	SFTPLIST=$(read_variable_module sftp),
 
 	# Loop Through Users
 	while echo $USERLIST | grep -q \,; do
@@ -70,12 +72,16 @@ else
 		PASS=${PASSLIST%%\,*}
 		HTTP=${HTTPLIST%%\,*}
 		PERM=${PERMLIST%%\,*}
+		SSH=${SSHLIST%%\,*}
+		SFTP=${SFTPLIST%%\,*}
 
 		# Remove Current From List
 		USERLIST=${USERLIST#*\,}
 		PASSLIST=${PASSLIST#*\,}
 		HTTPLIST=${HTTPLIST#*\,}
 		PERMLIST=${PERMLIST#*\,}
+		SSHLIST=${SSHLIST#*\,}
+		SFTPLIST=${SFTPLIST#*\,}
 
 		# Check User Array State
 		manage-user-check-array $USERLIST
@@ -89,12 +95,16 @@ else
 	unset PASSLIST
 	unset HTTPLIST
 	unset PERMLIST
+	unset SSHLIST
+	unset SFTPLIST
 
 	# Unset Variables
 	unset USER
 	unset PASS
 	unset HTTP
 	unset PERM
+	unset SSH
+	unset SFTP
 fi
 
 # Unset Init
