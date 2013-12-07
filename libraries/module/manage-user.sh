@@ -116,6 +116,18 @@ manage-user() {
 		chown -R $1:$1 /home/$1
 	}
 
+	# Add User to Group
+	manage-user-add-group() {
+		subheader "Adding User to Group..."
+		adduser $1 $2
+	}
+
+	# Remove User from Group
+	manage-user-remove-group() {
+		subheader "Removing User from Group..."
+		deluser $1 $2
+	}
+
 	####################
 	## Misc Functions ##
 	####################
