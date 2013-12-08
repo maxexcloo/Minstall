@@ -9,14 +9,14 @@ describe() {
 
 # Print All Module Information
 list() {
-	# Find Base Name
-	base=$(basename $1)
+	# Find Directory Name
+	base=$(dirname $1)
 
 	# Find File Name
-	file=${base%.*}
+	module=$(basename $base)
 
 	# Print Module Name
-	echo -en "\e[1;32m$file:\e[0m "
+	echo -en "\e[1;32m$module:\e[0m "
 
 	# Print Description
 	echo $(describe $1)
