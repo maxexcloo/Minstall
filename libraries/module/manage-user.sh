@@ -41,7 +41,10 @@ manage-user() {
 			read -p "Please enter a user: " USER
 
 			# Check Input
-			if [ ! -d /home/$USER ]; then
+			if [ -d /home/$USER ]; then
+				# Exit Loop
+				break
+			else
 				# Print Error
 				echo "Invalid user. Ensure the user exists on the system."
 			fi
@@ -111,6 +114,18 @@ manage-user() {
 		subheader "Setting Permissions..."
 		chmod -R o= /home/$1
 		chown -R $1:$1 /home/$1
+	}
+
+	# Add User to Group
+	manage-user-add-group() {
+		subheader "Adding User to Group..."
+		adduser $1 $2
+	}
+
+	# Remove User from Group
+	manage-user-remove-group() {
+		subheader "Removing User from Group..."
+		deluser $1 $2
 	}
 
 	####################

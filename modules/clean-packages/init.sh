@@ -17,12 +17,12 @@ package_update
 
 # Create Package List
 subheader "Creating Package List..."
-cp $MODULEPATH/$MODULE/$DISTRIBUTION-$VERSION/base temp.list
+cp $MODULEPATH/$MODULE/$DISTRIBUTION-$VERSION/base-$ARCHITECTURE temp.list
 
 # Check Platform
 if [ $PLATFORM = "hardware" ]; then
 	# Append Hardware Package List
-	cat $MODULEPATH/$MODULE/$DISTRIBUTION-$VERSION/base-hardware >> temp.list
+	cat $MODULEPATH/$MODULE/$DISTRIBUTION-$VERSION/base-hardware-$ARCHITECTURE >> temp.list
 fi
 
 # Check Platform Package List

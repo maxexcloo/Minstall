@@ -36,6 +36,19 @@ module() {
 	if question --default yes "Do you want to set permissions for this user to enable enhanced privacy? (Y/n)" || [ $PERM = 1 ]; then
 		manage-user-set-permissions $USER
 	fi
+
+	# User Add to SSH Question
+	if question --default yes "Do you want to allow this user access to SSH? (Y/n)" || [ $SSH = 1 ]; then
+		manage-user-add-group $USER "ssh"
+	else
+		manage-user-remove-group $USER "ssh"
+		
+		if question --default yes "Do you want to allow this user access to SFTP? (Y/n)" || [ $SFTP = 1 ]; then
+			manage-user-add-group $USER "sftp"
+		else
+			manage-user-remove-group $USER "sftp"
+		fi
+	fi
 }
 
 # Attended Mode
@@ -52,6 +65,8 @@ else
 	PASSLIST=$(read_variable_module pass),
 	HTTPLIST=$(read_variable_module http),
 	PERMLIST=$(read_variable_module perm),
+	SSHLIST=$(read_variable_module ssh),
+	SFTPLIST=$(read_variable_module sftp),
 
 	# Loop Through Users
 	while echo $USERLIST | grep -q \,; do
@@ -60,12 +75,16 @@ else
 		PASS=${PASSLIST%%\,*}
 		HTTP=${HTTPLIST%%\,*}
 		PERM=${PERMLIST%%\,*}
+		SSH=${SSHLIST%%\,*}
+		SFTP=${SFTPLIST%%\,*}
 
 		# Remove Current From List
 		USERLIST=${USERLIST#*\,}
 		PASSLIST=${PASSLIST#*\,}
 		HTTPLIST=${HTTPLIST#*\,}
 		PERMLIST=${PERMLIST#*\,}
+		SSHLIST=${SSHLIST#*\,}
+		SFTPLIST=${SFTPLIST#*\,}
 
 		# Check User Array State
 		manage-user-check-array $USERLIST
@@ -79,12 +98,16 @@ else
 	unset PASSLIST
 	unset HTTPLIST
 	unset PERMLIST
+	unset SSHLIST
+	unset SFTPLIST
 
 	# Unset Variables
 	unset USER
 	unset PASS
 	unset HTTP
 	unset PERM
+	unset SSH
+	unset SFTP
 fi
 
 # Unset Init

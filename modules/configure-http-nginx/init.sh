@@ -50,13 +50,13 @@ fi
 # Enable Default Host Protection
 if question --default no "Do you want to protect the default host by denying unmatched requests (this will override your default virtual host if you have assigned one)? (y/N)" || [ $(read_variable_module protect_default) = 1 ]; then
 	subheader "Enabling Default Host Protection..."
-	cp $MODULEPATH/$MODULE/nginx/sites-available/default.conf /etc/nginx/sites-available/
+	cp $MODULEPATH/$MODULE/etc/nginx/sites-available/default.conf /etc/nginx/sites-available/
 # Disable Default Host Protection
 else
 	# Default Host Reset
 	if question --default no "Do you want to reset the default host to the script default (this will override your default virtual host if you have assigned one)? (y/N)" || [ $(read_variable_module default_host_reset) = 1 ]; then
 		subheader "Resetting Default Host..."
-		cp $MODULEPATH/install-http-nginx/etc/sites-available/default.conf /etc/nginx/sites-available/
+		cp $MODULEPATH/install-http-nginx/etc/nginx/sites-available/default.conf /etc/nginx/sites-available/
 	fi
 fi
 

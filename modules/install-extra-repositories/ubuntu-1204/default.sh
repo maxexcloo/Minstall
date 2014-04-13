@@ -8,7 +8,7 @@ if question --default yes "Do you want to optimise the default repositories? War
 	# Check Mirror
 	if [ $(read_variable_module_variable mirror_$DISTRIBUTION_$VERSION) = 0 ]; then
 		# Set Mirror
-		MIRROR="http://ftp.us.debian.org/debian/"
+		MIRROR="http://us.archive.ubuntu.com/ubuntu/"
 	else
 		# Set Mirror
 		MIRROR=$(read_variable_module_variable mirror_$DISTRIBUTION_$VERSION)
