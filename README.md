@@ -22,7 +22,8 @@ Run on a freshly installed server under root, may not work under an already setu
 **Installation**
 
 To download Minstall run the following command under root:
-	wget -O /opt/minstall.tar.gz --no-check-certificate http://www.github.com/KnightSwarm/Minstall/archive/master.tar.gz; mkdir /opt/minstall/; tar -C /opt/minstall -f /opt/minstall.tar.gz --strip-components 1 -v -x -z; ln -s /opt/minstall/libraries/default/launcher.sh /usr/local/bin/minstall
+
+	wget -O /opt/minstall.tar.gz --no-check-certificate http://www.github.com/KnightSwarm/Minstall/archive/master.tar.gz; mkdir /opt/minstall; tar -C /opt/minstall -f /opt/minstall.tar.gz --strip-components 1 -x -z; ln -s /opt/minstall/libraries/default/launcher.sh /usr/local/bin/minstall; chmod +x /usr/local/bin/minstall
 
 To remove Minstall run the following command under root:
 
