@@ -1,5 +1,5 @@
 #!/bin/bash
-# Basic phpMyAdmin Installer
+# Basic Wordpress Installer
 
 ###############
 ## Variables ##
