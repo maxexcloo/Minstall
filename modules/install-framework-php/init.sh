@@ -29,7 +29,7 @@ fi
 
 # Copy Configuration
 subheader "Copying Configuration..."
-cp -r $MODULEPATH/$MODULE/etc/* /etc/php5/
+cp -r $MODULEPATH/$MODULE/etc/* /etc/
 
 # Common Clean
 common-clean
