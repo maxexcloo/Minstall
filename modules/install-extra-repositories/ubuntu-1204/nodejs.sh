@@ -10,4 +10,10 @@ if question --default yes "Do you want to install the Node repository? (Y/n)" ||
 
 	# Add Repository
 	repo_add "nodejs" "deb https://deb.nodesource.com/node precise main"
+
+	# Install HTTPS Transport
+	package_install "apt-transport-https"
+
+	# Add HTTPS Transport To Package List
+	echo "apt-transport-https" >> $MODULEPATH/clean-packages/custom/custom
 fi
