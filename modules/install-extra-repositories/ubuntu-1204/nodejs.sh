@@ -6,8 +6,8 @@ if question --default yes "Do you want to install the Node repository? (Y/n)" ||
 	subheader "Installing Node.js Repository..."
 
 	# Add Repository Key
-	repo_key_server "keyserver.ubuntu.com" "C7917B12"
+	repo_key "https://deb.nodesource.com/gpgkey/nodesource.gpg.key"
 
 	# Add Repository
-	repo_add "nodejs" "deb http://ppa.launchpad.net/chris-lea/node.js/ubuntu/ precise main"
+	repo_add "nodejs" "deb https://deb.nodesource.com/node precise main"
 fi
