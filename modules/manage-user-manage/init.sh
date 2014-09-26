@@ -46,6 +46,16 @@ module() {
 			manage-user-remove-group $USER "sftp"
 		fi
 	fi
+
+	# Check Package
+	if check_package "sudo"; then
+		# User Add to sudoers Question
+		if question --default no "Do you want to allow this user access to sudo? (y/N)" || [ $SUDO = 1 ]; then
+			manage-user-add-group $USER "sudo"
+		else
+			manage-user-remove-group $USER "sudo"
+		fi
+	fi
 }
 
 # Attended Mode
